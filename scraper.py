@@ -129,15 +129,16 @@ _HTML_GARBAGE = re.compile(
 _MIN_NAME_LEN = 5
 # Признаки того что строка — не название, а HTML/CSS мусор
 _JUNK_MARKERS = re.compile(
-    r'[\{\}\[\]\\|<>]|'            # технические символы
-    r'(?:px|em|rem|vw|vh)\b|'      # CSS единицы
-    r'#[0-9a-f]{3,6}\b|'           # hex-цвета
-    r'https?://|'                   # ссылки
-    r'\b(?:function|return|var|const|let|if|else|div|span|svg|ul|li|img)\b|'  # код/теги
-    r'__[a-z]|'                     # BEM-классы: card__title, t959__arrow
-    r'btn|button|icon|logo|nav|menu|header|footer|sidebar|widget|'
-    r'col|row|grid|flex|box|tile|thumb|banner|modal|popup|overlay|'
-    r'active|disabled|hidden|visible|primary|secondary)\b',  # CSS-классы
+    r'[\{\}\[\]\\|<>]'             # технические символы
+    r'|(?:px|em|rem|vw|vh)\b'      # CSS единицы
+    r'|#[0-9a-f]{3,6}\b'           # hex-цвета
+    r'|https?://'                   # ссылки
+    r'|__[a-z]'                     # BEM-классы: card__title, t959__arrow
+    r'|\b(?:function|return|var|const|let|if|else|div|span|svg|ul|li|img'
+    r'|arrow|card|block|wrapper|container|inner|outer|section'
+    r'|btn|button|icon|logo|nav|menu|header|footer|sidebar|widget'
+    r'|col|row|grid|flex|box|tile|thumb|banner|modal|popup|overlay'
+    r'|active|disabled|hidden|visible|primary|secondary)\b',
     re.I
 )
 
