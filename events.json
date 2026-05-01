@@ -1,0 +1,285 @@
+{
+  "updated": "2026-04-30T15:27:22Z",
+  "events": [
+    {
+      "id": 16,
+      "date": "2026-05-01",
+      "name": "Казанский марафон",
+      "city": "Казань",
+      "region": "Республика Татарстан",
+      "distances": "3 км, 10 км, 21,1 км, 42,2 км",
+      "type": "road",
+      "url": "https://kazan.run/"
+    },
+    {
+      "id": 17,
+      "date": "2026-05-06",
+      "name": "Останкинский марафон",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5 км, 10 км, 21,1 км, 42,2 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/OSTANKINSKIYMARAFON3zabeg"
+    },
+    {
+      "id": 18,
+      "date": "2026-05-10",
+      "name": "Царскосельский марафон",
+      "city": "Пушкин (СПб)",
+      "region": "Санкт-Петербург",
+      "distances": "3 км, 11 км, 21,1 км, 42,2 км, детский",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/TsarskoselskiyMarafon2026"
+    },
+    {
+      "id": 19,
+      "date": "2026-05-11",
+      "name": "Медовый забег",
+      "city": "Бирюзовая Катунь",
+      "region": "Алтайский край",
+      "distances": "5 км, 10 км, 21,1 км, детский",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/medovyy-zabeg-2026/"
+    },
+    {
+      "id": 20,
+      "date": "2026-05-15",
+      "name": "Бэкъярд на Шарташе",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "distances": "6,7 км (до последнего участника)",
+      "type": "trail",
+      "url": "https://myrace.info/events/1629"
+    },
+    {
+      "id": 21,
+      "date": "2026-05-16",
+      "name": "Hard Run Hill — забег на трамплин",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "distances": "Вертикальный километр",
+      "type": "trail",
+      "url": "https://ea-m.org/hardrunhill2026"
+    },
+    {
+      "id": 22,
+      "date": "2026-05-17",
+      "name": "Забег «Весна»",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "2 км, 5 км",
+      "type": "road",
+      "url": "https://krasmarafon.ru/vesna"
+    },
+    {
+      "id": 23,
+      "date": "2026-05-23",
+      "name": "Забег РФ",
+      "city": "Новосибирск",
+      "region": "Новосибирская область",
+      "distances": "1 км, 5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://забег.рф/Новосибирск"
+    },
+    {
+      "id": 24,
+      "date": "2026-05-29",
+      "name": "Первоуральск Опен — Весна",
+      "city": "Первоуральск",
+      "region": "Свердловская область",
+      "distances": "5, 10, 15, 30, 40, 55, 71, 100 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/PervouralskOpen2026Vesna"
+    },
+    {
+      "id": 25,
+      "date": "2026-06-06",
+      "name": "Sahara Trail",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "distances": "5 км, 10 км, 15 км",
+      "type": "trail",
+      "url": "https://marathonec.ru/sahara-trail/"
+    },
+    {
+      "id": 26,
+      "date": "2026-06-06",
+      "name": "Kamensk Urban Trail",
+      "city": "Каменск-Уральский",
+      "region": "Свердловская область",
+      "distances": "3 км, 10 км, 14 км, 20 км",
+      "type": "trail",
+      "url": "https://myrace.info/events/1637"
+    },
+    {
+      "id": 27,
+      "date": "2026-06-07",
+      "name": "Тагил ультра трейл",
+      "city": "Нижний Тагил",
+      "region": "Свердловская область",
+      "distances": "5 км, 10 км, 21 км, 65 км",
+      "type": "trail",
+      "url": "https://myrace.info/events/1716"
+    },
+    {
+      "id": 28,
+      "date": "2026-06-12",
+      "name": "Бисертский марафон",
+      "city": "Бисерть",
+      "region": "Свердловская область",
+      "distances": "5 км, 10 км, 42 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/VIIBisertskiymarafon12062026g"
+    },
+    {
+      "id": 29,
+      "date": "2026-06-12",
+      "name": "Полумарафон «Здорово, Кострома!»",
+      "city": "Кострома",
+      "region": "Костромская область",
+      "distances": "3 км, 5 км, 10 км, 21,1 км, детский",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/BZK_Kostroma_26"
+    },
+    {
+      "id": 30,
+      "date": "2026-06-13",
+      "name": "Марафон «Врата Сибири»",
+      "city": "Тюмень",
+      "region": "Тюменская область",
+      "distances": "3 км, 5 км, 10 км, 21,1 км, 42,2 км, эстафета",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/TyumenskiymarafonVrataSibiri"
+    },
+    {
+      "id": 31,
+      "date": "2026-06-13",
+      "name": "Пульс Ночи",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "5 км, 10 км, 21,1 км",
+      "type": "night",
+      "url": "https://toplist.run/race/12637"
+    },
+    {
+      "id": 32,
+      "date": "2026-06-20",
+      "name": "Ночной полумарафон «Серые ночи»",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "distances": "10 км, 21,1 км, детский",
+      "type": "night",
+      "url": "https://ea-m.org/greynight2026"
+    },
+    {
+      "id": 33,
+      "date": "2026-06-20",
+      "name": "Архангельский марафон «Гандвик»",
+      "city": "Архангельск",
+      "region": "Архангельская область",
+      "distances": "1 км, 4,2 км, 10 км, 21,1 км, 42,2 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/0926"
+    },
+    {
+      "id": 34,
+      "date": "2026-06-21",
+      "name": "Иркутский международный марафон",
+      "city": "Иркутск",
+      "region": "Иркутская область",
+      "distances": "10 км, 21,1 км, 42,2 км",
+      "type": "road",
+      "url": "https://alpmarathon.ru"
+    },
+    {
+      "id": 35,
+      "date": "2026-06-21",
+      "name": "Международный марафон «Алые паруса»",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "distances": "5 км, 10 км, 21,1 км, 42,2 км, 63 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/SCARLETSAILS2026"
+    },
+    {
+      "id": 36,
+      "date": "2026-07-04",
+      "name": "Марафон «Белые ночи»",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "distances": "10 км, 42,2 км, эстафета",
+      "type": "road",
+      "url": "https://wnmarathon.runc.run/"
+    },
+    {
+      "id": 37,
+      "date": "2026-07-04",
+      "name": "Арктический марафон",
+      "city": "Воркута",
+      "region": "Республика Коми",
+      "distances": "3 км, 10 км, 21,1 км, 42,2 км, детский",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/ArcticMarathon_2026"
+    },
+    {
+      "id": 38,
+      "date": "2026-07-04",
+      "name": "Горный марафон «Конжак»",
+      "city": "Краснотурьинск",
+      "region": "Свердловская область",
+      "distances": "42 км (горная трасса)",
+      "type": "trail",
+      "url": "https://marathonec.ru/gornyj-marafon-konzhak-2/"
+    },
+    {
+      "id": 39,
+      "date": "2026-07-11",
+      "name": "Полумарафон «Сергиевым путём»",
+      "city": "Сергиев Посад",
+      "region": "Московская область",
+      "distances": "5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/BZK_SPosad_26"
+    },
+    {
+      "id": 40,
+      "date": "2026-07-12",
+      "name": "Трейл «Шигирский идол»",
+      "city": "Дегтярск",
+      "region": "Свердловская область",
+      "distances": "10 км, 21 км, детский",
+      "type": "trail",
+      "url": "https://ea-m.org/shidoltrail2026"
+    },
+    {
+      "id": 41,
+      "date": "2026-08-09",
+      "name": "XI Марафон «Европа-Азия»",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "distances": "3 км, 10 км, 21,1 км, 42,2 км",
+      "type": "road",
+      "url": "https://ea-m.org/eamarathon2026"
+    },
+    {
+      "id": 42,
+      "date": "2026-09-12",
+      "name": "Ночной забег Laser Night Run",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "distances": "3 км, 10 км",
+      "type": "night",
+      "url": "https://ea-m.org/lasernightrun-2026"
+    },
+    {
+      "id": 43,
+      "date": "2026-12-06",
+      "name": "Зимний полумарафон «Европа-Азия»",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "distances": "7 км, 21,1 км, детский",
+      "type": "road",
+      "url": "https://ea-m.org/winterhalfmarathon-2026"
+    }
+  ]
+}

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Беговые события России 2026</title>
+<style>
+  :root {
+    --bg:       #f5f5f7;
+    --surface:  #ffffff;
+    --surface2: #f0f0f4;
+    --border:   rgba(0,0,0,0.08);
+    --text:     #111118;
+    --muted:    #6b6b7a;
+    --accent:   #2563eb;
+    --trail-c:  #059669;
+    --road-c:   #2563eb;
+    --night-c:  #7c3aed;
+    --trail-bg: #d1fae5;
+    --road-bg:  #dbeafe;
+    --night-bg: #ede9fe;
+    --shadow:   0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:       #0f0f13;
+      --surface:  #18181f;
+      --surface2: #202028;
+      --border:   rgba(255,255,255,0.08);
+      --text:     #f0f0f4;
+      --muted:    #7a7a8a;
+      --trail-bg: rgba(5,150,105,0.15);
+      --road-bg:  rgba(37,99,235,0.15);
+      --night-bg: rgba(124,58,237,0.15);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  }
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 20px; height: 56px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 700; font-size: 16px;
+    color: var(--text); text-decoration: none; flex-shrink: 0;
+  }
+  .nav-logo-icon {
+    width: 30px; height: 30px; background: var(--accent);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  }
+  .nav-logo-icon svg { width: 16px; height: 16px; }
+  .nav-updated { font-size: 11px; color: var(--muted); margin-left: auto; flex-shrink: 0; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #1e40af 0%, #2563eb 55%, #0891b2 100%);
+    color: #fff; padding: 44px 20px 40px; text-align: center;
+  }
+  .hero h1 { font-size: clamp(22px, 4vw, 36px); font-weight: 800; letter-spacing: -.02em; margin-bottom: 8px; }
+  .hero p   { font-size: 14px; opacity: .82; }
+
+  /* ── FILTER BAR ── */
+  .filters-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 56px; z-index: 90;
+  }
+  .filters-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 10px 20px;
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  }
+  .filter-group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .filter-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .08em; color: var(--muted); flex-shrink: 0;
+  }
+  .filter-sep { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
+
+  /* selects */
+  select {
+    font-family: inherit; font-size: 13px; color: var(--text);
+    background: var(--surface2);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 6px 28px 6px 10px; appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6b7a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 8px center;
+    min-width: 140px; transition: border-color .15s;
+  }
+  select:focus { outline: none; border-color: var(--accent); }
+
+  /* type chips */
+  .type-btn {
+    font-family: inherit; font-size: 13px; font-weight: 500;
+    padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--muted);
+    cursor: pointer; transition: all .15s; white-space: nowrap;
+    user-select: none;
+  }
+  .type-btn:hover { border-color: var(--muted); }
+  .type-btn.is-all   { background: var(--accent);   border-color: var(--accent);   color: #fff; }
+  .type-btn.is-trail { background: var(--trail-bg); border-color: var(--trail-c); color: var(--trail-c); }
+  .type-btn.is-road  { background: var(--road-bg);  border-color: var(--road-c);  color: var(--road-c); }
+  .type-btn.is-night { background: var(--night-bg); border-color: var(--night-c); color: var(--night-c); }
+
+  /* ── STATS ── */
+  .stats-wrap { max-width: 1100px; margin: 0 auto; padding: 12px 20px 0; }
+  .stats-text { font-size: 13px; color: var(--muted); }
+
+  /* ── MAIN ── */
+  .main { max-width: 1100px; margin: 0 auto; padding: 16px 20px 60px; }
+
+  /* month */
+  .month-section { margin-bottom: 28px; }
+  .month-heading {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+  }
+  .month-heading-text {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .12em; color: var(--muted); white-space: nowrap;
+  }
+  .month-heading-line { flex: 1; height: 1px; background: var(--border); }
+  .month-heading-count { font-size: 11px; color: var(--muted); white-space: nowrap; }
+
+  /* grid */
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+  }
+
+  /* card */
+  .event-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 14px 14px 14px 14px;
+    display: flex; gap: 12px; align-items: flex-start;
+    cursor: pointer; box-shadow: var(--shadow);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .event-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.09); }
+  .event-card:active { transform: scale(.98); }
+
+  .date-col {
+    background: var(--surface2); border-radius: 10px;
+    padding: 7px 9px; text-align: center; flex-shrink: 0; min-width: 46px;
+  }
+  .date-day { font-size: 20px; font-weight: 800; color: var(--text); line-height: 1; }
+  .date-mon { font-size: 10px; color: var(--muted); margin-top: 2px; text-transform: uppercase; font-weight: 600; letter-spacing: .04em; }
+
+  .event-body { flex: 1; min-width: 0; }
+  .event-name { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 3px; }
+  .event-dist { font-size: 12px; color: var(--muted); line-height: 1.4; margin-bottom: 7px; }
+  .event-meta { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+
+  .city-tag {
+    display: inline-flex; align-items: center; gap: 3px;
+    font-size: 11px; color: var(--muted);
+    background: var(--surface2); padding: 2px 7px 2px 5px; border-radius: 10px;
+  }
+  .city-tag svg { width: 10px; height: 10px; flex-shrink: 0; }
+
+  .badge {
+    font-size: 10px; font-weight: 700; padding: 2px 7px;
+    border-radius: 8px; letter-spacing: .05em; text-transform: uppercase;
+  }
+  .badge-trail { background: var(--trail-bg); color: var(--trail-c); }
+  .badge-road  { background: var(--road-bg);  color: var(--road-c); }
+  .badge-night { background: var(--night-bg); color: var(--night-c); }
+
+  .card-arrow { font-size: 20px; color: var(--border); align-self: center; margin-left: 2px; flex-shrink: 0; transition: color .15s; }
+  .event-card:hover .card-arrow { color: var(--muted); }
+
+  /* empty / loading */
+  .state-box { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 15px; }
+  .state-icon { font-size: 36px; margin-bottom: 12px; }
+
+  /* footer */
+  footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    text-align: center; padding: 20px 20px;
+    font-size: 12px; color: var(--muted); line-height: 1.7;
+  }
+
+  /* mobile */
+  @media (max-width: 600px) {
+    .nav-inner, .filters-inner, .stats-wrap, .main { padding-left: 14px; padding-right: 14px; }
+    .filter-sep { display: none; }
+    .hero { padding: 28px 16px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 20 20" fill="none">
+          <path d="M10 2C10 2 5 7 5 12C5 14.76 7.24 17 10 17C12.76 17 15 14.76 15 12C15 7 10 2 10 2Z" fill="white" opacity=".9"/>
+          <path d="M7 13L9.5 10.5L11 12L13.5 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      Бег по России
+    </a>
+    <span class="nav-updated" id="nav-updated"></span>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>Беговые события России 2026</h1>
+  <p>Официальные источники &nbsp;·&nbsp; Автообновление 2 раза в сутки</p>
+</div>
+
+<div class="filters-bar">
+  <div class="filters-inner">
+
+    <div class="filter-group">
+      <span class="filter-label">Город</span>
+      <select id="sel-city" onchange="applyFilters()">
+        <option value="">Все города</option>
+      </select>
+    </div>
+
+    <div class="filter-sep"></div>
+
+    <div class="filter-group">
+      <span class="filter-label">Месяц</span>
+      <select id="sel-month" onchange="applyFilters()">
+        <option value="">Все месяцы</option>
+        <option value="01">Январь</option>
+        <option value="02">Февраль</option>
+        <option value="03">Март</option>
+        <option value="04">Апрель</option>
+        <option value="05">Май</option>
+        <option value="06">Июнь</option>
+        <option value="07">Июль</option>
+        <option value="08">Август</option>
+        <option value="09">Сентябрь</option>
+        <option value="10">Октябрь</option>
+        <option value="11">Ноябрь</option>
+        <option value="12">Декабрь</option>
+      </select>
+    </div>
+
+    <div class="filter-sep"></div>
+
+    <div class="filter-group">
+      <span class="filter-label">Тип</span>
+      <button id="btn-all"   class="type-btn is-all"  onclick="setType('all')"  >Все</button>
+      <button id="btn-road"  class="type-btn"         onclick="setType('road')" >🏙 Шоссе</button>
+      <button id="btn-trail" class="type-btn"         onclick="setType('trail')">🏔 Трейл</button>
+      <button id="btn-night" class="type-btn"         onclick="setType('night')">🌙 Ночные</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="stats-wrap"><p class="stats-text" id="stats-text">Загрузка…</p></div>
+
+<main class="main" id="main">
+  <div class="state-box"><div class="state-icon">⏳</div>Загружаем события…</div>
+</main>
+
+<footer>
+  Данные: ea-m.org · krasmarafon.ru · pushkin-run.ru · heroleague.ru · tomskmarathon.ru ·
+  kazan.run · runsim.ru · myrace.info · rtra.ru · skyrunning.ru и др.<br>
+  Автоматическое обновление через GitHub Actions · 2 раза в сутки
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ── Состояние ──────────────────────────────────────────────────────────────
+  var allEvents   = [];
+  var currentType = 'all';
+
+  // ── Константы ──────────────────────────────────────────────────────────────
+  var MONTHS = {
+    '01':'Январь','02':'Февраль','03':'Март','04':'Апрель',
+    '05':'Май','06':'Июнь','07':'Июль','08':'Август',
+    '09':'Сентябрь','10':'Октябрь','11':'Ноябрь','12':'Декабрь'
+  };
+  var MONTHS_SHORT = {
+    '01':'янв','02':'фев','03':'мар','04':'апр',
+    '05':'май','06':'июн','07':'июл','08':'авг',
+    '09':'сен','10':'окт','11':'ноя','12':'дек'
+  };
+  var TYPE_CLASSES = { all:'is-all', road:'is-road', trail:'is-trail', night:'is-night' };
+  var BADGE_LABELS = { road:'шоссе', trail:'трейл', night:'ночной' };
+
+  // ── Фильтрация по типу ─────────────────────────────────────────────────────
+  window.setType = function (type) {
+    currentType = type;
+    // Сбрасываем все кнопки
+    ['all','road','trail','night'].forEach(function (t) {
+      var btn = document.getElementById('btn-' + t);
+      if (!btn) return;
+      btn.className = 'type-btn' + (t === type ? ' ' + TYPE_CLASSES[type] : '');
+    });
+    applyFilters();
+  };
+
+  // ── Применяем все фильтры ──────────────────────────────────────────────────
+  window.applyFilters = function () {
+    var city  = document.getElementById('sel-city').value;
+    var month = document.getElementById('sel-month').value;
+
+    var filtered = allEvents.filter(function (e) {
+      if (currentType !== 'all' && e.type !== currentType) return false;
+      if (city  && e.city !== city)                         return false;
+      if (month && e.date.slice(5, 7) !== month)           return false;
+      return true;
+    });
+
+    renderEvents(filtered);
+  };
+
+  // ── Рендер событий ─────────────────────────────────────────────────────────
+  function renderEvents(events) {
+    var mainEl = document.getElementById('main');
+    var statsEl = document.getElementById('stats-text');
+
+    statsEl.textContent = 'Показано: ' + events.length + ' ' +
+      plural(events.length, 'событие', 'события', 'событий');
+
+    if (!events.length) {
+      mainEl.innerHTML =
+        '<div class="state-box"><div class="state-icon">🔍</div>' +
+        'Событий не найдено.<br>Попробуй изменить фильтры.</div>';
+      return;
+    }
+
+    // Группируем по YYYY-MM
+    var byMonth = {}, order = [];
+    events.forEach(function (e) {
+      var key = e.date.slice(0, 7);
+      if (!byMonth[key]) { byMonth[key] = []; order.push(key); }
+      byMonth[key].push(e);
+    });
+
+    var html = '';
+    order.forEach(function (key) {
+      var evs  = byMonth[key];
+      var mNum = key.slice(5, 7);
+      var head = (MONTHS[mNum] || mNum) + ' ' + key.slice(0, 4);
+
+      html += '<div class="month-section">';
+      html += '<div class="month-heading">';
+      html += '<span class="month-heading-text">' + head + '</span>';
+      html += '<div class="month-heading-line"></div>';
+      html += '<span class="month-heading-count">' +
+               evs.length + ' ' + plural(evs.length, 'событие', 'события', 'событий') +
+              '</span>';
+      html += '</div><div class="events-grid">';
+
+      evs.forEach(function (ev) {
+        var parts = ev.date.split('-');
+        var day   = parseInt(parts[2], 10);
+        var mon   = MONTHS_SHORT[parts[1]] || parts[1];
+        var badge = BADGE_LABELS[ev.type] || ev.type;
+        // Безопасный data-атрибут вместо onclick с URL внутри строки
+        html += '<div class="event-card" data-url="' + esc(ev.url) + '" role="link" tabindex="0">';
+        html += '<div class="date-col">';
+        html += '<div class="date-day">' + day + '</div>';
+        html += '<div class="date-mon">' + mon + '</div>';
+        html += '</div>';
+        html += '<div class="event-body">';
+        html += '<div class="event-name">' + esc(ev.name) + '</div>';
+        if (ev.distances) html += '<div class="event-dist">' + esc(ev.distances) + '</div>';
+        html += '<div class="event-meta">';
+        html += '<span class="city-tag">';
+        html += '<svg viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4C3 6.5 6 11 6 11S9 6.5 9 4C9 2.34 7.66 1 6 1zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>';
+        html += esc(ev.city) + '</span>';
+        html += '<span class="badge badge-' + esc(ev.type) + '">' + esc(badge) + '</span>';
+        html += '</div></div>';
+        html += '<div class="card-arrow">›</div>';
+        html += '</div>';
+      });
+
+      html += '</div></div>';
+    });
+
+    mainEl.innerHTML = html;
+
+    // Вешаем клики через делегирование — безопасно, без eval-like строк
+    mainEl.querySelectorAll('.event-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var url = card.getAttribute('data-url');
+        if (url) window.open(url, '_blank', 'noopener,noreferrer');
+      });
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          var url = card.getAttribute('data-url');
+          if (url) window.open(url, '_blank', 'noopener,noreferrer');
+        }
+      });
+    });
+  }
+
+  // ── Утилиты ────────────────────────────────────────────────────────────────
+  function esc(s) {
+    return String(s || '')
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;')
+      .replace(/'/g,'&#39;');
+  }
+
+  function plural(n, one, few, many) {
+    var m10 = n % 10, m100 = n % 100;
+    if (m10 === 1 && m100 !== 11) return one;
+    if (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20)) return few;
+    return many;
+  }
+
+  function formatUpdated(iso) {
+    try {
+      return 'Обновлено: ' + new Date(iso).toLocaleString('ru-RU',
+        { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+    } catch (e) { return ''; }
+  }
+
+  // ── Строим список городов ──────────────────────────────────────────────────
+  function buildCityFilter(events) {
+    var seen = {}, sel = document.getElementById('sel-city');
+    events.forEach(function (e) { if (e.city) seen[e.city] = true; });
+    Object.keys(seen).sort(function (a, b) {
+      return a.localeCompare(b, 'ru');
+    }).forEach(function (city) {
+      var opt = document.createElement('option');
+      opt.value = city; opt.textContent = city;
+      sel.appendChild(opt);
+    });
+  }
+
+  // ── Загрузка events.json ───────────────────────────────────────────────────
+  fetch('events.json?_=' + Date.now())
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      allEvents = (data.events || []).sort(function (a, b) {
+        return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
+      });
+      if (data.updated) {
+        document.getElementById('nav-updated').textContent = formatUpdated(data.updated);
+      }
+      buildCityFilter(allEvents);
+      applyFilters();
+    })
+    .catch(function (err) {
+      console.error('Ошибка загрузки events.json:', err);
+      document.getElementById('main').innerHTML =
+        '<div class="state-box"><div class="state-icon">⚠️</div>' +
+        'Не удалось загрузить данные.<br>' +
+        '<small>Убедитесь, что <code>events.json</code> находится рядом с <code>index.html</code></small></div>';
+      document.getElementById('stats-text').textContent = '';
+    });
+
+}());
+</script>
+</body>
+</html>
