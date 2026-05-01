@@ -1,6 +1,16 @@
 {
-  "updated": "2026-05-01T17:05:05Z",
+  "updated": "2026-05-01T18:00:00Z",
   "events": [
+    {
+      "id": 15,
+      "date": "2026-04-26",
+      "name": "Забег «Майская гроза»",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "distances": "5 км, 10 км, детский",
+      "type": "road",
+      "url": "https://ea-m.org/maystormrace2026"
+    },
     {
       "id": 16,
       "date": "2026-05-01",
@@ -95,11 +105,21 @@
       "id": 21,
       "date": "2026-05-16",
       "name": "Hard Run Hill — забег на трамплин",
-      "city": "Екатеринбург",
+      "city": "Нижний Тагил",
       "region": "Свердловская область",
-      "distances": "Вертикальный километр",
+      "distances": "400 м, эстафета 4×100 м, детский",
       "type": "trail",
       "url": "https://ea-m.org/hardrunhill2026"
+    },
+    {
+      "date": "2026-05-16",
+      "name": "Эстафета по Садовому кольцу",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "15 км, эстафета",
+      "type": "road",
+      "url": "https://gardenring.runc.run/",
+      "id": 63
     },
     {
       "id": 22,
@@ -162,6 +182,16 @@
       "url": "https://myrace.info/events/1716"
     },
     {
+      "date": "2026-06-07",
+      "name": "Красочный забег",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5 км",
+      "type": "road",
+      "url": "https://colorrun5km.runc.run/",
+      "id": 64
+    },
+    {
       "id": 28,
       "date": "2026-06-12",
       "name": "Бисертский марафон",
@@ -220,6 +250,16 @@
       "distances": "1 км, 4,2 км, 10 км, 21,1 км, 42,2 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/0926"
+    },
+    {
+      "date": "2026-06-20",
+      "name": "Ночной забег",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "10 км",
+      "type": "night",
+      "url": "https://nightrun10km.runc.run/",
+      "id": 65
     },
     {
       "id": 34,
@@ -287,7 +327,7 @@
       "name": "Трейл «Шигирский идол»",
       "city": "Дегтярск",
       "region": "Свердловская область",
-      "distances": "10 км, 21 км, детский",
+      "distances": "10 км, 21,1 км, детский",
       "type": "trail",
       "url": "https://ea-m.org/shidoltrail2026"
     },
@@ -297,9 +337,29 @@
       "name": "XI Марафон «Европа-Азия»",
       "city": "Екатеринбург",
       "region": "Свердловская область",
-      "distances": "3 км, 10 км, 21,1 км, 42,2 км",
+      "distances": "3 км, 10 км, 21,1 км, 42,2 км, эстафета, детский",
       "type": "road",
       "url": "https://ea-m.org/eamarathon2026"
+    },
+    {
+      "date": "2026-08-09",
+      "name": "СПБ полумарафон «Северная столица»",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "distances": "21,1 км, 10 км, эстафета",
+      "type": "road",
+      "url": "https://spbhalf.runc.run/",
+      "id": 66
+    },
+    {
+      "date": "2026-08-22",
+      "name": "Большой фестиваль бега",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5 км, 10 км",
+      "type": "road",
+      "url": "https://runfest.runc.run/",
+      "id": 67
     },
     {
       "id": 42,
@@ -307,9 +367,19 @@
       "name": "Ночной забег Laser Night Run",
       "city": "Екатеринбург",
       "region": "Свердловская область",
-      "distances": "3 км, 10 км",
+      "distances": "3 км, 10 км, детский",
       "type": "night",
       "url": "https://ea-m.org/lasernightrun-2026"
+    },
+    {
+      "date": "2026-09-26",
+      "name": "СберПрайм Московский Марафон",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "42,2 км, 10 км, эстафета",
+      "type": "road",
+      "url": "https://moscowmarathon.runc.run/",
+      "id": 68
     },
     {
       "id": 43,
