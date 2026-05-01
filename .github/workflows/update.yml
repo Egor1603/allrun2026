@@ -2,9 +2,9 @@ name: Update Events
 
 on:
   schedule:
-    - cron: '0 6 * * *'   # 06:00 UTC = 09:00 МСК
-    - cron: '0 15 * * *'  # 15:00 UTC = 18:00 МСК
-  workflow_dispatch:       # ручной запуск через кнопку на GitHub
+    - cron: '0 6 * * *'
+    - cron: '0 15 * * *'
+  workflow_dispatch:
 
 jobs:
   update:
@@ -28,9 +28,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
           git add events.json
-          git diff --cached --quiet || (
-            git commit -m "auto: update events $(date -u +%Y-%m-%dT%H:%M:%SZ)" &&
-            git pull --rebase origin main &&
+          if ! git diff --cached --quiet; then
+            git commit -m "auto: update events $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             git push
-          )
+          fi
