@@ -12,64 +12,24 @@
       "url": "https://kazan.run/"
     },
     {
-      "date": "2026-05-01",
-      "name": "Старт Красноярск",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/",
-      "id": 44
-    },
-    {
+      "id": 62,
       "date": "2026-05-01",
       "name": "Весенний полумарафон Академгородок",
       "city": "Новосибирск",
       "region": "Новосибирская область",
       "distances": "5 км, 10 км, 21,1 км, детский",
       "type": "road",
-      "url": "https://www.springrun.ru/",
-      "id": 62
+      "url": "https://www.springrun.ru/"
     },
     {
+      "id": 57,
       "date": "2026-05-03",
-      "name": "Казанский марафон",
-      "city": "Казань",
-      "region": "Республика Татарстан",
-      "distances": "3 км, 10 км, 21,1 км, 42,2 км",
-      "type": "road",
-      "url": "https://kazan.run/",
-      "id": 56
-    },
-    {
-      "date": "2026-05-03",
-      "name": "Легкоатлетические соревнования &quot;МИР, ТРУД, БЕГ&quot; в Н",
-      "city": "Алтайский край",
+      "name": "Легкоатлетические соревнования «МИР, ТРУД, БЕГ»",
+      "city": "Барнаул",
       "region": "Алтайский край",
       "distances": "",
       "type": "road",
-      "url": "https://sib-events.ru/reg/mir-trud-beg-2026/",
-      "id": 57
-    },
-    {
-      "date": "2026-05-03",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/mir-trud-beg-2026/",
-      "id": 58
-    },
-    {
-      "date": "2026-05-03",
-      "name": "Легкоатлетические соревнования МИР, ТРУД, БЕГ в Нагорном парк",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/mir-trud-beg-2026/",
-      "id": 64
+      "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
       "id": 17,
@@ -82,54 +42,24 @@
       "url": "https://reg.russiarunning.com/event/OSTANKINSKIYMARAFON3zabeg"
     },
     {
+      "id": 59,
       "date": "2026-05-06",
-      "name": "Старт Европа-Азия",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://ea-m.org/",
-      "id": 49
-    },
-    {
-      "date": "2026-05-06",
-      "name": "Беговая экскурсия по Барнаулу 06.05.2026 // Алтайский край",
-      "city": "Алтайский край",
+      "name": "Беговая экскурсия по Барнаулу",
+      "city": "Барнаул",
       "region": "Алтайский край",
       "distances": "",
       "type": "road",
-      "url": "https://sib-events.ru/reg/ekskursiya-barnaul-2026/",
-      "id": 59
+      "url": "https://sib-events.ru/reg/ekskursiya-barnaul-2026/"
     },
     {
+      "id": 60,
       "date": "2026-05-09",
-      "name": "Легкоатлетический пробег &quot;Динамовская десятка 2026&quot;",
-      "city": "Алтайский край",
+      "name": "Легкоатлетический пробег «Динамовская десятка»",
+      "city": "Барнаул",
       "region": "Алтайский край",
       "distances": "",
       "type": "road",
-      "url": "https://sib-events.ru/reg/dinamo-2026/",
-      "id": 60
-    },
-    {
-      "date": "2026-05-09",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/dinamo-2026/",
-      "id": 61
-    },
-    {
-      "date": "2026-05-09",
-      "name": "Легкоатлетический пробег Динамовская десятка 2026 09.05.2026",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/dinamo-2026/",
-      "id": 65
+      "url": "https://sib-events.ru/reg/dinamo-2026/"
     },
     {
       "id": 18,
@@ -182,16 +112,6 @@
       "url": "https://krasmarafon.ru/vesna"
     },
     {
-      "date": "2026-05-17",
-      "name": "Информация о дополнительных опциях к регистрации",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/vesna",
-      "id": 46
-    },
-    {
       "id": 23,
       "date": "2026-05-23",
       "name": "Забег РФ",
@@ -210,16 +130,6 @@
       "distances": "5, 10, 15, 30, 40, 55, 71, 100 км",
       "type": "trail",
       "url": "https://reg.russiarunning.com/event/PervouralskOpen2026Vesna"
-    },
-    {
-      "date": "2026-06-00",
-      "name": "Старт Европа-Азия",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://ea-m.org/",
-      "id": 50
     },
     {
       "id": 25,
@@ -312,16 +222,6 @@
       "url": "https://reg.russiarunning.com/event/0926"
     },
     {
-      "date": "2026-06-20",
-      "name": "Информация о дополнительных опциях к регистрации",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/colorrun",
-      "id": 47
-    },
-    {
       "id": 34,
       "date": "2026-06-21",
       "name": "Иркутский международный марафон",
@@ -340,16 +240,6 @@
       "distances": "5 км, 10 км, 21,1 км, 42,2 км, 63 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/SCARLETSAILS2026"
-    },
-    {
-      "date": "2026-07-02",
-      "name": "Старт Европа-Азия",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://ea-m.org/",
-      "id": 51
     },
     {
       "id": 36,
@@ -402,16 +292,6 @@
       "url": "https://ea-m.org/shidoltrail2026"
     },
     {
-      "date": "2026-07-12",
-      "name": "Подробнее о дополнительных опциях к регистрации",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/girlseven",
-      "id": 48
-    },
-    {
       "id": 41,
       "date": "2026-08-09",
       "name": "XI Марафон «Европа-Азия»",
@@ -420,36 +300,6 @@
       "distances": "3 км, 10 км, 21,1 км, 42,2 км",
       "type": "road",
       "url": "https://ea-m.org/eamarathon2026"
-    },
-    {
-      "date": "2026-08-09",
-      "name": "событие сезона role=\"presentation\" class=\"t959__card-arrow width=\"14\"",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://ea-m.org/",
-      "id": 52
-    },
-    {
-      "date": "2026-09-02",
-      "name": "яркой! role=\"presentation\" class=\"t959__card-arrow width=\"14\" height=\"24\"",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://ea-m.org/",
-      "id": 53
-    },
-    {
-      "date": "2026-09-02",
-      "name": "Старт Европа-Азия",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://ea-m.org/",
-      "id": 63
     },
     {
       "id": 42,
@@ -472,34 +322,14 @@
       "url": "https://ea-m.org/winterhalfmarathon-2026"
     },
     {
-      "date": "2026-12-06",
-      "name": "class=\"t959__card-arrow width=\"14\" height=\"24\" viewBox=\"0 fill=\"none\"",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://ea-m.org/",
-      "id": 54
-    },
-    {
+      "id": 55,
       "date": "2027-03-06",
       "name": "Томский марафон",
       "city": "Томск",
       "region": "Томская область",
       "distances": "",
       "type": "road",
-      "url": "https://tomskmarathon.ru/",
-      "id": 55
-    },
-    {
-      "date": "2027-03-27",
-      "name": "Информация о дополнительных опциях к регистрации",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "night",
-      "url": "https://krasmarafon.ru/nightrun",
-      "id": 45
+      "url": "https://tomskmarathon.ru/"
     }
   ]
 }
