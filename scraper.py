@@ -908,6 +908,92 @@ def scrape_wildtrail():
     return events
 
 
+def scrape_runc_run():
+    """
+    runc.run — серия: Московский марафон, Белые ночи, СПБ полумарафон,
+    Большой фестиваль бега, Ночной забег, Красочный забег и др.
+    Парсим главную, при 403 — субдомены напрямую.
+    """
+    print("  runc.run")
+
+    SUBDOMAINS = [
+        ("https://moscowmarathon.runc.run/", "СберПрайм Московский Марафон",      "Москва",          "Москва",          "42,2 км, 10 км, эстафета",  "road"),
+        ("https://moscowhalf.runc.run/",     "Московский полумарафон",             "Москва",          "Москва",          "21,1 км, 5 км, эстафета",   "road"),
+        ("https://wnmarathon.runc.run/",     "СберПрайм Марафон «Белые ночи»",    "Санкт-Петербург", "Санкт-Петербург", "42,2 км, 10 км, эстафета",  "road"),
+        ("https://spbhalf.runc.run/",        "СПБ полумарафон «Северная столица»", "Санкт-Петербург", "Санкт-Петербург", "21,1 км, 10 км, эстафета",  "road"),
+        ("https://runfest.runc.run/",        "Большой фестиваль бега",             "Москва",          "Москва",          "5 км, 10 км",               "road"),
+        ("https://nightrun10km.runc.run/",   "Ночной забег",                       "Москва",          "Москва",          "10 км",                     "night"),
+        ("https://colorrun5km.runc.run/",    "Красочный забег",                    "Москва",          "Москва",          "5 км",                      "road"),
+        ("https://gardenring.runc.run/",     "Эстафета по Садовому кольцу",        "Москва",          "Москва",          "15 км, эстафета",           "road"),
+    ]
+
+    current_year = datetime.utcnow().year
+    events = []
+    seen = set()
+
+    # Попытка 1: главная страница
+    html = fetch("https://runc.run/")
+    if html:
+        pattern = re.compile(
+            r'(\d{1,2}(?:-\d{1,2})?\s+[а-яА-Я]+)'
+            r'[^<]{0,30}'
+            r'href="(https://[a-z0-9\-]+\.runc\.run/[^"#]*)"'
+            r'[^>]*>([^<]{3,80})</a>',
+            re.S
+        )
+        for m in pattern.finditer(html):
+            date_str, url, name = m.group(1).strip(), m.group(2).strip(), m.group(3).strip()
+            name = clean(name)
+            if not is_valid_name(name):
+                continue
+            d = parse_date(date_str + f' {current_year}')
+            if not d:
+                d = parse_date(date_str + f' {current_year + 1}')
+            if not d or not is_future(d):
+                continue
+            city, region = 'Москва', 'Москва'
+            if any(x in url.lower() or x in name.lower() for x in ['spb', 'петербург', 'белые', 'северн']):
+                city, region = 'Санкт-Петербург', 'Санкт-Петербург'
+            etype = 'road'
+            if re.search(r'ночн|night', name.lower()):
+                etype = 'night'
+            elif re.search(r'кросс|trail|трейл|лисья', name.lower()):
+                etype = 'trail'
+            key = (d, name[:30])
+            if key in seen:
+                continue
+            seen.add(key)
+            ev = make_event(d, name, city, region, '', etype, url)
+            if ev:
+                events.append(ev)
+        if events:
+            return events
+
+    # Попытка 2: субдомены напрямую
+    for url, default_name, city, region, distances, etype in SUBDOMAINS:
+        sub = fetch(url)
+        if not sub:
+            continue
+        dates = re.findall(r'(\d{1,2}(?:-\d{1,2})?\s+[а-яА-Я]+\s+202\d|\d{1,2}\.\d{2}\.202\d)', sub)
+        name_m = re.search(r'<h1[^>]*>([^<]{5,80})</h1>', sub)
+        name = clean(name_m.group(1)) if name_m else default_name
+        if not is_valid_name(name):
+            name = default_name
+        for ds in dates[:3]:
+            d = parse_date(ds)
+            if d and is_future(d):
+                key = (d, name[:30])
+                if key not in seen:
+                    seen.add(key)
+                    ev = make_event(d, name, city, region, distances, etype, url)
+                    if ev:
+                        events.append(ev)
+                break
+        time.sleep(0.5)
+
+    return events
+
+
 # ─── MERGE & SAVE ────────────────────────────────────────────────────────────
 
 SOURCES = [
