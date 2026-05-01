@@ -93,12 +93,89 @@ def parse_date(s):
     return None
 
 def strip_tags(html):
-    return re.sub(r'<[^>]+>', ' ', html)
+    """Убирает HTML-теги и их содержимое для script/style, остальное — пробел."""
+    # Убираем script и style вместе с содержимым
+    html = re.sub(r'<(script|style)[^>]*>.*?</\1>', ' ', html, flags=re.S | re.I)
+    # Убираем все остальные теги
+    html = re.sub(r'<[^>]+>', ' ', html)
+    return html
+
+# Паттерны HTML-мусора, которые могут просочиться в название
+_HTML_GARBAGE = re.compile(
+    r'''
+    role\s*=           |  # role="presentation"
+    class\s*=          |  # class="t959__card"
+    width\s*=          |  # width="14"
+    height\s*=         |  # height="14"
+    style\s*=          |  # style="color:..."
+    aria-[a-z]         |  # aria-label
+    data-[a-z]         |  # data-id
+    href\s*=           |  # href="..."
+    src\s*=            |  # src="..."
+    t\d{3}__           |  # классы tilda: t959__, t123__
+    _blank             |  # target="_blank"
+    noopener           |  # rel="noopener"
+    presentation       |  # role="presentation"
+    viewBox            |  # SVG атрибут
+    xmlns              |  # SVG атрибут
+    stroke-            |  # SVG stroke-width
+    fill-              |  # SVG fill-rule
+    &[a-z]{2,6};          # HTML-энтити (&nbsp; &mdash; итд)
+    ''',
+    re.X | re.I
+)
+
+# Минимальная длина валидного названия события
+_MIN_NAME_LEN = 5
+# Признаки того что строка — не название, а HTML/CSS мусор
+_JUNK_MARKERS = re.compile(
+    r'[\{\}\[\]\\|<>]|'            # технические символы
+    r'(?:px|em|rem|vw|vh)\b|'      # CSS единицы
+    r'#[0-9a-f]{3,6}\b|'           # hex-цвета
+    r'https?://|'                   # ссылки
+    r'\b(?:function|return|var|const|let|if|else|div|span|svg|ul|li|img)\b|'  # код/теги
+    r'__[a-z]|'                     # BEM-классы: card__title, t959__arrow
+    r'btn|button|icon|logo|nav|menu|header|footer|sidebar|widget|'
+    r'col|row|grid|flex|box|tile|thumb|banner|modal|popup|overlay|'
+    r'active|disabled|hidden|visible|primary|secondary)\b',  # CSS-классы
+    re.I
+)
 
 def clean(s):
-    return re.sub(r'\s+', ' ', strip_tags(s)).strip()
+    """Очищает строку от HTML, мусора и возвращает чистый текст."""
+    s = strip_tags(str(s))
+    # Убираем HTML-мусор атрибутов
+    s = _HTML_GARBAGE.sub(' ', s)
+    # Убираем кавычки с содержимым если это значение атрибута (="...")
+    s = re.sub(r'=\s*["\'][^"\']*["\']', ' ', s)
+    # Убираем разрозненные кавычки
+    s = re.sub(r'["\']', ' ', s)
+    # Схлопываем пробелы
+    s = re.sub(r'\s+', ' ', s).strip()
+    return s
+
+def is_valid_name(s):
+    """Проверяет, что строка похожа на название события, а не на HTML-мусор."""
+    if not s or len(s) < _MIN_NAME_LEN:
+        return False
+    if _JUNK_MARKERS.search(s):
+        return False
+    # Должен содержать хотя бы одну букву
+    if not re.search(r'[а-яёА-ЯЁa-zA-Z]', s):
+        return False
+    # Не должен начинаться с цифры или спецсимвола
+    if re.match(r'^[\d\W]', s):
+        return False
+    return True
 
 def make_event(date, name, city, region, distances, etype, url):
+    # Финальная очистка названия
+    name = clean(name)
+    if not is_valid_name(name):
+        return None  # сигнал: событие невалидно, не добавлять
+    # Обрезаем слишком длинные названия
+    if len(name) > 100:
+        name = name[:97] + '…'
     return {
         "date": date, "name": name, "city": city, "region": region,
         "distances": distances, "type": etype, "url": url,
@@ -876,6 +953,8 @@ def merge(base, scraped):
     skipped = 0
 
     for candidate in scraped:
+        if candidate is None:
+            continue
         if not candidate.get("date") or not is_future(candidate["date"]):
             continue
 
