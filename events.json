@@ -1,6 +1,16 @@
 {
-  "updated": "2026-05-01T17:41:19Z",
+  "updated": "2026-05-01T19:00:00Z",
   "events": [
+    {
+      "id": 15,
+      "date": "2026-04-26",
+      "name": "Забег «Майская гроза»",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "distances": "5 км, 10 км, детский",
+      "type": "road",
+      "url": "https://ea-m.org/maystormrace2026"
+    },
     {
       "id": 16,
       "date": "2026-05-01",
@@ -22,14 +32,14 @@
       "url": "https://www.springrun.ru/"
     },
     {
-      "date": "2026-05-01",
-      "name": "Старт Красноярск",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/",
-      "id": 69
+      "id": 69,
+      "date": "2026-05-02",
+      "name": "Т-Банк Grand Kislovodsk",
+      "city": "Кисловодск",
+      "region": "Ставропольский край",
+      "distances": "от 5 до 105 км",
+      "type": "trail",
+      "url": "https://wildtrail.ru/gk"
     },
     {
       "id": 57,
@@ -40,36 +50,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "date": "2026-05-03",
-      "name": "Казанский марафон",
-      "city": "Казань",
-      "region": "Республика Татарстан",
-      "distances": "3 км, 10 км, 21,1 км, 42,2 км",
-      "type": "road",
-      "url": "https://kazan.run/",
-      "id": 78
-    },
-    {
-      "date": "2026-05-03",
-      "name": "Легкоатлетические соревнования МИР, ТРУД, БЕГ в Нагорном парк",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/mir-trud-beg-2026/",
-      "id": 79
-    },
-    {
-      "date": "2026-05-03",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/mir-trud-beg-2026/",
-      "id": 80
     },
     {
       "id": 17,
@@ -92,26 +72,6 @@
       "url": "https://sib-events.ru/reg/ekskursiya-barnaul-2026/"
     },
     {
-      "date": "2026-05-06",
-      "name": "Старт Европа-Азия",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://ea-m.org/",
-      "id": 74
-    },
-    {
-      "date": "2026-05-06",
-      "name": "Беговая экскурсия по Барнаулу 06.05.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/ekskursiya-barnaul-2026/",
-      "id": 81
-    },
-    {
       "id": 60,
       "date": "2026-05-09",
       "name": "Легкоатлетический пробег «Динамовская десятка»",
@@ -120,26 +80,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/dinamo-2026/"
-    },
-    {
-      "date": "2026-05-09",
-      "name": "Легкоатлетический пробег Динамовская десятка 2026 09.05.2026",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/dinamo-2026/",
-      "id": 82
-    },
-    {
-      "date": "2026-05-09",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/dinamo-2026/",
-      "id": 83
     },
     {
       "id": 18,
@@ -202,16 +142,6 @@
       "url": "https://krasmarafon.ru/vesna"
     },
     {
-      "date": "2026-05-17",
-      "name": "Информация о дополнительных опциях к регистрации",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/vesna",
-      "id": 71
-    },
-    {
       "id": 23,
       "date": "2026-05-23",
       "name": "Забег РФ",
@@ -230,16 +160,6 @@
       "distances": "5, 10, 15, 30, 40, 55, 71, 100 км",
       "type": "trail",
       "url": "https://reg.russiarunning.com/event/PervouralskOpen2026Vesna"
-    },
-    {
-      "date": "2026-06-00",
-      "name": "Старт Европа-Азия",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://ea-m.org/",
-      "id": 75
     },
     {
       "id": 25,
@@ -280,6 +200,16 @@
       "type": "road",
       "url": "https://colorrun5km.runc.run/",
       "id": 64
+    },
+    {
+      "id": 70,
+      "date": "2026-06-11",
+      "name": "Т-Банк Sport-Marafon Fest",
+      "city": "Никола-Ленивец",
+      "region": "Калужская область",
+      "distances": "от 10 до 100 км",
+      "type": "trail",
+      "url": "https://sportmarafonfest.ru"
     },
     {
       "id": 28,
@@ -352,16 +282,6 @@
       "id": 65
     },
     {
-      "date": "2026-06-20",
-      "name": "Информация о дополнительных опциях к регистрации",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/colorrun",
-      "id": 72
-    },
-    {
       "id": 34,
       "date": "2026-06-21",
       "name": "Иркутский международный марафон",
@@ -382,14 +302,14 @@
       "url": "https://reg.russiarunning.com/event/SCARLETSAILS2026"
     },
     {
-      "date": "2026-07-02",
-      "name": "Старт Европа-Азия",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://ea-m.org/",
-      "id": 76
+      "id": 71,
+      "date": "2026-06-26",
+      "name": "Т-Банк Arkhyz Wild Trail",
+      "city": "Архыз",
+      "region": "Карачаево-Черкессия",
+      "distances": "от 10 км",
+      "type": "trail",
+      "url": "https://wildtrail.ru/awt"
     },
     {
       "id": 36,
@@ -442,14 +362,14 @@
       "url": "https://ea-m.org/shidoltrail2026"
     },
     {
-      "date": "2026-07-12",
-      "name": "Подробнее о дополнительных опциях к регистрации",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/girlseven",
-      "id": 73
+      "id": 72,
+      "date": "2026-08-08",
+      "name": "Т-Банк Elbrus Wild Trail",
+      "city": "Эльбрус",
+      "region": "Кабардино-Балкария",
+      "distances": "от 5 до 130 км",
+      "type": "trail",
+      "url": "https://wildtrail.ru/ewt"
     },
     {
       "id": 41,
@@ -472,6 +392,16 @@
       "id": 66
     },
     {
+      "id": 73,
+      "date": "2026-08-21",
+      "name": "Т-Банк MMK Wild Fest",
+      "city": "Абзаково",
+      "region": "Республика Башкортостан",
+      "distances": "от 11 до 95 км",
+      "type": "trail",
+      "url": "https://wildtrail.ru/mmk"
+    },
+    {
       "date": "2026-08-22",
       "name": "Большой фестиваль бега",
       "city": "Москва",
@@ -482,14 +412,14 @@
       "id": 67
     },
     {
-      "date": "2026-09-02",
-      "name": "Старт Европа-Азия",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://ea-m.org/",
-      "id": 77
+      "id": 74,
+      "date": "2026-09-04",
+      "name": "Т-Банк Rosa Wild Fest",
+      "city": "Красная Поляна",
+      "region": "Краснодарский край",
+      "distances": "от 10 до 180 км",
+      "type": "trail",
+      "url": "https://wildtrail.ru/rwt"
     },
     {
       "id": 42,
@@ -530,16 +460,6 @@
       "distances": "",
       "type": "road",
       "url": "https://tomskmarathon.ru/"
-    },
-    {
-      "date": "2027-03-27",
-      "name": "Информация о дополнительных опциях к регистрации",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "night",
-      "url": "https://krasmarafon.ru/nightrun",
-      "id": 70
     }
   ]
 }
