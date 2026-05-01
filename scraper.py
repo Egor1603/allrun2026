@@ -724,7 +724,105 @@ def scrape_vk():
     return events
 
 
-def scrape_runc_run():
+def scrape_wildtrail():
+    """
+    wildtrail.ru — серия трейловых фестивалей по всей России:
+    Dagestan Wild Trail, Elbrus Wild Trail, Rosa Wild Fest,
+    MMK Wild Fest (Башкирия), Arkhyz Wild Trail, Grand Kislovodsk,
+    Sport-Marafon Fest (Никола-Ленивец), City Trail (Москва).
+    Парсим главную — там все события с датами и локациями.
+    """
+    print("  wildtrail.ru")
+    html = fetch("https://wildtrail.ru/")
+    if not html:
+        return []
+
+    events = []
+
+    # На главной блоки вида:
+    # Место: Архыз\nДата: 26−28 июня 2026\nДистанции: от 10 км
+    # Ищем пары Место+Дата рядом с названием события
+
+    # Сначала вытаскиваем все блоки с датами
+    # Паттерн: название (из ссылки или заголовка) + Место + Дата
+    blocks = re.findall(
+        r'(?:href="(https://(?:wildtrail\.ru/[^"]+|[a-z]+wildtrail\.ru[^"]*|[a-z\-]+\.ru[^"]*?))"[^>]*>)?'
+        r'([^<]{5,80})</[^>]+>'
+        r'(?:.*?Место:\s*([^\n<]{3,40}))?'
+        r'.*?Дата:\s*([^\n<]{5,40})'
+        r'(?:.*?Дистанции:\s*([^\n<]{3,60}))?',
+        html, re.S
+    )
+
+    # Маппинг ссылок → города и регионы
+    URL_GEO = {
+        'wildtrail.ru/dwt':  ('Дагестан',           'Республика Дагестан'),
+        'wildtrail.ru/ewt':  ('Эльбрус',             'Кабардино-Балкария'),
+        'wildtrail.ru/rwt':  ('Красная Поляна',      'Краснодарский край'),
+        'wildtrail.ru/mmk':  ('Абзаково',            'Республика Башкортостан'),
+        'wildtrail.ru/awt':  ('Архыз',               'Карачаево-Черкессия'),
+        'wildtrail.ru/gk':   ('Кисловодск',          'Ставропольский край'),
+        'wildtrail.ru/nlwwt':('Никола-Ленивец',      'Калужская область'),
+        'sportmarafonfest.ru':('Никола-Ленивец',     'Калужская область'),
+        'city-trail.ru':     ('Москва',              'Москва'),
+        'lightsofderbent.ru':('Дербент',             'Республика Дагестан'),
+    }
+
+    seen = set()
+    for url, name, place, date_str, distances in blocks:
+        name = clean(name)
+        if not is_valid_name(name):
+            continue
+        d = parse_date(date_str)
+        if not d or not is_future(d):
+            continue
+
+        # Определяем город
+        city, region = '', ''
+        for key, geo in URL_GEO.items():
+            if key in (url or ''):
+                city, region = geo
+                break
+        if not city and place:
+            city = clean(place).split(',')[0].strip()
+            region = ''
+
+        if not city:
+            city = 'Россия'
+
+        key = (d, name[:30])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        ev = make_event(d, name, city, region,
+                        clean(distances) if distances else 'от 10 км',
+                        'trail', url or 'https://wildtrail.ru/')
+        if ev:
+            events.append(ev)
+
+    # Если регулярка не сработала — используем жёстко заданные события с сайта
+    if not events:
+        HARDCODED = [
+            ("2026-02-14", "Т-Банк Nikola-Lenivets Winter Wild Trail", "Никола-Ленивец", "Калужская область",       "от 10 до 50 км",   "https://wildtrail.ru/nlwwt"),
+            ("2026-04-10", "Т-Банк Dagestan Wild Trail",               "Дагестан",       "Республика Дагестан",     "от 10 до 100 км",  "https://wildtrail.ru/dwt"),
+            ("2026-05-02", "Т-Банк Grand Kislovodsk",                  "Кисловодск",     "Ставропольский край",     "от 5 до 105 км",   "https://wildtrail.ru/gk"),
+            ("2026-06-11", "Т-Банк Sport-Marafon Fest",                "Никола-Ленивец", "Калужская область",       "от 10 до 100 км",  "https://sportmarafonfest.ru"),
+            ("2026-06-26", "Т-Банк Arkhyz Wild Trail",                 "Архыз",          "Карачаево-Черкессия",     "от 10 км",         "https://wildtrail.ru/awt"),
+            ("2026-08-08", "Т-Банк Elbrus Wild Trail",                 "Эльбрус",        "Кабардино-Балкария",      "от 5 до 130 км",   "https://wildtrail.ru/ewt"),
+            ("2026-08-21", "Т-Банк MMK Wild Fest",                     "Абзаково",       "Республика Башкортостан", "от 11 до 95 км",   "https://wildtrail.ru/mmk"),
+            ("2026-09-04", "Т-Банк Rosa Wild Fest",                    "Красная Поляна", "Краснодарский край",      "от 10 до 180 км",  "https://wildtrail.ru/rwt"),
+        ]
+        for date, name, city, region, distances, url in HARDCODED:
+            if is_future(date):
+                ev = make_event(date, name, city, region, distances, 'trail', url)
+                if ev:
+                    events.append(ev)
+
+    return events
+
+
+
     """
     runc.run — главный сайт серии: Московский марафон, Белые ночи,
     СПБ полумарафон, Фестиваль бега, Ночной забег, Красочный забег и др.
@@ -822,6 +920,7 @@ SOURCES = [
     ("kazan.run",           scrape_kazan_run),
     ("sib-events.ru",       scrape_sib_events),
     ("runc.run",            scrape_runc_run),       # вся серия: марафоны, Белые ночи, СПБ и др.
+    ("wildtrail.ru",        scrape_wildtrail),      # трейловые фестивали по всей России
     ("wnmarathon.runc.run", scrape_wnmarathon),     # дополнительно детальная страница
     ("moscowhalf.runc.run", scrape_moscowhalf),     # дополнительно детальная страница
     ("springrun.ru",        scrape_springrun),
