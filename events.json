@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-02T04:50:19Z",
+  "updated": "2026-05-02T07:57:13Z",
   "events": [
     {
       "id": 69,
@@ -170,6 +170,16 @@
       "distances": "5 км, 10 км, 21,1 км, детский",
       "type": "road",
       "url": "https://sib-events.ru/reg/medovyy-zabeg-2026/"
+    },
+    {
+      "date": "2026-05-11",
+      "name": "Медовый забег 2026 11.05.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/medovyy-zabeg-2026/",
+      "id": 121
     },
     {
       "id": 20,
