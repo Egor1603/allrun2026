@@ -187,7 +187,16 @@
   .card-arrow { font-size: 20px; color: var(--border); align-self: center; margin-left: 2px; flex-shrink: 0; transition: color .15s; }
   .event-card:hover .card-arrow { color: var(--muted); }
 
-  /* empty / loading */
+  .type-btn.is-past  { background: var(--surface2); border-color: var(--muted); color: var(--muted); }
+
+  /* Прошедшие карточки — приглушённые */
+  .event-card.is-past { opacity: .55; }
+  .event-card.is-past:hover { opacity: .8; }
+  .past-banner {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 10px 16px; margin-bottom: 20px;
+    font-size: 13px; color: var(--muted); text-align: center;
+  }
   .state-box { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 15px; }
   .state-icon { font-size: 36px; margin-bottom: 12px; }
 
@@ -267,6 +276,7 @@
       <button id="btn-road"  class="type-btn"         onclick="setType('road')" >🏙 Шоссе</button>
       <button id="btn-trail" class="type-btn"         onclick="setType('trail')">🏔 Трейл</button>
       <button id="btn-night" class="type-btn"         onclick="setType('night')">🌙 Ночные</button>
+      <button id="btn-past"  class="type-btn"         onclick="setType('past')" >🕐 Прошедшие</button>
     </div>
 
   </div>
@@ -289,8 +299,10 @@
   'use strict';
 
   // ── Состояние ──────────────────────────────────────────────────────────────
-  var allEvents   = [];
+  var allEvents   = [];   // предстоящие
+  var pastEvents  = [];   // прошедшие
   var currentType = 'all';
+  var TODAY = new Date().toISOString().slice(0, 10);
 
   // ── Константы ──────────────────────────────────────────────────────────────
   var MONTHS = {
@@ -303,14 +315,13 @@
     '05':'май','06':'июн','07':'июл','08':'авг',
     '09':'сен','10':'окт','11':'ноя','12':'дек'
   };
-  var TYPE_CLASSES = { all:'is-all', road:'is-road', trail:'is-trail', night:'is-night' };
+  var TYPE_CLASSES = { all:'is-all', road:'is-road', trail:'is-trail', night:'is-night', past:'is-past' };
   var BADGE_LABELS = { road:'шоссе', trail:'трейл', night:'ночной' };
 
   // ── Фильтрация по типу ─────────────────────────────────────────────────────
   window.setType = function (type) {
     currentType = type;
-    // Сбрасываем все кнопки
-    ['all','road','trail','night'].forEach(function (t) {
+    ['all','road','trail','night','past'].forEach(function (t) {
       var btn = document.getElementById('btn-' + t);
       if (!btn) return;
       btn.className = 'type-btn' + (t === type ? ' ' + TYPE_CLASSES[type] : '');
@@ -323,6 +334,18 @@
     var city  = document.getElementById('sel-city').value;
     var month = document.getElementById('sel-month').value;
 
+    // Показываем прошедшие
+    if (currentType === 'past') {
+      var filtered = pastEvents.filter(function (e) {
+        if (city  && e.city !== city)             return false;
+        if (month && e.date.slice(5,7) !== month) return false;
+        return true;
+      });
+      renderEvents(filtered, true);
+      return;
+    }
+
+    // Обычный режим — предстоящие
     var filtered = allEvents.filter(function (e) {
       if (currentType !== 'all' && e.type !== currentType) return false;
       if (city  && e.city !== city)                         return false;
@@ -330,16 +353,21 @@
       return true;
     });
 
-    renderEvents(filtered);
+    renderEvents(filtered, false);
   };
 
   // ── Рендер событий ─────────────────────────────────────────────────────────
-  function renderEvents(events) {
-    var mainEl = document.getElementById('main');
+  function renderEvents(events, isPast) {
+    var mainEl  = document.getElementById('main');
     var statsEl = document.getElementById('stats-text');
 
-    statsEl.textContent = 'Показано: ' + events.length + ' ' +
-      plural(events.length, 'событие', 'события', 'событий');
+    if (isPast) {
+      statsEl.textContent = 'Прошедших: ' + events.length + ' ' +
+        plural(events.length, 'событие', 'события', 'событий');
+    } else {
+      statsEl.textContent = 'Показано: ' + events.length + ' ' +
+        plural(events.length, 'событие', 'события', 'событий');
+    }
 
     if (!events.length) {
       mainEl.innerHTML =
@@ -348,15 +376,27 @@
       return;
     }
 
+    // Прошедшие — в обратном хронологическом порядке (недавние сначала)
+    var sorted = events.slice();
+    if (isPast) {
+      sorted.sort(function(a, b) { return a.date < b.date ? 1 : -1; });
+    }
+
     // Группируем по YYYY-MM
     var byMonth = {}, order = [];
-    events.forEach(function (e) {
+    sorted.forEach(function (e) {
       var key = e.date.slice(0, 7);
       if (!byMonth[key]) { byMonth[key] = []; order.push(key); }
       byMonth[key].push(e);
     });
 
     var html = '';
+
+    // Баннер для прошедших
+    if (isPast) {
+      html += '<div class="past-banner">🕐 Прошедшие события — от последних к ранним</div>';
+    }
+
     order.forEach(function (key) {
       var evs  = byMonth[key];
       var mNum = key.slice(5, 7);
@@ -376,8 +416,8 @@
         var day   = parseInt(parts[2], 10);
         var mon   = MONTHS_SHORT[parts[1]] || parts[1];
         var badge = BADGE_LABELS[ev.type] || ev.type;
-        // Безопасный data-атрибут вместо onclick с URL внутри строки
-        html += '<div class="event-card" data-url="' + esc(ev.url) + '" role="link" tabindex="0">';
+        var cardClass = 'event-card' + (isPast ? ' is-past' : '');
+        html += '<div class="' + cardClass + '" data-url="' + esc(ev.url) + '" role="link" tabindex="0">';
         html += '<div class="date-col">';
         html += '<div class="date-day">' + day + '</div>';
         html += '<div class="date-mon">' + mon + '</div>';
@@ -400,7 +440,6 @@
 
     mainEl.innerHTML = html;
 
-    // Вешаем клики через делегирование — безопасно, без eval-like строк
     mainEl.querySelectorAll('.event-card').forEach(function (card) {
       card.addEventListener('click', function () {
         var url = card.getAttribute('data-url');
@@ -457,13 +496,19 @@
       return r.json();
     })
     .then(function (data) {
-      allEvents = (data.events || []).sort(function (a, b) {
+      var all = (data.events || []).sort(function (a, b) {
         return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
       });
+
+      // Разделяем на предстоящие и прошедшие
+      allEvents  = all.filter(function (e) { return e.date >= TODAY; });
+      pastEvents = all.filter(function (e) { return e.date < TODAY; });
+
       if (data.updated) {
         document.getElementById('nav-updated').textContent = formatUpdated(data.updated);
       }
-      buildCityFilter(allEvents);
+      // Список городов строим по всем событиям (включая прошедшие)
+      buildCityFilter(all);
       applyFilters();
     })
     .catch(function (err) {
