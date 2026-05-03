@@ -342,16 +342,6 @@
       "url": "https://paris-running.ru"
     },
     {
-      "date": "2026-06-00",
-      "name": "Старт Европа-Азия",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://ea-m.org/",
-      "id": 158
-    },
-    {
       "id": 26,
       "date": "2026-06-06",
       "name": "Kamensk Urban Trail",
@@ -672,16 +662,6 @@
       "url": "https://run2kremlins.ru"
     },
     {
-      "date": "2026-07-02",
-      "name": "Старт Европа-Азия",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://ea-m.org/",
-      "id": 159
-    },
-    {
       "id": 36,
       "date": "2026-07-04",
       "name": "Марафон «Белые ночи»",
@@ -960,16 +940,6 @@
       "distances": "5 км, 10 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/AlexandrinoSportmasterPROCrossFestdedicatedtoRussianFlagDay"
-    },
-    {
-      "date": "2026-09-02",
-      "name": "Старт Европа-Азия",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://ea-m.org/",
-      "id": 160
     },
     {
       "id": 74,
