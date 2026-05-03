@@ -908,7 +908,149 @@ def scrape_wildtrail():
     return events
 
 
+def scrape_trail1():
+    """trail1.ru — многодневный трейл на Камчатке"""
+    print("  trail1.ru")
+    html = fetch("https://trail1.ru/")
+    if not html:
+        return []
+    events = []
+    # Ищем даты вида "10-13 сентября 2026"
+    dates = re.findall(r'(\d{1,2}[-–]\d{1,2}\s+[а-яА-Я]+\s+202\d|\d{1,2}\s+[а-яА-Я]+\s+202\d)', html)
+    # Страницы дистанций
+    DAYS = [
+        ("https://trail1.ru/warmthoftheearth", "Trail-1 «Тепло Земли»",            "30 км (↑1300 м), вулкан Горелый"),
+        ("https://trail1.ru/ursa",             "Trail-1 «Урса. Путеводная звезда»", "20 км (↑1300 м), массив Вачкажец"),
+        ("https://trail1.ru/anotherplanet",    "Trail-1 «Другая планета»",          "17 км (↑2000 м), вулкан Авачинский"),
+        ("https://trail1.ru/oceansong",        "Trail-1 «Океанская песня»",         "32 км (↑900 м), берег Тихого океана"),
+    ]
+    # Определяем стартовую дату из главной страницы
+    start_date = None
+    for ds in dates[:5]:
+        d = parse_date(ds)
+        if d and is_future(d):
+            start_date = d
+            break
+    if not start_date:
+        return []
+    from datetime import date as _date, timedelta
+    base = _date.fromisoformat(start_date)
+    for i, (url, name, distances) in enumerate(DAYS):
+        day_date = (base + timedelta(days=i)).isoformat()
+        if is_future(day_date):
+            ev = make_event(day_date, name, "Петропавловск-Камчатский",
+                            "Камчатский край", distances, "trail", url)
+            if ev:
+                events.append(ev)
+    return events
+
+
+def scrape_norilsktrail():
+    """norilsktrail.ru — Норильск. Горный старт на плато Путорана"""
+    print("  norilsktrail.ru")
+    html = fetch("https://norilsktrail.ru/")
+    if not html:
+        return []
+    events = []
+    dates = re.findall(r'(\d{1,2}\s+[а-яА-Я]+\s+202\d|\d{1,2}\.\d{2}\.202\d)', html)
+    for ds in dates[:5]:
+        d = parse_date(ds)
+        if d and is_future(d):
+            ev = make_event(d, "Норильск. Горный старт",
+                            "Норильск", "Красноярский край",
+                            "5 км, 15 км, 30 км, 50 км, 70 км, детский",
+                            "trail", "https://norilsktrail.ru")
+            if ev:
+                events.append(ev)
+            break
+    return events
+
+
 def scrape_runc_run():
+    """
+    runc.run — серия: Московский марафон, Белые ночи, СПБ полумарафон,
+    Большой фестиваль бега, Ночной забег, Красочный забег и др.
+    Парсим главную, при 403 — субдомены напрямую.
+    """
+    print("  runc.run")
+
+    SUBDOMAINS = [
+        ("https://moscowmarathon.runc.run/", "СберПрайм Московский Марафон",      "Москва",          "Москва",          "42,2 км, 10 км, эстафета",  "road"),
+        ("https://moscowhalf.runc.run/",     "Московский полумарафон",             "Москва",          "Москва",          "21,1 км, 5 км, эстафета",   "road"),
+        ("https://wnmarathon.runc.run/",     "СберПрайм Марафон «Белые ночи»",    "Санкт-Петербург", "Санкт-Петербург", "42,2 км, 10 км, эстафета",  "road"),
+        ("https://spbhalf.runc.run/",        "СПБ полумарафон «Северная столица»", "Санкт-Петербург", "Санкт-Петербург", "21,1 км, 10 км, эстафета",  "road"),
+        ("https://runfest.runc.run/",        "Большой фестиваль бега",             "Москва",          "Москва",          "5 км, 10 км",               "road"),
+        ("https://nightrun10km.runc.run/",   "Ночной забег",                       "Москва",          "Москва",          "10 км",                     "night"),
+        ("https://colorrun5km.runc.run/",    "Красочный забег",                    "Москва",          "Москва",          "5 км",                      "road"),
+        ("https://gardenring.runc.run/",     "Эстафета по Садовому кольцу",        "Москва",          "Москва",          "15 км, эстафета",           "road"),
+    ]
+
+    current_year = datetime.utcnow().year
+    events = []
+    seen = set()
+
+    html = fetch("https://runc.run/")
+    if html:
+        pattern = re.compile(
+            r'(\d{1,2}(?:-\d{1,2})?\s+[а-яА-Я]+)'
+            r'[^<]{0,30}'
+            r'href="(https://[a-z0-9\-]+\.runc\.run/[^"#]*)"'
+            r'[^>]*>([^<]{3,80})</a>',
+            re.S
+        )
+        for m in pattern.finditer(html):
+            date_str, url, name = m.group(1).strip(), m.group(2).strip(), m.group(3).strip()
+            name = clean(name)
+            if not is_valid_name(name):
+                continue
+            d = parse_date(date_str + f' {current_year}')
+            if not d:
+                d = parse_date(date_str + f' {current_year + 1}')
+            if not d or not is_future(d):
+                continue
+            city, region = 'Москва', 'Москва'
+            if any(x in url.lower() or x in name.lower() for x in ['spb', 'петербург', 'белые', 'северн']):
+                city, region = 'Санкт-Петербург', 'Санкт-Петербург'
+            etype = 'road'
+            if re.search(r'ночн|night', name.lower()):
+                etype = 'night'
+            elif re.search(r'кросс|trail|трейл|лисья', name.lower()):
+                etype = 'trail'
+            key = (d, name[:30])
+            if key in seen:
+                continue
+            seen.add(key)
+            ev = make_event(d, name, city, region, '', etype, url)
+            if ev:
+                events.append(ev)
+        if events:
+            return events
+
+    for url, default_name, city, region, distances, etype in SUBDOMAINS:
+        sub = fetch(url)
+        if not sub:
+            continue
+        dates = re.findall(r'(\d{1,2}(?:-\d{1,2})?\s+[а-яА-Я]+\s+202\d|\d{1,2}\.\d{2}\.202\d)', sub)
+        name_m = re.search(r'<h1[^>]*>([^<]{5,80})</h1>', sub)
+        name = clean(name_m.group(1)) if name_m else default_name
+        if not is_valid_name(name):
+            name = default_name
+        for ds in dates[:3]:
+            d = parse_date(ds)
+            if d and is_future(d):
+                key = (d, name[:30])
+                if key not in seen:
+                    seen.add(key)
+                    ev = make_event(d, name, city, region, distances, etype, url)
+                    if ev:
+                        events.append(ev)
+                break
+        time.sleep(0.5)
+
+    return events
+
+
+
     """
     runc.run — серия: Московский марафон, Белые ночи, СПБ полумарафон,
     Большой фестиваль бега, Ночной забег, Красочный забег и др.
@@ -1323,6 +1465,220 @@ def scrape_taganay_ultra():
     return events
 
 
+def scrape_trail1():
+    """trail1.ru — многодневная гонка Trail-1 (Камчатка и др.)"""
+    print("  trail1.ru")
+    html = fetch("https://trail1.ru/")
+    if not html:
+        return []
+    events = []
+    dates = re.findall(r'(\d{1,2}[-–]\d{1,2}\s+[а-яА-Я]+\s+202\d|\d{1,2}\s+[а-яА-Я]+\s+202\d)', html)
+    name_m = re.search(r'<h1[^>]*>([^<]{5,80})</h1>', html)
+    name = clean(name_m.group(1)) if name_m and is_valid_name(clean(name_m.group(1))) else "Trail-1 многодневная гонка"
+    city_m = re.search(r'(?:Камчатк|Петропавловск|Байкал|Алтай|Кавказ)', html)
+    city = "Петропавловск-Камчатский" if city_m and "Камчатк" in city_m.group(0) else "Россия"
+    region = "Камчатский край" if "Камчатк" in html else ""
+    seen = set()
+    for ds in dates[:3]:
+        d = parse_date(ds)
+        if d and is_future(d) and d not in seen:
+            seen.add(d)
+            ev = make_event(d, name, city, region, "", "trail", "https://trail1.ru")
+            if ev:
+                events.append(ev)
+    return events
+
+
+def scrape_norilsktrail():
+    """norilsktrail.ru — Норильск. Горный старт, плато Путорана"""
+    print("  norilsktrail.ru")
+    html = fetch("https://norilsktrail.ru/")
+    if not html:
+        return []
+    events = []
+    dates = re.findall(r'(\d{1,2}\s+[а-яА-Я]+\s+202\d|\d{1,2}\.\d{2}\.202\d)', html)
+    for ds in dates[:3]:
+        d = parse_date(ds)
+        if d and is_future(d):
+            ev = make_event(d, "Норильск. Горный старт", "Норильск", "Красноярский край",
+                            "5 км, 15 км, 30 км, 50 км, 70 км, детский",
+                            "trail", "https://norilsktrail.ru")
+            if ev:
+                events.append(ev)
+            break
+    return events
+
+
+def scrape_edge_ultra():
+    """edge-ultra.ru — Alol Ultra Trail, Псковская область"""
+    print("  edge-ultra.ru")
+    html = fetch("https://edge-ultra.ru/")
+    if not html:
+        return []
+    events = []
+    dates = re.findall(r'(\d{1,2}[-–]\d{1,2}\s+[а-яА-Я]+\s+202\d|\d{1,2}\s+[а-яА-Я]+\s+202\d)', html)
+    name_m = re.search(r'<h1[^>]*>([^<]{5,80})</h1>', html)
+    name = clean(name_m.group(1)) if name_m and is_valid_name(clean(name_m.group(1))) else "Alol Ultra Trail"
+    for ds in dates[:3]:
+        d = parse_date(ds)
+        if d and is_future(d):
+            ev = make_event(d, name, "Пустошка", "Псковская область",
+                            "5, 10, 20, 30, 50, 100, 180 км",
+                            "trail", "https://edge-ultra.ru")
+            if ev:
+                events.append(ev)
+            break
+    return events
+
+
+def scrape_okarivertrail():
+    """okarivertrail.ru — Oka River Trail, Рязанская область"""
+    print("  okarivertrail.ru")
+    html = fetch("https://okarivertrail.ru/")
+    if not html:
+        return []
+    events = []
+    dates = re.findall(r'(\d{1,2}[-–]\d{1,2}\s+[а-яА-Я]+\s+202\d|\d{1,2}\s+[а-яА-Я]+\s+202\d)', html)
+    for ds in dates[:3]:
+        d = parse_date(ds)
+        if d and is_future(d):
+            ev = make_event(d, "Oka River Trail", "Выползово", "Рязанская область",
+                            "5 км, 10 км, 30 км, 50 км",
+                            "trail", "https://okarivertrail.ru")
+            if ev:
+                events.append(ev)
+            break
+    return events
+
+
+def scrape_russiarunning():
+    """
+    reg.russiarunning.com — крупнейшая платформа регистрации на забеги.
+    Парсим страницу предстоящих событий.
+    """
+    print("  reg.russiarunning.com")
+    html = fetch("https://reg.russiarunning.com/events")
+    if not html:
+        html = fetch("https://reg.russiarunning.com/")
+    if not html:
+        return []
+    events = []
+    # Карточки событий
+    cards = re.findall(
+        r'href="(/event/[^"]+)"[^>]*>(.*?)</a>',
+        html, re.S
+    )
+    seen = set()
+    for path, content in cards[:30]:
+        content_clean = clean(content)
+        if not is_valid_name(content_clean):
+            continue
+        d = parse_date(content_clean)
+        if not d or not is_future(d):
+            continue
+        key = (d, content_clean[:30])
+        if key in seen:
+            continue
+        seen.add(key)
+        url = "https://reg.russiarunning.com" + path
+        ev = make_event(d, content_clean, "Россия", "", "", "road", url)
+        if ev:
+            events.append(ev)
+    return events[:10]
+
+
+def scrape_toplist():
+    """toplist.run — агрегатор/платформа регистрации на трейлы"""
+    print("  toplist.run")
+    html = fetch("https://toplist.run/races/")
+    if not html:
+        html = fetch("https://toplist.run/")
+    if not html:
+        return []
+    events = []
+    cards = re.findall(
+        r'href="(/race/[^"]+)"[^>]*>(.*?)</a>',
+        html, re.S
+    )
+    seen = set()
+    for path, content in cards[:20]:
+        name = clean(content)
+        if not is_valid_name(name):
+            continue
+        d = parse_date(content)
+        if not d or not is_future(d):
+            continue
+        key = (d, name[:30])
+        if key in seen:
+            continue
+        seen.add(key)
+        url = "https://toplist.run" + path
+        ev = make_event(d, name, "Россия", "", "", "trail", url)
+        if ev:
+            events.append(ev)
+    return events[:10]
+
+
+def scrape_beg40():
+    """бег40.рф — Калужская область: Космический марафон, Атомный трейл"""
+    print("  бег40.рф")
+    html = fetch("https://xn--40-emcadbfdgn.xn--p1ai/events")
+    if not html:
+        html = fetch("https://xn--40-emcadbfdgn.xn--p1ai/")
+    if not html:
+        return []
+    events = []
+    items = re.findall(
+        r'href="/events/(\d+)"[^>]*>(.*?)</a>',
+        html, re.S
+    )
+    seen = set()
+    for event_id, content in items[:15]:
+        name = clean(content)
+        if not is_valid_name(name):
+            continue
+        d = parse_date(content)
+        if not d or not is_future(d):
+            continue
+        key = (d, name[:30])
+        if key in seen:
+            continue
+        seen.add(key)
+        etype = "trail" if re.search(r'трейл|trail', name, re.I) else "road"
+        url = f"https://xn--40-emcadbfdgn.xn--p1ai/events/{event_id}"
+        ev = make_event(d, name, "Калуга", "Калужская область", "", etype, url)
+        if ev:
+            events.append(ev)
+    return events
+
+
+def scrape_zabeg_rf():
+    """забег.рф — всероссийская серия массовых забегов по городам"""
+    print("  забег.рф")
+    html = fetch("https://xn--e1afamqp.xn--p1ai/")  # IDN: забег.рф
+    if not html:
+        html = fetch("https://zabeg.run/")
+    if not html:
+        return []
+    events = []
+    # Серия проходит одновременно в десятках городов
+    dates = re.findall(r'(\d{1,2}\s+[а-яА-Я]+\s+202\d|\d{1,2}\.\d{2}\.202\d)', html)
+    cities_m = re.findall(r'(?:Москва|Санкт-Петербург|Новосибирск|Екатеринбург|Казань|Нижний Новгород)', html)
+    seen_dates = set()
+    for ds in dates[:5]:
+        d = parse_date(ds)
+        if not d or not is_future(d) or d in seen_dates:
+            continue
+        seen_dates.add(d)
+        # Добавляем как одно событие "Забег РФ (по всей России)"
+        ev = make_event(d, "Забег РФ", "Россия (все города)", "",
+                        "1 км, 5 км, 10 км, 21,1 км",
+                        "road", "https://xn--e1afamqp.xn--p1ai/")
+        if ev:
+            events.append(ev)
+    return events
+
+
 # ─── MERGE & SAVE ────────────────────────────────────────────────────────────
 
 SOURCES = [
@@ -1346,7 +1702,6 @@ SOURCES = [
     ("myrace.info",              scrape_myrace),
     ("rtra.ru",                  scrape_rtra),
     ("skyrunning.ru",            scrape_skyrunning),
-    # Новые источники
     ("elbrus.redfox.ru",         scrape_elbrus_redfox),
     ("taigatrail.run",           scrape_taigatrail),
     ("galtropa.ru",              scrape_galtropa),
@@ -1359,6 +1714,14 @@ SOURCES = [
     ("paris-running.ru",         scrape_paris_running),
     ("donspacetrail.tilda.ws",   scrape_donspacetrail),
     ("ultra.irunclub.ru",        scrape_taganay_ultra),
+    ("trail1.ru",                scrape_trail1),
+    ("norilsktrail.ru",          scrape_norilsktrail),
+    ("edge-ultra.ru",            scrape_edge_ultra),
+    ("okarivertrail.ru",         scrape_okarivertrail),
+    ("reg.russiarunning.com",    scrape_russiarunning),
+    ("toplist.run",              scrape_toplist),
+    ("бег40.рф",                 scrape_beg40),
+    ("забег.рф",                 scrape_zabeg_rf),
     ("vk.com (API)",             scrape_vk),
 ]
 
