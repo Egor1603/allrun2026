@@ -295,52 +295,121 @@ def scrape_heroleague():
 
 
 def scrape_ea_m():
-    """ea-m.org — Европа-Азия Екатеринбург"""
+    """
+    ea-m.org — серия Европа-Азия, Екатеринбург.
+    Используем жёстко заданный список известных событий +
+    проверяем страницу на новые анонсы.
+    """
     print("  ea-m.org")
     html = fetch("https://ea-m.org/")
     if not html:
         return []
+
     events = []
-    # Ищем карточки событий
-    cards = re.findall(
-        r'<(?:article|div|li)[^>]*class="[^"]*event[^"]*"[^>]*>(.*?)</(?:article|div|li)>',
+    seen = set()
+
+    # Ищем ссылки вида href="https://ea-m.org/SLUG" рядом с датой
+    # Формат на сайте: <a href="https://ea-m.org/slug">Название\nДата</a>
+    blocks = re.findall(
+        r'href="(https://ea-m\.org/[a-z0-9\-]+)"[^>]*>(.*?)</a>',
         html, re.S
     )
-    if not cards:
-        # fallback
-        return scrape_generic("https://ea-m.org/", "Екатеринбург",
-                               "Свердловская область", "road", "Старт Европа-Азия")
-    for card in cards[:10]:
-        d = parse_date(card)
+
+    for url, content in blocks:
+        # Пропускаем служебные страницы
+        if url in ('https://ea-m.org/', 'https://ea-m.org/therunningroom',
+                   'https://ea-m.org/privacy'):
+            continue
+
+        # Ищем дату в содержимом блока
+        d = parse_date(content)
         if not d or not is_future(d):
             continue
-        name_m = re.search(r'<(?:h[123]|strong|a)[^>]*>([^<]{5,80})</(?:h[123]|strong|a)>', card)
-        name = clean(name_m.group(1)) if name_m else "Старт Европа-Азия"
-        events.append(make_event(d, name, "Екатеринбург", "Свердловская область",
-                                  "", "road", "https://ea-m.org/"))
+
+        # Чистим название — берём первую строку до даты
+        lines = [l.strip() for l in re.split(r'[\n\r]+', strip_tags(content)) if l.strip()]
+        # Убираем строки которые являются датой или служебным текстом
+        name_parts = []
+        for line in lines:
+            line_clean = clean(line)
+            if not line_clean:
+                continue
+            # Пропускаем если строка содержит дату или слишком короткая
+            if re.search(r'\d{1,2}\s+[а-яА-Я]+\s+20\d{2}|\d{4}', line_clean):
+                continue
+            if not is_valid_name(line_clean):
+                continue
+            name_parts.append(line_clean)
+
+        name = ' '.join(name_parts[:2]).strip() if name_parts else None
+        if not name or not is_valid_name(name):
+            continue
+
+        key = (d, name[:30])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        # Определяем тип
+        etype = 'road'
+        if re.search(r'трейл|trail|шигир', name, re.I):
+            etype = 'trail'
+        elif re.search(r'ночн|laser|night', name, re.I):
+            etype = 'night'
+
+        ev = make_event(d, name, 'Екатеринбург', 'Свердловская область', '', etype, url)
+        if ev:
+            events.append(ev)
+
     return events
 
 
 def scrape_runsim():
-    """runsim.ru — Омские старты"""
+    """
+    runsim.ru — серия SIM Омск:
+    Рождественский полумарафон, Весенний полумарафон ЗаБег.РФ,
+    Цветочный забег, Сибирский международный марафон.
+    Сайт рендерится через JS, парсим известные страницы событий напрямую.
+    """
     print("  runsim.ru")
-    html = fetch("https://runsim.ru/events/")
-    if not html:
-        return []
+
+    KNOWN = [
+        ("https://runsim.ru/events/vesennii-polumarafon-zabegrf-2026",
+         "Весенний полумарафон ЗаБег.РФ", "Омск", "Омская область",
+         "1 км, 5 км, 10 км, 21,1 км", "road"),
+        ("https://runsim.ru/events/cvetocnyi-zabeg-2026",
+         "Цветочный забег", "Омск", "Омская область",
+         "3 км, 10 км", "road"),
+        ("https://runsim.ru/events/sibirskii-mezdunarodnyi-marafon2026",
+         "37-й Сибирский международный марафон", "Омск", "Омская область",
+         "3 км, 10 км, 42,2 км", "road"),
+    ]
+
     events = []
-    # Карточки событий
-    items = re.findall(r'<(?:article|div|li)[^>]*>(.*?)</(?:article|div|li)>', html, re.S)
-    seen = set()
-    for item in items:
-        d = parse_date(item)
-        if not d or not is_future(d) or d in seen:
-            continue
-        seen.add(d)
-        name_m = re.search(r'<(?:h[1-4]|a|strong)[^>]*>([^<]{5,80})</(?:h[1-4]|a|strong)>', item)
-        name = clean(name_m.group(1)) if name_m else "Старт Омск"
-        events.append(make_event(d, name, "Омск", "Омская область", "", "road",
-                                  "https://runsim.ru/events/"))
-    return events[:10]
+    for url, default_name, city, region, distances, etype in KNOWN:
+        html = fetch(url)
+        # Сайт JS-rendered, поэтому сразу используем hardcoded данные
+        # и пробуем извлечь дату из HTML если получится
+        d = None
+        if html:
+            dates = re.findall(r'(\d{1,2}\s+[а-яА-Я]+\s+202\d|\d{1,2}\.\d{2}\.202\d)', html)
+            for ds in dates[:5]:
+                candidate = parse_date(ds)
+                if candidate and is_future(candidate):
+                    d = candidate
+                    break
+        # Fallback: берём дату из URL
+        if not d:
+            if 'vesennii' in url: d = '2026-05-23'
+            elif 'cvetocnyi' in url: d = '2026-06-14'
+            elif 'sibirskii' in url: d = '2026-08-01'
+        if d and is_future(d):
+            ev = make_event(d, default_name, city, region, distances, etype, url)
+            if ev:
+                events.append(ev)
+        time.sleep(0.5)
+
+    return events
 
 
 def scrape_tomskmarathon():
