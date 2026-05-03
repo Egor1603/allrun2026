@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-03T08:40:11Z",
+  "updated": "2026-05-03T09:18:31Z",
   "events": [
     {
       "id": 57,
@@ -490,6 +490,16 @@
       "distances": "1 миля, 5 км, 10 км, 21 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/DinamovskayaMilya2026"
+    },
+    {
+      "date": "2026-06-14",
+      "name": "Цветочный забег",
+      "city": "Омск",
+      "region": "Омская область",
+      "distances": "3 км, 10 км",
+      "type": "road",
+      "url": "https://runsim.ru/events/cvetocnyi-zabeg-2026",
+      "id": 171
     },
     {
       "id": 32,
