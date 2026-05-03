@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-02T14:00:00Z",
+  "updated": "2026-05-02T15:00:00Z",
   "events": [
     {
       "id": 69,
@@ -72,16 +72,6 @@
       "url": "https://reg.russiarunning.com/event/TsarskoselskiyMarafon2026"
     },
     {
-      "id": 121,
-      "date": "2026-05-10",
-      "name": "Ореховый трейл Spring",
-      "city": "Орехово",
-      "region": "Ленинградская область",
-      "distances": "5 км, 10 км, 20 км",
-      "type": "trail",
-      "url": "https://marathonec.ru/orexovo-trail/"
-    },
-    {
       "id": 19,
       "date": "2026-05-11",
       "name": "Медовый забег",
@@ -90,16 +80,6 @@
       "distances": "5 км, 10 км, 21,1 км, детский",
       "type": "road",
       "url": "https://sib-events.ru/reg/medovyy-zabeg-2026/"
-    },
-    {
-      "id": 105,
-      "date": "2026-05-11",
-      "name": "Коломенский полумарафон «Летопись победы»",
-      "city": "Коломна",
-      "region": "Московская область",
-      "distances": "3 км, 5 км, 10 км, 21 км",
-      "type": "road",
-      "url": "https://marathonec.ru/kolomenskij-polumarafon-letopis-pobedy/"
     },
     {
       "id": 20,
@@ -272,16 +252,6 @@
       "url": "https://paris-running.ru"
     },
     {
-      "id": 25,
-      "date": "2026-06-06",
-      "name": "Sahara Trail",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "5 км, 10 км, 15 км",
-      "type": "trail",
-      "url": "https://marathonec.ru/sahara-trail/"
-    },
-    {
       "id": 26,
       "date": "2026-06-06",
       "name": "Kamensk Urban Trail",
@@ -350,16 +320,6 @@
       "distances": "9,5 км, 30 км, 65 км, скандинавская ходьба, детский",
       "type": "trail",
       "url": "https://ultra.irunclub.ru"
-    },
-    {
-      "id": 137,
-      "date": "2026-06-12",
-      "name": "Ультрамарафон Crazy Owl 50",
-      "city": "Изборск",
-      "region": "Псковская область",
-      "distances": "3 км, 20 км, 50 км",
-      "type": "trail",
-      "url": "https://marathonec.ru/crazy-owl-50/"
     },
     {
       "id": 30,
@@ -482,16 +442,6 @@
       "url": "https://reg.russiarunning.com/event/BEAUTYRUNKAVKAZRUN2026"
     },
     {
-      "id": 124,
-      "date": "2026-06-20",
-      "name": "Biotropika Ultra Trail",
-      "city": "Коробицыно",
-      "region": "Ленинградская область",
-      "distances": "6,7 км (формат до последнего)",
-      "type": "trail",
-      "url": "https://marathonec.ru/butman-biotropika-ultra-trail/"
-    },
-    {
       "id": 34,
       "date": "2026-06-21",
       "name": "Иркутский международный марафон",
@@ -580,16 +530,6 @@
       "distances": "65 км (соло) или эстафета 4×12–20 км (Коломна → Зарайск)",
       "type": "road",
       "url": "https://run2kremlins.ru"
-    },
-    {
-      "id": 123,
-      "date": "2026-07-03",
-      "name": "Caucasus Ultra Trail",
-      "city": "Грозный",
-      "region": "Чеченская Республика",
-      "distances": "160 км, 500 км, 1000 км",
-      "type": "trail",
-      "url": "https://marathonec.ru/caucasus-ultratrail-first-step/"
     },
     {
       "id": 36,
@@ -692,16 +632,6 @@
       "url": "https://myrace.info/events/1510"
     },
     {
-      "id": 118,
-      "date": "2026-07-19",
-      "name": "Трейл «Молния»",
-      "city": "Белопесоцкий",
-      "region": "Московская область",
-      "distances": "3 км, 7 км, 14 км, 20 км",
-      "type": "trail",
-      "url": "https://marathonec.ru/trail-molniya/"
-    },
-    {
       "id": 77,
       "date": "2026-07-25",
       "name": "GESH RUN FEST",
@@ -712,16 +642,6 @@
       "url": "https://taigatrail.run/geshtrail"
     },
     {
-      "id": 106,
-      "date": "2026-07-25",
-      "name": "Серпуховский полумарафон «Золотой павлин»",
-      "city": "Серпухов",
-      "region": "Московская область",
-      "distances": "3 км, 5 км, 10 км, 21 км",
-      "type": "road",
-      "url": "https://marathonec.ru/serpuxovskij-polumarafon-zolotoj-pavlin/"
-    },
-    {
       "id": 113,
       "date": "2026-07-26",
       "name": "Кировский полумарафон Спортмастер Про",
@@ -730,16 +650,6 @@
       "distances": "7 км, 21 км, 42 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/IIIKirovHalfMarathonSportmasterPROandIIMarathoninmemoryofMSMikhailBykov"
-    },
-    {
-      "id": 133,
-      "date": "2026-08-07",
-      "name": "Malidak Ultra",
-      "city": "Белорецк",
-      "region": "Республика Башкортостан",
-      "distances": "8 км, 16 км, 18 км, 24 км, 35 км, 45 км, 77 км, 100 км, 160 км",
-      "type": "trail",
-      "url": "https://marathonec.ru/malidak-ultra/"
     },
     {
       "id": 72,
@@ -772,16 +682,6 @@
       "id": 66
     },
     {
-      "id": 136,
-      "date": "2026-08-15",
-      "name": "Ultra 100",
-      "city": "Волжский",
-      "region": "Волгоградская область",
-      "distances": "1,5 км, 2 км, 6,7 км, 10 км, 12 км, 20 км",
-      "type": "trail",
-      "url": "https://marathonec.ru/fest-ultra100/"
-    },
-    {
       "id": 140,
       "date": "2026-08-15",
       "name": "Бабай-трейл",
@@ -812,16 +712,6 @@
       "url": "https://city-trail.ru/4"
     },
     {
-      "id": 141,
-      "date": "2026-08-16",
-      "name": "Благотворительный гастрономический забег Run & Eat",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "5 км, 10 км",
-      "type": "road",
-      "url": "https://marathonec.ru/zabeg-run-and-eat/"
-    },
-    {
       "id": 73,
       "date": "2026-08-21",
       "name": "Т-Банк MMK Wild Fest",
@@ -830,16 +720,6 @@
       "distances": "от 11 до 95 км",
       "type": "trail",
       "url": "https://wildtrail.ru/mmk"
-    },
-    {
-      "id": 132,
-      "date": "2026-08-21",
-      "name": "Riekkalansaari Ultra Trail",
-      "city": "Риеккалансаари",
-      "region": "Республика Карелия",
-      "distances": "7 км, 12 км, 25 км, 35 км, 55 км, 80 км",
-      "type": "trail",
-      "url": "https://marathonec.ru/riekkalansaari-trail/"
     },
     {
       "date": "2026-08-22",
@@ -892,16 +772,6 @@
       "url": "https://reg.russiarunning.com/event/lahtitrail2026"
     },
     {
-      "id": 127,
-      "date": "2026-08-29",
-      "name": "O-Trail Дигория",
-      "city": "Стур-Дигора",
-      "region": "Республика Северная Осетия",
-      "distances": "9 км, 15 км, 25 км, 35 км",
-      "type": "trail",
-      "url": "https://marathonec.ru/o-trail-digoriya/"
-    },
-    {
       "id": 114,
       "date": "2026-08-30",
       "name": "КроссФест Александрино Спортмастер Про",
@@ -920,16 +790,6 @@
       "distances": "от 10 до 180 км",
       "type": "trail",
       "url": "https://wildtrail.ru/rwt"
-    },
-    {
-      "id": 119,
-      "date": "2026-09-06",
-      "name": "Трейл «Ливень»",
-      "city": "Ильинское",
-      "region": "Московская область",
-      "distances": "5 км, 10 км, 20 км",
-      "type": "trail",
-      "url": "https://marathonec.ru/trail-liven/"
     },
     {
       "id": 128,
@@ -982,16 +842,6 @@
       "id": 68
     },
     {
-      "id": 115,
-      "date": "2026-09-26",
-      "name": "Ультрамарафон «Джейрах 8»",
-      "city": "Армхи",
-      "region": "Республика Ингушетия",
-      "distances": "4 км, 10 км, 21 км, 42 км, 75 км",
-      "type": "trail",
-      "url": "https://marathonec.ru/marathon-dzheirah/"
-    },
-    {
       "id": 134,
       "date": "2026-09-26",
       "name": "Атомный трейл",
@@ -1042,16 +892,6 @@
       "url": "https://city-trail.ru/6"
     },
     {
-      "id": 120,
-      "date": "2026-11-15",
-      "name": "Трейл «Буря»",
-      "city": "Красногорск",
-      "region": "Московская область",
-      "distances": "5 км, 10 км, 20 км",
-      "type": "trail",
-      "url": "https://marathonec.ru/trail-burya/"
-    },
-    {
       "id": 43,
       "date": "2026-12-06",
       "name": "Зимний полумарафон «Европа-Азия»",
@@ -1080,16 +920,6 @@
       "distances": "5 км, 10 км, 21 км, 42 км, 63 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/SosnovkaGoat"
-    },
-    {
-      "id": 138,
-      "date": "2027-01-23",
-      "name": "Международный трейловый забег Lake Ice Race",
-      "city": "Миасс",
-      "region": "Челябинская область",
-      "distances": "3 км, 10 км, 20 км",
-      "type": "trail",
-      "url": "https://marathonec.ru/lake-ice-race/"
     },
     {
       "id": 55,
