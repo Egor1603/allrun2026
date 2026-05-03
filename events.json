@@ -1,26 +1,6 @@
 {
-  "updated": "2026-05-02T15:00:00Z",
+  "updated": "2026-05-02T17:00:00Z",
   "events": [
-    {
-      "id": 69,
-      "date": "2026-05-02",
-      "name": "Т-Банк Grand Kislovodsk",
-      "city": "Кисловодск",
-      "region": "Ставропольский край",
-      "distances": "от 5 до 105 км",
-      "type": "trail",
-      "url": "https://wildtrail.ru/gk"
-    },
-    {
-      "id": 75,
-      "date": "2026-05-02",
-      "name": "Red Fox Elbrus Race",
-      "city": "Эльбрус",
-      "region": "Кабардино-Балкария",
-      "distances": "скайраннинг, ски-альпинизм, снегоступинг",
-      "type": "trail",
-      "url": "https://elbrus.redfox.ru"
-    },
     {
       "id": 57,
       "date": "2026-05-03",
@@ -742,6 +722,16 @@
       "url": "https://reg.russiarunning.com/event/Nochnoyzabeg2026"
     },
     {
+      "id": 145,
+      "date": "2026-08-22",
+      "name": "Норильск. Горный старт",
+      "city": "Норильск",
+      "region": "Красноярский край",
+      "distances": "5 км, 15 км, 30 км, 50 км, 70 км, детский",
+      "type": "trail",
+      "url": "https://norilsktrail.ru"
+    },
+    {
       "id": 107,
       "date": "2026-08-28",
       "name": "Калужский космический марафон",
@@ -812,6 +802,36 @@
       "url": "https://reg.russiarunning.com/event/KAShTAKTRAILOSEN2025"
     },
     {
+      "id": 141,
+      "date": "2026-09-10",
+      "name": "Trail-1 «Тепло Земли»",
+      "city": "Петропавловск-Камчатский",
+      "region": "Камчатский край",
+      "distances": "30 км (↑1300 м), вулкан Горелый",
+      "type": "trail",
+      "url": "https://trail1.ru/warmthoftheearth"
+    },
+    {
+      "id": 146,
+      "date": "2026-09-10",
+      "name": "Trail-1 Камчатка — многодневная гонка",
+      "city": "Петропавловск-Камчатский",
+      "region": "Камчатский край",
+      "distances": "17 км (+2000 м), 20 км (+1300 м), 30 км (+1300 м), 32 км (+900 м), детский 1 км",
+      "type": "trail",
+      "url": "https://trail1.ru"
+    },
+    {
+      "id": 142,
+      "date": "2026-09-11",
+      "name": "Trail-1 «Урса. Путеводная звезда»",
+      "city": "Петропавловск-Камчатский",
+      "region": "Камчатский край",
+      "distances": "20 км (↑1300 м), массив Вачкажец",
+      "type": "trail",
+      "url": "https://trail1.ru/ursa"
+    },
+    {
       "id": 42,
       "date": "2026-09-12",
       "name": "Ночной забег Laser Night Run",
@@ -820,6 +840,26 @@
       "distances": "3 км, 10 км, детский",
       "type": "night",
       "url": "https://ea-m.org/lasernightrun-2026"
+    },
+    {
+      "id": 143,
+      "date": "2026-09-12",
+      "name": "Trail-1 «Другая планета»",
+      "city": "Петропавловск-Камчатский",
+      "region": "Камчатский край",
+      "distances": "17 км (↑2000 м), вулкан Авачинский",
+      "type": "trail",
+      "url": "https://trail1.ru/anotherplanet"
+    },
+    {
+      "id": 144,
+      "date": "2026-09-13",
+      "name": "Trail-1 «Океанская песня»",
+      "city": "Петропавловск-Камчатский",
+      "region": "Камчатский край",
+      "distances": "32 км (↑900 м), берег Тихого океана",
+      "type": "trail",
+      "url": "https://trail1.ru/oceansong"
     },
     {
       "id": 94,
