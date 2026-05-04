@@ -1748,6 +1748,156 @@ def scrape_zabeg_rf():
     return events
 
 
+def scrape_otime():
+    """
+    reg.o-time.ru — платформа регистрации на забеги СПб и Северо-Запада.
+    Парсим календарь предстоящих событий.
+    """
+    print("  reg.o-time.ru")
+    html = fetch("https://reg.o-time.ru/calendar")
+    if not html:
+        return []
+
+    events = []
+    seen = set()
+
+    # Страница использует windows-1251, fetch уже декодирует
+    # Формат строк: DD.MM.YYYY :: г. Город  Название события
+    rows = re.findall(
+        r'(\d{2}\.\d{2}\.202\d)\s*::\s*([^\n<]{3,80})',
+        html
+    )
+
+    for date_str, rest in rows[:30]:
+        d = parse_date(date_str)
+        if not d or not is_future(d):
+            continue
+
+        # rest = "г. Выборг  XXI Выборгский полумарафон" — убираем город из начала
+        rest_clean = re.sub(r'^г\.\s*\S+\s+', '', rest.strip())
+        name = clean(rest_clean)
+        if not is_valid_name(name):
+            continue
+
+        # Город — слово после "г."
+        city_m = re.search(r'г\.\s*(\S+)', rest)
+        city = city_m.group(1).strip('.,') if city_m else "Санкт-Петербург"
+        region = ""
+
+        key = (d, name[:30])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        etype = "trail" if re.search(r'трейл|trail|кросс', name, re.I) else "road"
+        ev = make_event(d, name, city, region, "", etype,
+                        "https://reg.o-time.ru/calendar")
+        if ev:
+            events.append(ev)
+
+    return events[:15]
+
+
+def scrape_goldenultra():
+    """
+    goldenultra.ru — серия Running Heroes Russia:
+    Golden Ring Ultra-Trail, Mad Fox Ultra, Белая Невеста,
+    CrazyOwl50, Воттоваара, Баскунчак, Хребет Кодара и др.
+    Проверяем каждый старт отдельно — у каждого своя страница.
+    """
+    print("  goldenultra.ru")
+
+    # Список стартов: (url, название по умолчанию, город, регион, дистанции, тип)
+    RACES = [
+        ("https://goldenultra.ru/grut/",
+         "Golden Ring Ultra-Trail 100", "Суздаль", "Владимирская область",
+         "5, 10, 20, 30, 50, 80, 100 км, SE 30K, HN 10K, детский", "trail"),
+
+        ("https://goldenultra.ru/madfox/",
+         "Mad Fox Ultra", "Переславль-Залесский", "Ярославская область",
+         "10 км, 40 км, 100 миль", "trail"),
+
+        ("https://goldenultra.ru/wbu/",
+         "Белая Невеста Геленджик (White Bride Ultra)", "Геленджик", "Краснодарский край",
+         "4,2 км, 15 км, 30 км, 50 км, 70 км, 120 км", "trail"),
+
+        ("https://goldenultra.ru/crazyowl/",
+         "CrazyOwl50 — Сумасшедшая Сова", "Переславль-Залесский", "Ярославская область",
+         "10 км, 30 км, 50 км (ночной)", "night"),
+
+        ("https://goldenultra.ru/bud/",
+         "Баскунчак Ультра Дискавери", "Баскунчак", "Астраханская область",
+         "ультра", "trail"),
+
+        ("https://goldenultra.ru/kuge/",
+         "Рыбачий-Териберка Ultra Grand Escape", "Мурманск", "Мурманская область",
+         "ультра", "trail"),
+
+        ("https://goldenultra.ru/krcs/",
+         "Хребет Кодара — Пески Чара (Life Journey Race)", "Чара", "Забайкальский край",
+         "трейл-экспедиция", "trail"),
+
+        ("https://goldenultra.ru/cameltrophy/",
+         "Трофи Верблюда. Калмыкия (Kalmyk Camel Trophy)", "Элиста", "Республика Калмыкия",
+         "ультра", "trail"),
+
+        ("https://goldenultra.ru/vmr/",
+         "Воттоваара Ультра (Vottovaara Mountain Race)", "Гимолы", "Республика Карелия",
+         "14 км, 55 км, 50 миль, 100 миль", "trail"),
+
+        ("https://ultras.goldenultra.ru/",
+         "ANTA Кросс Московский Дрифт", "Москва", "Москва",
+         "кросс", "trail"),
+    ]
+
+    events = []
+    seen = set()
+
+    for url, default_name, city, region, distances, etype in RACES:
+        html = fetch(url)
+        if not html:
+            continue
+
+        # Ищем дату в формате "DD-DD месяца YYYY" или "DD месяца YYYY"
+        date_patterns = [
+            r'(\d{1,2}[-–]\d{1,2}\s+[а-яА-Я]+\s+202\d)',  # диапазон
+            r'(\d{1,2}\s+[а-яА-Я]+\s+202\d)',               # одна дата
+            r'(\d{2}\.\d{2}\.202\d)',                         # DD.MM.YYYY
+        ]
+
+        found_date = None
+        for pat in date_patterns:
+            dates = re.findall(pat, html)
+            for ds in dates[:5]:
+                d = parse_date(ds)
+                if d and is_future(d):
+                    found_date = d
+                    break
+            if found_date:
+                break
+
+        if not found_date:
+            time.sleep(0.3)
+            continue
+
+        # Пробуем найти реальное название на странице
+        name_m = re.search(r'<h1[^>]*>([^<]{5,100})</h1>', html)
+        name = clean(name_m.group(1)) if name_m and is_valid_name(clean(name_m.group(1))) \
+               else default_name
+
+        key = (found_date, name[:30])
+        if key not in seen:
+            seen.add(key)
+            ev = make_event(found_date, name, city, region, distances, etype, url)
+            if ev:
+                events.append(ev)
+                print(f"    → {found_date}  {name}")
+
+        time.sleep(0.5)
+
+    return events
+
+
 # ─── MERGE & SAVE ────────────────────────────────────────────────────────────
 
 SOURCES = [
@@ -1791,6 +1941,8 @@ SOURCES = [
     ("toplist.run",              scrape_toplist),
     ("бег40.рф",                 scrape_beg40),
     ("забег.рф",                 scrape_zabeg_rf),
+    ("reg.o-time.ru",            scrape_otime),
+    ("goldenultra.ru",           scrape_goldenultra),
     ("vk.com (API)",             scrape_vk),
 ]
 
