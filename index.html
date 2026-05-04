@@ -166,6 +166,9 @@
   .city-option-count {
     margin-left: auto; font-size: 11px; color: var(--muted);
   }
+  .city-option-region {
+    font-size: 10px; color: var(--muted); font-weight: 400;
+  }
   .stats-wrap { max-width: 1100px; margin: 0 auto; padding: 12px 20px 0; }
   .stats-text { font-size: 13px; color: var(--muted); }
 
@@ -414,25 +417,66 @@
     applyFilters();
   };
 
+  // ── Региональный поиск ────────────────────────────────────────────────────
+  // Крупный город → регион. При выборе города показываем все события региона.
+  var REGION_MAP = {
+    'Москва':              'Москва',
+    'Санкт-Петербург':     'Санкт-Петербург',
+    'Екатеринбург':        'Свердловская область',
+    'Новосибирск':         'Новосибирская область',
+    'Казань':              'Республика Татарстан',
+    'Красноярск':          'Красноярский край',
+    'Омск':                'Омская область',
+    'Томск':               'Томская область',
+    'Тюмень':              'Тюменская область',
+    'Иркутск':             'Иркутская область',
+    'Уфа':                 'Республика Башкортостан',
+    'Челябинск':           'Челябинская область',
+    'Пермь':               'Пермский край',
+    'Самара':              'Самарская область',
+    'Нижний Новгород':     'Нижегородская область',
+    'Воронеж':             'Воронежская область',
+    'Краснодар':           'Краснодарский край',
+    'Ростов-на-Дону':      'Ростовская область',
+    'Владивосток':         'Приморский край',
+    'Хабаровск':           'Хабаровский край',
+    'Барнаул':             'Алтайский край',
+    'Кемерово':            'Кемеровская область',
+    'Калуга':              'Калужская область',
+    'Мурманск':            'Мурманская область',
+    'Архангельск':         'Архангельская область',
+    'Петрозаводск':        'Республика Карелия',
+    'Якутск':              'Республика Саха (Якутия)',
+    'Ставрополь':          'Ставропольский край',
+    'Владикавказ':         'Республика Северная Осетия',
+  };
+
+  // Проверяет совпадение города/региона
+  function cityMatch(ev, city) {
+    if (!city) return true;
+    if (ev.city === city) return true;
+    var region = REGION_MAP[city];
+    if (region && ev.region === region) return true;
+    return false;
+  }
+
   // ── Применяем все фильтры ──────────────────────────────────────────────────
   window.applyFilters = function () {
     var month = document.getElementById('sel-month').value;
 
-    // Показываем прошедшие
     if (currentType === 'past') {
       var filtered = pastEvents.filter(function (e) {
-        if (selectedCity && e.city !== selectedCity) return false;
-        if (month && e.date.slice(5,7) !== month)   return false;
+        if (!cityMatch(e, selectedCity))              return false;
+        if (month && e.date.slice(5,7) !== month)    return false;
         return true;
       });
       renderEvents(filtered, true);
       return;
     }
 
-    // Обычный режим — предстоящие
     var filtered = allEvents.filter(function (e) {
       if (currentType !== 'all' && e.type !== currentType) return false;
-      if (selectedCity && e.city !== selectedCity)          return false;
+      if (!cityMatch(e, selectedCity))                      return false;
       if (month && e.date.slice(5, 7) !== month)           return false;
       return true;
     });
@@ -657,11 +701,22 @@
 
   // ── Автодополнение города ─────────────────────────────────────────────────
   function buildCityFilter(events) {
-    // Считаем количество событий по городам
     var counts = {};
+
+    // Считаем по полю city
     events.forEach(function (e) {
       if (e.city) counts[e.city] = (counts[e.city] || 0) + 1;
     });
+
+    // Для крупных городов из REGION_MAP — считаем все события региона
+    Object.keys(REGION_MAP).forEach(function (bigCity) {
+      var region = REGION_MAP[bigCity];
+      var regional = events.filter(function (e) { return e.region === region; }).length;
+      if (regional > 0) {
+        counts[bigCity] = Math.max(counts[bigCity] || 0, regional);
+      }
+    });
+
     allCities = Object.keys(counts).sort(function (a, b) {
       return a.localeCompare(b, 'ru');
     }).map(function (city) {
@@ -704,8 +759,11 @@
               '</div>';
     }
     matches.forEach(function (c, i) {
+      var region = REGION_MAP[c.name];
+      var nameHtml = highlightMatch(c.name, query);
+      if (region) nameHtml += ' <span class="city-option-region">+ ' + esc(region) + '</span>';
       html += '<div class="city-option" data-city="' + esc(c.name) + '" data-idx="' + i + '">' +
-              '<span>' + highlightMatch(c.name, query) + '</span>' +
+              '<span>' + nameHtml + '</span>' +
               '<span class="city-option-count">' + c.count + '</span>' +
               '</div>';
     });
