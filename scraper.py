@@ -2139,13 +2139,15 @@ def pick_better(candidate, existing_list):
 def merge(base, scraped):
     """
     Объединяет базовые события с новыми из парсинга.
-    - Удаляет прошедшие события
-    - Добавляет новые, которые не являются дубликатами
+    - Сохраняет прошедшие события (для вкладки «Прошедшие»)
+    - Добавляет новые будущие события, которые не являются дубликатами
     - Обогащает существующие записи (дистанции, URL) из новых источников
     - Логирует отброшенные дубликаты
     """
+    # Сохраняем все события — и прошедшие и будущие
+    past   = [e for e in base if e.get("date", "") < TODAY]
     active = [e for e in base if e.get("date", "") >= TODAY]
-    next_id = max((e.get("id", 0) for e in active), default=0) + 1
+    next_id = max((e.get("id", 0) for e in base), default=0) + 1
 
     added = 0
     enriched = 0
@@ -2154,11 +2156,11 @@ def merge(base, scraped):
     for candidate in scraped:
         if candidate is None:
             continue
+        # Новые события добавляем только будущие
         if not candidate.get("date") or not is_future(candidate["date"]):
             continue
 
         if pick_better(candidate, active):
-            # Дубликат — но возможно обогатили поля
             enriched += 1
             skipped += 1
             continue
@@ -2173,9 +2175,12 @@ def merge(base, scraped):
         added += 1
 
     print(f"  Добавлено новых: {added}, обогащено: {enriched}, отброшено дублей: {skipped}")
+    print(f"  Прошедших сохранено: {len(past)}")
 
-    active.sort(key=lambda x: x.get("date", ""))
-    return active
+    # Объединяем: сначала прошедшие (по дате убыванию), потом будущие
+    result = sorted(past, key=lambda x: x.get("date", ""), reverse=True) + \
+             sorted(active, key=lambda x: x.get("date", ""))
+    return result
 
 def main():
     ts = datetime.utcnow().isoformat()
