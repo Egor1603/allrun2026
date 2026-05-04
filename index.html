@@ -109,7 +109,13 @@
     border-radius: 8px; display: flex; align-items: center; justify-content: center;
   }
   .nav-logo-icon svg { width: 16px; height: 16px; }
-  .nav-updated { font-size: 11px; color: var(--muted); margin-left: auto; flex-shrink: 0; }
+  .hero-updated {
+    font-size: 11px;
+    opacity: .5;
+    margin-top: 8px;
+    min-height: 0;
+  }
+  .hero-updated:empty { display: none; }
 
   /* ── HERO ── */
   .hero {
@@ -375,6 +381,10 @@
   @media (max-width: 600px) {
     .nav-inner, .filters-inner, .stats-wrap, .main { padding-left: 14px; padding-right: 14px; }
     .filter-sep { display: none; }
+    .filter-label { display: none; }
+    .filters-inner { gap: 8px; padding: 8px 14px; }
+    .event-search-input { min-width: 140px; width: 140px; }
+    .city-input { min-width: 140px; width: 140px; }
     .hero { padding: 28px 16px 24px; }
   }
 </style>
@@ -393,13 +403,13 @@
       </div>
       Беговой календарь России
     </a>
-    <span class="nav-updated" id="nav-updated"></span>
   </div>
 </nav>
 
 <div class="hero">
   <h1>Беговой календарь России 2026</h1>
   <p>Забеги, марафоны, трейлы &nbsp;·&nbsp; Официальные источники &nbsp;·&nbsp; Автообновление 2 раза в сутки</p>
+  <p class="hero-updated" id="nav-updated"></p>
 </div>
 
 <div class="filters-bar">
