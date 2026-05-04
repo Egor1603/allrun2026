@@ -120,6 +120,31 @@
   .type-btn.is-road  { background: var(--road-bg);  border-color: var(--road-c);  color: var(--road-c); }
   .type-btn.is-night { background: var(--night-bg); border-color: var(--night-c); color: var(--night-c); }
 
+  /* ── CITY DROPDOWN ── */
+  .city-search-wrap { position: relative; }
+  .city-dropdown {
+    display: none; position: absolute; top: calc(100% + 4px); left: 0;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    min-width: 240px; max-height: 260px; overflow-y: auto;
+    z-index: 200; scrollbar-width: thin;
+  }
+  .city-dropdown.open { display: block; }
+  .city-opt {
+    padding: 9px 12px; font-size: 13px; color: var(--text);
+    cursor: pointer; transition: background .1s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .city-opt:hover, .city-opt.kbd-active { background: var(--surface2); }
+  .city-opt-icon { font-size: 14px; flex-shrink: 0; }
+  .city-opt-name { flex: 1; }
+  .city-opt-name mark { background: none; color: var(--accent); font-weight: 700; }
+  .city-opt-sub { font-size: 11px; color: var(--muted); flex-shrink: 0; }
+  .city-opt-count { font-size: 11px; color: var(--muted); margin-left: auto; flex-shrink: 0; }
+  .city-dropdown-sep {
+    height: 1px; background: var(--border); margin: 2px 0;
+  }
+
   /* ── EVENT SEARCH ── */
   .event-search-wrap {
     position: relative;
@@ -349,6 +374,7 @@
           oninput="onCityInput()"
         >
         <button class="city-clear" id="city-clear" title="Сбросить" style="display:none" onclick="clearCity()">✕</button>
+        <div class="city-dropdown" id="city-dropdown"></div>
       </div>
     </div>
 
@@ -435,24 +461,189 @@
       .replace(/\s+/g,' ').trim();
   }
 
-  // Читает и нормализует текст из поля города
+  // Возвращает текущий выбранный запрос города
   function getCityQuery() {
-    var inp = document.getElementById('city-input');
-    return inp ? norm(inp.value.trim()) : '';
+    return selectedCityQuery || '';
   }
+  // ── Дропдаун выбора города/региона ───────────────────────────────────────
+  var selectedCityQuery = '';  // то что реально применяется к фильтру
+  var cityKbdIdx = -1;
+
+  function closeCityDropdown() {
+    var dd = document.getElementById('city-dropdown');
+    if (dd) dd.classList.remove('open');
+    cityKbdIdx = -1;
+  }
+
+  function buildCityDropdown(query) {
+    var dd = document.getElementById('city-dropdown');
+    if (!dd) return;
+
+    if (!query || query.length < 1) { closeCityDropdown(); return; }
+
+    var nq = normKey(query);
+    var opts = [];
+
+    // 1. Ищем совпадающие города
+    var cityKeys = Object.keys(cityToRegion);
+    var matchedCities = cityKeys.filter(function(k) {
+      return k.indexOf(nq) !== -1;
+    }).slice(0, 5);
+
+    matchedCities.forEach(function(k) {
+      // Восстанавливаем оригинальное название города
+      var origCity = query; // fallback
+      // Ищем в CITY_REGION
+      Object.keys(CITY_REGION).forEach(function(c) {
+        if (normKey(c) === k) origCity = c;
+      });
+      // Ищем в событиях
+      allEvents.concat(pastEvents).forEach(function(e) {
+        if (normKey(e.city || '') === k) origCity = e.city;
+      });
+      var region = cityToRegion[k];
+      var cityCount = allEvents.filter(function(e) { return e.city && normKey(e.city) === k; }).length;
+      opts.push({
+        type: 'city', query: origCity, label: origCity,
+        sub: region, count: cityCount, icon: '📍'
+      });
+    });
+
+    // 2. Ищем совпадающие регионы
+    Object.keys(allRegions).forEach(function(k) {
+      if (k.indexOf(nq) === -1) return;
+      var regionOrig = allRegions[k];
+      var regionCount = allEvents.filter(function(e) { return e.region === regionOrig; }).length;
+      if (regionCount === 0) return;
+      opts.push({
+        type: 'region', query: regionOrig, label: regionOrig,
+        sub: '', count: regionCount, icon: '🗺'
+      });
+    });
+
+    // 3. Ищем совпадающие макрорегионы
+    Object.keys(allMacros).forEach(function(k) {
+      if (k.indexOf(nq) === -1) return;
+      var macroOrig = allMacros[k];
+      var macroCount = allEvents.filter(function(e) {
+        return MACRO_MAP[macroOrig] && MACRO_MAP[macroOrig].indexOf(e.region) !== -1;
+      }).length;
+      if (macroCount === 0) return;
+      opts.push({
+        type: 'macro', query: macroOrig, label: macroOrig,
+        sub: 'несколько регионов', count: macroCount, icon: '🌐'
+      });
+    });
+
+    // 4. Если ввели город — предлагаем его регион и макрорегион
+    var cityMatch = cityToRegion[nq];
+    if (cityMatch) {
+      var regionCount = allEvents.filter(function(e) { return e.region === cityMatch; }).length;
+      var alreadyRegion = opts.some(function(o) { return o.type === 'region' && o.query === cityMatch; });
+      if (!alreadyRegion && regionCount > 0) {
+        opts.push({ type: 'region', query: cityMatch, label: cityMatch, sub: 'весь регион', count: regionCount, icon: '🗺' });
+      }
+      var macro = regionToMacro[cityMatch];
+      if (macro) {
+        var macroCount = allEvents.filter(function(e) {
+          return MACRO_MAP[macro] && MACRO_MAP[macro].indexOf(e.region) !== -1;
+        }).length;
+        var alreadyMacro = opts.some(function(o) { return o.type === 'macro' && o.query === macro; });
+        if (!alreadyMacro && macroCount > 0) {
+          opts.push({ type: 'macro', query: macro, label: macro, sub: 'весь ' + macro, count: macroCount, icon: '🌐' });
+        }
+      }
+    }
+
+    if (!opts.length) { closeCityDropdown(); return; }
+
+    // Рендерим
+    var html = '';
+    var lastType = '';
+    opts.forEach(function(opt, i) {
+      if (lastType && lastType !== opt.type) html += '<div class="city-dropdown-sep"></div>';
+      lastType = opt.type;
+      var nameHtml = esc(opt.label).replace(
+        new RegExp('(' + query.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&') + ')', 'i'),
+        '<mark>$1</mark>'
+      );
+      html += '<div class="city-opt" data-q="' + esc(opt.query) + '" data-type="' + opt.type + '" data-idx="' + i + '">'
+        + '<span class="city-opt-icon">' + opt.icon + '</span>'
+        + '<span class="city-opt-name">' + nameHtml + '</span>'
+        + (opt.sub ? '<span class="city-opt-sub">' + esc(opt.sub) + '</span>' : '')
+        + '<span class="city-opt-count">' + opt.count + '</span>'
+        + '</div>';
+    });
+    dd.innerHTML = html;
+    dd.classList.add('open');
+
+    // Клики
+    dd.querySelectorAll('.city-opt').forEach(function(el) {
+      el.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        applyCitySelection(el.getAttribute('data-q'));
+      });
+    });
+  }
+
+  function applyCitySelection(q) {
+    selectedCityQuery = q;
+    var inp = document.getElementById('city-input');
+    var btn = document.getElementById('city-clear');
+    if (inp) inp.value = q;
+    if (btn) btn.style.display = q ? 'block' : 'none';
+    closeCityDropdown();
+    applyFilters();
+  }
+
   window.onCityInput = function() {
     var inp = document.getElementById('city-input');
     var btn = document.getElementById('city-clear');
-    if (btn) btn.style.display = inp && inp.value.trim() ? 'block' : 'none';
+    var val = inp ? inp.value.trim() : '';
+    if (btn) btn.style.display = val ? 'block' : 'none';
+    // При вводе сбрасываем выбранное — покажем всё пока не выберут
+    selectedCityQuery = val;
+    buildCityDropdown(val);
     applyFilters();
   };
+
   window.clearCity = function() {
     var inp = document.getElementById('city-input');
     var btn = document.getElementById('city-clear');
+    selectedCityQuery = '';
     if (inp) { inp.value = ''; inp.focus(); }
     if (btn) btn.style.display = 'none';
+    closeCityDropdown();
     applyFilters();
   };
+
+  // Клавиатурная навигация
+  document.addEventListener('keydown', function(e) {
+    var dd = document.getElementById('city-dropdown');
+    if (!dd || !dd.classList.contains('open')) return;
+    var opts = dd.querySelectorAll('.city-opt');
+    if (!opts.length) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      cityKbdIdx = Math.min(cityKbdIdx + 1, opts.length - 1);
+      opts.forEach(function(o, i) { o.classList.toggle('kbd-active', i === cityKbdIdx); });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      cityKbdIdx = Math.max(cityKbdIdx - 1, 0);
+      opts.forEach(function(o, i) { o.classList.toggle('kbd-active', i === cityKbdIdx); });
+    } else if (e.key === 'Enter' && cityKbdIdx >= 0) {
+      e.preventDefault();
+      applyCitySelection(opts[cityKbdIdx].getAttribute('data-q'));
+    } else if (e.key === 'Escape') {
+      closeCityDropdown();
+    }
+  });
+
+  // Закрываем при клике вне
+  document.addEventListener('click', function(e) {
+    var wrap = document.getElementById('city-wrap');
+    if (wrap && !wrap.contains(e.target)) closeCityDropdown();
+  });
 
   // ── Константы ──────────────────────────────────────────────────────────────
   var MONTHS = {
@@ -493,9 +684,10 @@
   //  cityToRegion строится автоматически из events.json (город → регион)
   //  MACRO_MAP — ручная таблица макрорегионов
 
-  var cityToRegion = {};   // Пушкин → Санкт-Петербург (из данных)
-  var regionToMacro = {};  // Свердловская область → Урал
-  var allRegions    = {};  // все регионы из данных
+  var cityToRegion = {};   // нормKey(город) → регион
+  var regionToMacro = {};  // регион → макрорегион
+  var allRegions    = {};  // нормKey(регион) → оригинал
+  var allMacros     = {};  // нормKey(макро) → оригинал
 
   // Макрорегионы → списки регионов
   var MACRO_MAP = {
@@ -685,37 +877,60 @@
     'Выползово':'Рязанская область',
   };
 
-  // Строим cityToRegion из событий + статичной таблицы
+  // Нормализация ключа для сравнения (нижний регистр + ё→е, без удаления дефисов)
+  function normKey(s) {
+    return String(s || '').toLowerCase().replace(/ё/g, 'е').trim();
+  }
+
+  // Строим индексы из событий + статичной таблицы с нормализованными ключами
   function buildGeoIndex(events) {
-    // Сначала статичная таблица
+    // Статичная таблица
     Object.keys(CITY_REGION).forEach(function (city) {
-      cityToRegion[city] = CITY_REGION[city];
+      cityToRegion[normKey(city)] = CITY_REGION[city];
     });
-    // Потом данные из событий (перекрывают статику если есть расхождения)
+    // Данные из событий
     events.forEach(function (e) {
-      if (e.city && e.region) cityToRegion[e.city] = e.region;
-      if (e.region) allRegions[e.region] = true;
+      if (e.city && e.region) cityToRegion[normKey(e.city)] = e.region;
+      if (e.region) allRegions[normKey(e.region)] = e.region;
+    });
+    // Макрорегионы
+    Object.keys(MACRO_MAP).forEach(function (macro) {
+      allMacros[normKey(macro)] = macro;
     });
   }
 
   // Что ввёл пользователь? city / region / macro / unknown
   function classifyQuery(q) {
     if (!q) return { type: 'none' };
+    var nq = normKey(q);
+
     // Макрорегион?
-    if (MACRO_MAP[q]) return { type: 'macro', macro: q, regions: MACRO_MAP[q] };
-    // Город? (проверяем ДО региона — чтобы «Москва» и «Санкт-Петербург»
-    // работали как город с акцентом, а не просто как регион)
-    if (cityToRegion[q]) {
-      var region = cityToRegion[q];
-      var macro2 = regionToMacro[region];
-      return { type: 'city', city: q, region: region, macro: macro2 };
+    var macroOrig = allMacros[nq];
+    if (macroOrig) return { type: 'macro', macro: macroOrig, regions: MACRO_MAP[macroOrig] };
+
+    // Город?
+    var cityRegion = cityToRegion[nq];
+    if (cityRegion) {
+      return { type: 'city', city: q, region: cityRegion, macro: regionToMacro[cityRegion] };
     }
+
     // Регион?
-    if (allRegions[q]) {
-      var macro = regionToMacro[q];
-      return { type: 'region', region: q, macro: macro };
+    var regionOrig = allRegions[nq];
+    if (regionOrig) {
+      return { type: 'region', region: regionOrig, macro: regionToMacro[regionOrig] };
     }
-    // Неизвестно — прямое совпадение
+
+    // Частичное совпадение — ищем города начинающиеся с введённого текста
+    if (nq.length >= 3) {
+      var keys = Object.keys(cityToRegion);
+      for (var i = 0; i < keys.length; i++) {
+        if (keys[i].indexOf(nq) === 0) { // начинается с запроса
+          var pr = cityToRegion[keys[i]];
+          return { type: 'city', city: q, region: pr, macro: regionToMacro[pr] };
+        }
+      }
+    }
+
     return { type: 'exact', city: q };
   }
 
