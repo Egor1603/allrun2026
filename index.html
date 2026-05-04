@@ -265,7 +265,25 @@
 
   .type-btn.is-past  { background: var(--surface2); border-color: var(--muted); color: var(--muted); }
 
-  /* Прошедшие карточки — приглушённые */
+  /* Акцент — точное совпадение города (уровень 2) */
+  .event-card.is-accent-2 {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), var(--shadow);
+  }
+  .event-card.is-accent-2 .date-col {
+    background: var(--accent);
+  }
+  .event-card.is-accent-2 .date-day,
+  .event-card.is-accent-2 .date-mon {
+    color: #fff;
+  }
+
+  /* Акцент — регион/макрорегион (уровень 1) */
+  .event-card.is-accent-1 {
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  }
+
+  /* Прошедшие карточки */
   .event-card.is-past { opacity: .55; }
   .event-card.is-past:hover { opacity: .8; }
   .past-banner {
@@ -417,47 +435,145 @@
     applyFilters();
   };
 
-  // ── Региональный поиск ────────────────────────────────────────────────────
-  // Крупный город → регион. При выборе города показываем все события региона.
-  var REGION_MAP = {
-    'Москва':              'Москва',
-    'Санкт-Петербург':     'Санкт-Петербург',
-    'Екатеринбург':        'Свердловская область',
-    'Новосибирск':         'Новосибирская область',
-    'Казань':              'Республика Татарстан',
-    'Красноярск':          'Красноярский край',
-    'Омск':                'Омская область',
-    'Томск':               'Томская область',
-    'Тюмень':              'Тюменская область',
-    'Иркутск':             'Иркутская область',
-    'Уфа':                 'Республика Башкортостан',
-    'Челябинск':           'Челябинская область',
-    'Пермь':               'Пермский край',
-    'Самара':              'Самарская область',
-    'Нижний Новгород':     'Нижегородская область',
-    'Воронеж':             'Воронежская область',
-    'Краснодар':           'Краснодарский край',
-    'Ростов-на-Дону':      'Ростовская область',
-    'Владивосток':         'Приморский край',
-    'Хабаровск':           'Хабаровский край',
-    'Барнаул':             'Алтайский край',
-    'Кемерово':            'Кемеровская область',
-    'Калуга':              'Калужская область',
-    'Мурманск':            'Мурманская область',
-    'Архангельск':         'Архангельская область',
-    'Петрозаводск':        'Республика Карелия',
-    'Якутск':              'Республика Саха (Якутия)',
-    'Ставрополь':          'Ставропольский край',
-    'Владикавказ':         'Республика Северная Осетия',
+  // ── Поиск: трёхуровневая иерархия ─────────────────────────────────────────
+  //
+  //  Макрорегион (Сибирь, Урал...)
+  //    └── Регион (Свердловская область, Алтайский край...)
+  //          └── Город (Екатеринбург, Пушкин, Бирюзовая Катунь...)
+  //
+  //  Логика:
+  //  • Ввёл город      → показываем все события его региона; акцент на точном городе
+  //  • Ввёл регион     → показываем все события региона + смежные (из того же макрорегиона)
+  //  • Ввёл макрорегион→ показываем все регионы внутри него
+  //
+  //  cityToRegion строится автоматически из events.json (город → регион)
+  //  MACRO_MAP — ручная таблица макрорегионов
+
+  var cityToRegion = {};   // Пушкин → Санкт-Петербург (из данных)
+  var regionToMacro = {};  // Свердловская область → Урал
+  var allRegions    = {};  // все регионы из данных
+
+  // Макрорегионы → списки регионов
+  var MACRO_MAP = {
+    'Урал': [
+      'Свердловская область','Челябинская область','Пермский край',
+      'Курганская область','Тюменская область','Ханты-Мансийский АО','Ямало-Ненецкий АО'
+    ],
+    'Москва и область': [
+      'Москва','Московская область'
+    ],
+    'Санкт-Петербург и область': [
+      'Санкт-Петербург','Ленинградская область'
+    ],
+    'Сибирь': [
+      'Новосибирская область','Кемеровская область','Томская область',
+      'Омская область','Красноярский край','Иркутская область',
+      'Республика Хакасия','Республика Тыва','Забайкальский край'
+    ],
+    'Алтай': [
+      'Алтайский край','Республика Алтай'
+    ],
+    'Дальний Восток': [
+      'Приморский край','Хабаровский край','Амурская область',
+      'Сахалинская область','Камчатский край','Магаданская область',
+      'Республика Саха (Якутия)','Еврейская АО','Чукотский АО'
+    ],
+    'Кавказ': [
+      'Краснодарский край','Ставропольский край','Республика Дагестан',
+      'Чеченская Республика','Кабардино-Балкария','Республика Северная Осетия',
+      'Карачаево-Черкессия','Республика Ингушетия','Республика Адыгея'
+    ],
+    'Поволжье': [
+      'Республика Татарстан','Самарская область','Нижегородская область',
+      'Волгоградская область','Саратовская область','Ульяновская область',
+      'Пензенская область','Оренбургская область','Республика Башкортостан',
+      'Республика Марий Эл','Чувашская Республика','Республика Мордовия',
+      'Удмуртская Республика','Республика Калмыкия','Астраханская область'
+    ],
+    'Центр': [
+      'Москва','Московская область','Тверская область','Ярославская область',
+      'Костромская область','Ивановская область','Владимирская область',
+      'Рязанская область','Тульская область','Калужская область',
+      'Смоленская область','Брянская область','Орловская область',
+      'Курская область','Белгородская область','Воронежская область',
+      'Липецкая область','Тамбовская область'
+    ],
+    'Север и Северо-Запад': [
+      'Санкт-Петербург','Ленинградская область','Мурманская область',
+      'Архангельская область','Республика Карелия','Республика Коми',
+      'Вологодская область','Новгородская область','Псковская область',
+      'Калининградская область'
+    ],
   };
 
-  // Проверяет совпадение города/региона
-  function cityMatch(ev, city) {
-    if (!city) return true;
-    if (ev.city === city) return true;
-    var region = REGION_MAP[city];
-    if (region && ev.region === region) return true;
+  // Строим обратный индекс: регион → макрорегион
+  Object.keys(MACRO_MAP).forEach(function (macro) {
+    MACRO_MAP[macro].forEach(function (region) {
+      regionToMacro[region] = macro;
+    });
+  });
+
+  // Строим cityToRegion из событий (автоматически)
+  function buildGeoIndex(events) {
+    events.forEach(function (e) {
+      if (e.city && e.region) {
+        cityToRegion[e.city] = e.region;
+      }
+      if (e.region) {
+        allRegions[e.region] = true;
+      }
+    });
+  }
+
+  // Что ввёл пользователь? city / region / macro / unknown
+  function classifyQuery(q) {
+    if (!q) return { type: 'none' };
+    // Макрорегион?
+    if (MACRO_MAP[q]) return { type: 'macro', macro: q, regions: MACRO_MAP[q] };
+    // Город? (проверяем ДО региона — чтобы «Москва» и «Санкт-Петербург»
+    // работали как город с акцентом, а не просто как регион)
+    if (cityToRegion[q]) {
+      var region = cityToRegion[q];
+      var macro2 = regionToMacro[region];
+      return { type: 'city', city: q, region: region, macro: macro2 };
+    }
+    // Регион?
+    if (allRegions[q]) {
+      var macro = regionToMacro[q];
+      return { type: 'region', region: q, macro: macro };
+    }
+    // Неизвестно — прямое совпадение
+    return { type: 'exact', city: q };
+  }
+
+  // Проверяет, попадает ли событие в запрос (true/false)
+  function cityMatch(ev, query) {
+    if (!query) return true;
+    var q = classifyQuery(query);
+    if (q.type === 'none')   return true;
+    if (q.type === 'exact')  return ev.city === q.city;
+    if (q.type === 'city')   return ev.region === q.region;
+    if (q.type === 'region') return ev.region === q.region;
+    if (q.type === 'macro')  return q.regions.indexOf(ev.region) !== -1;
     return false;
+  }
+
+  // Уровень акцента: 2 = точное совпадение города, 1 = регион/макро, 0 = нет акцента
+  function accentLevel(ev, query) {
+    if (!query) return 0;
+    var q = classifyQuery(query);
+    if (q.type === 'none' || q.type === 'exact') return 0;
+    if (q.type === 'city') {
+      if (ev.city === q.city) return 2;     // точный город — яркий акцент
+      if (ev.region === q.region) return 1; // область — слабый акцент
+    }
+    if (q.type === 'region') {
+      if (ev.region === q.region) return 2;
+    }
+    if (q.type === 'macro') {
+      if (q.regions.indexOf(ev.region) !== -1) return 1;
+    }
+    return 0;
   }
 
   // ── Применяем все фильтры ──────────────────────────────────────────────────
@@ -466,8 +582,8 @@
 
     if (currentType === 'past') {
       var filtered = pastEvents.filter(function (e) {
-        if (!cityMatch(e, selectedCity))              return false;
-        if (month && e.date.slice(5,7) !== month)    return false;
+        if (!cityMatch(e, selectedCity))           return false;
+        if (month && e.date.slice(5,7) !== month)  return false;
         return true;
       });
       renderEvents(filtered, true);
@@ -504,13 +620,9 @@
       return;
     }
 
-    // Прошедшие — в обратном хронологическом порядке (недавние сначала)
     var sorted = events.slice();
-    if (isPast) {
-      sorted.sort(function(a, b) { return a.date < b.date ? 1 : -1; });
-    }
+    if (isPast) sorted.sort(function(a,b){ return a.date < b.date ? 1 : -1; });
 
-    // Группируем по YYYY-MM
     var byMonth = {}, order = [];
     sorted.forEach(function (e) {
       var key = e.date.slice(0, 7);
@@ -519,11 +631,7 @@
     });
 
     var html = '';
-
-    // Баннер для прошедших
-    if (isPast) {
-      html += '<div class="past-banner">🕐 Прошедшие события — от последних к ранним</div>';
-    }
+    if (isPast) html += '<div class="past-banner">🕐 Прошедшие события — от последних к ранним</div>';
 
     order.forEach(function (key) {
       var evs  = byMonth[key];
@@ -540,11 +648,15 @@
       html += '</div><div class="events-grid">';
 
       evs.forEach(function (ev) {
-        var parts = ev.date.split('-');
-        var day   = parseInt(parts[2], 10);
-        var mon   = MONTHS_SHORT[parts[1]] || parts[1];
-        var badge = BADGE_LABELS[ev.type] || ev.type;
-        var cardClass = 'event-card' + (isPast ? ' is-past' : '');
+        var parts  = ev.date.split('-');
+        var day    = parseInt(parts[2], 10);
+        var mon    = MONTHS_SHORT[parts[1]] || parts[1];
+        var badge  = BADGE_LABELS[ev.type] || ev.type;
+        var accent = isPast ? 0 : accentLevel(ev, selectedCity);
+        var cardClass = 'event-card'
+          + (isPast   ? ' is-past' : '')
+          + (accent === 2 ? ' is-accent-2' : accent === 1 ? ' is-accent-1' : '');
+
         html += '<div class="' + cardClass + '" data-url="' + esc(ev.url) + '" role="link" tabindex="0">';
         html += '<div class="date-col">';
         html += '<div class="date-day">' + day + '</div>';
@@ -559,15 +671,14 @@
         html += esc(ev.city) + '</span>';
         html += '<span class="badge badge-' + esc(ev.type) + '">' + esc(badge) + '</span>';
         html += '</div>';
-        // Кнопки добавления в календарь
         html += '<div class="cal-btns">';
-        html += '<a class="cal-btn cal-btn-google" href="' + esc(googleCalUrl(ev)) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Добавить в Google Календарь">';
+        html += '<a class="cal-btn cal-btn-google" href="' + esc(googleCalUrl(ev)) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">';
         html += '<svg viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 1v2M9 1v2M1 6h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
         html += 'Google</a>';
-        html += '<a class="cal-btn cal-btn-yandex" href="' + esc(yandexCalUrl(ev)) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Добавить в Яндекс Календарь">';
+        html += '<a class="cal-btn cal-btn-yandex" href="' + esc(yandexCalUrl(ev)) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">';
         html += '<svg viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 1v2M9 1v2M1 6h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
         html += 'Яндекс</a>';
-        html += '<button class="cal-btn" data-ics-id="' + ev.id + '" onclick="event.stopPropagation(); window._icsDownload(' + ev.id + ')" title=".ics для Apple / Outlook">';
+        html += '<button class="cal-btn" onclick="event.stopPropagation(); window._icsDownload(' + ev.id + ')">';
         html += '<svg viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         html += '.ics</button>';
         html += '</div>';
@@ -701,27 +812,41 @@
 
   // ── Автодополнение города ─────────────────────────────────────────────────
   function buildCityFilter(events) {
-    var counts = {};
-
-    // Считаем по полю city
+    // Считаем события по городам
+    var cityCounts = {};
     events.forEach(function (e) {
-      if (e.city) counts[e.city] = (counts[e.city] || 0) + 1;
+      if (e.city) cityCounts[e.city] = (cityCounts[e.city] || 0) + 1;
     });
 
-    // Для крупных городов из REGION_MAP — считаем все события региона
-    Object.keys(REGION_MAP).forEach(function (bigCity) {
-      var region = REGION_MAP[bigCity];
-      var regional = events.filter(function (e) { return e.region === region; }).length;
-      if (regional > 0) {
-        counts[bigCity] = Math.max(counts[bigCity] || 0, regional);
-      }
+    // Для регионов — суммируем все города региона
+    var regionCounts = {};
+    events.forEach(function (e) {
+      if (e.region) regionCounts[e.region] = (regionCounts[e.region] || 0) + 1;
     });
 
-    allCities = Object.keys(counts).sort(function (a, b) {
-      return a.localeCompare(b, 'ru');
-    }).map(function (city) {
-      return { name: city, count: counts[city] };
+    // Для макрорегионов — суммируем все регионы внутри
+    var macroCounts = {};
+    Object.keys(MACRO_MAP).forEach(function (macro) {
+      var n = 0;
+      MACRO_MAP[macro].forEach(function (r) { n += regionCounts[r] || 0; });
+      if (n > 0) macroCounts[macro] = n;
     });
+
+    var items = [];
+
+    // Города
+    Object.keys(cityCounts).sort(function (a,b) { return a.localeCompare(b,'ru'); })
+      .forEach(function (c) { items.push({ name: c, count: cityCounts[c], kind: 'city' }); });
+
+    // Регионы (только те, что есть в данных)
+    Object.keys(regionCounts).sort(function (a,b) { return a.localeCompare(b,'ru'); })
+      .forEach(function (r) { items.push({ name: r, count: regionCounts[r], kind: 'region' }); });
+
+    // Макрорегионы
+    Object.keys(macroCounts).sort(function (a,b) { return a.localeCompare(b,'ru'); })
+      .forEach(function (m) { items.push({ name: m, count: macroCounts[m], kind: 'macro' }); });
+
+    allCities = items;
   }
 
   function getMatchingCities(query) {
@@ -759,9 +884,8 @@
               '</div>';
     }
     matches.forEach(function (c, i) {
-      var region = REGION_MAP[c.name];
-      var nameHtml = highlightMatch(c.name, query);
-      if (region) nameHtml += ' <span class="city-option-region">+ ' + esc(region) + '</span>';
+      var kindIcon = c.kind === 'macro' ? '🗺 ' : c.kind === 'region' ? '📍 ' : '';
+      var nameHtml = kindIcon + highlightMatch(c.name, query);
       html += '<div class="city-option" data-city="' + esc(c.name) + '" data-idx="' + i + '">' +
               '<span>' + nameHtml + '</span>' +
               '<span class="city-option-count">' + c.count + '</span>' +
@@ -904,6 +1028,7 @@
         document.getElementById('nav-updated').textContent = formatUpdated(data.updated);
       }
       // Список городов строим по всем событиям (включая прошедшие)
+      buildGeoIndex(all);
       buildCityFilter(all);
       initCitySearch();
       applyFilters();
