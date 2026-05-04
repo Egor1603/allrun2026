@@ -337,24 +337,6 @@
   <div class="filters-inner">
 
     <div class="filter-group">
-      <span class="filter-label">Поиск</span>
-      <div class="event-search-wrap">
-        <input
-          type="text"
-          id="event-search"
-          class="event-search-input"
-          placeholder="Название события…"
-          autocomplete="off"
-          spellcheck="false"
-          oninput="applyFilters()"
-        >
-        <button class="event-search-clear" id="event-search-clear" title="Сбросить" style="display:none" onclick="clearEventSearch()">✕</button>
-      </div>
-    </div>
-
-    <div class="filter-sep"></div>
-
-    <div class="filter-group">
       <span class="filter-label">Город / регион</span>
       <div class="city-search-wrap" id="city-wrap">
         <input
@@ -394,6 +376,24 @@
     <div class="filter-sep"></div>
 
     <div class="filter-group">
+      <span class="filter-label">Поиск</span>
+      <div class="event-search-wrap">
+        <input
+          type="text"
+          id="event-search"
+          class="event-search-input"
+          placeholder="Название события…"
+          autocomplete="off"
+          spellcheck="false"
+          oninput="applyFilters()"
+        >
+        <button class="event-search-clear" id="event-search-clear" title="Сбросить" style="display:none" onclick="clearEventSearch()">✕</button>
+      </div>
+    </div>
+
+    <div class="filter-sep"></div>
+
+    <div class="filter-group">
       <span class="filter-label">Тип</span>
       <button id="btn-all"   class="type-btn is-all"  onclick="setType('all')"  >Все</button>
       <button id="btn-road"  class="type-btn"         onclick="setType('road')" >🏙 Шоссе</button>
@@ -425,7 +425,17 @@
   var allEvents   = [];
   var pastEvents  = [];
   var currentType = 'all';
-  // Читает текст из поля города
+  var TODAY = new Date().toISOString().slice(0, 10);
+
+  // norm нужна раньше всех остальных функций
+  function norm(s) {
+    return String(s || '').toLowerCase()
+      .replace(/ё/g,'е')
+      .replace(/[«»""''.,!?():;\-–—\/\\]/g,' ')
+      .replace(/\s+/g,' ').trim();
+  }
+
+  // Читает и нормализует текст из поля города
   function getCityQuery() {
     var inp = document.getElementById('city-input');
     return inp ? norm(inp.value.trim()) : '';
@@ -443,7 +453,6 @@
     if (btn) btn.style.display = 'none';
     applyFilters();
   };
-  var TODAY = new Date().toISOString().slice(0, 10);
 
   // ── Константы ──────────────────────────────────────────────────────────────
   var MONTHS = {
@@ -781,13 +790,6 @@
                  'p':'п','r':'р','s':'с','t':'т','u':'у','f':'ф','h':'х','y':'й'};
         return m[c] !== undefined ? m[c] : c;
       }).join('');
-  }
-
-  function norm(s) {
-    return String(s || '').toLowerCase()
-      .replace(/ё/g,'е')
-      .replace(/[«»""''.,!?():;\-\u2013\u2014\/\\]/g,' ')
-      .replace(/\s+/g,' ').trim();
   }
 
   function normFull(s) {
