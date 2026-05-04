@@ -120,6 +120,31 @@
   .type-btn.is-road  { background: var(--road-bg);  border-color: var(--road-c);  color: var(--road-c); }
   .type-btn.is-night { background: var(--night-bg); border-color: var(--night-c); color: var(--night-c); }
 
+  /* ── EVENT SEARCH ── */
+  .event-search-wrap {
+    position: relative;
+  }
+  .event-search-input {
+    font-family: inherit; font-size: 13px; color: var(--text);
+    background: var(--surface2);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 6px 28px 6px 10px;
+    min-width: 180px; width: 180px;
+    transition: border-color .15s, width .2s;
+    outline: none;
+  }
+  .event-search-input:focus {
+    border-color: var(--accent);
+    width: 220px;
+  }
+  .event-search-input::placeholder { color: var(--muted); }
+  .event-search-clear {
+    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    font-size: 14px; color: var(--muted); cursor: pointer;
+    background: none; border: none; padding: 0; line-height: 1;
+  }
+  .event-search-clear:hover { color: var(--text); }
+
   /* ── CITY AUTOCOMPLETE ── */
   .city-search-wrap {
     position: relative;
@@ -333,6 +358,24 @@
 
 <div class="filters-bar">
   <div class="filters-inner">
+
+    <div class="filter-group">
+      <span class="filter-label">Поиск</span>
+      <div class="event-search-wrap">
+        <input
+          type="text"
+          id="event-search"
+          class="event-search-input"
+          placeholder="Название события…"
+          autocomplete="off"
+          spellcheck="false"
+          oninput="applyFilters()"
+        >
+        <button class="event-search-clear" id="event-search-clear" title="Сбросить" style="display:none" onclick="clearEventSearch()">✕</button>
+      </div>
+    </div>
+
+    <div class="filter-sep"></div>
 
     <div class="filter-group">
       <span class="filter-label">Город</span>
@@ -705,14 +748,140 @@
     return 0;
   }
 
+  // ── Нечёткий поиск по событиям ───────────────────────────────────────────
+
+  // Кириллица → латиница
+  var CYR_LAT = {
+    'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'e','ж':'zh',
+    'з':'z','и':'i','й':'j','к':'k','л':'l','м':'m','н':'n','о':'o',
+    'п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'h','ц':'ts',
+    'ч':'ch','ш':'sh','щ':'sch','ъ':'','ы':'y','ь':'','э':'e','ю':'yu','я':'ya'
+  };
+
+  // Словарь: беговые слова кир↔лат
+  var WORD_MAP = {
+    'трейл':'trail','найт':'night','лазер':'laser','ран':'run','бег':'run',
+    'ранинг':'running','марафон':'marathon','ультра':'ultra',
+    'фест':'fest','сити':'city','пик':'peak','вайлд':'wild',
+    'голден':'golden','ринг':'ring','мэд':'mad','фокс':'fox',
+    'овл':'owl','кросс':'cross','вайт':'white','брайд':'bride',
+    'сахара':'sahara',
+    'trail':'трейл','night':'найт','laser':'лазер','run':'ран','run':'бег',
+    'running':'ранинг','marathon':'марафон','ultra':'ультра',
+    'fest':'фест','city':'сити','peak':'пик','wild':'вайлд',
+    'golden':'голден','ring':'ринг','mad':'мэд','fox':'фокс',
+    'owl':'овл','cross':'кросс','white':'вайт','bride':'брайд',
+    'sahara':'сахара',
+  };
+
+  function cyrToLat(s) {
+    return s.split('').map(function(c){ return CYR_LAT[c] !== undefined ? CYR_LAT[c] : c; }).join('');
+  }
+
+  function latToCyr(s) {
+    return s
+      .replace(/sch/g,'щ').replace(/zh/g,'ж').replace(/ts/g,'ц')
+      .replace(/ch/g,'ч').replace(/sh/g,'ш').replace(/yu/g,'ю')
+      .replace(/ya/g,'я').replace(/yo/g,'е')
+      .split('').map(function(c){
+        var m = {'a':'а','b':'б','v':'в','g':'г','d':'д','e':'е','z':'з',
+                 'i':'и','j':'й','k':'к','l':'л','m':'м','n':'н','o':'о',
+                 'p':'п','r':'р','s':'с','t':'т','u':'у','f':'ф','h':'х','y':'й'};
+        return m[c] !== undefined ? m[c] : c;
+      }).join('');
+  }
+
+  function norm(s) {
+    return String(s || '').toLowerCase()
+      .replace(/ё/g,'е')
+      .replace(/[«»""''.,!?():;\-\u2013\u2014\/\\]/g,' ')
+      .replace(/\s+/g,' ').trim();
+  }
+
+  function normFull(s) {
+    var n = norm(s);
+    var lat = cyrToLat(n);
+    var cyr = latToCyr(n);
+    var result = n;
+    if (lat !== n)            result += ' ' + lat;
+    if (cyr !== n && cyr !== lat) result += ' ' + cyr;
+    return result;
+  }
+
+  function lev(a, b) {
+    if (a === b) return 0;
+    if (!a.length) return b.length;
+    if (!b.length) return a.length;
+    var prev = [];
+    for (var k = 0; k <= b.length; k++) prev[k] = k;
+    for (var i = 1; i <= a.length; i++) {
+      var curr = [i];
+      for (var j = 1; j <= b.length; j++) {
+        curr[j] = a[i-1] === b[j-1]
+          ? prev[j-1]
+          : 1 + Math.min(prev[j-1], prev[j], curr[j-1]);
+      }
+      prev = curr;
+    }
+    return prev[b.length];
+  }
+
+  function wordMatches(qWord, text) {
+    if (text.indexOf(qWord) !== -1) return true;
+    if (qWord.length <= 3) return false;
+    var maxErr = qWord.length >= 6 ? 2 : 1;
+    var words = text.split(' ');
+    for (var i = 0; i < words.length; i++) {
+      var w = words[i];
+      if (Math.abs(w.length - qWord.length) > maxErr + 1) continue;
+      if (lev(qWord, w) <= maxErr) return true;
+      if (w.length >= qWord.length && w.slice(0, qWord.length) === qWord) return true;
+    }
+    return false;
+  }
+
+  function eventMatchesSearch(ev, query) {
+    if (!query) return true;
+    var q = norm(query);
+    if (!q) return true;
+    var haystack = normFull(ev.name) + ' ' + normFull(ev.city) + ' '
+                 + normFull(ev.region || '') + ' ' + normFull(ev.distances || '');
+    var qWords = q.split(' ').filter(function(w){ return w.length > 0; });
+    for (var i = 0; i < qWords.length; i++) {
+      var w = qWords[i];
+      // Варианты слова: оригинал + транслит + словарь
+      var variants = [w, cyrToLat(w), latToCyr(w)];
+      if (WORD_MAP[w]) variants.push(WORD_MAP[w]);
+      var found = false;
+      for (var v = 0; v < variants.length; v++) {
+        if (wordMatches(variants[v], haystack)) { found = true; break; }
+      }
+      if (!found) return false;
+    }
+    return true;
+  }
+
+  window.clearEventSearch = function() {
+    var inp = document.getElementById('event-search');
+    var btn = document.getElementById('event-search-clear');
+    if (inp) { inp.value = ''; inp.focus(); }
+    if (btn) btn.style.display = 'none';
+    applyFilters();
+  };
+
   // ── Применяем все фильтры ──────────────────────────────────────────────────
   window.applyFilters = function () {
-    var month = document.getElementById('sel-month').value;
+    var month      = document.getElementById('sel-month').value;
+    var searchInp  = document.getElementById('event-search');
+    var searchVal  = searchInp ? searchInp.value.trim() : '';
+    var searchBtn  = document.getElementById('event-search-clear');
+    if (searchBtn) searchBtn.style.display = searchVal ? 'block' : 'none';
 
     if (currentType === 'past') {
       var filtered = pastEvents.filter(function (e) {
         if (!cityMatch(e, selectedCity))           return false;
         if (month && e.date.slice(5,7) !== month)  return false;
+        if (!eventMatchesSearch(e, searchVal))     return false;
         return true;
       });
       renderEvents(filtered, true);
@@ -723,6 +892,7 @@
       if (currentType !== 'all' && e.type !== currentType) return false;
       if (!cityMatch(e, selectedCity))                      return false;
       if (month && e.date.slice(5, 7) !== month)           return false;
+      if (!eventMatchesSearch(e, searchVal))               return false;
       return true;
     });
 
@@ -941,19 +1111,19 @@
 
   // ── Автодополнение города ─────────────────────────────────────────────────
   function buildCityFilter(events) {
-    // Считаем события по городам
+    // Считаем события по городам (прямые совпадения)
     var cityCounts = {};
     events.forEach(function (e) {
       if (e.city) cityCounts[e.city] = (cityCounts[e.city] || 0) + 1;
     });
 
-    // Для регионов — суммируем все города региона
+    // Считаем события по регионам
     var regionCounts = {};
     events.forEach(function (e) {
       if (e.region) regionCounts[e.region] = (regionCounts[e.region] || 0) + 1;
     });
 
-    // Для макрорегионов — суммируем все регионы внутри
+    // Для макрорегионов
     var macroCounts = {};
     Object.keys(MACRO_MAP).forEach(function (macro) {
       var n = 0;
@@ -961,19 +1131,35 @@
       if (n > 0) macroCounts[macro] = n;
     });
 
+    // Добавляем все города из CITY_REGION — показываем региональный счётчик
+    // чтобы пользователь видел сколько событий найдётся при выборе
+    Object.keys(CITY_REGION).forEach(function (city) {
+      var region = CITY_REGION[city];
+      var regionalCount = regionCounts[region] || 0;
+      if (regionalCount > 0 && !(city in cityCounts)) {
+        cityCounts[city] = regionalCount;
+      }
+    });
+
     var items = [];
 
-    // Города
-    Object.keys(cityCounts).sort(function (a,b) { return a.localeCompare(b,'ru'); })
-      .forEach(function (c) { items.push({ name: c, count: cityCounts[c], kind: 'city' }); });
+    // Города (включая те, что только в CITY_REGION)
+    Object.keys(cityCounts).sort(function (a, b) { return a.localeCompare(b, 'ru'); })
+      .forEach(function (c) {
+        items.push({ name: c, count: cityCounts[c], kind: 'city' });
+      });
 
-    // Регионы (только те, что есть в данных)
-    Object.keys(regionCounts).sort(function (a,b) { return a.localeCompare(b,'ru'); })
-      .forEach(function (r) { items.push({ name: r, count: regionCounts[r], kind: 'region' }); });
+    // Регионы
+    Object.keys(regionCounts).sort(function (a, b) { return a.localeCompare(b, 'ru'); })
+      .forEach(function (r) {
+        items.push({ name: r, count: regionCounts[r], kind: 'region' });
+      });
 
     // Макрорегионы
-    Object.keys(macroCounts).sort(function (a,b) { return a.localeCompare(b,'ru'); })
-      .forEach(function (m) { items.push({ name: m, count: macroCounts[m], kind: 'macro' }); });
+    Object.keys(macroCounts).sort(function (a, b) { return a.localeCompare(b, 'ru'); })
+      .forEach(function (m) {
+        items.push({ name: m, count: macroCounts[m], kind: 'macro' });
+      });
 
     allCities = items;
   }
