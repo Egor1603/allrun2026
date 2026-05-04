@@ -370,6 +370,17 @@
   .state-box { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 15px; }
   .state-icon { font-size: 36px; margin-bottom: 12px; }
 
+  /* SEO-текст — виден поисковикам, скрыт от пользователей */
+  .seo-text {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   /* footer */
   footer {
     background: var(--surface); border-top: 1px solid var(--border);
@@ -490,6 +501,16 @@
 <main class="main" id="main">
   <div class="state-box"><div class="state-icon">⏳</div>Загружаем события…</div>
 </main>
+
+<div class="seo-text">
+  <h2>Беговой календарь России 2026</h2>
+  <p>Полный календарь забегов, марафонов, трейлов и полумарафонов по всей России в 2026 году.
+  На сайте собраны беговые события из более чем 40 городов — Москва, Санкт-Петербург,
+  Екатеринбург, Новосибирск, Казань, Краснодар, Омск, Томск, Иркутск, Уфа, Челябинск и других.
+  Все данные берутся с официальных сайтов организаторов и обновляются автоматически дважды в сутки.</p>
+  <p>Типы соревнований: шоссейные забеги и марафоны, горные и лесные трейлы, ночные забеги,
+  ультрамарафоны. Используйте фильтры для поиска событий по городу, региону, месяцу или типу дистанции.</p>
+</div>
 
 <footer>
   Данные: ea-m.org · krasmarafon.ru · pushkin-run.ru · heroleague.ru · tomskmarathon.ru ·
@@ -1306,6 +1327,9 @@
 
     mainEl.innerHTML = html;
 
+    // ── Динамический title и schema.org Event ─────────────────────────────
+    updateSEO(events, isPast, cityQ);
+
     mainEl.querySelectorAll('.event-card').forEach(function (card) {
       card.addEventListener('click', function () {
         var url = card.getAttribute('data-url');
@@ -1318,6 +1342,75 @@
         }
       });
     });
+  }
+
+  // ── SEO: динамический title + schema.org Event ─────────────────────────
+  function updateSEO(events, isPast, cityQ) {
+    // 1. Динамический <title>
+    var base = 'Беговой календарь России 2026';
+    var parts = [];
+    var q = cityQ ? classifyQuery(cityQ) : null;
+
+    if (isPast) {
+      parts.push('Прошедшие события');
+    } else {
+      if (q && q.type === 'city')   parts.push('Забеги ' + cityQ);
+      if (q && q.type === 'region') parts.push('Забеги ' + cityQ);
+      if (q && q.type === 'macro')  parts.push('Забеги ' + cityQ);
+      if (currentType === 'trail')  parts.push('трейлы');
+      if (currentType === 'road')   parts.push('марафоны и шоссе');
+      if (currentType === 'night')  parts.push('ночные забеги');
+      var month = document.getElementById('sel-month');
+      if (month && month.value) {
+        var mNames = {'01':'январь','02':'февраль','03':'март','04':'апрель',
+                      '05':'май','06':'июнь','07':'июль','08':'август',
+                      '09':'сентябрь','10':'октябрь','11':'ноябрь','12':'декабрь'};
+        parts.push(mNames[month.value] || '');
+      }
+    }
+
+    document.title = parts.length
+      ? parts.join(', ') + ' — ' + base
+      : base + ' — забеги, марафоны, трейлы';
+
+    // 2. Schema.org Event для каждого события в выдаче (первые 20)
+    var existing = document.getElementById('schema-events');
+    if (existing) existing.remove();
+
+    if (!isPast && events.length > 0) {
+      var eventsForSchema = events.slice(0, 20);
+      var schemaEvents = eventsForSchema.map(function(ev) {
+        var typeMap = { road: 'SportsEvent', trail: 'SportsEvent', night: 'SportsEvent' };
+        return {
+          '@context': 'https://schema.org',
+          '@type': 'SportsEvent',
+          'name': ev.name,
+          'startDate': ev.date,
+          'location': {
+            '@type': 'Place',
+            'name': ev.city,
+            'address': {
+              '@type': 'PostalAddress',
+              'addressLocality': ev.city,
+              'addressRegion': ev.region || '',
+              'addressCountry': 'RU'
+            }
+          },
+          'description': ev.distances ? 'Дистанции: ' + ev.distances : ev.name,
+          'url': ev.url,
+          'organizer': { '@type': 'Organization', 'url': ev.url },
+          'sport': ev.type === 'trail' ? 'Trail Running' : 'Road Running',
+          'eventStatus': 'https://schema.org/EventScheduled',
+          'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode'
+        };
+      });
+
+      var script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = 'schema-events';
+      script.textContent = JSON.stringify(schemaEvents);
+      document.head.appendChild(script);
+    }
   }
 
   // ── Утилиты ────────────────────────────────────────────────────────────────
