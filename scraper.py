@@ -1898,6 +1898,167 @@ def scrape_goldenultra():
     return events
 
 
+def scrape_goldenringrun():
+    """
+    goldenringrun.ru — серия «Фармэко — Бегом по Золотому кольцу»
+    10 городов Золотого кольца + Москва, май–октябрь.
+    """
+    print("  goldenringrun.ru")
+    html = fetch("http://goldenringrun.ru/")
+    if not html:
+        return []
+    events = []
+    seen = set()
+    # Ищем ссылки на города с датами
+    items = re.findall(
+        r'href="http://goldenringrun\.ru/([a-z]+)"[^>]*>(.*?)</a>',
+        html, re.S
+    )
+    CITY_MAP = {
+        'yaroslavl':  ('Ярославль',           'Ярославская область'),
+        'pereslavl':  ('Переславль-Залесский', 'Ярославская область'),
+        'rybinsk':    ('Рыбинск',             'Ярославская область'),
+        'rostov':     ('Ростов',              'Ярославская область'),
+        'uglich':     ('Углич',               'Ярославская область'),
+        'tutaev':     ('Тутаев',              'Ярославская область'),
+        'myshkin':    ('Мышкин',              'Ярославская область'),
+        'moscow':     ('Москва',              'Москва'),
+    }
+    current_year = datetime.utcnow().year
+    for slug, content in items:
+        city_data = CITY_MAP.get(slug)
+        if not city_data:
+            continue
+        d = parse_date(content)
+        if not d:
+            d = parse_date(content + f' {current_year}')
+        if not d or not is_future(d):
+            continue
+        name_m = re.search(r'([А-ЯA-Z][^<\n]{5,60})', strip_tags(content))
+        name = clean(name_m.group(1)) if name_m and is_valid_name(clean(name_m.group(1))) \
+               else f'Полумарафон «Золотое кольцо» {city_data[0]}'
+        key = (d, name[:30])
+        if key in seen:
+            continue
+        seen.add(key)
+        ev = make_event(d, name, city_data[0], city_data[1],
+                        '3 км, 5 км, 10 км, 21,1 км, детский', 'road',
+                        f'http://goldenringrun.ru/{slug}')
+        if ev:
+            events.append(ev)
+    return events
+
+
+def scrape_leorun():
+    """leorun.ru — трейловый полумарафон в нацпарке «Земля Леопарда», Приморье"""
+    print("  leorun.ru")
+    html = fetch("https://leorun.ru/")
+    if not html:
+        return []
+    events = []
+    dates = re.findall(r'(\d{1,2}\s+[а-яА-Я]+\s+202\d|\d{2}\.\d{2}\.202\d)', html)
+    for ds in dates[:5]:
+        d = parse_date(ds)
+        if d and is_future(d):
+            ev = make_event(d, "LeoRun — трейловый полумарафон",
+                            "Хасанский район", "Приморский край",
+                            "3 км, 5 км, 10 км, 15 км, 22 км",
+                            "trail", "https://leorun.ru/")
+            if ev:
+                events.append(ev)
+            break
+    return events
+
+
+def scrape_topliga_events():
+    """
+    events.topliga.ru — платформа «Высшая Лига»:
+    Суворов Трейл (Усть-Лабинск), другие старты Кубани.
+    """
+    print("  events.topliga.ru")
+    html = fetch("https://events.topliga.ru/")
+    if not html:
+        return []
+    events = []
+    seen = set()
+    # Карточки событий вида /event/NAME/
+    cards = re.findall(
+        r'href="/event/([^"]+)"[^>]*>(.*?)</a>',
+        html, re.S
+    )
+    for slug, content in cards[:20]:
+        name = clean(strip_tags(content))
+        if not is_valid_name(name):
+            continue
+        d = parse_date(content)
+        if not d or not is_future(d):
+            continue
+        key = (d, name[:30])
+        if key in seen:
+            continue
+        seen.add(key)
+        etype = 'trail' if re.search(r'трейл|trail|кросс', name, re.I) else 'road'
+        # Город из контента
+        city_m = re.search(r'([А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?),\s*([А-ЯЁ])', content)
+        city = city_m.group(1) if city_m else 'Краснодарский край'
+        url = f'https://events.topliga.ru/event/{slug}'
+        ev = make_event(d, name, city, 'Краснодарский край', '', etype, url)
+        if ev:
+            events.append(ev)
+    return events[:10]
+
+
+def scrape_kavkazrun():
+    """
+    kavkaz.run — ночные трейлы «Пять вершин» и другие старты
+    Кавказских Минеральных Вод (Лермонтов, Пятигорск).
+    """
+    print("  kavkaz.run")
+    html = fetch("https://kavkaz.run/")
+    if not html:
+        html = fetch("https://reg.russiarunning.com/event/KavkazRunPyatVershin2026")
+    if not html:
+        return []
+    events = []
+    dates = re.findall(r'(\d{1,2}\s+[а-яА-Я]+\s+202\d|\d{2}\.\d{2}\.202\d)', html)
+    for ds in dates[:5]:
+        d = parse_date(ds)
+        if d and is_future(d):
+            ev = make_event(d, 'Ночной трейл «Пять вершин» KAVKAZ.RUN',
+                            'Лермонтов', 'Ставропольский край',
+                            '5 км, 10 км, 25 км', 'night',
+                            'https://reg.russiarunning.com/event/KavkazRunPyatVershin2026')
+            if ev:
+                events.append(ev)
+            break
+    return events
+
+
+def scrape_nordrock():
+    """
+    NORD ROCK — горный трейл в Хибинах, Кировск, гора Айкуайвенчорр.
+    Организуется через reg.russiarunning.com.
+    """
+    print("  NORD ROCK (Кировск)")
+    # Проверяем страницу события напрямую
+    html = fetch("https://reg.russiarunning.com/event/NordRock2026")
+    if not html:
+        return []
+    dates = re.findall(r'(\d{1,2}\s+[а-яА-Я]+\s+202\d|\d{2}\.\d{2}\.202\d)', html)
+    events = []
+    for ds in dates[:3]:
+        d = parse_date(ds)
+        if d and is_future(d):
+            ev = make_event(d, 'NORD ROCK 2026',
+                            'Кировск', 'Мурманская область',
+                            '10 км, 25 км, 50 км', 'trail',
+                            'https://reg.russiarunning.com/event/NordRock2026')
+            if ev:
+                events.append(ev)
+            break
+    return events
+
+
 # ─── MERGE & SAVE ────────────────────────────────────────────────────────────
 
 SOURCES = [
@@ -1943,6 +2104,11 @@ SOURCES = [
     ("забег.рф",                 scrape_zabeg_rf),
     ("reg.o-time.ru",            scrape_otime),
     ("goldenultra.ru",           scrape_goldenultra),
+    ("goldenringrun.ru",         scrape_goldenringrun),
+    ("leorun.ru",                scrape_leorun),
+    ("events.topliga.ru",        scrape_topliga_events),
+    ("kavkaz.run",               scrape_kavkazrun),
+    ("nordrock (Кировск)",       scrape_nordrock),
     ("vk.com (API)",             scrape_vk),
 ]
 
