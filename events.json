@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-05T16:30:32Z",
+  "updated": "2026-05-06T03:39:21Z",
   "events": [
     {
       "id": 57,
@@ -1520,6 +1520,16 @@
       "type": "trail",
       "url": "https://trail1.ru",
       "id": 230
+    },
+    {
+      "date": "2026-09-13",
+      "name": "Камчатка Trail-1",
+      "city": "Петропавловск-Камчатский",
+      "region": "Камчатский край",
+      "distances": "",
+      "type": "trail",
+      "url": "https://trail1.ru",
+      "id": 238
     },
     {
       "id": 94,
