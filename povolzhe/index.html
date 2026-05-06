@@ -200,11 +200,12 @@
     cursor: pointer; transition: all .15s; white-space: nowrap;
     user-select: none;
   }
-  .type-btn:hover { border-color: var(--muted); }
-  .type-btn.is-all   { background: var(--accent);   border-color: var(--accent);   color: #fff; }
-  .type-btn.is-trail { background: var(--trail-bg); border-color: var(--trail-c); color: var(--trail-c); }
-  .type-btn.is-road  { background: var(--road-bg);  border-color: var(--road-c);  color: var(--road-c); }
-  .type-btn.is-night { background: var(--night-bg); border-color: var(--night-c); color: var(--night-c); }
+  .type-btn:hover { border-color: var(--muted); color: var(--text); }
+  .type-btn.is-active {
+    background: var(--accent); border-color: var(--accent); color: #fff;
+  }
+  .type-btn.is-past { color: var(--muted); }
+
 
   /* ── CITY DROPDOWN ── */
   .city-search-wrap { position: relative; }
@@ -376,8 +377,6 @@
     .cal-btns { display: flex; }
   }
 
-  .type-btn.is-past  { background: var(--surface2); border-color: var(--muted); color: var(--muted); }
-
   /* Акцент — точное совпадение города (уровень 2) */
   .event-card.is-accent-2 {
     border-color: var(--accent);
@@ -438,11 +437,16 @@
 
   /* Благотворительные забеги */
   .badge-charity {
-    background: #fdf2f8; color: #9d174d;
-    border: 1px solid #fbcfe8;
+    background: #f0fdf4; color: #15803d;
+    border: 1px solid #bbf7d0;
   }
   .event-card.is-charity {
-    border-left: 3px solid #ec4899;
+    border-left: 3px solid #22c55e;
+    background: linear-gradient(to right, rgba(34,197,94,.04), transparent 60%);
+  }
+  .type-btn.is-charity-active {
+    background: #16a34a; border-color: #16a34a;
+    color: #fff; box-shadow: 0 2px 8px rgba(22,163,74,.25);
   }
 
 </style>
@@ -532,15 +536,16 @@
       </div>
     </div>
 
+
     <div class="filter-sep"></div>
 
     <div class="filter-group">
-      <span class="filter-label">Тип</span>
-      <button id="btn-all"   class="type-btn is-all"  onclick="setType('all')"  >Все</button>
-      <button id="btn-road"  class="type-btn"         onclick="setType('road')" >🏙 Шоссе</button>
-      <button id="btn-trail" class="type-btn"         onclick="setType('trail')">🏔 Трейл</button>
-      <button id="btn-night" class="type-btn"         onclick="setType('night')">🌙 Ночные</button>
-      <button id="btn-past"  class="type-btn"         onclick="setType('past')" >🕐 Прошедшие</button>
+      <button id="btn-all"     class="type-btn is-active" onclick="setType('all')"    >Все</button>
+      <button id="btn-road"    class="type-btn"           onclick="setType('road')"   >🏙 Шоссе</button>
+      <button id="btn-trail"   class="type-btn"           onclick="setType('trail')"  >🏔 Трейл</button>
+      <button id="btn-night"   class="type-btn"           onclick="setType('night')"  >🌙 Ночные</button>
+      <button id="btn-charity" class="type-btn"           onclick="setType('charity')">💚 Благотворительные</button>
+      <button id="btn-past"    class="type-btn"           onclick="setType('past')"   >🕐 Прошедшие</button>
     </div>
 
   </div>
@@ -581,6 +586,40 @@
   var pastEvents  = [];
   var currentType = 'all';
   var TODAY = new Date().toISOString().slice(0, 10);
+
+  // ── Применяем все фильтры ──────────────────────────────────────────────────
+  window.applyFilters = function () {
+    var month     = document.getElementById('sel-month').value;
+    var searchInp = document.getElementById('event-search');
+    var searchVal = searchInp ? searchInp.value.trim() : '';
+    var searchBtn = document.getElementById('event-search-clear');
+    if (searchBtn) searchBtn.style.display = searchVal ? 'block' : 'none';
+    var cityQ = getCityQuery();
+
+    if (currentType === 'past') {
+      var filtered = pastEvents.filter(function (e) {
+        if (!cityMatch(e, cityQ))                 return false;
+        if (month && e.date.slice(5,7) !== month) return false;
+        if (!eventMatchesSearch(e, searchVal))    return false;
+        return true;
+      });
+      renderEvents(filtered, true, cityQ);
+      return;
+    }
+
+    var filtered = allEvents.filter(function (e) {
+      if (currentType === 'charity') {
+        if (!e.charity) return false;
+      } else if (currentType !== 'all' && e.type !== currentType) return false;
+      if (!cityMatch(e, cityQ))                             return false;
+      if (month && e.date.slice(5,7) !== month)            return false;
+      if (!eventMatchesSearch(e, searchVal))               return false;
+      return true;
+    });
+    renderEvents(filtered, false, cityQ);
+  };
+
+
 
   // norm нужна раньше всех остальных функций
   function norm(s) {
@@ -830,16 +869,21 @@
     '05':'май','06':'июн','07':'июл','08':'авг',
     '09':'сен','10':'окт','11':'ноя','12':'дек'
   };
-  var TYPE_CLASSES = { all:'is-all', road:'is-road', trail:'is-trail', night:'is-night', past:'is-past' };
+  var TYPE_CLASSES = { all:'', past:'is-past' };
   var BADGE_LABELS = { road:'шоссе', trail:'трейл', night:'ночной' };
 
   // ── Фильтрация по типу ─────────────────────────────────────────────────────
   window.setType = function (type) {
     currentType = type;
-    ['all','road','trail','night','past'].forEach(function (t) {
+    ['all','road','trail','night','charity','past'].forEach(function(t) {
       var btn = document.getElementById('btn-' + t);
       if (!btn) return;
-      btn.className = 'type-btn' + (t === type ? ' ' + TYPE_CLASSES[type] : '');
+      btn.classList.remove('is-active', 'is-past', 'is-charity-active');
+      if (t === type) {
+        if (t === 'past')    btn.classList.add('is-past');
+        else if (t === 'charity') btn.classList.add('is-charity-active');
+        else                 btn.classList.add('is-active');
+      }
     });
     applyFilters();
   };
@@ -1057,6 +1101,81 @@
   }
 
   // Строим индексы из событий + статичной таблицы с нормализованными ключами
+  // ── Список городов для дропдауна ──────────────────────────────────────────
+  var allCities = [];
+
+  function buildCityFilter(events) {
+    var cityCounts = {};
+    var regionCounts = {};
+    events.forEach(function (e) {
+      if (e.city) cityCounts[e.city] = (cityCounts[e.city] || 0) + 1;
+      if (e.region) regionCounts[e.region] = (regionCounts[e.region] || 0) + 1;
+    });
+    // Добавляем города из CITY_REGION если в их регионе есть события
+    Object.keys(CITY_REGION).forEach(function (city) {
+      var region = CITY_REGION[city];
+      if (regionCounts[region] && !cityCounts[city]) {
+        cityCounts[city] = regionCounts[region];
+      }
+    });
+    var macroCounts = {};
+    Object.keys(MACRO_MAP).forEach(function (macro) {
+      var n = 0;
+      MACRO_MAP[macro].forEach(function (r) { n += regionCounts[r] || 0; });
+      if (n > 0) macroCounts[macro] = n;
+    });
+    var items = [];
+    Object.keys(cityCounts).sort(function (a, b) { return a.localeCompare(b, 'ru'); })
+      .forEach(function (c) { items.push({ name: c, count: cityCounts[c], kind: 'city' }); });
+    Object.keys(regionCounts).sort(function (a, b) { return a.localeCompare(b, 'ru'); })
+      .forEach(function (r) { items.push({ name: r, count: regionCounts[r], kind: 'region' }); });
+    Object.keys(macroCounts).sort(function (a, b) { return a.localeCompare(b, 'ru'); })
+      .forEach(function (m) { items.push({ name: m, count: macroCounts[m], kind: 'macro' }); });
+    allCities = items;
+  }
+
+  function initCitySearch() {
+    var input   = document.getElementById('city-input');
+    var clearBtn = document.getElementById('city-clear');
+    var wrap    = document.getElementById('city-wrap');
+    if (!input) return;
+
+    input.addEventListener('focus', function () {
+      buildCityDropdown(input.value.trim());
+    });
+    input.addEventListener('keydown', function (e) {
+      var dd = document.getElementById('city-dropdown');
+      if (!dd || !dd.classList.contains('open')) return;
+      var opts = dd.querySelectorAll('.city-opt');
+      if (!opts.length) return;
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        cityKbdIdx = Math.min(cityKbdIdx + 1, opts.length - 1);
+        opts.forEach(function (o, i) { o.classList.toggle('kbd-active', i === cityKbdIdx); });
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        cityKbdIdx = Math.max(cityKbdIdx - 1, 0);
+        opts.forEach(function (o, i) { o.classList.toggle('kbd-active', i === cityKbdIdx); });
+      } else if (e.key === 'Enter' && cityKbdIdx >= 0) {
+        e.preventDefault();
+        if (opts[cityKbdIdx]) applyCitySelection(opts[cityKbdIdx].getAttribute('data-q'));
+      } else if (e.key === 'Escape') {
+        closeCityDropdown();
+      }
+    });
+    input.addEventListener('blur', function () {
+      setTimeout(closeCityDropdown, 160);
+    });
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function () {
+        window.clearCity();
+      });
+    }
+    document.addEventListener('click', function (e) {
+      if (wrap && !wrap.contains(e.target)) closeCityDropdown();
+    });
+  }
+
   function buildGeoIndex(events) {
     // Статичная таблица
     Object.keys(CITY_REGION).forEach(function (city) {
@@ -1259,36 +1378,6 @@
     applyFilters();
   };
 
-  // ── Применяем все фильтры ──────────────────────────────────────────────────
-  window.applyFilters = function () {
-    var month     = document.getElementById('sel-month').value;
-    var searchInp = document.getElementById('event-search');
-    var searchVal = searchInp ? searchInp.value.trim() : '';
-    var searchBtn = document.getElementById('event-search-clear');
-    if (searchBtn) searchBtn.style.display = searchVal ? 'block' : 'none';
-    var cityQ = getCityQuery();
-
-    if (currentType === 'past') {
-      var filtered = pastEvents.filter(function (e) {
-        if (!cityMatch(e, cityQ))                 return false;
-        if (month && e.date.slice(5,7) !== month) return false;
-        if (!eventMatchesSearch(e, searchVal))    return false;
-        return true;
-      });
-      renderEvents(filtered, true, cityQ);
-      return;
-    }
-
-    var filtered = allEvents.filter(function (e) {
-      if (currentType !== 'all' && e.type !== currentType) return false;
-      if (!cityMatch(e, cityQ))                             return false;
-      if (month && e.date.slice(5,7) !== month)            return false;
-      if (!eventMatchesSearch(e, searchVal))               return false;
-      return true;
-    });
-    renderEvents(filtered, false, cityQ);
-  };
-
   // ── Рендер событий ─────────────────────────────────────────────────────────
   function renderEvents(events, isPast, cityQ) {
     var mainEl  = document.getElementById('main');
@@ -1415,9 +1504,7 @@
       if (q && q.type === 'city')   parts.push('Забеги ' + cityQ);
       if (q && q.type === 'region') parts.push('Забеги ' + cityQ);
       if (q && q.type === 'macro')  parts.push('Забеги ' + cityQ);
-      if (currentType === 'trail')  parts.push('трейлы');
-      if (currentType === 'road')   parts.push('марафоны и шоссе');
-      if (currentType === 'night')  parts.push('ночные забеги');
+
       var month = document.getElementById('sel-month');
       if (month && month.value) {
         var mNames = {'01':'январь','02':'февраль','03':'март','04':'апрель',
