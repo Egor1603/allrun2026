@@ -2365,12 +2365,194 @@ def slugify(text):
 
 def generate_city_pages(events, template_path="index.html"):
     """
-    Генерирует статичные HTML-страницы для городов, регионов и типов забегов.
-    Каждая страница — копия index.html с предустановленным фильтром и SEO-тегами.
+    Генерирует лёгкие HTML-оболочки для городов/регионов/типов.
+    Каждая страница подключает общие style.css и app.js —
+    при изменении дизайна достаточно обновить эти файлы,
+    городские страницы не нужно перегенерировать.
     """
     if not os.path.exists(template_path):
         print(f"  [SKIP] Шаблон {template_path} не найден")
-        return
+        return []
+
+    future = [e for e in events if e.get('date', '') >= TODAY]
+
+    from collections import Counter
+    city_counts  = Counter(e['city']   for e in future if e.get('city'))
+    region_counts= Counter(e['region'] for e in future if e.get('region'))
+    type_counts  = Counter(e['type']   for e in future if e.get('type'))
+
+    MACRO_REGIONS = {
+        'ural':        ('Урал',                 ['Свердловская область','Челябинская область','Пермский край','Курганская область','Тюменская область']),
+        'sibir':       ('Сибирь',               ['Новосибирская область','Кемеровская область','Томская область','Омская область','Красноярский край','Иркутская область']),
+        'kavkaz':      ('Кавказ',               ['Краснодарский край','Ставропольский край','Республика Дагестан','Чеченская Республика','Кабардино-Балкария','Республика Северная Осетия','Карачаево-Черкессия','Республика Ингушетия','Республика Адыгея']),
+        'altaj':       ('Алтай',                ['Алтайский край','Республика Алтай']),
+        'dalvostok':   ('Дальний Восток',        ['Приморский край','Хабаровский край','Амурская область','Камчатский край','Республика Саха (Якутия)']),
+        'povolzhe':    ('Поволжье',             ['Республика Татарстан','Самарская область','Нижегородская область','Волгоградская область','Ульяновская область','Республика Башкортостан']),
+        'centr':       ('Центральная Россия',    ['Москва','Московская область','Тверская область','Ярославская область','Владимирская область','Рязанская область','Тульская область','Калужская область']),
+        'severo-zapad':('Северо-Запад',          ['Санкт-Петербург','Ленинградская область','Мурманская область','Республика Карелия','Архангельская область','Псковская область','Новгородская область']),
+    }
+
+    TYPE_PAGES = {
+        'trail': ('Трейлы России',          'trail', 'trail'),
+        'road':  ('Шоссейные забеги России','road',  'road'),
+        'night': ('Ночные забеги России',   'night', 'night'),
+    }
+
+    pages = []
+
+    # Города с 3+ событиями
+    for city, cnt in city_counts.most_common(30):
+        if cnt < 3:
+            continue
+        slug = slugify(city)
+        region = next((e['region'] for e in future if e.get('city') == city and e.get('region')), '')
+        title = f'Забеги {city} 2026 — {cnt} событий | Беговой календарь России'
+        desc  = f'Все забеги, марафоны и трейлы в {city}' + (f' и {region}' if region else '') + f' в 2026 году. {cnt} событий, официальные источники.'
+        pages.append((slug, city, title, desc, f"PRESELECT_CITY='{city}';", cnt))
+
+    # Макрорегионы
+    for macro_slug, (macro_name, macro_regions) in MACRO_REGIONS.items():
+        cnt = sum(1 for e in future if e.get('region') in macro_regions)
+        if cnt < 2:
+            continue
+        title = f'Забеги {macro_name} 2026 — {cnt} событий | Беговой календарь России'
+        desc  = f'Все забеги, марафоны и трейлы в регионах {macro_name} в 2026 году. {cnt} событий.'
+        pages.append((macro_slug, macro_name, title, desc, f"PRESELECT_CITY='{macro_name}';", cnt))
+
+    # Типы
+    for type_slug, (type_label, type_val, type_btn) in TYPE_PAGES.items():
+        cnt = type_counts.get(type_val, 0)
+        if cnt < 2:
+            continue
+        title = f'{type_label} 2026 — {cnt} событий | Беговой календарь России'
+        desc  = f'Полный календарь {type_label.lower()} 2026 года по всей России. {cnt} событий.'
+        pages.append((type_slug, type_label, title, desc, f"PRESELECT_TYPE='{type_val}';", cnt))
+
+    created = []
+    for slug, label, title, desc, preselect_js, cnt in pages:
+        canonical = f'https://allrunrus.ru/{slug}/'
+        breadcrumb = f'<a href="../" style="color:inherit;opacity:.8;">← Все события</a> · {label} ({cnt})'
+
+        # Лёгкая оболочка — только мета-теги и подключение общих файлов
+        page_html = f'''<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{canonical}">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{canonical}">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:image" content="https://allrunrus.ru/og-image.svg">
+<meta property="og:locale" content="ru_RU">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="../">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="10" r="9" fill="white" opacity=".15"/>
+          <text x="10" y="14.5" font-family="Georgia, serif" font-size="12" font-weight="700"
+                fill="white" text-anchor="middle">R</text>
+        </svg>
+      </div>
+      Беговой календарь России
+    </a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-content">
+    <h1>Беговой календарь России 2026</h1>
+    <p>Забеги, марафоны, трейлы · Официальные источники · Автообновление 2 раза в сутки</p>
+    <p style="font-size:12px;opacity:.65;margin-top:8px;">{breadcrumb}</p>
+    <p class="hero-updated" id="nav-updated"></p>
+  </div>
+</div>
+
+<div class="filters-bar">
+  <div class="filters-inner">
+    <div class="filter-group">
+      <span class="filter-label">Город / регион</span>
+      <div class="city-search-wrap" id="city-wrap">
+        <input type="text" id="city-input" class="city-input" placeholder="Город или регион…"
+               autocomplete="off" spellcheck="false" oninput="onCityInput()">
+        <button class="city-clear" id="city-clear" title="Сбросить" style="display:none" onclick="clearCity()">✕</button>
+        <div class="city-dropdown" id="city-dropdown"></div>
+      </div>
+    </div>
+    <div class="filter-sep"></div>
+    <div class="filter-group">
+      <span class="filter-label">Месяц</span>
+      <select id="sel-month" onchange="applyFilters()">
+        <option value="">Все месяцы</option>
+        <option value="01">Январь</option><option value="02">Февраль</option>
+        <option value="03">Март</option><option value="04">Апрель</option>
+        <option value="05">Май</option><option value="06">Июнь</option>
+        <option value="07">Июль</option><option value="08">Август</option>
+        <option value="09">Сентябрь</option><option value="10">Октябрь</option>
+        <option value="11">Ноябрь</option><option value="12">Декабрь</option>
+      </select>
+    </div>
+    <div class="filter-sep"></div>
+    <div class="filter-group">
+      <span class="filter-label">Поиск</span>
+      <div class="event-search-wrap">
+        <input type="text" id="event-search" class="event-search-input"
+               placeholder="Название события…" autocomplete="off" spellcheck="false" oninput="applyFilters()">
+        <button class="event-search-clear" id="event-search-clear" title="Сбросить"
+                style="display:none" onclick="clearEventSearch()">✕</button>
+      </div>
+    </div>
+    <div class="filter-sep"></div>
+    <div class="filter-group">
+      <span class="filter-label">Тип</span>
+      <button id="btn-all"   class="type-btn is-all"  onclick="setType('all')"  >Все</button>
+      <button id="btn-road"  class="type-btn"         onclick="setType('road')" >🏙 Шоссе</button>
+      <button id="btn-trail" class="type-btn"         onclick="setType('trail')">🏔 Трейл</button>
+      <button id="btn-night" class="type-btn"         onclick="setType('night')">🌙 Ночные</button>
+      <button id="btn-past"  class="type-btn"         onclick="setType('past')" >🕐 Прошедшие</button>
+    </div>
+  </div>
+</div>
+
+<div class="stats-wrap"><p class="stats-text" id="stats-text">Загрузка…</p></div>
+<main class="main" id="main">
+  <div class="state-box"><div class="state-icon">⏳</div>Загружаем события…</div>
+</main>
+
+<footer>
+  Данные: ea-m.org · krasmarafon.ru · pushkin-run.ru · heroleague.ru и др.<br>
+  Автоматическое обновление через GitHub Actions · 2 раза в сутки
+</footer>
+
+<script>
+  var PAGE_DEPTH = 1;
+  var {preselect_js}
+</script>
+<script src="../app.js"></script>
+
+</body>
+</html>'''
+
+        os.makedirs(slug, exist_ok=True)
+        with open(os.path.join(slug, 'index.html'), 'w', encoding='utf-8') as f:
+            f.write(page_html)
+        created.append(f'/{slug}/ ({cnt} событий)')
+
+    print(f"\n  Сгенерировано {len(created)} страниц городов/регионов:")
+    for p in created:
+        print(f"    {p}")
+
+    return [slug for slug, *_ in pages]
 
     with open(template_path, encoding='utf-8') as f:
         template = f.read()
@@ -2468,7 +2650,9 @@ def generate_city_pages(events, template_path="index.html"):
         # Относительные пути → абсолютные (страница глубже на 1 уровень)
         page_html = page_html.replace("href='favicon.svg'", "href='../favicon.svg'")
         page_html = page_html.replace('href="favicon.svg"', 'href="../favicon.svg"')
+        page_html = page_html.replace('href="style.css"', 'href="../style.css"')
         page_html = page_html.replace("url('hero-map.png')", "url('../hero-map.png')")
+        page_html = page_html.replace('src="app.js"', 'src="../app.js"')
         page_html = page_html.replace('"events.json?', '"../events.json?')
         page_html = page_html.replace("'events.json?", "'../events.json?")
         page_html = page_html.replace("fetch('events.json", "fetch('../events.json")
