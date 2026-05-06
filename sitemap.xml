@@ -16,7 +16,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://allrunrus.ru/ekaterinburg/</loc>
+    <loc>https://allrunrus.ru/krasnoyarsk/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -26,7 +26,27 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://allrunrus.ru/altajskij-kraj/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://allrunrus.ru/ekaterinburg/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://allrunrus.ru/omsk/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://allrunrus.ru/aktash/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://allrunrus.ru/pereslavl-zalesskij/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -41,7 +61,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://allrunrus.ru/aktash/</loc>
+    <loc>https://allrunrus.ru/suzdal/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
