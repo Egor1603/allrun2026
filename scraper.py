@@ -2653,10 +2653,7 @@ def generate_city_pages(events, template_path="index.html"):
         page_html = page_html.replace('href="style.css"', 'href="../style.css"')
         page_html = page_html.replace("url('hero-map.png')", "url('../hero-map.png')")
         page_html = page_html.replace('src="app.js"', 'src="../app.js"')
-        page_html = page_html.replace('"events.json?', '"../events.json?')
-        page_html = page_html.replace("'events.json?", "'../events.json?")
-        page_html = page_html.replace("fetch('events.json", "fetch('../events.json")
-        page_html = page_html.replace('fetch("events.json', 'fetch("../events.json')
+        # events.json путь определяется динамически в app.js через window.location
 
         # Хлебные крошки в hero
         breadcrumb = (
@@ -2669,10 +2666,10 @@ def generate_city_pages(events, template_path="index.html"):
             breadcrumb + '\n    <p class="hero-updated" id="nav-updated"></p>'
         )
 
-        # Предустановленный фильтр — инжектируем перед закрытием </script>
+        # Предустановленный фильтр — вставляем inline script ПЕРЕД app.js
         page_html = page_html.replace(
-            '  var allEvents   = [];',
-            f'  {preselect_js}\n  var allEvents   = [];'
+            '<script src="../app.js"></script>',
+            f'<script>{preselect_js}</script>\n<script src="../app.js"></script>'
         )
 
         # Автоприменение фильтра после загрузки данных
