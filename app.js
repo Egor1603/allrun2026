@@ -1005,9 +1005,8 @@
 
   // ── Автодополнение города ─────────────────────────────────────────────────
   // ── Загрузка events.json ───────────────────────────────────────────────────
-  // Определяем путь к events.json — работает и для / и для /city/
-  var eventsPath = (window.location.pathname.split('/').filter(Boolean).length > 0
-    ? '../' : '') + 'events.json';
+  // Всегда берём events.json от корня сайта — абсолютный путь надёжнее
+  var eventsPath = '/events.json';
   fetch(eventsPath + '?_=' + Date.now())
     .then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
