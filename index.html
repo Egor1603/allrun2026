@@ -435,7 +435,6 @@
     .city-input { min-width: 140px; width: 140px; }
     .hero { padding: 28px 16px 24px; }
   }
-</style>
 
   /* Благотворительные забеги */
   .badge-charity {
@@ -1552,14 +1551,6 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
   }
 
-  // Публичная функция для вызова из onclick по id события
-  window._icsDownload = function (id) {
-    var all = allEvents.concat(pastEvents);
-    for (var i = 0; i < all.length; i++) {
-      if (all[i].id === id) { downloadIcs(all[i]); return; }
-    }
-  };
-
   function plural(n, one, few, many) {
     var m10 = n % 10, m100 = n % 100;
     if (m10 === 1 && m100 !== 11) return one;
@@ -1574,15 +1565,9 @@
     } catch (e) { return ''; }
   }
 
-  // ── Автодополнение города ─────────────────────────────────────────────────
   // ── Загрузка events.json ───────────────────────────────────────────────────
-  // Всегда берём events.json от корня сайта — абсолютный путь надёжнее
-  var eventsPath = 'events.json';
-  // Для городских страниц (находятся в подпапке) — берём от корня
-  if (window.location.pathname.split('/').filter(Boolean).length > 0) {
-    eventsPath = '../events.json';
-  }
-  fetch(eventsPath + '?_=' + Date.now())
+  var eventsUrl = 'https://allrunrus.ru/events.json';
+  fetch(eventsUrl + '?_=' + Date.now())
     .then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
