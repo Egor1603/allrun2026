@@ -2059,6 +2059,64 @@ def scrape_nordrock():
     return events
 
 
+def scrape_legalrun():
+    """
+    legal.run — XIII Международный благотворительный забег юристов.
+    25+ городов России, апрель–июнь 2026. Все средства → фонд «Подари жизнь».
+    """
+    print("  legal.run")
+    html = fetch("https://legal.run/")
+    if not html:
+        return []
+
+    events = []
+    seen = set()
+
+    # Ищем строки вида: Город – дата, регистрация открыта
+    city_dates = re.findall(
+        r'([А-ЯЁа-яё\-]+)\s*[–—-]\s*(\d{1,2}\s+[а-яё]+(?:\s+\d{4})?)',
+        html
+    )
+
+    CITY_REGION_LR = {
+        'Москва': 'Москва',
+        'Санкт-Петербург': 'Санкт-Петербург',
+        'Калининград': 'Калининградская область',
+        'Волгоград': 'Волгоградская область',
+        'Красноярск': 'Красноярский край',
+        'Иркутск': 'Иркутская область',
+        'Казань': 'Республика Татарстан',
+        'Екатеринбург': 'Свердловская область',
+        'Новосибирск': 'Новосибирская область',
+        'Краснодар': 'Краснодарский край',
+        'Воронеж': 'Воронежская область',
+        'Нижний Новгород': 'Нижегородская область',
+        'Самара': 'Самарская область',
+        'Уфа': 'Республика Башкортостан',
+    }
+
+    for city, date_str in city_dates:
+        region = CITY_REGION_LR.get(city)
+        if not region:
+            continue
+        d = parse_date(date_str)
+        if not d or not is_future(d):
+            continue
+        key = (city, d)
+        if key in seen:
+            continue
+        seen.add(key)
+        name = f'Legal Run {city} 2026'
+        ev = make_event(d, name, city, region,
+                        '1 км, 2,5 км, 5 км', 'road',
+                        f'https://legal.run/')
+        if ev:
+            ev['charity'] = True
+            events.append(ev)
+
+    return events
+
+
 # ─── MERGE & SAVE ────────────────────────────────────────────────────────────
 
 SOURCES = [
@@ -2109,6 +2167,7 @@ SOURCES = [
     ("events.topliga.ru",        scrape_topliga_events),
     ("kavkaz.run",               scrape_kavkazrun),
     ("nordrock (Кировск)",       scrape_nordrock),
+    ("legal.run",                scrape_legalrun),
     ("vk.com (API)",             scrape_vk),
 ]
 
@@ -2435,6 +2494,7 @@ def generate_city_pages(events, template_path="index.html"):
     created = []
     for slug, label, title, desc, preselect_js, cnt in pages:
         canonical = f'https://allrunrus.ru/{slug}/'
+
         page_html = template
 
         # SEO мета-теги
@@ -2494,155 +2554,6 @@ def generate_city_pages(events, template_path="index.html"):
         print(f"    {p}")
 
     return [slug for slug, *_ in pages]
-
-
-    with open(template_path, encoding='utf-8') as f:
-        template = f.read()
-
-    future = [e for e in events if e.get('date', '') >= TODAY]
-
-    # ── Собираем топ городов (3+ событий) ────────────────────────────────────
-    from collections import Counter
-    city_counts = Counter(e['city'] for e in future if e.get('city'))
-    region_counts = Counter(e['region'] for e in future if e.get('region'))
-    type_counts = Counter(e['type'] for e in future if e.get('type'))
-
-    MACRO_REGIONS = {
-        'ural':    ('Урал',    ['Свердловская область','Челябинская область','Пермский край','Курганская область','Тюменская область']),
-        'sibir':   ('Сибирь',  ['Новосибирская область','Кемеровская область','Томская область','Омская область','Красноярский край','Иркутская область']),
-        'kavkaz':  ('Кавказ',  ['Краснодарский край','Ставропольский край','Республика Дагестан','Чеченская Республика','Кабардино-Балкария','Республика Северная Осетия','Карачаево-Черкессия','Республика Ингушетия','Республика Адыгея']),
-        'altaj':   ('Алтай',   ['Алтайский край','Республика Алтай']),
-        'dalvostok':('Дальний Восток',['Приморский край','Хабаровский край','Амурская область','Камчатский край','Республика Саха (Якутия)']),
-        'povolzhe':('Поволжье',['Республика Татарстан','Самарская область','Нижегородская область','Волгоградская область','Ульяновская область','Республика Башкортостан']),
-        'centr':   ('Центральная Россия',['Москва','Московская область','Тверская область','Ярославская область','Владимирская область','Рязанская область','Тульская область','Калужская область']),
-        'severo-zapad':('Северо-Запад',['Санкт-Петербург','Ленинградская область','Мурманская область','Республика Карелия','Архангельская область','Псковская область','Новгородская область']),
-    }
-
-    TYPE_PAGES = {
-        'trail': ('Трейлы России', 'trail', 'trail', 'трейл'),
-        'road':  ('Шоссейные забеги России', 'road', 'road', 'шоссе'),
-        'night': ('Ночные забеги России', 'night', 'night', 'ночные'),
-    }
-
-    pages = []  # (slug, title, desc, preselect_js, events_count)
-
-    # Города с 3+ событиями
-    for city, cnt in city_counts.most_common(30):
-        if cnt < 3:
-            continue
-        slug = slugify(city)
-        # Регион города
-        region = next((e['region'] for e in future if e.get('city') == city and e.get('region')), '')
-        title = f'Забеги {city} 2026 — {cnt} событий | Беговой календарь России'
-        desc = f'Все забеги, марафоны и трейлы в {city}' + (f' и {region}' if region else '') + f' в 2026 году. {cnt} событий, официальные источники, автообновление.'
-        preselect = f"var PRESELECT_CITY = '{city}';"
-        canonical = f'https://allrunrus.ru/{slug}/'
-        pages.append((slug, city, title, desc, preselect, canonical, cnt))
-
-    # Макрорегионы
-    for macro_slug, (macro_name, macro_regions) in MACRO_REGIONS.items():
-        cnt = sum(1 for e in future if e.get('region') in macro_regions)
-        if cnt < 2:
-            continue
-        title = f'Забеги {macro_name} 2026 — {cnt} событий | Беговой календарь России'
-        desc = f'Все забеги, марафоны и трейлы в регионах {macro_name} в 2026 году. {cnt} событий.'
-        preselect = f"var PRESELECT_CITY = '{macro_name}';"
-        canonical = f'https://allrunrus.ru/{macro_slug}/'
-        pages.append((macro_slug, macro_name, title, desc, preselect, canonical, cnt))
-
-    # Типы
-    for type_slug, (type_label, type_val, type_btn, type_name) in TYPE_PAGES.items():
-        cnt = type_counts.get(type_val, 0)
-        if cnt < 2:
-            continue
-        title = f'{type_label} 2026 — {cnt} событий | Беговой календарь России'
-        desc = f'Полный календарь {type_name} 2026 года по всей России. {cnt} событий, официальные источники.'
-        preselect = f"var PRESELECT_TYPE = '{type_val}';"
-        canonical = f'https://allrunrus.ru/{type_slug}/'
-        pages.append((type_slug, type_label, title, desc, preselect, canonical, cnt))
-
-    # ── Генерируем страницы ───────────────────────────────────────────────────
-    created = []
-    for slug, label, title, desc, preselect_js, canonical, cnt in pages:
-        page_html = template
-
-        # Мета-теги
-        page_html = page_html.replace(
-            '<title>Беговой календарь России 2026 — забеги, марафоны, трейлы</title>',
-            f'<title>{title}</title>'
-        )
-        page_html = re.sub(
-            r'<meta name="description" content="[^"]*">',
-            f'<meta name="description" content="{desc}">',
-            page_html
-        )
-        page_html = page_html.replace(
-            '<link rel="canonical" href="https://allrunrus.ru/">',
-            f'<link rel="canonical" href="{canonical}">'
-        )
-        page_html = page_html.replace(
-            '<meta property="og:url" content="https://allrunrus.ru/">',
-            f'<meta property="og:url" content="{canonical}">'
-        )
-        page_html = page_html.replace(
-            '<meta property="og:title" content="Беговой календарь России 2026">',
-            f'<meta property="og:title" content="{title}">'
-        )
-
-        # Относительные пути → абсолютные (страница глубже на 1 уровень)
-        page_html = page_html.replace("href='favicon.svg'", "href='../favicon.svg'")
-        page_html = page_html.replace('href="favicon.svg"', 'href="../favicon.svg"')
-        page_html = page_html.replace("url('hero-map.png')", "url('../hero-map.png')")
-        # events.json путь определяется динамически в app.js через window.location
-
-        # Хлебные крошки в hero
-        breadcrumb = (
-            f'<p style="font-size:12px;opacity:.7;margin-top:6px;">'
-            f'<a href="../" style="color:inherit;opacity:.8;">← Все события</a>'
-            f'&nbsp;·&nbsp;{label}&nbsp;({cnt})</p>'
-        )
-        page_html = page_html.replace(
-            '<p class="hero-updated" id="nav-updated"></p>',
-            breadcrumb + '\n    <p class="hero-updated" id="nav-updated"></p>'
-        )
-
-        # Предустановленный фильтр — вставляем перед var allEvents
-        page_html = page_html.replace(
-            '  var allEvents   = [];',
-            f'  {preselect_js}\n  var allEvents   = [];'
-        )
-
-        # Автоприменение фильтра после загрузки данных
-        page_html = page_html.replace(
-            '      buildGeoIndex(all);\n      buildCityFilter(all);\n      initCitySearch();\n      applyFilters();',
-            '      buildGeoIndex(all);\n      buildCityFilter(all);\n      initCitySearch();\n'
-            '      if (typeof PRESELECT_CITY !== "undefined" && PRESELECT_CITY) {\n'
-            '        var inp = document.getElementById("city-input");\n'
-            '        if (inp) { inp.value = PRESELECT_CITY; selectedCityQuery = PRESELECT_CITY; }\n'
-            '        var btn = document.getElementById("city-clear");\n'
-            '        if (btn) btn.style.display = "block";\n'
-            '      }\n'
-            '      if (typeof PRESELECT_TYPE !== "undefined" && PRESELECT_TYPE) {\n'
-            '        setType(PRESELECT_TYPE);\n'
-            '      } else {\n'
-            '        applyFilters();\n'
-            '      }'
-        )
-
-        # Сохраняем
-        dir_path = slug
-        os.makedirs(dir_path, exist_ok=True)
-        out_path = os.path.join(dir_path, 'index.html')
-        with open(out_path, 'w', encoding='utf-8') as f:
-            f.write(page_html)
-        created.append(f'/{slug}/ ({cnt} событий)')
-
-    print(f"\n  Сгенерировано {len(created)} страниц городов/регионов:")
-    for p in created:
-        print(f"    {p}")
-
-    return [slug for slug, *_ in pages]
-
 
 def generate_sitemap(city_slugs):
     """Генерирует sitemap.xml с главной страницей и всеми городскими."""
