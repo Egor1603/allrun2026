@@ -1,7 +1,6 @@
 /* Беговой календарь России — allrunrus.ru */
 /* Редактируй этот файл чтобы изменить логику на всех страницах сразу */
 
-<script>
 (function () {
   'use strict';
 
@@ -1006,7 +1005,10 @@
 
   // ── Автодополнение города ─────────────────────────────────────────────────
   // ── Загрузка events.json ───────────────────────────────────────────────────
-  fetch('events.json?_=' + Date.now())
+  // Определяем путь к events.json — работает и для / и для /city/
+  var eventsPath = (window.location.pathname.split('/').filter(Boolean).length > 0
+    ? '../' : '') + 'events.json';
+  fetch(eventsPath + '?_=' + Date.now())
     .then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
@@ -1030,7 +1032,22 @@
       }
       // Список городов строим по всем событиям (включая прошедшие)
       buildGeoIndex(all);
-      applyFilters();
+      buildCityFilter(all);
+      initCitySearch();
+
+      // Предустановленный фильтр для городских страниц
+      if (typeof PRESELECT_CITY !== 'undefined' && PRESELECT_CITY) {
+        var inp = document.getElementById('city-input');
+        if (inp) inp.value = PRESELECT_CITY;
+        selectedCityQuery = PRESELECT_CITY;
+        var btn = document.getElementById('city-clear');
+        if (btn) btn.style.display = 'block';
+      }
+      if (typeof PRESELECT_TYPE !== 'undefined' && PRESELECT_TYPE) {
+        setType(PRESELECT_TYPE);
+      } else {
+        applyFilters();
+      }
     })
     .catch(function (err) {
       console.error('Ошибка загрузки events.json:', err);
@@ -1042,4 +1059,3 @@
     });
 
 }());
-</script>
