@@ -1,0 +1,1045 @@
+/* Беговой календарь России — allrunrus.ru */
+/* Редактируй этот файл чтобы изменить логику на всех страницах сразу */
+
+<script>
+(function () {
+  'use strict';
+
+  // ── Состояние ──────────────────────────────────────────────────────────────
+  var allEvents   = [];
+  var pastEvents  = [];
+  var currentType = 'all';
+  var TODAY = new Date().toISOString().slice(0, 10);
+
+  // norm нужна раньше всех остальных функций
+  function norm(s) {
+    return String(s || '').toLowerCase()
+      .replace(/ё/g,'е')
+      .replace(/[«»""''.,!?():;\-–—\/\\]/g,' ')
+      .replace(/\s+/g,' ').trim();
+  }
+
+  // Возвращает текущий выбранный запрос города
+  function getCityQuery() {
+    return selectedCityQuery || '';
+  }
+  // ── Дропдаун выбора города/региона ───────────────────────────────────────
+  var selectedCityQuery = '';  // то что реально применяется к фильтру
+  var cityKbdIdx = -1;
+
+  function closeCityDropdown() {
+    var dd = document.getElementById('city-dropdown');
+    if (dd) dd.classList.remove('open');
+    cityKbdIdx = -1;
+  }
+
+  function buildCityDropdown(query) {
+    var dd = document.getElementById('city-dropdown');
+    if (!dd) return;
+    if (!query || query.length < 1) { closeCityDropdown(); return; }
+
+    var nq = normKey(query);
+    var opts = [];
+    var seen = {};
+
+    // Считаем события по регионам и макрорегионам
+    function countRegion(region) {
+      return allEvents.filter(function(e) { return e.region === region; }).length;
+    }
+    function countMacro(macro) {
+      if (!MACRO_MAP[macro]) return 0;
+      return allEvents.filter(function(e) { return MACRO_MAP[macro].indexOf(e.region) !== -1; }).length;
+    }
+    function countCity(nk) {
+      return allEvents.filter(function(e) { return normKey(e.city || '') === nk; }).length;
+    }
+
+    // Восстанавливаем оригинальное название города из CITY_REGION и событий
+    function getOrigCity(nk) {
+      var orig = null;
+      Object.keys(CITY_REGION).forEach(function(c) { if (normKey(c) === nk) orig = c; });
+      if (!orig) allEvents.concat(pastEvents).forEach(function(e) {
+        if (normKey(e.city || '') === nk) orig = e.city;
+      });
+      return orig || query;
+    }
+
+    // 1. Прямое совпадение города → сразу строим иерархию макро→регион→город
+    var exactCityRegion = cityToRegion[nq];
+    if (exactCityRegion) {
+      var macro = regionToMacro[exactCityRegion];
+
+      // Макрорегион (первым — самый широкий охват)
+      if (macro && !seen[macro]) {
+        var mc = countMacro(macro);
+        if (mc > 0) {
+          opts.push({ type:'macro', query:macro, label:macro,
+            sub:'весь ' + macro, count:mc, icon:'🌐' });
+          seen[macro] = true;
+        }
+      }
+
+      // Регион
+      if (!seen[exactCityRegion]) {
+        var rc = countRegion(exactCityRegion);
+        if (rc > 0) {
+          opts.push({ type:'region', query:exactCityRegion, label:exactCityRegion,
+            sub:'весь регион', count:rc, icon:'🗺' });
+          seen[exactCityRegion] = true;
+        }
+      }
+
+      // Город (последним — самый узкий)
+      var origCity = getOrigCity(nq);
+      var cc = countCity(nq);
+      if (cc > 0 && !seen['city:'+nq]) {
+        opts.push({ type:'city', query:origCity, label:origCity,
+          sub:exactCityRegion, count:cc, icon:'📍' });
+        seen['city:'+nq] = true;
+      }
+    }
+
+    // 2. Частичные совпадения городов
+    if (opts.length === 0) {
+      Object.keys(cityToRegion).filter(function(k) {
+        return k.indexOf(nq) !== -1 && k !== nq;
+      }).slice(0, 4).forEach(function(k) {
+        var reg = cityToRegion[k];
+        var mac = regionToMacro[reg];
+        var origCity = getOrigCity(k);
+        var cc = countCity(k);
+        if (cc > 0 && !seen['city:'+k]) {
+          opts.push({ type:'city', query:origCity, label:origCity,
+            sub:reg, count:cc, icon:'📍' });
+          seen['city:'+k] = true;
+        }
+        if (mac && !seen[mac]) {
+          var mc = countMacro(mac);
+          if (mc > 0) {
+            opts.push({ type:'macro', query:mac, label:mac,
+              sub:'весь ' + mac, count:mc, icon:'🌐' });
+            seen[mac] = true;
+          }
+        }
+      });
+    }
+
+    // 3. Совпадения регионов по тексту
+    Object.keys(allRegions).forEach(function(k) {
+      if (k.indexOf(nq) === -1) return;
+      var regionOrig = allRegions[k];
+      if (seen[regionOrig]) return;
+      var rc = countRegion(regionOrig);
+      if (rc === 0) return;
+      var mac = regionToMacro[regionOrig];
+      if (mac && !seen[mac]) {
+        var mc = countMacro(mac);
+        if (mc > 0) {
+          opts.push({ type:'macro', query:mac, label:mac,
+            sub:'весь ' + mac, count:mc, icon:'🌐' });
+          seen[mac] = true;
+        }
+      }
+      opts.push({ type:'region', query:regionOrig, label:regionOrig,
+        sub:'', count:rc, icon:'🗺' });
+      seen[regionOrig] = true;
+    });
+
+    // 4. Совпадения макрорегионов по тексту
+    Object.keys(allMacros).forEach(function(k) {
+      if (k.indexOf(nq) === -1) return;
+      var macroOrig = allMacros[k];
+      if (seen[macroOrig]) return;
+      var mc = countMacro(macroOrig);
+      if (mc > 0) {
+        opts.push({ type:'macro', query:macroOrig, label:macroOrig,
+          sub:'несколько регионов', count:mc, icon:'🌐' });
+        seen[macroOrig] = true;
+      }
+    });
+
+    if (!opts.length) { closeCityDropdown(); return; }
+
+    // Рендерим
+    var html = '';
+    var lastType = '';
+    opts.forEach(function(opt, i) {
+      if (lastType && lastType !== opt.type) html += '<div class="city-dropdown-sep"></div>';
+      lastType = opt.type;
+      // Безопасная подсветка совпадения
+      var safeQuery = query.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&');
+      var nameHtml = esc(opt.label).replace(
+        new RegExp('(' + safeQuery + ')', 'i'), '<mark>$1</mark>'
+      );
+      html += '<div class="city-opt" data-q="' + esc(opt.query) + '" data-type="' + opt.type + '" data-idx="' + i + '">'
+        + '<span class="city-opt-icon">' + opt.icon + '</span>'
+        + '<span class="city-opt-name">' + nameHtml + '</span>'
+        + (opt.sub ? '<span class="city-opt-sub">' + esc(opt.sub) + '</span>' : '')
+        + '<span class="city-opt-count">' + opt.count + '</span>'
+        + '</div>';
+    });
+    dd.innerHTML = html;
+    dd.classList.add('open');
+
+    dd.querySelectorAll('.city-opt').forEach(function(el) {
+      el.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        applyCitySelection(el.getAttribute('data-q'));
+      });
+    });
+  }
+
+  function applyCitySelection(q) {
+    selectedCityQuery = q;
+    var inp = document.getElementById('city-input');
+    var btn = document.getElementById('city-clear');
+    if (inp) inp.value = q;
+    if (btn) btn.style.display = q ? 'block' : 'none';
+    closeCityDropdown();
+    applyFilters();
+  }
+
+  window.onCityInput = function() {
+    var inp = document.getElementById('city-input');
+    var btn = document.getElementById('city-clear');
+    var val = inp ? inp.value.trim() : '';
+    if (btn) btn.style.display = val ? 'block' : 'none';
+    // При вводе сбрасываем выбранное — покажем всё пока не выберут
+    selectedCityQuery = val;
+    buildCityDropdown(val);
+    applyFilters();
+  };
+
+  window.clearCity = function() {
+    var inp = document.getElementById('city-input');
+    var btn = document.getElementById('city-clear');
+    selectedCityQuery = '';
+    if (inp) { inp.value = ''; inp.focus(); }
+    if (btn) btn.style.display = 'none';
+    closeCityDropdown();
+    applyFilters();
+  };
+
+  // Клавиатурная навигация
+  document.addEventListener('keydown', function(e) {
+    var dd = document.getElementById('city-dropdown');
+    if (!dd || !dd.classList.contains('open')) return;
+    var opts = dd.querySelectorAll('.city-opt');
+    if (!opts.length) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      cityKbdIdx = Math.min(cityKbdIdx + 1, opts.length - 1);
+      opts.forEach(function(o, i) { o.classList.toggle('kbd-active', i === cityKbdIdx); });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      cityKbdIdx = Math.max(cityKbdIdx - 1, 0);
+      opts.forEach(function(o, i) { o.classList.toggle('kbd-active', i === cityKbdIdx); });
+    } else if (e.key === 'Enter' && cityKbdIdx >= 0) {
+      e.preventDefault();
+      applyCitySelection(opts[cityKbdIdx].getAttribute('data-q'));
+    } else if (e.key === 'Escape') {
+      closeCityDropdown();
+    }
+  });
+
+  // Закрываем при клике вне
+  document.addEventListener('click', function(e) {
+    var wrap = document.getElementById('city-wrap');
+    if (wrap && !wrap.contains(e.target)) closeCityDropdown();
+  });
+
+  // ── Константы ──────────────────────────────────────────────────────────────
+  var MONTHS = {
+    '01':'Январь','02':'Февраль','03':'Март','04':'Апрель',
+    '05':'Май','06':'Июнь','07':'Июль','08':'Август',
+    '09':'Сентябрь','10':'Октябрь','11':'Ноябрь','12':'Декабрь'
+  };
+  var MONTHS_SHORT = {
+    '01':'янв','02':'фев','03':'мар','04':'апр',
+    '05':'май','06':'июн','07':'июл','08':'авг',
+    '09':'сен','10':'окт','11':'ноя','12':'дек'
+  };
+  var TYPE_CLASSES = { all:'is-all', road:'is-road', trail:'is-trail', night:'is-night', past:'is-past' };
+  var BADGE_LABELS = { road:'шоссе', trail:'трейл', night:'ночной' };
+
+  // ── Фильтрация по типу ─────────────────────────────────────────────────────
+  window.setType = function (type) {
+    currentType = type;
+    ['all','road','trail','night','past'].forEach(function (t) {
+      var btn = document.getElementById('btn-' + t);
+      if (!btn) return;
+      btn.className = 'type-btn' + (t === type ? ' ' + TYPE_CLASSES[type] : '');
+    });
+    applyFilters();
+  };
+
+  // ── Поиск: трёхуровневая иерархия ─────────────────────────────────────────
+  //
+  //  Макрорегион (Сибирь, Урал...)
+  //    └── Регион (Свердловская область, Алтайский край...)
+  //          └── Город (Екатеринбург, Пушкин, Бирюзовая Катунь...)
+  //
+  //  Логика:
+  //  • Ввёл город      → показываем все события его региона; акцент на точном городе
+  //  • Ввёл регион     → показываем все события региона + смежные (из того же макрорегиона)
+  //  • Ввёл макрорегион→ показываем все регионы внутри него
+  //
+  //  cityToRegion строится автоматически из events.json (город → регион)
+  //  MACRO_MAP — ручная таблица макрорегионов
+
+  var cityToRegion = {};   // нормKey(город) → регион
+  var regionToMacro = {};  // регион → макрорегион
+  var allRegions    = {};  // нормKey(регион) → оригинал
+  var allMacros     = {};  // нормKey(макро) → оригинал
+
+  // Макрорегионы → списки регионов
+  var MACRO_MAP = {
+    'Урал': [
+      'Свердловская область','Челябинская область','Пермский край',
+      'Курганская область','Тюменская область','Ханты-Мансийский АО','Ямало-Ненецкий АО'
+    ],
+    'Москва и область': [
+      'Москва','Московская область'
+    ],
+    'Санкт-Петербург и область': [
+      'Санкт-Петербург','Ленинградская область'
+    ],
+    'Сибирь': [
+      'Новосибирская область','Кемеровская область','Томская область',
+      'Омская область','Красноярский край','Иркутская область',
+      'Республика Хакасия','Республика Тыва','Забайкальский край'
+    ],
+    'Алтай': [
+      'Алтайский край','Республика Алтай'
+    ],
+    'Дальний Восток': [
+      'Приморский край','Хабаровский край','Амурская область',
+      'Сахалинская область','Камчатский край','Магаданская область',
+      'Республика Саха (Якутия)','Еврейская АО','Чукотский АО'
+    ],
+    'Кавказ': [
+      'Краснодарский край','Ставропольский край','Республика Дагестан',
+      'Чеченская Республика','Кабардино-Балкария','Республика Северная Осетия',
+      'Карачаево-Черкессия','Республика Ингушетия','Республика Адыгея'
+    ],
+    'Поволжье': [
+      'Республика Татарстан','Самарская область','Нижегородская область',
+      'Волгоградская область','Саратовская область','Ульяновская область',
+      'Пензенская область','Оренбургская область','Республика Башкортостан',
+      'Республика Марий Эл','Чувашская Республика','Республика Мордовия',
+      'Удмуртская Республика','Республика Калмыкия','Астраханская область'
+    ],
+    'Центр': [
+      'Москва','Московская область','Тверская область','Ярославская область',
+      'Костромская область','Ивановская область','Владимирская область',
+      'Рязанская область','Тульская область','Калужская область',
+      'Смоленская область','Брянская область','Орловская область',
+      'Курская область','Белгородская область','Воронежская область',
+      'Липецкая область','Тамбовская область'
+    ],
+    'Север и Северо-Запад': [
+      'Санкт-Петербург','Ленинградская область','Мурманская область',
+      'Архангельская область','Республика Карелия','Республика Коми',
+      'Вологодская область','Новгородская область','Псковская область',
+      'Калининградская область'
+    ],
+  };
+
+  // Строим обратный индекс: регион → макрорегион
+  Object.keys(MACRO_MAP).forEach(function (macro) {
+    MACRO_MAP[macro].forEach(function (region) {
+      regionToMacro[region] = macro;
+    });
+  });
+
+  // Статичная таблица: город → регион (для городов которых может не быть в базе)
+  var CITY_REGION = {
+    // Центральная Россия
+    'Москва':'Москва','Зеленоград':'Москва','Троицк':'Москва',
+    'Мытищи':'Московская область','Подольск':'Московская область',
+    'Химки':'Московская область','Балашиха':'Московская область',
+    'Королёв':'Московская область','Одинцово':'Московская область',
+    'Серпухов':'Московская область','Коломна':'Московская область',
+    'Сергиев Посад':'Московская область','Красногорск':'Московская область',
+    'Дмитров':'Московская область','Люберцы':'Московская область',
+    'Электросталь':'Московская область','Домодедово':'Московская область',
+    'Щёлково':'Московская область','Солнечногорск':'Московская область',
+    'Раменское':'Московская область','Ступино':'Московская область',
+    'Клин':'Московская область','Ногинск':'Московская область',
+    'Тверь':'Тверская область','Ржев':'Тверская область',
+    'Ярославль':'Ярославская область','Рыбинск':'Ярославская область',
+    'Переславль-Залесский':'Ярославская область',
+    'Кострома':'Костромская область','Галич':'Костромская область',
+    'Иваново':'Ивановская область','Кинешма':'Ивановская область',
+    'Владимир':'Владимирская область','Муром':'Владимирская область',
+    'Суздаль':'Владимирская область','Ковров':'Владимирская область',
+    'Рязань':'Рязанская область','Коломна':'Московская область',
+    'Тула':'Тульская область','Новомосковск':'Тульская область',
+    'Калуга':'Калужская область','Обнинск':'Калужская область',
+    'Смоленск':'Смоленская область',
+    'Брянск':'Брянская область',
+    'Орёл':'Орловская область',
+    'Курск':'Курская область',
+    'Белгород':'Белгородская область','Старый Оскол':'Белгородская область',
+    'Воронеж':'Воронежская область',
+    'Липецк':'Липецкая область',
+    'Тамбов':'Тамбовская область',
+    // Северо-Запад
+    'Санкт-Петербург':'Санкт-Петербург','Пушкин':'Санкт-Петербург',
+    'Петергоф':'Санкт-Петербург','Колпино':'Санкт-Петербург',
+    'Кронштадт':'Санкт-Петербург','Сестрорецк':'Санкт-Петербург',
+    'Выборг':'Ленинградская область','Гатчина':'Ленинградская область',
+    'Тихвин':'Ленинградская область','Кириши':'Ленинградская область',
+    'Коробицыно':'Ленинградская область','Всеволожск':'Ленинградская область',
+    'Мурманск':'Мурманская область','Апатиты':'Мурманская область',
+    'Архангельск':'Архангельская область','Северодвинск':'Архангельская область',
+    'Петрозаводск':'Республика Карелия','Сортавала':'Республика Карелия',
+    'Гимолы':'Республика Карелия',
+    'Сыктывкар':'Республика Коми','Воркута':'Республика Коми',
+    'Вологда':'Вологодская область','Череповец':'Вологодская область',
+    'Великий Новгород':'Новгородская область',
+    'Псков':'Псковская область','Пустошка':'Псковская область','Изборск':'Псковская область',
+    'Калининград':'Калининградская область',
+    // Поволжье и Приуралье
+    'Казань':'Республика Татарстан','Набережные Челны':'Республика Татарстан',
+    'Нижний Новгород':'Нижегородская область','Дзержинск':'Нижегородская область',
+    'Самара':'Самарская область','Тольятти':'Самарская область',
+    'Саратов':'Саратовская область','Энгельс':'Саратовская область',
+    'Хвалынск':'Саратовская область','Белогорское':'Саратовская область',
+    'Волгоград':'Волгоградская область','Волжский':'Волгоградская область',
+    'Ульяновск':'Ульяновская область',
+    'Пенза':'Пензенская область',
+    'Оренбург':'Оренбургская область',
+    'Уфа':'Республика Башкортостан','Стерлитамак':'Республика Башкортостан',
+    'Белорецк':'Республика Башкортостан','Абзаково':'Республика Башкортостан',
+    'Кумертау':'Республика Башкортостан',
+    'Чебоксары':'Чувашская Республика',
+    'Йошкар-Ола':'Республика Марий Эл',
+    'Саранск':'Республика Мордовия',
+    'Ижевск':'Удмуртская Республика',
+    'Астрахань':'Астраханская область','Баскунчак':'Астраханская область',
+    'Элиста':'Республика Калмыкия',
+    // Урал
+    'Екатеринбург':'Свердловская область','Нижний Тагил':'Свердловская область',
+    'Первоуральск':'Свердловская область','Каменск-Уральский':'Свердловская область',
+    'Краснотурьинск':'Свердловская область','Дегтярск':'Свердловская область',
+    'Бисерть':'Свердловская область','Красноуфимск':'Свердловская область',
+    'Серов':'Свердловская область',
+    'Челябинск':'Челябинская область','Магнитогорск':'Челябинская область',
+    'Миасс':'Челябинская область','Копейск':'Челябинская область',
+    'Кисегач':'Челябинская область','Карабаш':'Челябинская область',
+    'Пермь':'Пермский край','Березники':'Пермский край',
+    'Курган':'Курганская область',
+    'Тюмень':'Тюменская область','Тобольск':'Тюменская область',
+    'Сургут':'Ханты-Мансийский АО','Нижневартовск':'Ханты-Мансийский АО',
+    'Ноябрьск':'Ямало-Ненецкий АО','Новый Уренгой':'Ямало-Ненецкий АО',
+    // Сибирь
+    'Новосибирск':'Новосибирская область',
+    'Омск':'Омская область',
+    'Томск':'Томская область',
+    'Красноярск':'Красноярский край','Норильск':'Красноярский край',
+    'Канск':'Красноярский край',
+    'Кемерово':'Кемеровская область','Новокузнецк':'Кемеровская область',
+    'Шерегеш':'Кемеровская область',
+    'Иркутск':'Иркутская область','Ангарск':'Иркутская область',
+    'Братск':'Иркутская область',
+    'Чита':'Забайкальский край','Чара':'Забайкальский край',
+    'Абакан':'Республика Хакасия',
+    'Кызыл':'Республика Тыва',
+    // Алтай
+    'Барнаул':'Алтайский край','Бийск':'Алтайский край',
+    'Бирюзовая Катунь':'Алтайский край','Белокуриха':'Алтайский край',
+    'Горно-Алтайск':'Республика Алтай','Манжерок':'Республика Алтай',
+    'Акташ':'Республика Алтай','Горный Алтай':'Республика Алтай',
+    // Дальний Восток
+    'Владивосток':'Приморский край','Находка':'Приморский край',
+    'Хабаровск':'Хабаровский край','Комсомольск-на-Амуре':'Хабаровский край',
+    'Благовещенск':'Амурская область',
+    'Южно-Сахалинск':'Сахалинская область',
+    'Петропавловск-Камчатский':'Камчатский край',
+    'Магадан':'Магаданская область',
+    'Якутск':'Республика Саха (Якутия)',
+    // Кавказ и Юг
+    'Краснодар':'Краснодарский край','Сочи':'Краснодарский край',
+    'Геленджик':'Краснодарский край','Новороссийск':'Краснодарский край',
+    'Красная Поляна':'Краснодарский край','Армавир':'Краснодарский край',
+    'Ставрополь':'Ставропольский край','Пятигорск':'Ставропольский край',
+    'Кисловодск':'Ставропольский край','Ессентуки':'Ставропольский край',
+    'Невинномысск':'Ставропольский край',
+    'Ростов-на-Дону':'Ростовская область','Таганрог':'Ростовская область',
+    'Белая Калитва':'Ростовская область',
+    'Махачкала':'Республика Дагестан','Дербент':'Республика Дагестан',
+    'Грозный':'Чеченская Республика',
+    'Нальчик':'Кабардино-Балкария','Эльбрус':'Кабардино-Балкария',
+    'Владикавказ':'Республика Северная Осетия',
+    'Армхи':'Республика Ингушетия',
+    'Черкесск':'Карачаево-Черкессия','Архыз':'Карачаево-Черкессия',
+    'Сириус':'Краснодарский край',
+    // Прочее
+    'Никола-Ленивец':'Калужская область',
+    'Выползово':'Рязанская область',
+  };
+
+  // Нормализация ключа для сравнения (нижний регистр + ё→е, без удаления дефисов)
+  function normKey(s) {
+    return String(s || '').toLowerCase().replace(/ё/g, 'е').trim();
+  }
+
+  // Строим индексы из событий + статичной таблицы с нормализованными ключами
+  function buildGeoIndex(events) {
+    // Статичная таблица
+    Object.keys(CITY_REGION).forEach(function (city) {
+      cityToRegion[normKey(city)] = CITY_REGION[city];
+    });
+    // Данные из событий
+    events.forEach(function (e) {
+      if (e.city && e.region) cityToRegion[normKey(e.city)] = e.region;
+      if (e.region) allRegions[normKey(e.region)] = e.region;
+    });
+    // Макрорегионы
+    Object.keys(MACRO_MAP).forEach(function (macro) {
+      allMacros[normKey(macro)] = macro;
+    });
+  }
+
+  // Что ввёл пользователь? city / region / macro / unknown
+  function classifyQuery(q) {
+    if (!q) return { type: 'none' };
+    var nq = normKey(q);
+
+    // Макрорегион?
+    var macroOrig = allMacros[nq];
+    if (macroOrig) return { type: 'macro', macro: macroOrig, regions: MACRO_MAP[macroOrig] };
+
+    // Город?
+    var cityRegion = cityToRegion[nq];
+    if (cityRegion) {
+      return { type: 'city', city: q, region: cityRegion, macro: regionToMacro[cityRegion] };
+    }
+
+    // Регион?
+    var regionOrig = allRegions[nq];
+    if (regionOrig) {
+      return { type: 'region', region: regionOrig, macro: regionToMacro[regionOrig] };
+    }
+
+    // Частичное совпадение — ищем города начинающиеся с введённого текста
+    if (nq.length >= 3) {
+      var keys = Object.keys(cityToRegion);
+      for (var i = 0; i < keys.length; i++) {
+        if (keys[i].indexOf(nq) === 0) { // начинается с запроса
+          var pr = cityToRegion[keys[i]];
+          return { type: 'city', city: q, region: pr, macro: regionToMacro[pr] };
+        }
+      }
+    }
+
+    return { type: 'exact', city: q };
+  }
+
+  // Проверяет, попадает ли событие в запрос (true/false)
+  function cityMatch(ev, query) {
+    if (!query) return true;
+    var q = classifyQuery(query);
+    if (q.type === 'none')   return true;
+    if (q.type === 'exact')  return normKey(ev.city || '') === normKey(q.city);
+    if (q.type === 'macro')  return q.regions.indexOf(ev.region) !== -1;
+    if (q.type === 'region') return ev.region === q.region;
+    if (q.type === 'city') {
+      // Город → показываем весь макрорегион если он есть, иначе регион
+      if (q.macro && MACRO_MAP[q.macro]) {
+        return MACRO_MAP[q.macro].indexOf(ev.region) !== -1;
+      }
+      return ev.region === q.region;
+    }
+    return false;
+  }
+
+  // Уровень акцента: 2 = точный город, 1 = регион города, 0 = другой регион макро
+  function accentLevel(ev, query) {
+    if (!query) return 0;
+    var q = classifyQuery(query);
+    if (q.type === 'none' || q.type === 'exact') return 0;
+    if (q.type === 'city') {
+      if (normKey(ev.city || '') === normKey(q.city)) return 2; // точный город
+      if (ev.region === q.region) return 1;                     // регион города
+      return 0;                                                  // другой регион макро
+    }
+    if (q.type === 'region') {
+      if (ev.region === q.region) return 2;
+    }
+    if (q.type === 'macro') {
+      if (q.regions.indexOf(ev.region) !== -1) return 1;
+    }
+    return 0;
+  }
+
+  // ── Нечёткий поиск по событиям ───────────────────────────────────────────
+
+  // Кириллица → латиница
+  var CYR_LAT = {
+    'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'e','ж':'zh',
+    'з':'z','и':'i','й':'j','к':'k','л':'l','м':'m','н':'n','о':'o',
+    'п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'h','ц':'ts',
+    'ч':'ch','ш':'sh','щ':'sch','ъ':'','ы':'y','ь':'','э':'e','ю':'yu','я':'ya'
+  };
+
+  // Словарь: беговые слова кир↔лат
+  var WORD_MAP = {
+    'трейл':'trail','найт':'night','лазер':'laser','ран':'run','бег':'run',
+    'ранинг':'running','марафон':'marathon','ультра':'ultra',
+    'фест':'fest','сити':'city','пик':'peak','вайлд':'wild',
+    'голден':'golden','ринг':'ring','мэд':'mad','фокс':'fox',
+    'овл':'owl','кросс':'cross','вайт':'white','брайд':'bride',
+    'сахара':'sahara',
+    'trail':'трейл','night':'найт','laser':'лазер','run':'ран','run':'бег',
+    'running':'ранинг','marathon':'марафон','ultra':'ультра',
+    'fest':'фест','city':'сити','peak':'пик','wild':'вайлд',
+    'golden':'голден','ring':'ринг','mad':'мэд','fox':'фокс',
+    'owl':'овл','cross':'кросс','white':'вайт','bride':'брайд',
+    'sahara':'сахара',
+  };
+
+  function cyrToLat(s) {
+    return s.split('').map(function(c){ return CYR_LAT[c] !== undefined ? CYR_LAT[c] : c; }).join('');
+  }
+
+  function latToCyr(s) {
+    return s
+      .replace(/sch/g,'щ').replace(/zh/g,'ж').replace(/ts/g,'ц')
+      .replace(/ch/g,'ч').replace(/sh/g,'ш').replace(/yu/g,'ю')
+      .replace(/ya/g,'я').replace(/yo/g,'е')
+      .split('').map(function(c){
+        var m = {'a':'а','b':'б','v':'в','g':'г','d':'д','e':'е','z':'з',
+                 'i':'и','j':'й','k':'к','l':'л','m':'м','n':'н','o':'о',
+                 'p':'п','r':'р','s':'с','t':'т','u':'у','f':'ф','h':'х','y':'й'};
+        return m[c] !== undefined ? m[c] : c;
+      }).join('');
+  }
+
+  function normFull(s) {
+    var n = norm(s);
+    var lat = cyrToLat(n);
+    var cyr = latToCyr(n);
+    var result = n;
+    if (lat !== n)            result += ' ' + lat;
+    if (cyr !== n && cyr !== lat) result += ' ' + cyr;
+    return result;
+  }
+
+  function lev(a, b) {
+    if (a === b) return 0;
+    if (!a.length) return b.length;
+    if (!b.length) return a.length;
+    var prev = [];
+    for (var k = 0; k <= b.length; k++) prev[k] = k;
+    for (var i = 1; i <= a.length; i++) {
+      var curr = [i];
+      for (var j = 1; j <= b.length; j++) {
+        curr[j] = a[i-1] === b[j-1]
+          ? prev[j-1]
+          : 1 + Math.min(prev[j-1], prev[j], curr[j-1]);
+      }
+      prev = curr;
+    }
+    return prev[b.length];
+  }
+
+  function wordMatches(qWord, text) {
+    if (text.indexOf(qWord) !== -1) return true;
+    if (qWord.length <= 3) return false;
+    var maxErr = qWord.length >= 6 ? 2 : 1;
+    var words = text.split(' ');
+    for (var i = 0; i < words.length; i++) {
+      var w = words[i];
+      if (Math.abs(w.length - qWord.length) > maxErr + 1) continue;
+      if (lev(qWord, w) <= maxErr) return true;
+      if (w.length >= qWord.length && w.slice(0, qWord.length) === qWord) return true;
+    }
+    return false;
+  }
+
+  function eventMatchesSearch(ev, query) {
+    if (!query) return true;
+    var q = norm(query);
+    if (!q) return true;
+    var haystack = normFull(ev.name) + ' ' + normFull(ev.city) + ' '
+                 + normFull(ev.region || '') + ' ' + normFull(ev.distances || '');
+    var qWords = q.split(' ').filter(function(w){ return w.length > 0; });
+    for (var i = 0; i < qWords.length; i++) {
+      var w = qWords[i];
+      // Варианты слова: оригинал + транслит + словарь
+      var variants = [w, cyrToLat(w), latToCyr(w)];
+      if (WORD_MAP[w]) variants.push(WORD_MAP[w]);
+      var found = false;
+      for (var v = 0; v < variants.length; v++) {
+        if (wordMatches(variants[v], haystack)) { found = true; break; }
+      }
+      if (!found) return false;
+    }
+    return true;
+  }
+
+  window.clearEventSearch = function() {
+    var inp = document.getElementById('event-search');
+    var btn = document.getElementById('event-search-clear');
+    if (inp) { inp.value = ''; inp.focus(); }
+    if (btn) btn.style.display = 'none';
+    applyFilters();
+  };
+
+  // ── Применяем все фильтры ──────────────────────────────────────────────────
+  window.applyFilters = function () {
+    var month     = document.getElementById('sel-month').value;
+    var searchInp = document.getElementById('event-search');
+    var searchVal = searchInp ? searchInp.value.trim() : '';
+    var searchBtn = document.getElementById('event-search-clear');
+    if (searchBtn) searchBtn.style.display = searchVal ? 'block' : 'none';
+    var cityQ = getCityQuery();
+
+    if (currentType === 'past') {
+      var filtered = pastEvents.filter(function (e) {
+        if (!cityMatch(e, cityQ))                 return false;
+        if (month && e.date.slice(5,7) !== month) return false;
+        if (!eventMatchesSearch(e, searchVal))    return false;
+        return true;
+      });
+      renderEvents(filtered, true, cityQ);
+      return;
+    }
+
+    var filtered = allEvents.filter(function (e) {
+      if (currentType !== 'all' && e.type !== currentType) return false;
+      if (!cityMatch(e, cityQ))                             return false;
+      if (month && e.date.slice(5,7) !== month)            return false;
+      if (!eventMatchesSearch(e, searchVal))               return false;
+      return true;
+    });
+    renderEvents(filtered, false, cityQ);
+  };
+
+  // ── Рендер событий ─────────────────────────────────────────────────────────
+  function renderEvents(events, isPast, cityQ) {
+    var mainEl  = document.getElementById('main');
+    var statsEl = document.getElementById('stats-text');
+
+    if (isPast) {
+      statsEl.textContent = 'Прошедших: ' + events.length + ' ' +
+        plural(events.length, 'событие', 'события', 'событий');
+    } else {
+      statsEl.textContent = 'Показано: ' + events.length + ' ' +
+        plural(events.length, 'событие', 'события', 'событий');
+    }
+
+    if (!events.length) {
+      mainEl.innerHTML =
+        '<div class="state-box"><div class="state-icon">🔍</div>' +
+        'Событий не найдено.<br>Попробуй изменить фильтры.</div>';
+      return;
+    }
+
+    var sorted = events.slice();
+    if (isPast) sorted.sort(function(a,b){ return a.date < b.date ? 1 : -1; });
+
+    var byMonth = {}, order = [];
+    sorted.forEach(function (e) {
+      var key = e.date.slice(0, 7);
+      if (!byMonth[key]) { byMonth[key] = []; order.push(key); }
+      byMonth[key].push(e);
+    });
+
+    var html = '';
+    if (isPast) html += '<div class="past-banner">🕐 Прошедшие события — от последних к ранним</div>';
+
+    order.forEach(function (key) {
+      var evs  = byMonth[key];
+      var mNum = key.slice(5, 7);
+      var head = (MONTHS[mNum] || mNum) + ' ' + key.slice(0, 4);
+
+      html += '<div class="month-section">';
+      html += '<div class="month-heading">';
+      html += '<span class="month-heading-text">' + head + '</span>';
+      html += '<div class="month-heading-line"></div>';
+      html += '<span class="month-heading-count">' +
+               evs.length + ' ' + plural(evs.length, 'событие', 'события', 'событий') +
+              '</span>';
+      html += '</div><div class="events-grid">';
+
+      evs.forEach(function (ev) {
+        var parts  = ev.date.split('-');
+        var day    = parseInt(parts[2], 10);
+        var mon    = MONTHS_SHORT[parts[1]] || parts[1];
+        var badge  = BADGE_LABELS[ev.type] || ev.type;
+        var accent = isPast ? 0 : accentLevel(ev, cityQ || '');
+        var cardClass = 'event-card'
+          + (isPast   ? ' is-past' : '')
+          + (accent === 2 ? ' is-accent-2' : accent === 1 ? ' is-accent-1' : '')
+          + (ev.charity  ? ' is-charity' : '');
+
+        html += '<div class="' + cardClass + '" data-url="' + esc(ev.url) + '" role="link" tabindex="0">';
+        html += '<div class="date-col">';
+        html += '<div class="date-day">' + day + '</div>';
+        html += '<div class="date-mon">' + mon + '</div>';
+        html += '</div>';
+        html += '<div class="event-body">';
+        html += '<div class="event-name">' + esc(ev.name) + '</div>';
+        if (ev.distances) html += '<div class="event-dist">' + esc(ev.distances) + '</div>';
+        html += '<div class="event-meta">';
+        html += '<span class="city-tag">';
+        html += '<svg viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4C3 6.5 6 11 6 11S9 6.5 9 4C9 2.34 7.66 1 6 1zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>';
+        html += esc(ev.city) + '</span>';
+        html += '<span class="badge badge-' + esc(ev.type) + '">' + esc(badge) + '</span>';
+        if (ev.charity) {
+          html += '<span class="badge badge-charity">&#9829; благотворительный</span>';
+        }
+        html += '</div>';
+        html += '<div class="cal-btns">';
+        html += '<a class="cal-btn cal-btn-google" href="' + esc(googleCalUrl(ev)) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">';
+        html += '<svg viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 1v2M9 1v2M1 6h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
+        html += 'Google</a>';
+        html += '<a class="cal-btn cal-btn-yandex" href="' + esc(yandexCalUrl(ev)) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">';
+        html += '<svg viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 1v2M9 1v2M1 6h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
+        html += 'Яндекс</a>';
+        html += '<button class="cal-btn" onclick="event.stopPropagation(); window._icsDownload(' + ev.id + ')">';
+        html += '<svg viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        html += '.ics</button>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div class="card-arrow">›</div>';
+        html += '</div>';
+      });
+
+      html += '</div></div>';
+    });
+
+    mainEl.innerHTML = html;
+
+    // ── Динамический title и schema.org Event ─────────────────────────────
+    updateSEO(events, isPast, cityQ);
+
+    mainEl.querySelectorAll('.event-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var url = card.getAttribute('data-url');
+        if (url) window.open(url, '_blank', 'noopener,noreferrer');
+      });
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          var url = card.getAttribute('data-url');
+          if (url) window.open(url, '_blank', 'noopener,noreferrer');
+        }
+      });
+    });
+  }
+
+  // ── SEO: динамический title + schema.org Event ─────────────────────────
+  function updateSEO(events, isPast, cityQ) {
+    // 1. Динамический <title>
+    var base = 'Беговой календарь России 2026';
+    var parts = [];
+    var q = cityQ ? classifyQuery(cityQ) : null;
+
+    if (isPast) {
+      parts.push('Прошедшие события');
+    } else {
+      if (q && q.type === 'city')   parts.push('Забеги ' + cityQ);
+      if (q && q.type === 'region') parts.push('Забеги ' + cityQ);
+      if (q && q.type === 'macro')  parts.push('Забеги ' + cityQ);
+      if (currentType === 'trail')  parts.push('трейлы');
+      if (currentType === 'road')   parts.push('марафоны и шоссе');
+      if (currentType === 'night')  parts.push('ночные забеги');
+      var month = document.getElementById('sel-month');
+      if (month && month.value) {
+        var mNames = {'01':'январь','02':'февраль','03':'март','04':'апрель',
+                      '05':'май','06':'июнь','07':'июль','08':'август',
+                      '09':'сентябрь','10':'октябрь','11':'ноябрь','12':'декабрь'};
+        parts.push(mNames[month.value] || '');
+      }
+    }
+
+    document.title = parts.length
+      ? parts.join(', ') + ' — ' + base
+      : base + ' — забеги, марафоны, трейлы';
+
+    // 2. Schema.org Event для каждого события в выдаче (первые 20)
+    var existing = document.getElementById('schema-events');
+    if (existing) existing.remove();
+
+    if (!isPast && events.length > 0) {
+      var eventsForSchema = events.slice(0, 20);
+      var schemaEvents = eventsForSchema.map(function(ev) {
+        var typeMap = { road: 'SportsEvent', trail: 'SportsEvent', night: 'SportsEvent' };
+        return {
+          '@context': 'https://schema.org',
+          '@type': 'SportsEvent',
+          'name': ev.name,
+          'startDate': ev.date,
+          'location': {
+            '@type': 'Place',
+            'name': ev.city,
+            'address': {
+              '@type': 'PostalAddress',
+              'addressLocality': ev.city,
+              'addressRegion': ev.region || '',
+              'addressCountry': 'RU'
+            }
+          },
+          'description': ev.distances ? 'Дистанции: ' + ev.distances : ev.name,
+          'url': ev.url,
+          'organizer': { '@type': 'Organization', 'url': ev.url },
+          'sport': ev.type === 'trail' ? 'Trail Running' : 'Road Running',
+          'eventStatus': 'https://schema.org/EventScheduled',
+          'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode'
+        };
+      });
+
+      var script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = 'schema-events';
+      script.textContent = JSON.stringify(schemaEvents);
+      document.head.appendChild(script);
+    }
+  }
+
+  // ── Утилиты ────────────────────────────────────────────────────────────────
+  function esc(s) {
+    return String(s || '')
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;')
+      .replace(/'/g,'&#39;');
+  }
+
+  // Форматирует дату в YYYYMMDD для Google Calendar
+  function toGoogleDate(dateStr) {
+    return dateStr.replace(/-/g, '');
+  }
+
+  // Форматирует дату в YYYY-MM-DD для Яндекс Календаря
+  function toYandexDate(dateStr) {
+    return dateStr; // уже в нужном формате
+  }
+
+  // Google Calendar URL
+  function googleCalUrl(ev) {
+    var d = toGoogleDate(ev.date);
+    // Делаем событие на весь день — end = следующий день
+    var parts = ev.date.split('-');
+    var end = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]) + 1);
+    var endStr = end.getFullYear().toString() +
+      String(end.getMonth() + 1).padStart(2, '0') +
+      String(end.getDate()).padStart(2, '0');
+    var details = (ev.distances ? 'Дистанции: ' + ev.distances + '\n' : '') + ev.url;
+    return 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+      '&text=' + encodeURIComponent(ev.name) +
+      '&dates=' + d + '/' + endStr +
+      '&location=' + encodeURIComponent(ev.city + ', Россия') +
+      '&details=' + encodeURIComponent(details);
+  }
+
+  // Яндекс Календарь URL — создание нового события
+  function yandexCalUrl(ev) {
+    var details = (ev.distances ? 'Дистанции: ' + ev.distances + '\n' : '') + ev.url;
+    return 'https://calendar.yandex.ru/event/new' +
+      '?name=' + encodeURIComponent(ev.name) +
+      '&description=' + encodeURIComponent(details) +
+      '&from=' + ev.date + 'T09%3A00%3A00' +
+      '&to='   + ev.date + 'T21%3A00%3A00' +
+      '&location=' + encodeURIComponent(ev.city + ', Россия');
+  }
+
+  // Скачивает .ics файл — универсальный формат (Apple Calendar, Outlook и др.)
+  function downloadIcs(ev) {
+    var parts = ev.date.split('-');
+    var d = toGoogleDate(ev.date);
+    var end = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]) + 1);
+    var endStr = end.getFullYear().toString() +
+      String(end.getMonth() + 1).padStart(2, '0') +
+      String(end.getDate()).padStart(2, '0');
+    var desc = (ev.distances ? 'Дистанции: ' + ev.distances + '\\n' : '') + ev.url;
+    var ics = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//allrunrus.ru//RU',
+      'BEGIN:VEVENT',
+      'UID:allrunrus-' + ev.id + '@allrunrus.ru',
+      'DTSTART;VALUE=DATE:' + d,
+      'DTEND;VALUE=DATE:' + endStr,
+      'SUMMARY:' + ev.name,
+      'DESCRIPTION:' + desc,
+      'LOCATION:' + ev.city + ', Россия',
+      'URL:' + ev.url,
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+
+    var blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    var url  = URL.createObjectURL(blob);
+    var a    = document.createElement('a');
+    a.href   = url;
+    a.download = ev.name.replace(/[^а-яёa-z0-9]/gi, '_').toLowerCase() + '.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  // Публичная функция для вызова из onclick по id события
+  window._icsDownload = function (id) {
+    var all = allEvents.concat(pastEvents);
+    for (var i = 0; i < all.length; i++) {
+      if (all[i].id === id) { downloadIcs(all[i]); return; }
+    }
+  };
+
+  function plural(n, one, few, many) {
+    var m10 = n % 10, m100 = n % 100;
+    if (m10 === 1 && m100 !== 11) return one;
+    if (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20)) return few;
+    return many;
+  }
+
+  function formatUpdated(iso) {
+    try {
+      return 'Обновлено: ' + new Date(iso).toLocaleString('ru-RU',
+        { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+    } catch (e) { return ''; }
+  }
+
+  // ── Автодополнение города ─────────────────────────────────────────────────
+  // ── Загрузка events.json ───────────────────────────────────────────────────
+  fetch('events.json?_=' + Date.now())
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      var all = (data.events || []).sort(function (a, b) {
+        return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
+      });
+
+      // Разделяем на предстоящие и прошедшие
+      allEvents  = all.filter(function (e) { return e.date >= TODAY; });
+      pastEvents = all.filter(function (e) { return e.date < TODAY; });
+
+      // Глобальный словарь для .ics скачивания по id
+      var eventsById = {};
+      all.forEach(function (e) { eventsById[e.id] = e; });
+      window._icsDownload = function (id) { downloadIcs(eventsById[id]); };
+
+      if (data.updated) {
+        document.getElementById('nav-updated').textContent = formatUpdated(data.updated);
+      }
+      // Список городов строим по всем событиям (включая прошедшие)
+      buildGeoIndex(all);
+      applyFilters();
+    })
+    .catch(function (err) {
+      console.error('Ошибка загрузки events.json:', err);
+      document.getElementById('main').innerHTML =
+        '<div class="state-box"><div class="state-icon">⚠️</div>' +
+        'Не удалось загрузить данные.<br>' +
+        '<small>Убедитесь, что <code>events.json</code> находится рядом с <code>index.html</code></small></div>';
+      document.getElementById('stats-text').textContent = '';
+    });
+
+}());
+</script>
