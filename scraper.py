@@ -2467,7 +2467,7 @@ def generate_city_pages(events, template_path="index.html"):
         region = next((e['region'] for e in future if e.get('city') == city and e.get('region')), '')
         title = f'Забеги {city} 2026 — {cnt} событий | Беговой календарь России'
         desc  = f'Все забеги, марафоны и трейлы в {city}' + (f' и {region}' if region else '') + f' в 2026 году. {cnt} событий, официальные источники.'
-        pages.append((slug, city, title, desc, f"PRESELECT_CITY='{city}';", cnt))
+        pages.append((slug, city, title, desc, f"var PRESELECT_CITY='{city}';", cnt))
 
     # Макрорегионы
     for macro_slug, (macro_name, macro_regions) in MACRO_REGIONS.items():
@@ -2476,7 +2476,7 @@ def generate_city_pages(events, template_path="index.html"):
             continue
         title = f'Забеги {macro_name} 2026 — {cnt} событий | Беговой календарь России'
         desc  = f'Все забеги, марафоны и трейлы в регионах {macro_name} в 2026 году. {cnt} событий.'
-        pages.append((macro_slug, macro_name, title, desc, f"PRESELECT_CITY='{macro_name}';", cnt))
+        pages.append((macro_slug, macro_name, title, desc, f"var PRESELECT_CITY='{macro_name}';", cnt))
 
     # Типы
     for type_slug, (type_label, type_val, type_btn) in TYPE_PAGES.items():
@@ -2485,7 +2485,7 @@ def generate_city_pages(events, template_path="index.html"):
             continue
         title = f'{type_label} 2026 — {cnt} событий | Беговой календарь России'
         desc  = f'Полный календарь {type_label.lower()} 2026 года по всей России. {cnt} событий.'
-        pages.append((type_slug, type_label, title, desc, f"PRESELECT_TYPE='{type_val}';", cnt))
+        pages.append((type_slug, type_label, title, desc, f"var PRESELECT_TYPE='{type_val}';", cnt))
 
     # Загружаем index.html как шаблон (содержит встроенный CSS и JS)
     with open(template_path, encoding='utf-8') as f:
