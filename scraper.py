@@ -2544,6 +2544,12 @@ def generate_city_pages(events, template_path="index.html"):
             f'  {preselect_js}\n  var allEvents   = [];'
         )
 
+        # Метка времени — чтобы git видел изменение при каждом запуске
+        page_html = page_html.replace(
+            '</title>',
+            f'</title>\n<!-- generated: {datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")} -->'
+        )
+
         os.makedirs(slug, exist_ok=True)
         with open(os.path.join(slug, 'index.html'), 'w', encoding='utf-8') as f:
             f.write(page_html)
