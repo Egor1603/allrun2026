@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-07T03:43:23Z",
+  "updated": "2026-05-07T08:48:01Z",
   "events": [
     {
       "id": 17,
@@ -670,6 +670,16 @@
       "url": "https://events.topliga.ru/event/SuvorovTreyl2026/"
     },
     {
+      "date": "2026-06-13",
+      "name": "Сумасшедшая Сова (CrazyOwl50) 2026 Вещий Олег, могучий Волхов",
+      "city": "Переславль-Залесский",
+      "region": "Ярославская область",
+      "distances": "10 км, 30 км, 50 км (ночной)",
+      "type": "night",
+      "url": "https://goldenultra.ru/crazyowl/",
+      "id": 245
+    },
+    {
       "date": "2026-06-14",
       "name": "Цветочный забег",
       "city": "Омск",
@@ -1179,6 +1189,16 @@
       "distances": "7 км, 21 км, 42 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/IIIKirovHalfMarathonSportmasterPROandIIMarathoninmemoryofMSMikhailBykov"
+    },
+    {
+      "date": "2026-07-26",
+      "name": "Информация",
+      "city": "Суздаль",
+      "region": "Владимирская область",
+      "distances": "5, 10, 20, 30, 50, 80, 100 км, SE 30K, HN 10K, детский",
+      "type": "trail",
+      "url": "https://goldenultra.ru/grut/",
+      "id": 242
     },
     {
       "id": 149,
@@ -1731,6 +1751,16 @@
       "url": "https://taigatrail.run/octobertrail"
     },
     {
+      "date": "2026-10-04",
+      "name": "Белая Невеста Геленджик (White Bride Ultra)",
+      "city": "Геленджик",
+      "region": "Краснодарский край",
+      "distances": "4,2 км, 15 км, 30 км, 50 км, 70 км, 120 км",
+      "type": "trail",
+      "url": "https://goldenultra.ru/wbu/",
+      "id": 244
+    },
+    {
       "id": 205,
       "date": "2026-10-10",
       "name": "Яблочный Трейл 2026",
@@ -1811,6 +1841,16 @@
       "url": "https://reg.russiarunning.com/event/SosnovkaGoat"
     },
     {
+      "date": "2026-12-20",
+      "name": "Mad Fox Ultra",
+      "city": "Переславль-Залесский",
+      "region": "Ярославская область",
+      "distances": "10 км, 40 км, 100 миль",
+      "type": "trail",
+      "url": "https://goldenultra.ru/madfox/",
+      "id": 243
+    },
+    {
       "id": 177,
       "date": "2026-12-26",
       "name": "Рождественский забег",
@@ -1839,6 +1879,26 @@
       "type": "night",
       "url": "https://krasmarafon.ru/nightrun",
       "id": 227
+    },
+    {
+      "date": "2027-05-08",
+      "name": "Баскунчак Ультра Дискавери",
+      "city": "Баскунчак",
+      "region": "Астраханская область",
+      "distances": "ультра",
+      "type": "trail",
+      "url": "https://goldenultra.ru/bud/",
+      "id": 246
+    },
+    {
+      "date": "2027-09-05",
+      "name": "Воттоваара Ультра (Vottovaara Mountain Race)",
+      "city": "Гимолы",
+      "region": "Республика Карелия",
+      "distances": "14 км, 55 км, 50 миль, 100 миль",
+      "type": "trail",
+      "url": "https://goldenultra.ru/vmr/",
+      "id": 247
     }
   ]
 }
