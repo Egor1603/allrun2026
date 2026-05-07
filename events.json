@@ -1,16 +1,6 @@
 {
-  "updated": "2026-05-06T16:50:41Z",
+  "updated": "2026-05-07T03:43:23Z",
   "events": [
-    {
-      "id": 57,
-      "date": "2026-05-03",
-      "name": "Легкоатлетические соревнования «МИР, ТРУД, БЕГ»",
-      "city": "Барнаул",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
     {
       "id": 17,
       "date": "2026-05-06",
@@ -40,6 +30,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/ekskursiya-barnaul-2026/",
       "id": 232
+    },
+    {
+      "id": 57,
+      "date": "2026-05-03",
+      "name": "Легкоатлетические соревнования «МИР, ТРУД, БЕГ»",
+      "city": "Барнаул",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
       "date": "2026-05-08",
@@ -191,6 +191,16 @@
       "type": "road",
       "url": "https://legal.run/",
       "charity": true
+    },
+    {
+      "date": "2026-05-16",
+      "name": "Кубка Сибири по МТБ 2026 в Новососедово 16.05.2026 // Новосиб",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/xc-novososedovo-2026/",
+      "id": 241
     },
     {
       "id": 22,
