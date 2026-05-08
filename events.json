@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-07T17:00:06Z",
+  "updated": "2026-05-08T07:55:56Z",
   "events": [
     {
       "id": 17,
@@ -201,6 +201,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/xc-novososedovo-2026/",
       "id": 241
+    },
+    {
+      "date": "2026-05-16",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/xc-novososedovo-2026/",
+      "id": 248
     },
     {
       "id": 22,
@@ -456,6 +466,16 @@
       "distances": "3,5 км, 10 км, 21,1 км",
       "type": "road",
       "url": "https://reg.o-time.ru/race/26019"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Солоновский серпантин 2026 31.05.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/solonovka-2026/",
+      "id": 249
     },
     {
       "id": 26,
