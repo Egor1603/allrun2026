@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Справка 1444н для забегов — клиники по городам России</title>
+<meta name="description" content="Список медицинских клиник где можно получить справку по приказу 1444н для участия в забегах, марафонах и трейлах. Москва, Санкт-Петербург, Екатеринбург и другие города.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://allrunrus.ru/clinics/">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://allrunrus.ru/clinics/">
+<meta property="og:title" content="Справка 1444н для забегов — клиники России">
+<meta property="og:description" content="Где получить медицинскую справку для участия в забегах и марафонах">
+<meta property="og:image" content="https://allrunrus.ru/og-image.svg">
+
+<style>
+  :root {
+    --bg:       #f5f5f7;
+    --surface:  #ffffff;
+    --surface2: #f0f0f4;
+    --border:   rgba(0,0,0,0.08);
+    --text:     #111118;
+    --muted:    #6b6b7a;
+    --accent:   #2563eb;
+    --road-bg:  #dbeafe;
+    --shadow:   0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f0f13; --surface: #18181f; --surface2: #202028;
+      --border: rgba(255,255,255,0.08); --text: #f0f0f4; --muted: #7a7a8a;
+      --road-bg: rgba(37,99,235,0.15);
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .nav { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
+  .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; height: 56px; display: flex; align-items: center; }
+  .nav-logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; color: var(--text); text-decoration: none; }
+  .nav-logo-icon { width: 30px; height: 30px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+  .nav-logo-icon svg { width: 16px; height: 16px; }
+
+  .hero {
+    position: relative;
+    background: linear-gradient(to bottom, rgba(10,30,80,0.68) 0%, rgba(15,40,100,0.62) 50%, rgba(10,30,80,0.70) 100%),
+      url('../hero-map.png') center center / cover no-repeat;
+    color: #fff; padding: 52px 20px 48px; text-align: center; overflow: hidden;
+  }
+  .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(37,99,235,0.20) 0%, rgba(8,145,178,0.15) 100%); pointer-events: none; }
+  .hero-content { position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(22px, 4vw, 38px); font-weight: 800; letter-spacing: -.02em; margin-bottom: 10px; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+  .hero p { font-size: 14px; opacity: .88; text-shadow: 0 1px 6px rgba(0,0,0,0.35); }
+
+  .filters-bar { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 56px; z-index: 90; }
+  .filters-inner { max-width: 1100px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .filter-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); flex-shrink: 0; }
+
+  .city-search-wrap { position: relative; }
+  .city-input { font-family: inherit; font-size: 13px; color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 6px 28px 6px 10px; min-width: 180px; width: 180px; transition: border-color .15s, width .2s; outline: none; }
+  .city-input:focus { border-color: var(--accent); width: 220px; }
+  .city-input::placeholder { color: var(--muted); }
+  .city-clear { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 14px; color: var(--muted); cursor: pointer; display: none; line-height: 1; background: none; border: none; padding: 0; }
+  .city-clear:hover { color: var(--text); }
+
+  .city-dropdown { display: none; position: absolute; top: calc(100% + 4px); left: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.12); min-width: 220px; max-height: 260px; overflow-y: auto; z-index: 200; }
+  .city-dropdown.open { display: block; }
+  .city-opt { padding: 9px 12px; font-size: 13px; color: var(--text); cursor: pointer; transition: background .1s; display: flex; align-items: center; gap: 8px; }
+  .city-opt:hover, .city-opt.kbd-active { background: var(--surface2); }
+  .city-opt-icon { font-size: 14px; flex-shrink: 0; }
+  .city-opt-name { flex: 1; }
+  .city-opt-name mark { background: none; color: var(--accent); font-weight: 700; }
+  .city-opt-count { font-size: 11px; color: var(--muted); }
+
+  .stats-wrap { max-width: 1100px; margin: 0 auto; padding: 12px 20px 0; }
+  .stats-text { font-size: 13px; color: var(--muted); }
+
+  .main { max-width: 1100px; margin: 0 auto; padding: 16px 20px 60px; }
+
+  .month-section { margin-bottom: 28px; }
+  .month-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .month-heading-text { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); white-space: nowrap; }
+  .month-heading-line { flex: 1; height: 1px; background: var(--border); }
+  .month-heading-count { font-size: 11px; color: var(--muted); white-space: nowrap; }
+
+  .clinics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+
+  .clinic-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); transition: transform .12s, box-shadow .12s; display: flex; flex-direction: column; }
+  .clinic-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.09); }
+  .clinic-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+  .clinic-info { font-size: 13px; color: var(--muted); display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; flex: 1; }
+  .clinic-info-row { display: flex; align-items: flex-start; gap: 6px; line-height: 1.4; }
+  .clinic-info-icon { flex-shrink: 0; margin-top: 1px; width: 13px; height: 13px; }
+  .no-address { font-style: italic; opacity: .65; }
+  .clinic-btn { display: inline-flex; align-items: center; gap: 5px; font-family: inherit; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--accent); color: var(--accent); background: var(--road-bg); text-decoration: none; transition: all .15s; align-self: flex-start; }
+  .clinic-btn:hover { background: var(--accent); color: #fff; }
+
+  .info-banner { background: var(--road-bg); border: 1px solid rgba(37,99,235,.2); border-radius: 12px; padding: 14px 16px; font-size: 13px; color: var(--text); margin-bottom: 20px; line-height: 1.6; }
+  .info-banner strong { color: var(--accent); }
+
+  .state-box { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 15px; }
+  .state-icon { font-size: 36px; margin-bottom: 12px; }
+
+  footer { background: var(--surface); border-top: 1px solid var(--border); text-align: center; padding: 20px; font-size: 12px; color: var(--muted); line-height: 1.7; }
+
+  @media (max-width: 600px) {
+    .nav-inner, .filters-inner, .stats-wrap, .main { padding-left: 14px; padding-right: 14px; }
+    .hero { padding: 28px 16px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="../">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="10" r="9" fill="white" opacity=".15"/>
+          <text x="10" y="14.5" font-family="Georgia, serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">R</text>
+        </svg>
+      </div>
+      Беговой календарь России
+    </a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-content">
+    <h1>Справка 1444н для забегов</h1>
+    <p>Медицинские клиники где можно получить допуск к соревнованиям</p>
+    <p style="font-size:12px;opacity:.65;margin-top:8px;">
+      <a href="../" style="color:inherit;opacity:.8;">← Все события</a>
+    </p>
+  </div>
+</div>
+
+<div class="filters-bar">
+  <div class="filters-inner">
+    <span class="filter-label">Город</span>
+    <div class="city-search-wrap" id="city-wrap">
+      <input type="text" id="city-input" class="city-input"
+        placeholder="Выберите город…" autocomplete="off" spellcheck="false" oninput="onCityInput()">
+      <button class="city-clear" id="city-clear" title="Сбросить" onclick="clearCity()">✕</button>
+      <div class="city-dropdown" id="city-dropdown"></div>
+    </div>
+  </div>
+</div>
+
+<div class="stats-wrap"><p class="stats-text" id="stats-text">Загрузка…</p></div>
+
+<main class="main" id="main">
+  <div class="state-box"><div class="state-icon">⏳</div>Загружаем данные…</div>
+</main>
+
+<footer>
+  Информация с официальных источников организаторов забегов · 48 источников · Обновление 2 раза в сутки
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var allClinics = [];
+  var selectedCity = '';
+  var cityKbdIdx = -1;
+
+  function esc(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+  function plural(n, one, few, many) {
+    var m10=n%10, m100=n%100;
+    if (m10===1&&m100!==11) return one;
+    if (m10>=2&&m10<=4&&(m100<10||m100>=20)) return few;
+    return many;
+  }
+
+  function render() {
+    var mainEl  = document.getElementById('main');
+    var statsEl = document.getElementById('stats-text');
+    var filtered = selectedCity
+      ? allClinics.filter(function(c){ return c.city===selectedCity; })
+      : allClinics;
+
+    statsEl.textContent = 'Найдено: ' + filtered.length + ' ' + plural(filtered.length,'клиника','клиники','клиник');
+
+    if (!filtered.length) {
+      mainEl.innerHTML = '<div class="state-box"><div class="state-icon">🔍</div>Клиник не найдено.</div>';
+      return;
+    }
+
+    var byCity={}, cityOrder=[];
+    filtered.forEach(function(c){
+      if (!byCity[c.city]) { byCity[c.city]=[]; cityOrder.push(c.city); }
+      byCity[c.city].push(c);
+    });
+
+    var html = '<div class="info-banner">' +
+      '<strong>Справка по приказу Минздрава № 1444н</strong> — официальный допуск к участию ' +
+      'в спортивных соревнованиях. Для забегов до 10 км: осмотр терапевта + ЭКГ. ' +
+      'Для марафонов и трейлов: ЭКГ с нагрузкой. Срок действия — 6 месяцев.' +
+      '</div>';
+
+    cityOrder.forEach(function(city){
+      var cl = byCity[city];
+      html += '<div class="month-section">';
+      html += '<div class="month-heading"><span class="month-heading-text">'+esc(city)+'</span><div class="month-heading-line"></div><span class="month-heading-count">'+cl.length+' '+plural(cl.length,'клиника','клиники','клиник')+'</span></div>';
+      html += '<div class="clinics-grid">';
+      cl.forEach(function(c){
+        html += '<div class="clinic-card">';
+        html += '<div class="clinic-name">'+esc(c.name)+'</div>';
+        html += '<div class="clinic-info">';
+        html += '<div class="clinic-info-row">';
+        html += '<svg class="clinic-info-icon" viewBox="0 0 14 14" fill="none"><path d="M7 1C5.34 1 4 2.34 4 4C4 6.5 7 13 7 13S10 6.5 10 4C10 2.34 8.66 1 7 1zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>';
+        html += c.address ? '<span>'+esc(c.address)+'</span>' : '<span class="no-address">Адрес на сайте клиники</span>';
+        html += '</div>';
+        if (c.phone) {
+          html += '<div class="clinic-info-row">';
+          html += '<svg class="clinic-info-icon" viewBox="0 0 14 14" fill="none"><path d="M2 2h3l1.5 3-1.5 1.5a9 9 0 004 4L10.5 9l3 1.5V14a1 1 0 01-1 1C6 15-1 8-1 1a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>';
+          html += '<span>'+esc(c.phone)+'</span></div>';
+        }
+        html += '</div>';
+        html += '<a class="clinic-btn" href="'+esc(c.url)+'" target="_blank" rel="noopener">';
+        html += '<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M6 2H2a1 1 0 00-1 1v9a1 1 0 001 1h9a1 1 0 001-1V8M9 1h4m0 0v4m0-4L6 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        html += 'Сайт клиники</a>';
+        html += '</div>';
+      });
+      html += '</div></div>';
+    });
+
+    mainEl.innerHTML = html;
+  }
+
+  function getCities() {
+    var seen={}, order=[];
+    allClinics.forEach(function(c){
+      if (!seen[c.city]) { seen[c.city]=0; order.push(c.city); }
+      seen[c.city]++;
+    });
+    return order.map(function(city){ return {city:city, count:seen[city]}; });
+  }
+
+  function buildDropdown(query) {
+    var dd = document.getElementById('city-dropdown');
+    if (!dd) return;
+    var cities = getCities();
+    var nq = query.toLowerCase().replace(/ё/g,'е').trim();
+    var matched = nq ? cities.filter(function(c){ return c.city.toLowerCase().replace(/ё/g,'е').indexOf(nq)!==-1; }) : cities;
+    if (!matched.length) { dd.classList.remove('open'); return; }
+    var safe = query.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&');
+    dd.innerHTML = matched.map(function(c,i){
+      var nameHtml = esc(c.city).replace(new RegExp('('+safe+')','i'),'<mark>$1</mark>');
+      return '<div class="city-opt" data-city="'+esc(c.city)+'" data-idx="'+i+'">' +
+        '<span class="city-opt-icon">📍</span>' +
+        '<span class="city-opt-name">'+nameHtml+'</span>' +
+        '<span class="city-opt-count">'+c.count+'</span></div>';
+    }).join('');
+    dd.classList.add('open');
+    dd.querySelectorAll('.city-opt').forEach(function(el){
+      el.addEventListener('mousedown', function(e){ e.preventDefault(); selectCity(el.getAttribute('data-city')); });
+    });
+  }
+
+  function selectCity(city) {
+    selectedCity = city;
+    var inp=document.getElementById('city-input'), btn=document.getElementById('city-clear');
+    if (inp) inp.value=city;
+    if (btn) btn.style.display=city?'block':'none';
+    closeDropdown(); render();
+  }
+
+  function closeDropdown() {
+    var dd=document.getElementById('city-dropdown');
+    if (dd) dd.classList.remove('open');
+    cityKbdIdx=-1;
+  }
+
+  window.onCityInput = function(){
+    var inp=document.getElementById('city-input'), btn=document.getElementById('city-clear');
+    var val=inp?inp.value.trim():'';
+    if (btn) btn.style.display=val?'block':'none';
+    selectedCity=''; buildDropdown(val); render();
+  };
+  window.clearCity = function(){
+    var inp=document.getElementById('city-input'), btn=document.getElementById('city-clear');
+    selectedCity='';
+    if (inp) { inp.value=''; inp.focus(); }
+    if (btn) btn.style.display='none';
+    closeDropdown(); render();
+  };
+
+  document.addEventListener('keydown', function(e){
+    var dd=document.getElementById('city-dropdown');
+    if (!dd||!dd.classList.contains('open')) return;
+    var opts=dd.querySelectorAll('.city-opt');
+    if (!opts.length) return;
+    if (e.key==='ArrowDown') { e.preventDefault(); cityKbdIdx=Math.min(cityKbdIdx+1,opts.length-1); opts.forEach(function(o,i){o.classList.toggle('kbd-active',i===cityKbdIdx);}); }
+    else if (e.key==='ArrowUp') { e.preventDefault(); cityKbdIdx=Math.max(cityKbdIdx-1,0); opts.forEach(function(o,i){o.classList.toggle('kbd-active',i===cityKbdIdx);}); }
+    else if (e.key==='Enter'&&cityKbdIdx>=0) { e.preventDefault(); selectCity(opts[cityKbdIdx].getAttribute('data-city')); }
+    else if (e.key==='Escape') closeDropdown();
+  });
+  document.addEventListener('click', function(e){
+    var wrap=document.getElementById('city-wrap');
+    if (wrap&&!wrap.contains(e.target)) closeDropdown();
+  });
+  document.getElementById('city-input').addEventListener('focus', function(){ buildDropdown(this.value.trim()); });
+  document.getElementById('city-input').addEventListener('blur', function(){ setTimeout(closeDropdown,160); });
+
+  fetch('https://allrunrus.ru/clinics.json?_='+Date.now())
+    .then(function(r){ if (!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(function(data){ allClinics=data.clinics||[]; render(); })
+    .catch(function(){ document.getElementById('main').innerHTML='<div class="state-box"><div class="state-icon">⚠️</div>Не удалось загрузить данные.</div>'; document.getElementById('stats-text').textContent=''; });
+
+}());
+</script>
+</body>
+</html>
