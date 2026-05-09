@@ -1,6 +1,16 @@
 {
-  "updated": "2026-05-08T16:23:26Z",
+  "updated": "2026-05-09T08:10:13Z",
   "events": [
+    {
+      "date": "2026-05-08",
+      "name": "Red Fox Elbrus Race",
+      "city": "Эльбрус",
+      "region": "Кабардино-Балкария",
+      "distances": "скайраннинг, ски-альпинизм, снегоступинг",
+      "type": "trail",
+      "url": "https://elbrus.redfox.ru/",
+      "id": 237
+    },
     {
       "id": 17,
       "date": "2026-05-06",
@@ -40,16 +50,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "date": "2026-05-08",
-      "name": "Red Fox Elbrus Race",
-      "city": "Эльбрус",
-      "region": "Кабардино-Балкария",
-      "distances": "скайраннинг, ски-альпинизм, снегоступинг",
-      "type": "trail",
-      "url": "https://elbrus.redfox.ru/",
-      "id": 237
     },
     {
       "id": 60,
