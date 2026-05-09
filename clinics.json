@@ -1,0 +1,203 @@
+{
+  "updated": "2026-05-09T00:00:00Z",
+  "clinics": [
+    {
+      "id": 1,
+      "name": "Медкомиссия №1",
+      "city": "Москва",
+      "region": "Москва",
+      "address": "Несколько адресов в Москве",
+      "phone": "+7 (499) 922-88-19",
+      "url": "https://medic1.msk.ru/clients/medicinskie-spravki/spravki-dlya-sporta/spravka-dlya-sorevnovaniy.php"
+    },
+    {
+      "id": 2,
+      "name": "Деломедика",
+      "city": "Москва",
+      "region": "Москва",
+      "address": "",
+      "phone": "",
+      "url": "https://delomedika.ru/spravki/dlya-sporta/spravka-dlya-uchastiya-v-sorevnovaniyakh/"
+    },
+    {
+      "id": 3,
+      "name": "МедТест",
+      "city": "Москва",
+      "region": "Москва",
+      "address": "ул. Сущёвский вал",
+      "phone": "",
+      "url": "https://medtestclinica.ru/spravki-dlya-zanyatiya-sportom/na-sorevnovaniya/"
+    },
+    {
+      "id": 4,
+      "name": "МедГД",
+      "city": "Москва",
+      "region": "Москва",
+      "address": "ул. Нижегородская, д. 2, к. 1",
+      "phone": "+7 (495) 150-35-53",
+      "url": "https://mcgd.ru/uslugi/vzroslye/spravki-dlya-uchastiya-v-sorevnovaniyah/"
+    },
+    {
+      "id": 5,
+      "name": "Мед-Экспресс",
+      "city": "Москва",
+      "region": "Москва",
+      "address": "Несколько адресов в Москве",
+      "phone": "+7 (495) 021-23-03",
+      "url": "https://med-expres.ru/medicinskie-spravki/dlya-zanyatiya-sportom/dlya-sorevnovaniy/"
+    },
+    {
+      "id": 6,
+      "name": "Союзмед",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "address": "",
+      "phone": "+7 (812) 344-15-51",
+      "url": "https://souz-med.ru/uslugi/spravka-dlya-sorevnovanij/"
+    },
+    {
+      "id": 7,
+      "name": "Юлмед",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "address": "",
+      "phone": "+7 (921) 770-77-76",
+      "url": "https://ulmedi.ru/services/spravka-dlya-sorevnovanij/"
+    },
+    {
+      "id": 8,
+      "name": "ОМЕД",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "address": "ул. Бухарестская, д. 74",
+      "phone": "+7 (911) 920-03-02",
+      "url": "https://o-med.ru/spravki/spravka-dopusk-k-sorevnovaniyam/"
+    },
+    {
+      "id": 9,
+      "name": "Привилегия Здоровья",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "address": "ул. Васи Алексеева",
+      "phone": "",
+      "url": "https://pzmed.ru/usluga/sportivnaya-meditsina"
+    },
+    {
+      "id": 10,
+      "name": "Медицентр",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "address": "Аллея Поликарпова, д. 6, к. 2",
+      "phone": "+7 (812) 640-55-25",
+      "url": "https://prof.medi-center.ru/spravka-dlya-zanyatiy-sportom"
+    },
+    {
+      "id": 11,
+      "name": "МПО СПБ",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "address": "",
+      "phone": "",
+      "url": "https://mpo-spb.ru/spravki/spravka-dlya-sorevnovanij/"
+    },
+    {
+      "id": 12,
+      "name": "Ортодокс",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "address": "",
+      "phone": "+7 (343) 305-22-25",
+      "url": "https://orthodocs.ru/service/lechebnaya-fizkultura/meditsinskie-spravki-v-sektsii"
+    },
+    {
+      "id": 13,
+      "name": "Профосмотр",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "address": "ул. Белинского, д. 86",
+      "phone": "",
+      "url": "https://profosmotrekb.ru/certificate-sport/"
+    },
+    {
+      "id": 14,
+      "name": "Семейная клиника",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "address": "ул. 8 Марта, д. 194",
+      "phone": "",
+      "url": "https://fc-ek.ru/services/sportivnuyu-medkomissiyu/"
+    },
+    {
+      "id": 15,
+      "name": "КДЦ Консилиум",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "address": "",
+      "phone": "",
+      "url": "https://uralclinic.ru/uslugi/medosmotry-i-spravki/pri-ustrojstve-na-rabotu/sportivnaya-medkomissiya/"
+    },
+    {
+      "id": 16,
+      "name": "Здоровая семья",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "address": "",
+      "phone": "",
+      "url": "https://zs-mc.ru/products/spravka-sport"
+    },
+    {
+      "id": 17,
+      "name": "Претор",
+      "city": "Новосибирск",
+      "region": "Новосибирская область",
+      "address": "",
+      "phone": "+7 (383) 309-00-00",
+      "url": "https://vz-nsk.ru/uslugi/sportivnaya-meditsina/"
+    },
+    {
+      "id": 18,
+      "name": "МК24",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "address": "",
+      "phone": "+7 (391) 242-62-42",
+      "url": "https://mk24.ru/"
+    },
+    {
+      "id": 19,
+      "name": "Семейная клиника",
+      "city": "Казань",
+      "region": "Республика Татарстан",
+      "address": "",
+      "phone": "+7 (843) 202-40-11",
+      "url": "https://helfbebe.ru/services/meditsinskie-osmotry/meditsinskie-spravki/meditsinskaya-spravka-dlya-zanyatiy-sportom/"
+    },
+    {
+      "id": 20,
+      "name": "БарсМед",
+      "city": "Казань",
+      "region": "Республика Татарстан",
+      "address": "",
+      "phone": "",
+      "url": "https://mrtkt.ru/aktsii/spravka-dlya-sportivnyh-sorevnovanij-i-gto/"
+    },
+    {
+      "id": 21,
+      "name": "Качество Жизни",
+      "city": "Казань",
+      "region": "Республика Татарстан",
+      "address": "",
+      "phone": "",
+      "url": "https://www.aa-expert.ru/sports-medicine/profilaktika/dopusk-dlya-uchastiya-v-sorevnovaniyakh/"
+    },
+    {
+      "id": 22,
+      "name": "ЦКМО",
+      "city": "Томск",
+      "region": "Томская область",
+      "address": "ул. Нахимова, д. 16",
+      "phone": "+7 (3822) 55-95-26",
+      "url": "https://ckmo.ru/services/medical/spravka-dlya-dopuska-k-sorevnovaniyam/"
+    }
+  ]
+}
