@@ -382,7 +382,22 @@
   .cal-btn svg { width: 12px; height: 12px; flex-shrink: 0; }
   .cal-btn-google:hover { border-color: #4285f4; color: #4285f4; background: rgba(66,133,244,.08); }
   .cal-btn-yandex:hover  { border-color: #fc3f1d; color: #fc3f1d; background: rgba(252,63,29,.08); }
-  .cal-btn-cert:hover    { border-color: #059669; color: #059669; background: rgba(5,150,105,.08); }
+
+  /* Кнопка справки — отдельная строка под кнопками календаря */
+  .cert-btn {
+    display: none;
+    align-items: center; gap: 4px;
+    font-family: inherit; font-size: 11px; font-weight: 600;
+    padding: 4px 9px; border-radius: 8px;
+    border: 1px solid #dc2626; color: #dc2626;
+    background: #fef2f2; text-decoration: none;
+    transition: all .15s; white-space: nowrap;
+    margin-top: 5px;
+    user-select: none;
+  }
+  .cert-btn:hover { background: #dc2626; color: #fff; }
+  .event-card:hover .cert-btn { display: inline-flex; }
+  @media (hover: none) { .cert-btn { display: inline-flex; } }
 
   /* На мобильных — кнопки всегда видны */
   @media (hover: none) {
@@ -1468,10 +1483,10 @@
         html += '<button class="cal-btn" onclick="event.stopPropagation(); window._icsDownload(' + ev.id + ')">';
         html += '<svg viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         html += '.ics</button>';
-        html += '<a class="cal-btn cal-btn-cert" href="clinics/" onclick="event.stopPropagation()">';
-        html += '<svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M4 5h6M4 8h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
-        html += 'Справка 1444н</a>';
         html += '</div>';
+        html += '<a class="cert-btn" href="clinics/" onclick="event.stopPropagation()">';
+        html += '<svg width="11" height="11" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M4 5h6M4 8h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
+        html += 'Справка 1444н</a>';
         html += '</div>';
         html += '<div class="card-arrow">›</div>';
         html += '</div>';
