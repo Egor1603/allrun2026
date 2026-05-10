@@ -2520,6 +2520,11 @@ def generate_city_pages(events, template_path="index.html"):
         # Относительные пути для ресурсов
         page_html = page_html.replace('href="favicon.svg"', 'href="../favicon.svg"')
         page_html = page_html.replace("url('hero-map.png')", "url('../hero-map.png')")
+        # Вкладки навигации — исправляем пути
+        page_html = page_html.replace('<a class="nav-tab active" href="/">🏃 Забеги</a>',
+                                      '<a class="nav-tab" href="../">🏃 Забеги</a>')
+        page_html = page_html.replace('<a class="nav-tab" href="/clinics/">🏥 Справка 1444н</a>',
+                                      '<a class="nav-tab" href="../clinics/">🏥 Справка 1444н</a>')
 
         # Логотип ведёт на главную
         page_html = page_html.replace(
