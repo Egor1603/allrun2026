@@ -6,7 +6,7 @@
 
 <!-- SEO -->
 <title>Забеги Кисегач 2026 — 3 событий | Беговой календарь России</title>
-<!-- generated: 2026-05-10T08:23:54Z -->
+<!-- generated: 2026-05-10T09:18:34Z -->
 <meta name="description" content="Все забеги, марафоны и трейлы в Кисегач и Челябинская область в 2026 году. 3 событий, официальные источники.">
 <meta name="keywords" content="забеги 2026, марафоны России 2026, трейлы 2026, беговой календарь, полумарафон, забеги Москва, забеги Екатеринбург, забеги Санкт-Петербург, беговые соревнования">
 <meta name="robots" content="index, follow">
@@ -100,7 +100,7 @@
   }
   .nav-inner {
     max-width: 1100px; margin: 0 auto;
-    padding: 0 20px; height: 56px;
+    padding: 0 20px; height: 52px;
     display: flex; align-items: center; gap: 12px;
     overflow: hidden;
   }
@@ -113,19 +113,9 @@
   .nav-logo-icon {
     width: 30px; height: 30px; background: var(--accent);
     border-radius: 8px; display: flex; align-items: center; justify-content: center;
-  }
-  .nav-logo-icon svg { width: 16px; height: 16px; }
-  .nav-clinics-link {
-    margin-left: auto;
-    font-size: 12px; font-weight: 500;
-    color: var(--muted); text-decoration: none;
-    padding: 5px 8px; border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--surface2);
-    transition: all .15s; white-space: nowrap;
     flex-shrink: 0;
   }
-  .nav-clinics-link:hover { color: var(--accent); border-color: var(--accent); }
+  .nav-logo-icon svg { width: 16px; height: 16px; }
   .nav-logo-text {
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     font-size: clamp(12px, 2.5vw, 16px);
@@ -133,6 +123,29 @@
   @media (max-width: 400px) {
     .nav-logo-text { display: none; }
   }
+
+  /* ── ВКЛАДКИ НАВИГАЦИИ ── */
+  .nav-tabs-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 52px; z-index: 99;
+  }
+  .nav-tabs-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; overflow-x: auto; scrollbar-width: none;
+    padding: 0 12px;
+  }
+  .nav-tabs-inner::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    display: flex; align-items: center; gap: 6px;
+    padding: 10px 14px; font-size: 13px; font-weight: 500;
+    color: var(--muted); white-space: nowrap;
+    text-decoration: none; cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all .15s; flex-shrink: 0;
+  }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
   .hero-updated {
     font-size: 11px;
@@ -188,7 +201,7 @@
   .filters-bar {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
-    position: sticky; top: 56px; z-index: 90;
+    position: sticky; top: 93px; z-index: 90;
   }
   .filters-inner {
     max-width: 1100px; margin: 0 auto;
@@ -493,7 +506,7 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <a class="nav-logo" href="../">
+    <a class="nav-logo" href="/">
       <div class="nav-logo-icon">
         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="10" cy="10" r="9" fill="white" opacity=".15"/>
@@ -503,9 +516,15 @@
       </div>
       <span class="nav-logo-text">Беговой календарь России</span>
     </a>
-    <a href="clinics/" class="nav-clinics-link">🏥 Справка 1444н</a>
   </div>
 </nav>
+
+<div class="nav-tabs-bar">
+  <div class="nav-tabs-inner">
+    <a class="nav-tab active" href="/">🏃 Забеги</a>
+    <a class="nav-tab" href="/clinics/">🏥 Справка 1444н</a>
+  </div>
+</div>
 
 <div class="hero">
   <div class="hero-content">
