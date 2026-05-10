@@ -1,6 +1,36 @@
 {
-  "updated": "2026-05-09T16:00:26Z",
+  "updated": "2026-05-10T08:23:54Z",
   "events": [
+    {
+      "id": 60,
+      "date": "2026-05-09",
+      "name": "Легкоатлетический пробег «Динамовская десятка»",
+      "city": "Барнаул",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/dinamo-2026/"
+    },
+    {
+      "date": "2026-05-09",
+      "name": "Легкоатлетический пробег Динамовская десятка 2026 09.05.2026",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/dinamo-2026/",
+      "id": 233
+    },
+    {
+      "date": "2026-05-09",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/dinamo-2026/",
+      "id": 234
+    },
     {
       "date": "2026-05-08",
       "name": "Red Fox Elbrus Race",
@@ -50,36 +80,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 60,
-      "date": "2026-05-09",
-      "name": "Легкоатлетический пробег «Динамовская десятка»",
-      "city": "Барнаул",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/dinamo-2026/"
-    },
-    {
-      "date": "2026-05-09",
-      "name": "Легкоатлетический пробег Динамовская десятка 2026 09.05.2026",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/dinamo-2026/",
-      "id": 233
-    },
-    {
-      "date": "2026-05-09",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/dinamo-2026/",
-      "id": 234
     },
     {
       "id": 18,
@@ -476,6 +476,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/solonovka-2026/",
       "id": 249
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/solonovka-2026/",
+      "id": 250
     },
     {
       "id": 26,

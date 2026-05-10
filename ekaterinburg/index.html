@@ -6,7 +6,7 @@
 
 <!-- SEO -->
 <title>Забеги Екатеринбург 2026 — 5 событий | Беговой календарь России</title>
-<!-- generated: 2026-05-09T16:00:26Z -->
+<!-- generated: 2026-05-10T08:23:54Z -->
 <meta name="description" content="Все забеги, марафоны и трейлы в Екатеринбург и Свердловская область в 2026 году. 5 событий, официальные источники.">
 <meta name="keywords" content="забеги 2026, марафоны России 2026, трейлы 2026, беговой календарь, полумарафон, забеги Москва, забеги Екатеринбург, забеги Санкт-Петербург, беговые соревнования">
 <meta name="robots" content="index, follow">
@@ -102,17 +102,38 @@
     max-width: 1100px; margin: 0 auto;
     padding: 0 20px; height: 56px;
     display: flex; align-items: center; gap: 12px;
+    overflow: hidden;
   }
   .nav-logo {
     display: flex; align-items: center; gap: 8px;
     font-weight: 700; font-size: 16px;
     color: var(--text); text-decoration: none; flex-shrink: 0;
+    min-width: 0;
   }
   .nav-logo-icon {
     width: 30px; height: 30px; background: var(--accent);
     border-radius: 8px; display: flex; align-items: center; justify-content: center;
   }
   .nav-logo-icon svg { width: 16px; height: 16px; }
+  .nav-clinics-link {
+    margin-left: auto;
+    font-size: 12px; font-weight: 500;
+    color: var(--muted); text-decoration: none;
+    padding: 5px 8px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    transition: all .15s; white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .nav-clinics-link:hover { color: var(--accent); border-color: var(--accent); }
+  .nav-logo-text {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    font-size: clamp(12px, 2.5vw, 16px);
+  }
+  @media (max-width: 400px) {
+    .nav-logo-text { display: none; }
+  }
+
   .hero-updated {
     font-size: 11px;
     opacity: .5;
@@ -373,6 +394,22 @@
   .cal-btn-google:hover { border-color: #4285f4; color: #4285f4; background: rgba(66,133,244,.08); }
   .cal-btn-yandex:hover  { border-color: #fc3f1d; color: #fc3f1d; background: rgba(252,63,29,.08); }
 
+  /* Кнопка справки — отдельная строка под кнопками календаря */
+  .cert-btn {
+    display: none;
+    align-items: center; gap: 4px;
+    font-family: inherit; font-size: 11px; font-weight: 600;
+    padding: 4px 9px; border-radius: 8px;
+    border: 1px solid #dc2626; color: #dc2626;
+    background: #fef2f2; text-decoration: none;
+    transition: all .15s; white-space: nowrap;
+    margin-top: 5px;
+    user-select: none;
+  }
+  .cert-btn:hover { background: #dc2626; color: #fff; }
+  .event-card:hover .cert-btn { display: inline-flex; }
+  @media (hover: none) { .cert-btn { display: inline-flex; } }
+
   /* На мобильных — кнопки всегда видны */
   @media (hover: none) {
     .cal-btns { display: flex; }
@@ -464,8 +501,9 @@
                 fill="white" text-anchor="middle">R</text>
         </svg>
       </div>
-      Беговой календарь России
+      <span class="nav-logo-text">Беговой календарь России</span>
     </a>
+    <a href="clinics/" class="nav-clinics-link">🏥 Справка 1444н</a>
   </div>
 </nav>
 
@@ -868,7 +906,6 @@
     '05':'май','06':'июн','07':'июл','08':'авг',
     '09':'сен','10':'окт','11':'ноя','12':'дек'
   };
-  var TYPE_CLASSES = { all:'', past:'is-past' };
   var BADGE_LABELS = { road:'шоссе', trail:'трейл', night:'ночной' };
 
   // ── Фильтрация по типу ─────────────────────────────────────────────────────
@@ -1170,9 +1207,6 @@
         window.clearCity();
       });
     }
-    document.addEventListener('click', function (e) {
-      if (wrap && !wrap.contains(e.target)) closeCityDropdown();
-    });
   }
 
   function buildGeoIndex(events) {
@@ -1281,7 +1315,7 @@
     'голден':'golden','ринг':'ring','мэд':'mad','фокс':'fox',
     'овл':'owl','кросс':'cross','вайт':'white','брайд':'bride',
     'сахара':'sahara',
-    'trail':'трейл','night':'найт','laser':'лазер','run':'ран','run':'бег',
+    'trail':'трейл','night':'найт','laser':'лазер','run':'ран',
     'running':'ранинг','marathon':'марафон','ultra':'ультра',
     'fest':'фест','city':'сити','peak':'пик','wild':'вайлд',
     'golden':'голден','ring':'ринг','mad':'мэд','fox':'фокс',
@@ -1463,6 +1497,9 @@
         html += '<svg viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         html += '.ics</button>';
         html += '</div>';
+        html += '<a class="cert-btn" href="clinics/" onclick="event.stopPropagation()">';
+        html += '<svg width="11" height="11" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M4 5h6M4 8h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
+        html += 'Справка 1444н</a>';
         html += '</div>';
         html += '<div class="card-arrow">›</div>';
         html += '</div>';
@@ -1568,11 +1605,6 @@
   // Форматирует дату в YYYYMMDD для Google Calendar
   function toGoogleDate(dateStr) {
     return dateStr.replace(/-/g, '');
-  }
-
-  // Форматирует дату в YYYY-MM-DD для Яндекс Календаря
-  function toYandexDate(dateStr) {
-    return dateStr; // уже в нужном формате
   }
 
   // Google Calendar URL
