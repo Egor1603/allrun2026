@@ -37,6 +37,7 @@
   body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
   .nav { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
+  .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; height: 52px; display: flex; align-items: center; gap: 12px; overflow: hidden; }
   .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; height: 56px; display: flex; align-items: center; }
   .nav-logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; color: var(--text); text-decoration: none; }
   .nav-logo-icon { width: 30px; height: 30px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
@@ -52,6 +53,28 @@
   .hero-content { position: relative; z-index: 1; }
   .hero h1 { font-size: clamp(22px, 4vw, 38px); font-weight: 800; letter-spacing: -.02em; margin-bottom: 10px; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
   .hero p { font-size: 14px; opacity: .88; text-shadow: 0 1px 6px rgba(0,0,0,0.35); }
+
+  .nav-tabs-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 52px; z-index: 99;
+  }
+  .nav-tabs-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; overflow-x: auto; scrollbar-width: none;
+    padding: 0 12px;
+  }
+  .nav-tabs-inner::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    display: flex; align-items: center; gap: 6px;
+    padding: 10px 14px; font-size: 13px; font-weight: 500;
+    color: var(--muted); white-space: nowrap;
+    text-decoration: none; cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all .15s; flex-shrink: 0;
+  }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
   .filters-bar { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 56px; z-index: 90; }
   .filters-inner { max-width: 1100px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
@@ -108,23 +131,58 @@
     .nav-inner, .filters-inner, .stats-wrap, .main { padding-left: 14px; padding-right: 14px; }
     .hero { padding: 28px 16px 24px; }
   }
+
+  /* ── ВКЛАДКИ НАВИГАЦИИ ── */
+  .nav-tabs-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 52px; z-index: 99;
+  }
+  .nav-tabs-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; overflow-x: auto; scrollbar-width: none;
+    padding: 0 12px;
+  }
+  .nav-tabs-inner::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    display: flex; align-items: center; gap: 6px;
+    padding: 10px 14px; font-size: 13px; font-weight: 500;
+    color: var(--muted); white-space: nowrap;
+    text-decoration: none; cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all .15s; flex-shrink: 0;
+  }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .nav-logo-text {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    font-size: clamp(12px, 2.5vw, 16px);
+  }
+  @media (max-width: 400px) { .nav-logo-text { display: none; } }
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-inner">
-    <a class="nav-logo" href="../">
+    <a class="nav-logo" href="/">
       <div class="nav-logo-icon">
         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="10" cy="10" r="9" fill="white" opacity=".15"/>
           <text x="10" y="14.5" font-family="Georgia, serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">R</text>
         </svg>
       </div>
-      Беговой календарь России
+      <span class="nav-logo-text">Беговой календарь России</span>
     </a>
   </div>
 </nav>
+
+<div class="nav-tabs-bar">
+  <div class="nav-tabs-inner">
+    <a class="nav-tab" href="../">🏃 Забеги</a>
+    <a class="nav-tab active" href="../clinics/">🏥 Справка 1444н</a>
+  </div>
+</div>
 
 <div class="hero">
   <div class="hero-content">
