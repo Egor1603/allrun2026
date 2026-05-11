@@ -106,6 +106,8 @@
   .hero { padding: 56px 20px 52px; text-align: center; }
   .hero h1 { font-size: clamp(24px,5vw,42px); font-weight: 800; letter-spacing: -.03em; margin-bottom: 10px; color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
   .hero p { font-size: 14px; color: rgba(255,255,255,0.72); }
+  [data-theme="day"] .hero h1 { text-shadow: 0 2px 12px rgba(15,33,80,0.45); }
+  [data-theme="day"] .hero p { color: rgba(15,33,80,0.70); text-shadow: none; }
   .filters-bar { background: var(--filter-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border2); position: sticky; top: 93px; z-index: 90; }
   .filters-inner { max-width: 1100px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
   .filter-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); flex-shrink: 0; }
@@ -168,7 +170,7 @@
       </div>
       <span class="nav-logo-text">Беговой календарь России</span>
     </a>
-    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Сменить тему">&#9728;</button>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Сменить тему">☀️</button>
   </div>
 </nav>
 
@@ -220,7 +222,7 @@
   var theme = (override && (Date.now()-overrideTime) < 3600000) ? override : auto;
   document.documentElement.setAttribute('data-theme', theme);
   var btn = document.getElementById('theme-toggle');
-  if (btn) btn.textContent = theme === 'night' ? '&#9728;' : '&#127769;';
+  if (btn) btn.textContent = theme === 'night' ? '☀️' : '🌙';
 })();
 window.toggleTheme = function() {
   var current = document.documentElement.getAttribute('data-theme') || 'night';
@@ -229,7 +231,7 @@ window.toggleTheme = function() {
   localStorage.setItem('allrunrus-theme-override', next);
   localStorage.setItem('allrunrus-theme-time', Date.now().toString());
   var btn = document.getElementById('theme-toggle');
-  if (btn) btn.textContent = next === 'night' ? '&#9728;' : '&#127769;';
+  if (btn) btn.textContent = next === 'night' ? '☀️' : '🌙';
 };
 </script>
 
