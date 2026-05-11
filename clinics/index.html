@@ -4,168 +4,162 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Справка 1444н для забегов — клиники по городам России</title>
-<meta name="description" content="Список медицинских клиник где можно получить справку по приказу 1444н для участия в забегах, марафонах и трейлах. Москва, Санкт-Петербург, Екатеринбург и другие города.">
+<meta name="description" content="Список медицинских клиник где можно получить справку по приказу 1444н для участия в забегах, марафонах и трейлах.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://allrunrus.ru/clinics/">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://allrunrus.ru/clinics/">
 <meta property="og:title" content="Справка 1444н для забегов — клиники России">
-<meta property="og:description" content="Где получить медицинскую справку для участия в забегах и марафонах">
 <meta property="og:image" content="https://allrunrus.ru/og-image.svg">
-
-<style>
-  :root {
-    --bg:       #f5f5f7;
-    --surface:  #ffffff;
-    --surface2: #f0f0f4;
-    --border:   rgba(0,0,0,0.08);
-    --text:     #111118;
-    --muted:    #6b6b7a;
-    --accent:   #2563eb;
-    --road-bg:  #dbeafe;
-    --shadow:   0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0f0f13; --surface: #18181f; --surface2: #202028;
-      --border: rgba(255,255,255,0.08); --text: #f0f0f4; --muted: #7a7a8a;
-      --road-bg: rgba(37,99,235,0.15);
+<script>
+  (function(){
+    // Автоматическое переключение по времени суток
+    // 7:00–19:00 → дневная, остальное → вечерняя
+    // Ручной override сохраняется в localStorage на 1 час
+    var override = localStorage.getItem('allrunrus-theme-override');
+    var overrideTime = parseInt(localStorage.getItem('allrunrus-theme-time')||'0');
+    var now = Date.now();
+    var theme;
+    if (override && (now - overrideTime) < 3600000) {
+      theme = override;
+    } else {
+      var h = new Date().getHours();
+      theme = (h >= 7 && h < 19) ? 'day' : 'night';
     }
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+<style>
+  :root, [data-theme="night"] {
+    --bg:          linear-gradient(160deg, #0c1d4a 0%, #1a2f6e 45%, #0d3058 100%);
+    --bg-solid:    #0c1d4a;
+    --nav-bg:      rgba(12,29,74,0.65);
+    --tabs-bg:     rgba(8,20,55,0.60);
+    --filter-bg:   rgba(8,20,55,0.50);
+    --footer-bg:   rgba(8,16,48,0.55);
+    --surface:     rgba(255,255,255,0.09);
+    --surface2:    rgba(255,255,255,0.06);
+    --surface-hover: rgba(255,255,255,0.14);
+    --border:      rgba(255,255,255,0.16);
+    --border2:     rgba(255,255,255,0.10);
+    --text:        #ffffff;
+    --muted:       rgba(255,255,255,0.55);
+    --trail-c:     #fdf0ec;
+    --road-c:      #dbeafe;
+    --night-c:     #e0e7ff;
+    --trail-bg:    rgba(155,74,46,0.40);
+    --road-bg:     rgba(37,99,235,0.40);
+    --night-bg:    rgba(45,74,122,0.45);
+    --shadow:      0 4px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.12);
+    --dropdown-bg: rgba(12,25,70,0.90);
+    --select-opt:  #1a2f6e;
+    --theme-icon:  '☀️';
   }
+
+  [data-theme="day"] {
+    --date-col-bg: linear-gradient(135deg, #2563eb, #1d4ed8);
+    --date-col-border: transparent;
+    --date-text: #ffffff;
+    --bg:          linear-gradient(160deg, #e8f4ff 0%, #ddeeff 45%, #e0f0f8 100%);
+    --bg-solid:    #e8f4ff;
+    --nav-bg:      rgba(240,248,255,0.75);
+    --tabs-bg:     rgba(230,244,255,0.70);
+    --filter-bg:   rgba(225,240,255,0.65);
+    --footer-bg:   rgba(220,238,255,0.65);
+    --surface:     rgba(255,255,255,0.72);
+    --surface2:    rgba(255,255,255,0.50);
+    --surface-hover: rgba(255,255,255,0.88);
+    --border:      rgba(255,255,255,0.90);
+    --border2:     rgba(37,99,235,0.12);
+    --text:        #0f1f3d;
+    --muted:       #5a7299;
+    --trail-c:     #9b4a2e;
+    --road-c:      #1e40af;
+    --night-c:     #2d4a7a;
+    --trail-bg:    #fdf0ec;
+    --road-bg:     #dbeafe;
+    --night-bg:    #dde8f7;
+    --shadow:      0 2px 16px rgba(37,99,235,0.08), 0 1px 3px rgba(0,0,0,0.04);
+    --dropdown-bg: rgba(240,248,255,0.95);
+    --select-opt:  #e8f4ff;
+    --theme-icon:  '🌙';
+  }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-
-  .nav { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
+  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); background-attachment: fixed; color: var(--text); min-height: 100vh; }
+  .nav { background: var(--nav-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border2); position: sticky; top: 0; z-index: 100; }
   .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; height: 52px; display: flex; align-items: center; gap: 12px; overflow: hidden; }
-  .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; height: 56px; display: flex; align-items: center; }
-  .nav-logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; color: var(--text); text-decoration: none; }
-  .nav-logo-icon { width: 30px; height: 30px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+  .nav-logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; color: #fff; text-decoration: none; flex-shrink: 0; min-width: 0; }
+  .nav-logo-icon { width: 30px; height: 30px; background: rgba(255,255,255,0.20); border: 1px solid rgba(255,255,255,0.30); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .nav-logo-icon svg { width: 16px; height: 16px; }
-
-  .hero {
-    position: relative;
-    background: linear-gradient(to bottom, rgba(10,30,80,0.68) 0%, rgba(15,40,100,0.62) 50%, rgba(10,30,80,0.70) 100%),
-      url('../hero-map.png') center center / cover no-repeat;
-    color: #fff; padding: 52px 20px 48px; text-align: center; overflow: hidden;
-  }
-  .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(37,99,235,0.20) 0%, rgba(8,145,178,0.15) 100%); pointer-events: none; }
-  .hero-content { position: relative; z-index: 1; }
-  .hero h1 { font-size: clamp(22px, 4vw, 38px); font-weight: 800; letter-spacing: -.02em; margin-bottom: 10px; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
-  .hero p { font-size: 14px; opacity: .88; text-shadow: 0 1px 6px rgba(0,0,0,0.35); }
-
-  .nav-tabs-bar {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    position: sticky; top: 52px; z-index: 99;
-  }
-  .nav-tabs-inner {
-    max-width: 1100px; margin: 0 auto;
-    display: flex; overflow-x: auto; scrollbar-width: none;
-    padding: 0 12px;
-  }
+  .nav-logo-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: clamp(12px,2.5vw,16px); }
+  @media (max-width: 400px) { .nav-logo-text { display: none; } }
+  .theme-toggle { margin-left: auto; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.20); border-radius: 8px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; flex-shrink: 0; transition: all .15s; }
+  .theme-toggle:hover { background: rgba(255,255,255,0.18); }
+  .nav-tabs-bar { background: var(--tabs-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border2); position: sticky; top: 52px; z-index: 99; }
+  .nav-tabs-inner { max-width: 1100px; margin: 0 auto; display: flex; overflow-x: auto; scrollbar-width: none; padding: 0 12px; }
   .nav-tabs-inner::-webkit-scrollbar { display: none; }
-  .nav-tab {
-    display: flex; align-items: center; gap: 6px;
-    padding: 10px 14px; font-size: 13px; font-weight: 500;
-    color: var(--muted); white-space: nowrap;
-    text-decoration: none; cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: all .15s; flex-shrink: 0;
-  }
+  .nav-tab { display: flex; align-items: center; gap: 6px; padding: 10px 14px; font-size: 13px; font-weight: 500; color: var(--muted); white-space: nowrap; text-decoration: none; border-bottom: 2px solid transparent; transition: all .15s; flex-shrink: 0; }
   .nav-tab:hover { color: var(--text); }
-  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-
-  .filters-bar { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 56px; z-index: 90; }
+  .nav-tab.active { color: var(--text); border-bottom-color: var(--text); }
+  .hero { padding: 56px 20px 52px; text-align: center; }
+  .hero h1 { font-size: clamp(24px,5vw,42px); font-weight: 800; letter-spacing: -.03em; margin-bottom: 10px; color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+  .hero p { font-size: 14px; color: rgba(255,255,255,0.72); }
+  .filters-bar { background: var(--filter-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border2); position: sticky; top: 93px; z-index: 90; }
   .filters-inner { max-width: 1100px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
   .filter-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); flex-shrink: 0; }
-
   .city-search-wrap { position: relative; }
-  .city-input { font-family: inherit; font-size: 13px; color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 6px 28px 6px 10px; min-width: 180px; width: 180px; transition: border-color .15s, width .2s; outline: none; }
-  .city-input:focus { border-color: var(--accent); width: 220px; }
+  .city-input { font-family: inherit; font-size: 13px; color: var(--text); background: rgba(255,255,255,0.10); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 8px; padding: 6px 28px 6px 10px; min-width: 180px; width: 180px; transition: border-color .15s, width .2s; outline: none; }
+  .city-input:focus { border-color: rgba(255,255,255,0.50); width: 220px; }
   .city-input::placeholder { color: var(--muted); }
   .city-clear { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 14px; color: var(--muted); cursor: pointer; display: none; line-height: 1; background: none; border: none; padding: 0; }
-  .city-clear:hover { color: var(--text); }
-
-  .city-dropdown { display: none; position: absolute; top: calc(100% + 4px); left: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.12); min-width: 220px; max-height: 260px; overflow-y: auto; z-index: 200; }
+  .city-dropdown { display: none; position: absolute; top: calc(100% + 4px); left: 0; background: var(--dropdown-bg); backdrop-filter: blur(24px); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.40); min-width: 220px; max-height: 260px; overflow-y: auto; z-index: 200; }
   .city-dropdown.open { display: block; }
   .city-opt { padding: 9px 12px; font-size: 13px; color: var(--text); cursor: pointer; transition: background .1s; display: flex; align-items: center; gap: 8px; }
-  .city-opt:hover, .city-opt.kbd-active { background: var(--surface2); }
-  .city-opt-icon { font-size: 14px; flex-shrink: 0; }
+  .city-opt:hover, .city-opt.kbd-active { background: rgba(255,255,255,0.10); }
   .city-opt-name { flex: 1; }
-  .city-opt-name mark { background: none; color: var(--accent); font-weight: 700; }
+  .city-opt-name mark { background: none; color: #93c5fd; font-weight: 700; }
   .city-opt-count { font-size: 11px; color: var(--muted); }
-
   .stats-wrap { max-width: 1100px; margin: 0 auto; padding: 12px 20px 0; }
   .stats-text { font-size: 13px; color: var(--muted); }
-
   .main { max-width: 1100px; margin: 0 auto; padding: 16px 20px 60px; }
-
   .month-section { margin-bottom: 28px; }
   .month-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
   .month-heading-text { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); white-space: nowrap; }
-  .month-heading-line { flex: 1; height: 1px; background: var(--border); }
+  .month-heading-line { flex: 1; height: 1px; background: var(--border2); }
   .month-heading-count { font-size: 11px; color: var(--muted); white-space: nowrap; }
-
   .clinics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
-
-  .clinic-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); transition: transform .12s, box-shadow .12s; display: flex; flex-direction: column; }
-  .clinic-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.09); }
+  .clinic-card { background: var(--surface); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 16px; padding: 16px; box-shadow: var(--shadow); transition: transform .12s, background .12s; display: flex; flex-direction: column; }
+  .clinic-card:hover { transform: translateY(-2px); background: var(--surface-hover); }
   .clinic-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
   .clinic-info { font-size: 13px; color: var(--muted); display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; flex: 1; }
   .clinic-info-row { display: flex; align-items: flex-start; gap: 6px; line-height: 1.4; }
   .clinic-info-icon { flex-shrink: 0; margin-top: 1px; width: 13px; height: 13px; }
   .no-address { font-style: italic; opacity: .65; }
-  .clinic-btn { display: inline-flex; align-items: center; gap: 5px; font-family: inherit; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--accent); color: var(--accent); background: var(--road-bg); text-decoration: none; transition: all .15s; align-self: flex-start; }
-  .clinic-btn:hover { background: var(--accent); color: #fff; }
-
-  .info-banner { background: var(--road-bg); border: 1px solid rgba(37,99,235,.2); border-radius: 12px; padding: 14px 16px; font-size: 13px; color: var(--text); margin-bottom: 20px; line-height: 1.6; }
-  .info-banner strong { color: var(--accent); }
-
+  .clinic-btn { display: inline-flex; align-items: center; gap: 5px; font-family: inherit; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); color: var(--text); background: rgba(255,255,255,0.10); text-decoration: none; transition: all .15s; align-self: flex-start; }
+  .clinic-btn:hover { background: rgba(255,255,255,0.20); border-color: rgba(255,255,255,0.40); }
+  .info-banner { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+  .info-banner strong { color: var(--text); }
   .state-box { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 15px; }
   .state-icon { font-size: 36px; margin-bottom: 12px; }
-
-  footer { background: var(--surface); border-top: 1px solid var(--border); text-align: center; padding: 20px; font-size: 12px; color: var(--muted); line-height: 1.7; }
-
-  @media (max-width: 600px) {
-    .nav-inner, .filters-inner, .stats-wrap, .main { padding-left: 14px; padding-right: 14px; }
-    .hero { padding: 28px 16px 24px; }
-  }
-
-  /* ── ВКЛАДКИ НАВИГАЦИИ ── */
-  .nav-tabs-bar {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    position: sticky; top: 52px; z-index: 99;
-  }
-  .nav-tabs-inner {
-    max-width: 1100px; margin: 0 auto;
-    display: flex; overflow-x: auto; scrollbar-width: none;
-    padding: 0 12px;
-  }
-  .nav-tabs-inner::-webkit-scrollbar { display: none; }
-  .nav-tab {
-    display: flex; align-items: center; gap: 6px;
-    padding: 10px 14px; font-size: 13px; font-weight: 500;
-    color: var(--muted); white-space: nowrap;
-    text-decoration: none; cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: all .15s; flex-shrink: 0;
-  }
-  .nav-tab:hover { color: var(--text); }
-  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-  .nav-logo-text {
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    font-size: clamp(12px, 2.5vw, 16px);
-  }
-  @media (max-width: 400px) { .nav-logo-text { display: none; } }
+  footer { background: var(--footer-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--border2); text-align: center; padding: 20px; font-size: 12px; color: var(--muted); line-height: 1.7; }
+  @media (max-width: 600px) { .nav-inner, .filters-inner, .stats-wrap, .main { padding-left: 14px; padding-right: 14px; } .hero { padding: 28px 16px 24px; } }
+  [data-theme="day"] .clinic-card { background: rgba(255,255,255,0.72); border-color: rgba(255,255,255,0.90); box-shadow: 0 2px 16px rgba(37,99,235,0.07); }
+  [data-theme="day"] .clinic-card:hover { background: rgba(255,255,255,0.88); }
+  [data-theme="day"] .clinic-btn { background: rgba(37,99,235,0.10); border-color: rgba(37,99,235,0.30); color: #1e40af; }
+  [data-theme="day"] .clinic-btn:hover { background: #2563eb; color: #fff; border-color: #2563eb; }
+  [data-theme="day"] .info-banner { background: rgba(37,99,235,0.08); border-color: rgba(37,99,235,0.20); }
+  [data-theme="day"] .city-opt-name mark { color: #2563eb; }
+  [data-theme="day"] .city-input { background: rgba(255,255,255,0.60); border-color: rgba(37,99,235,0.25); color: #111827; }
+  [data-theme="day"] .city-input::placeholder { color: #9ca3af; }
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-inner">
-    <a class="nav-logo" href="/">
+    <a class="nav-logo" href="../">
       <div class="nav-logo-icon">
         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="10" cy="10" r="9" fill="white" opacity=".15"/>
@@ -174,13 +168,14 @@
       </div>
       <span class="nav-logo-text">Беговой календарь России</span>
     </a>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Сменить тему">&#9728;</button>
   </div>
 </nav>
 
 <div class="nav-tabs-bar">
   <div class="nav-tabs-inner">
-    <a class="nav-tab" href="../">🏃 Забеги</a>
-    <a class="nav-tab active" href="../clinics/">🏥 Справка 1444н</a>
+    <a class="nav-tab" href="../">&#127939; Забеги</a>
+    <a class="nav-tab active" href="../clinics/">&#127973; Справка 1444н</a>
   </div>
 </div>
 
@@ -189,7 +184,7 @@
     <h1>Справка 1444н для забегов</h1>
     <p>Медицинские клиники где можно получить допуск к соревнованиям</p>
     <p style="font-size:12px;opacity:.65;margin-top:8px;">
-      <a href="../" style="color:inherit;opacity:.8;">← Все события</a>
+      <a href="../" style="color:inherit;opacity:.8;">&#8592; Все события</a>
     </p>
   </div>
 </div>
@@ -199,177 +194,105 @@
     <span class="filter-label">Город</span>
     <div class="city-search-wrap" id="city-wrap">
       <input type="text" id="city-input" class="city-input"
-        placeholder="Выберите город…" autocomplete="off" spellcheck="false" oninput="onCityInput()">
-      <button class="city-clear" id="city-clear" title="Сбросить" onclick="clearCity()">✕</button>
+        placeholder="Выберите город..." autocomplete="off" spellcheck="false" oninput="onCityInput()">
+      <button class="city-clear" id="city-clear" title="Сбросить" onclick="clearCity()">&#x2715;</button>
       <div class="city-dropdown" id="city-dropdown"></div>
     </div>
   </div>
 </div>
 
-<div class="stats-wrap"><p class="stats-text" id="stats-text">Загрузка…</p></div>
+<div class="stats-wrap"><p class="stats-text" id="stats-text">Загрузка...</p></div>
 
 <main class="main" id="main">
-  <div class="state-box"><div class="state-icon">⏳</div>Загружаем данные…</div>
+  <div class="state-box"><div class="state-icon">&#9203;</div>Загружаем данные...</div>
 </main>
 
 <footer>
-  Информация с официальных источников организаторов забегов · 48 источников · Обновление 2 раза в сутки
+  Информация с официальных источников организаторов забегов &middot; 48 источников &middot; Обновление 2 раза в сутки
 </footer>
+
+<script>
+(function() {
+  var h = new Date().getHours();
+  var auto = (h >= 7 && h < 19) ? 'day' : 'night';
+  var override = localStorage.getItem('allrunrus-theme-override');
+  var overrideTime = parseInt(localStorage.getItem('allrunrus-theme-time')||'0');
+  var theme = (override && (Date.now()-overrideTime) < 3600000) ? override : auto;
+  document.documentElement.setAttribute('data-theme', theme);
+  var btn = document.getElementById('theme-toggle');
+  if (btn) btn.textContent = theme === 'night' ? '&#9728;' : '&#127769;';
+})();
+window.toggleTheme = function() {
+  var current = document.documentElement.getAttribute('data-theme') || 'night';
+  var next = current === 'night' ? 'day' : 'night';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('allrunrus-theme-override', next);
+  localStorage.setItem('allrunrus-theme-time', Date.now().toString());
+  var btn = document.getElementById('theme-toggle');
+  if (btn) btn.textContent = next === 'night' ? '&#9728;' : '&#127769;';
+};
+</script>
 
 <script>
 (function () {
   'use strict';
-
   var allClinics = [];
   var selectedCity = '';
   var cityKbdIdx = -1;
 
-  function esc(s) {
-    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-  }
-  function plural(n, one, few, many) {
-    var m10=n%10, m100=n%100;
-    if (m10===1&&m100!==11) return one;
-    if (m10>=2&&m10<=4&&(m100<10||m100>=20)) return few;
-    return many;
-  }
+  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+  function plural(n, one, few, many) { var m10=n%10,m100=n%100; if(m10===1&&m100!==11) return one; if(m10>=2&&m10<=4&&(m100<10||m100>=20)) return few; return many; }
 
   function render() {
-    var mainEl  = document.getElementById('main');
-    var statsEl = document.getElementById('stats-text');
-    var filtered = selectedCity
-      ? allClinics.filter(function(c){ return c.city===selectedCity; })
-      : allClinics;
-
-    statsEl.textContent = 'Найдено: ' + filtered.length + ' ' + plural(filtered.length,'клиника','клиники','клиник');
-
-    if (!filtered.length) {
-      mainEl.innerHTML = '<div class="state-box"><div class="state-icon">🔍</div>Клиник не найдено.</div>';
-      return;
-    }
-
+    var mainEl=document.getElementById('main'), statsEl=document.getElementById('stats-text');
+    var filtered = selectedCity ? allClinics.filter(function(c){return c.city===selectedCity;}) : allClinics;
+    statsEl.textContent = 'Найдено: '+filtered.length+' '+plural(filtered.length,'клиника','клиники','клиник');
+    if (!filtered.length) { mainEl.innerHTML='<div class="state-box"><div class="state-icon">&#128269;</div>Клиник не найдено.</div>'; return; }
     var byCity={}, cityOrder=[];
-    filtered.forEach(function(c){
-      if (!byCity[c.city]) { byCity[c.city]=[]; cityOrder.push(c.city); }
-      byCity[c.city].push(c);
-    });
-
-    var html = '<div class="info-banner">' +
-      '<strong>Справка по приказу Минздрава № 1444н</strong> — официальный допуск к участию ' +
-      'в спортивных соревнованиях. Для забегов до 10 км: осмотр терапевта + ЭКГ. ' +
-      'Для марафонов и трейлов: ЭКГ с нагрузкой. Срок действия — 6 месяцев.' +
-      '</div>';
-
+    filtered.forEach(function(c){ if(!byCity[c.city]){byCity[c.city]=[];cityOrder.push(c.city);} byCity[c.city].push(c); });
+    var html = '<div class="info-banner"><strong>Справка по приказу Минздрава № 1444н</strong> — официальный допуск к участию в спортивных соревнованиях. Для забегов до 10 км: осмотр терапевта + ЭКГ. Для марафонов и трейлов: ЭКГ с нагрузкой. Срок действия — 6 месяцев.</div>';
     cityOrder.forEach(function(city){
-      var cl = byCity[city];
-      html += '<div class="month-section">';
-      html += '<div class="month-heading"><span class="month-heading-text">'+esc(city)+'</span><div class="month-heading-line"></div><span class="month-heading-count">'+cl.length+' '+plural(cl.length,'клиника','клиники','клиник')+'</span></div>';
-      html += '<div class="clinics-grid">';
+      var cl=byCity[city];
+      html+='<div class="month-section"><div class="month-heading"><span class="month-heading-text">'+esc(city)+'</span><div class="month-heading-line"></div><span class="month-heading-count">'+cl.length+' '+plural(cl.length,'клиника','клиники','клиник')+'</span></div><div class="clinics-grid">';
       cl.forEach(function(c){
-        html += '<div class="clinic-card">';
-        html += '<div class="clinic-name">'+esc(c.name)+'</div>';
-        html += '<div class="clinic-info">';
-        html += '<div class="clinic-info-row">';
-        html += '<svg class="clinic-info-icon" viewBox="0 0 14 14" fill="none"><path d="M7 1C5.34 1 4 2.34 4 4C4 6.5 7 13 7 13S10 6.5 10 4C10 2.34 8.66 1 7 1zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>';
-        html += c.address ? '<span>'+esc(c.address)+'</span>' : '<span class="no-address">Адрес на сайте клиники</span>';
-        html += '</div>';
-        if (c.phone) {
-          html += '<div class="clinic-info-row">';
-          html += '<svg class="clinic-info-icon" viewBox="0 0 14 14" fill="none"><path d="M2 2h3l1.5 3-1.5 1.5a9 9 0 004 4L10.5 9l3 1.5V14a1 1 0 01-1 1C6 15-1 8-1 1a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>';
-          html += '<span>'+esc(c.phone)+'</span></div>';
-        }
-        html += '</div>';
-        html += '<a class="clinic-btn" href="'+esc(c.url)+'" target="_blank" rel="noopener">';
-        html += '<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M6 2H2a1 1 0 00-1 1v9a1 1 0 001 1h9a1 1 0 001-1V8M9 1h4m0 0v4m0-4L6 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-        html += 'Сайт клиники</a>';
-        html += '</div>';
+        html+='<div class="clinic-card"><div class="clinic-name">'+esc(c.name)+'</div><div class="clinic-info">';
+        html+='<div class="clinic-info-row"><svg class="clinic-info-icon" viewBox="0 0 14 14" fill="none"><path d="M7 1C5.34 1 4 2.34 4 4C4 6.5 7 13 7 13S10 6.5 10 4C10 2.34 8.66 1 7 1zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>';
+        html+=(c.address?'<span>'+esc(c.address)+'</span>':'<span class="no-address">Адрес на сайте клиники</span>')+'</div>';
+        if(c.phone) html+='<div class="clinic-info-row"><svg class="clinic-info-icon" viewBox="0 0 14 14" fill="none"><path d="M2 2h3l1.5 3-1.5 1.5a9 9 0 004 4L10.5 9l3 1.5V14a1 1 0 01-1 1C6 15-1 8-1 1a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2" fill="none"/></svg><span>'+esc(c.phone)+'</span></div>';
+        html+='</div><a class="clinic-btn" href="'+esc(c.url)+'" target="_blank" rel="noopener"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M6 2H2a1 1 0 00-1 1v9a1 1 0 001 1h9a1 1 0 001-1V8M9 1h4m0 0v4m0-4L6 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Сайт клиники</a></div>';
       });
-      html += '</div></div>';
+      html+='</div></div>';
     });
-
-    mainEl.innerHTML = html;
+    mainEl.innerHTML=html;
   }
 
-  function getCities() {
-    var seen={}, order=[];
-    allClinics.forEach(function(c){
-      if (!seen[c.city]) { seen[c.city]=0; order.push(c.city); }
-      seen[c.city]++;
-    });
-    return order.map(function(city){ return {city:city, count:seen[city]}; });
-  }
-
+  function getCities() { var seen={},order=[]; allClinics.forEach(function(c){if(!seen[c.city]){seen[c.city]=0;order.push(c.city);}seen[c.city]++;}); return order.map(function(city){return{city:city,count:seen[city]};}); }
   function buildDropdown(query) {
-    var dd = document.getElementById('city-dropdown');
-    if (!dd) return;
-    var cities = getCities();
-    var nq = query.toLowerCase().replace(/ё/g,'е').trim();
-    var matched = nq ? cities.filter(function(c){ return c.city.toLowerCase().replace(/ё/g,'е').indexOf(nq)!==-1; }) : cities;
-    if (!matched.length) { dd.classList.remove('open'); return; }
-    var safe = query.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&');
-    dd.innerHTML = matched.map(function(c,i){
-      var nameHtml = esc(c.city).replace(new RegExp('('+safe+')','i'),'<mark>$1</mark>');
-      return '<div class="city-opt" data-city="'+esc(c.city)+'" data-idx="'+i+'">' +
-        '<span class="city-opt-icon">📍</span>' +
-        '<span class="city-opt-name">'+nameHtml+'</span>' +
-        '<span class="city-opt-count">'+c.count+'</span></div>';
+    var dd=document.getElementById('city-dropdown'); if(!dd) return;
+    var cities=getCities(), nq=query.toLowerCase().replace(/ё/g,'е').trim();
+    var matched=nq?cities.filter(function(c){return c.city.toLowerCase().replace(/ё/g,'е').indexOf(nq)!==-1;}):cities;
+    if(!matched.length){dd.classList.remove('open');return;}
+    var safe=query.replace(/[-\/\^$*+?.()|[\]{}]/g,'\$&');
+    dd.innerHTML=matched.map(function(c,i){
+      var nameHtml=esc(c.city).replace(new RegExp('('+safe+')','i'),'<mark>$1</mark>');
+      return '<div class="city-opt" data-city="'+esc(c.city)+'" data-idx="'+i+'"><span style="font-size:14px;flex-shrink:0">&#128205;</span><span class="city-opt-name">'+nameHtml+'</span><span class="city-opt-count">'+c.count+'</span></div>';
     }).join('');
     dd.classList.add('open');
-    dd.querySelectorAll('.city-opt').forEach(function(el){
-      el.addEventListener('mousedown', function(e){ e.preventDefault(); selectCity(el.getAttribute('data-city')); });
-    });
+    dd.querySelectorAll('.city-opt').forEach(function(el){el.addEventListener('mousedown',function(e){e.preventDefault();selectCity(el.getAttribute('data-city'));});});
   }
-
-  function selectCity(city) {
-    selectedCity = city;
-    var inp=document.getElementById('city-input'), btn=document.getElementById('city-clear');
-    if (inp) inp.value=city;
-    if (btn) btn.style.display=city?'block':'none';
-    closeDropdown(); render();
-  }
-
-  function closeDropdown() {
-    var dd=document.getElementById('city-dropdown');
-    if (dd) dd.classList.remove('open');
-    cityKbdIdx=-1;
-  }
-
-  window.onCityInput = function(){
-    var inp=document.getElementById('city-input'), btn=document.getElementById('city-clear');
-    var val=inp?inp.value.trim():'';
-    if (btn) btn.style.display=val?'block':'none';
-    selectedCity=''; buildDropdown(val); render();
-  };
-  window.clearCity = function(){
-    var inp=document.getElementById('city-input'), btn=document.getElementById('city-clear');
-    selectedCity='';
-    if (inp) { inp.value=''; inp.focus(); }
-    if (btn) btn.style.display='none';
-    closeDropdown(); render();
-  };
-
-  document.addEventListener('keydown', function(e){
-    var dd=document.getElementById('city-dropdown');
-    if (!dd||!dd.classList.contains('open')) return;
-    var opts=dd.querySelectorAll('.city-opt');
-    if (!opts.length) return;
-    if (e.key==='ArrowDown') { e.preventDefault(); cityKbdIdx=Math.min(cityKbdIdx+1,opts.length-1); opts.forEach(function(o,i){o.classList.toggle('kbd-active',i===cityKbdIdx);}); }
-    else if (e.key==='ArrowUp') { e.preventDefault(); cityKbdIdx=Math.max(cityKbdIdx-1,0); opts.forEach(function(o,i){o.classList.toggle('kbd-active',i===cityKbdIdx);}); }
-    else if (e.key==='Enter'&&cityKbdIdx>=0) { e.preventDefault(); selectCity(opts[cityKbdIdx].getAttribute('data-city')); }
-    else if (e.key==='Escape') closeDropdown();
-  });
-  document.addEventListener('click', function(e){
-    var wrap=document.getElementById('city-wrap');
-    if (wrap&&!wrap.contains(e.target)) closeDropdown();
-  });
-  document.getElementById('city-input').addEventListener('focus', function(){ buildDropdown(this.value.trim()); });
-  document.getElementById('city-input').addEventListener('blur', function(){ setTimeout(closeDropdown,160); });
+  function selectCity(city){selectedCity=city;var inp=document.getElementById('city-input'),btn=document.getElementById('city-clear');if(inp)inp.value=city;if(btn)btn.style.display=city?'block':'none';closeDropdown();render();}
+  function closeDropdown(){var dd=document.getElementById('city-dropdown');if(dd)dd.classList.remove('open');cityKbdIdx=-1;}
+  window.onCityInput=function(){var inp=document.getElementById('city-input'),btn=document.getElementById('city-clear'),val=inp?inp.value.trim():'';if(btn)btn.style.display=val?'block':'none';selectedCity='';buildDropdown(val);render();};
+  window.clearCity=function(){var inp=document.getElementById('city-input'),btn=document.getElementById('city-clear');selectedCity='';if(inp){inp.value='';inp.focus();}if(btn)btn.style.display='none';closeDropdown();render();};
+  document.addEventListener('keydown',function(e){var dd=document.getElementById('city-dropdown');if(!dd||!dd.classList.contains('open'))return;var opts=dd.querySelectorAll('.city-opt');if(!opts.length)return;if(e.key==='ArrowDown'){e.preventDefault();cityKbdIdx=Math.min(cityKbdIdx+1,opts.length-1);opts.forEach(function(o,i){o.classList.toggle('kbd-active',i===cityKbdIdx);});}else if(e.key==='ArrowUp'){e.preventDefault();cityKbdIdx=Math.max(cityKbdIdx-1,0);opts.forEach(function(o,i){o.classList.toggle('kbd-active',i===cityKbdIdx);});}else if(e.key==='Enter'&&cityKbdIdx>=0){e.preventDefault();selectCity(opts[cityKbdIdx].getAttribute('data-city'));}else if(e.key==='Escape')closeDropdown();});
+  document.addEventListener('click',function(e){var wrap=document.getElementById('city-wrap');if(wrap&&!wrap.contains(e.target))closeDropdown();});
+  document.getElementById('city-input').addEventListener('focus',function(){buildDropdown(this.value.trim());});
+  document.getElementById('city-input').addEventListener('blur',function(){setTimeout(closeDropdown,160);});
 
   fetch('https://allrunrus.ru/clinics.json?_='+Date.now())
-    .then(function(r){ if (!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-    .then(function(data){ allClinics=data.clinics||[]; render(); })
-    .catch(function(){ document.getElementById('main').innerHTML='<div class="state-box"><div class="state-icon">⚠️</div>Не удалось загрузить данные.</div>'; document.getElementById('stats-text').textContent=''; });
-
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(function(data){allClinics=data.clinics||[];render();})
+    .catch(function(){document.getElementById('main').innerHTML='<div class="state-box"><div class="state-icon">&#9888;</div>Не удалось загрузить данные.</div>';document.getElementById('stats-text').textContent='';});
 }());
 </script>
 </body>
