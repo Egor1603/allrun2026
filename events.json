@@ -1,6 +1,16 @@
 {
-  "updated": "2026-05-10T16:04:39Z",
+  "updated": "2026-05-11T09:58:49Z",
   "events": [
+    {
+      "id": 18,
+      "date": "2026-05-10",
+      "name": "Царскосельский марафон",
+      "city": "Пушкин (СПб)",
+      "region": "Санкт-Петербург",
+      "distances": "3 км, 11 км, 21,1 км, 42,2 км, детский",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/TsarskoselskiyMarafon2026"
+    },
     {
       "id": 60,
       "date": "2026-05-09",
@@ -80,16 +90,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 18,
-      "date": "2026-05-10",
-      "name": "Царскосельский марафон",
-      "city": "Пушкин (СПб)",
-      "region": "Санкт-Петербург",
-      "distances": "3 км, 11 км, 21,1 км, 42,2 км, детский",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/TsarskoselskiyMarafon2026"
     },
     {
       "id": 19,
