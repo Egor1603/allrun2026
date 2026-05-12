@@ -1,6 +1,36 @@
 {
-  "updated": "2026-05-11T17:33:01Z",
+  "updated": "2026-05-12T08:54:53Z",
   "events": [
+    {
+      "id": 19,
+      "date": "2026-05-11",
+      "name": "Медовый забег",
+      "city": "Бирюзовая Катунь",
+      "region": "Алтайский край",
+      "distances": "5 км, 10 км, 21,1 км, детский",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/medovyy-zabeg-2026/"
+    },
+    {
+      "date": "2026-05-11",
+      "name": "Медовый забег 2026 11.05.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/medovyy-zabeg-2026/",
+      "id": 235
+    },
+    {
+      "date": "2026-05-11",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/medovyy-zabeg-2026/",
+      "id": 236
+    },
     {
       "id": 18,
       "date": "2026-05-10",
@@ -90,36 +120,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 19,
-      "date": "2026-05-11",
-      "name": "Медовый забег",
-      "city": "Бирюзовая Катунь",
-      "region": "Алтайский край",
-      "distances": "5 км, 10 км, 21,1 км, детский",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/medovyy-zabeg-2026/"
-    },
-    {
-      "date": "2026-05-11",
-      "name": "Медовый забег 2026 11.05.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/medovyy-zabeg-2026/",
-      "id": 235
-    },
-    {
-      "date": "2026-05-11",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/medovyy-zabeg-2026/",
-      "id": 236
     },
     {
       "id": 20,
@@ -527,6 +527,16 @@
       "type": "road",
       "url": "https://legal.run/",
       "charity": true
+    },
+    {
+      "date": "2026-06-06",
+      "name": "Tamara City Game 2026 06.06.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/tamara-city-game-2026/",
+      "id": 251
     },
     {
       "id": 27,
