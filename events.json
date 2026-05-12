@@ -1,15 +1,35 @@
 {
-  "updated": "2026-05-05T15:30:00Z",
+  "updated": "2026-05-12T17:18:45Z",
   "events": [
     {
-      "id": 57,
-      "date": "2026-05-03",
-      "name": "Легкоатлетические соревнования «МИР, ТРУД, БЕГ»",
+      "id": 19,
+      "date": "2026-05-11",
+      "name": "Медовый забег",
+      "city": "Бирюзовая Катунь",
+      "region": "Алтайский край",
+      "distances": "5 км, 10 км, 21,1 км, детский",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/medovyy-zabeg-2026/"
+    },
+    {
+      "id": 18,
+      "date": "2026-05-10",
+      "name": "Царскосельский марафон",
+      "city": "Пушкин (СПб)",
+      "region": "Санкт-Петербург",
+      "distances": "3 км, 11 км, 21,1 км, 42,2 км, детский",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/TsarskoselskiyMarafon2026"
+    },
+    {
+      "id": 60,
+      "date": "2026-05-09",
+      "name": "Легкоатлетический пробег «Динамовская десятка»",
       "city": "Барнаул",
       "region": "Алтайский край",
       "distances": "",
       "type": "road",
-      "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
+      "url": "https://sib-events.ru/reg/dinamo-2026/"
     },
     {
       "id": 17,
@@ -32,34 +52,14 @@
       "url": "https://sib-events.ru/reg/ekskursiya-barnaul-2026/"
     },
     {
-      "id": 60,
-      "date": "2026-05-09",
-      "name": "Легкоатлетический пробег «Динамовская десятка»",
+      "id": 57,
+      "date": "2026-05-03",
+      "name": "Легкоатлетические соревнования «МИР, ТРУД, БЕГ»",
       "city": "Барнаул",
       "region": "Алтайский край",
       "distances": "",
       "type": "road",
-      "url": "https://sib-events.ru/reg/dinamo-2026/"
-    },
-    {
-      "id": 18,
-      "date": "2026-05-10",
-      "name": "Царскосельский марафон",
-      "city": "Пушкин (СПб)",
-      "region": "Санкт-Петербург",
-      "distances": "3 км, 11 км, 21,1 км, 42,2 км, детский",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/TsarskoselskiyMarafon2026"
-    },
-    {
-      "id": 19,
-      "date": "2026-05-11",
-      "name": "Медовый забег",
-      "city": "Бирюзовая Катунь",
-      "region": "Алтайский край",
-      "distances": "5 км, 10 км, 21,1 км, детский",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/medovyy-zabeg-2026/"
+      "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
       "id": 20,
@@ -133,6 +133,26 @@
       "charity": true
     },
     {
+      "date": "2026-05-16",
+      "name": "Кубка Сибири по МТБ 2026 в Новососедово 16.05.2026 // Новосиб",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/xc-novososedovo-2026/",
+      "id": 233
+    },
+    {
+      "date": "2026-05-16",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/xc-novososedovo-2026/",
+      "id": 234
+    },
+    {
       "id": 22,
       "date": "2026-05-17",
       "name": "Забег «Весна»",
@@ -181,6 +201,26 @@
       "distances": "5 км, 10 км, 20 км, 30 км",
       "type": "trail",
       "url": "https://reg.russiarunning.com/event/CrazyTrailDunilovo2026"
+    },
+    {
+      "date": "2026-05-17",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 227
+    },
+    {
+      "date": "2026-05-17",
+      "name": "Информация о дополнительных опциях к регистрации",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/vesna",
+      "id": 229
     },
     {
       "id": 135,
@@ -379,6 +419,26 @@
       "url": "https://reg.o-time.ru/race/26019"
     },
     {
+      "date": "2026-05-31",
+      "name": "Солоновский серпантин 2026 31.05.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/solonovka-2026/",
+      "id": 235
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/solonovka-2026/",
+      "id": 236
+    },
+    {
       "id": 26,
       "date": "2026-06-06",
       "name": "Kamensk Urban Trail",
@@ -418,6 +478,16 @@
       "type": "road",
       "url": "https://legal.run/",
       "charity": true
+    },
+    {
+      "date": "2026-06-06",
+      "name": "Tamara City Game 2026 06.06.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/tamara-city-game-2026/",
+      "id": 237
     },
     {
       "id": 27,
@@ -591,6 +661,26 @@
       "url": "https://events.topliga.ru/event/SuvorovTreyl2026/"
     },
     {
+      "date": "2026-06-13",
+      "name": "Сумасшедшая Сова (CrazyOwl50) 2026 Вещий Олег, могучий Волхов",
+      "city": "Переславль-Залесский",
+      "region": "Ярославская область",
+      "distances": "10 км, 30 км, 50 км (ночной)",
+      "type": "night",
+      "url": "https://goldenultra.ru/crazyowl/",
+      "id": 243
+    },
+    {
+      "date": "2026-06-14",
+      "name": "Цветочный забег",
+      "city": "Омск",
+      "region": "Омская область",
+      "distances": "3 км, 10 км",
+      "type": "road",
+      "url": "https://runsim.ru/events/cvetocnyi-zabeg-2026",
+      "id": 232
+    },
+    {
       "id": 183,
       "date": "2026-06-19",
       "name": "Ультратрейл Тридцатка",
@@ -672,6 +762,16 @@
       "charity": true
     },
     {
+      "date": "2026-06-20",
+      "name": "Информация о дополнительных опциях к регистрации",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/colorrun",
+      "id": 230
+    },
+    {
       "id": 34,
       "date": "2026-06-21",
       "name": "Иркутский международный марафон",
@@ -750,6 +850,16 @@
       "distances": "113 км (плавание 1,9 км + вело 90 км + бег 21,1 км)",
       "type": "road",
       "url": "https://wildsiberia.ru/#wild-113"
+    },
+    {
+      "date": "2026-06-24",
+      "name": "Wild Siberia 226",
+      "city": "Акташ",
+      "region": "Республика Алтай",
+      "distances": "226 км (плавание 3,8 + вело 180 + бег 42,2 км)",
+      "type": "road",
+      "url": "https://wildsiberia.ru",
+      "id": 238
     },
     {
       "id": 71,
@@ -922,6 +1032,16 @@
       "url": "https://reg.russiarunning.com/event/17yUfimskiyLesnoyMarafon2026pamyatiDZValeeva"
     },
     {
+      "date": "2026-07-12",
+      "name": "Подробнее о дополнительных опциях к регистрации",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/girlseven",
+      "id": 231
+    },
+    {
       "id": 187,
       "date": "2026-07-17",
       "name": "Марафон «БЕГИ»",
@@ -1060,6 +1180,16 @@
       "distances": "7 км, 21 км, 42 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/IIIKirovHalfMarathonSportmasterPROandIIMarathoninmemoryofMSMikhailBykov"
+    },
+    {
+      "date": "2026-07-26",
+      "name": "Информация",
+      "city": "Суздаль",
+      "region": "Владимирская область",
+      "distances": "5, 10, 20, 30, 50, 80, 100 км, SE 30K, HN 10K, детский",
+      "type": "trail",
+      "url": "https://goldenultra.ru/grut/",
+      "id": 240
     },
     {
       "id": 149,
@@ -1482,6 +1612,16 @@
       "url": "https://reg.russiarunning.com/event/TyrinskayaLiniya2026"
     },
     {
+      "date": "2026-09-13",
+      "name": "Камчатка Trail-1",
+      "city": "Петропавловск-Камчатский",
+      "region": "Камчатский край",
+      "distances": "",
+      "type": "trail",
+      "url": "https://trail1.ru",
+      "id": 239
+    },
+    {
       "id": 94,
       "date": "2026-09-20",
       "name": "City Trail #5 Парк Измайлово",
@@ -1602,6 +1742,16 @@
       "url": "https://taigatrail.run/octobertrail"
     },
     {
+      "date": "2026-10-04",
+      "name": "Белая Невеста Геленджик (White Bride Ultra)",
+      "city": "Геленджик",
+      "region": "Краснодарский край",
+      "distances": "4,2 км, 15 км, 30 км, 50 км, 70 км, 120 км",
+      "type": "trail",
+      "url": "https://goldenultra.ru/wbu/",
+      "id": 242
+    },
+    {
       "id": 205,
       "date": "2026-10-10",
       "name": "Яблочный Трейл 2026",
@@ -1642,6 +1792,16 @@
       "url": "https://reg.russiarunning.com/event/PoTropamPredkov2026"
     },
     {
+      "date": "2026-11-14",
+      "name": "ANTA Кросс Московский Дрифт",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "кросс",
+      "type": "trail",
+      "url": "https://ultras.goldenultra.ru/",
+      "id": 246
+    },
+    {
       "id": 43,
       "date": "2026-12-06",
       "name": "Зимний полумарафон «Европа-Азия»",
@@ -1672,6 +1832,16 @@
       "url": "https://reg.russiarunning.com/event/SosnovkaGoat"
     },
     {
+      "date": "2026-12-20",
+      "name": "Mad Fox Ultra",
+      "city": "Переславль-Залесский",
+      "region": "Ярославская область",
+      "distances": "10 км, 40 км, 100 миль",
+      "type": "trail",
+      "url": "https://goldenultra.ru/madfox/",
+      "id": 241
+    },
+    {
       "id": 177,
       "date": "2026-12-26",
       "name": "Рождественский забег",
@@ -1690,6 +1860,36 @@
       "distances": "",
       "type": "road",
       "url": "https://tomskmarathon.ru/"
+    },
+    {
+      "date": "2027-03-27",
+      "name": "Информация о дополнительных опциях к регистрации",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "night",
+      "url": "https://krasmarafon.ru/nightrun",
+      "id": 228
+    },
+    {
+      "date": "2027-05-08",
+      "name": "Баскунчак Ультра Дискавери",
+      "city": "Баскунчак",
+      "region": "Астраханская область",
+      "distances": "ультра",
+      "type": "trail",
+      "url": "https://goldenultra.ru/bud/",
+      "id": 244
+    },
+    {
+      "date": "2027-09-05",
+      "name": "Воттоваара Ультра (Vottovaara Mountain Race)",
+      "city": "Гимолы",
+      "region": "Республика Карелия",
+      "distances": "14 км, 55 км, 50 миль, 100 миль",
+      "type": "trail",
+      "url": "https://goldenultra.ru/vmr/",
+      "id": 245
     }
   ]
 }
