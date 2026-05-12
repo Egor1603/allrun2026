@@ -2117,6 +2117,47 @@ def scrape_legalrun():
     return events
 
 
+def scrape_greenmarathon():
+    """
+    greenmarathon.sberbank.ru — СберПрайм Зелёный Марафон.
+    Ежегодный благотворительный забег Сбербанка в 60+ городах России.
+    Одно событие на всю страну.
+    """
+    print("  greenmarathon.sberbank.ru")
+    html = fetch("https://greenmarathon.sberbank.ru/")
+    if not html:
+        return []
+
+    # Ищем дату
+    date_match = re.search(r'(\d{1,2})\s*(мая|июня|июля|августа|сентября)', html)
+    if not date_match:
+        return []
+
+    month_map = {
+        'мая': '05', 'июня': '06', 'июля': '07',
+        'августа': '08', 'сентября': '09'
+    }
+    day = date_match.group(1).zfill(2)
+    month = month_map.get(date_match.group(2), '05')
+    year = str(datetime.utcnow().year)
+    d = f"{year}-{month}-{day}"
+
+    if not is_future(d):
+        return []
+
+    ev = make_event(
+        d,
+        f"СберПрайм Зелёный Марафон {year}",
+        "60+ городов России", "Россия",
+        "4,2 км, 10 км, 21,1 км, детские дистанции",
+        "road",
+        "https://greenmarathon.sberbank.ru"
+    )
+    if ev:
+        ev['charity'] = True
+    return [ev] if ev else []
+
+
 # ─── MERGE & SAVE ────────────────────────────────────────────────────────────
 
 SOURCES = [
@@ -2167,6 +2208,7 @@ SOURCES = [
     ("events.topliga.ru",        scrape_topliga_events),
     ("kavkaz.run",               scrape_kavkazrun),
     ("nordrock (Кировск)",       scrape_nordrock),
+    ("greenmarathon.sberbank.ru", scrape_greenmarathon),
     ("legal.run",                scrape_legalrun),
     ("vk.com (API)",             scrape_vk),
 ]
