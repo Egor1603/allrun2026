@@ -6,7 +6,7 @@
 
 <!-- SEO -->
 <title>Трейлы России 2026 — 89 событий | Беговой календарь России</title>
-<!-- generated: 2026-05-12T17:18:45Z -->
+<!-- generated: 2026-05-13T08:59:38Z -->
 <meta name="description" content="Полный календарь трейлы россии 2026 года по всей России. 89 событий.">
 <meta name="keywords" content="забеги 2026, марафоны России 2026, трейлы 2026, беговой календарь, полумарафон, забеги Москва, забеги Екатеринбург, забеги Санкт-Петербург, беговые соревнования">
 <meta name="robots" content="index, follow">
@@ -124,7 +124,7 @@
     --shadow:      0 2px 16px rgba(37,99,235,0.08), 0 1px 3px rgba(0,0,0,0.04);
     --dropdown-bg: rgba(240,248,255,0.95);
     --select-opt:  #e8f4ff;
-    --theme-icon:  '🌙';
+    --theme-icon:  '☽';
   }
 
 
@@ -166,6 +166,10 @@
     flex-shrink: 0;
   }
   .nav-logo-icon svg { width: 16px; height: 16px; }
+  [data-theme="day"] .nav-logo-icon {
+    background: rgba(15,33,80,0.15);
+    border-color: rgba(15,33,80,0.30);
+  }
   .nav-logo-text {
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     font-size: clamp(12px, 2.5vw, 16px);
@@ -192,6 +196,15 @@
   .theme-toggle:hover {
     background: var(--surface-hover);
     transform: scale(1.08);
+  }
+  [data-theme="day"] .theme-toggle {
+    background: rgba(15,33,80,0.08);
+    border-color: transparent;
+    box-shadow: none;
+  }
+  [data-theme="day"] .theme-toggle:hover {
+    background: rgba(15,33,80,0.14);
+    border-color: transparent;
   }
 
   /* ── ВКЛАДКИ НАВИГАЦИИ ── */
@@ -644,6 +657,23 @@
   [data-theme="day"] .filter-label { color: #5a7299; }
   [data-theme="day"] .filter-sep { background: rgba(37,99,235,0.15); }
   [data-theme="day"] footer { color: #7a9bbf; }
+  /* Дропдаун */
+  [data-theme="day"] .city-opt { color: #0f1f3d; }
+  [data-theme="day"] .city-opt:hover,
+  [data-theme="day"] .city-opt.kbd-active { background: rgba(37,99,235,0.08); }
+  [data-theme="day"] .city-opt-sub { color: #5a7299; }
+  [data-theme="day"] .city-opt-count { color: #5a7299; }
+  [data-theme="day"] .city-opt-name mark { color: #1d4ed8; }
+  [data-theme="day"] .city-dropdown-sep { background: rgba(37,99,235,0.10); }
+  /* Кнопки очистки */
+  [data-theme="day"] .city-clear { color: #5a7299; }
+  [data-theme="day"] .city-clear:hover { color: #0f1f3d; }
+  [data-theme="day"] .event-search-clear { color: #5a7299; }
+  [data-theme="day"] .event-search-clear:hover { color: #0f1f3d; }
+  /* Прошедшие */
+  [data-theme="day"] .past-banner { color: #4b6a99; background: rgba(37,99,235,0.06); border-color: rgba(37,99,235,0.12); }
+  /* Пустой экран */
+  [data-theme="day"] .state-box { color: #5a7299; }
 
 </style>
 </head>
@@ -654,7 +684,7 @@
     <a class="nav-logo" href="/">
       <div class="nav-logo-icon">
         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="10" cy="10" r="9" fill="white" opacity=".15"/>
+          <circle cx="10" cy="10" r="9" fill="#111827"/>
           <text x="10" y="14.5" font-family="Georgia, serif" font-size="12" font-weight="700"
                 fill="white" text-anchor="middle">R</text>
         </svg>
@@ -788,7 +818,7 @@
   var theme = (override && (Date.now()-overrideTime) < 3600000) ? override : auto;
   document.documentElement.setAttribute('data-theme', theme);
   var btn = document.getElementById('theme-toggle');
-  if (btn) btn.textContent = theme === 'night' ? '☀️' : '🌙';
+  if (btn) btn.textContent = theme === 'night' ? '☀️' : '☽';
 })();
 
 window.toggleTheme = function() {
@@ -799,7 +829,7 @@ window.toggleTheme = function() {
   localStorage.setItem('allrunrus-theme-override', next);
   localStorage.setItem('allrunrus-theme-time', Date.now().toString());
   var btn = document.getElementById('theme-toggle');
-  if (btn) btn.textContent = next === 'night' ? '☀️' : '🌙';
+  if (btn) btn.textContent = next === 'night' ? '☀️' : '☽';
 };
 
 (function () {
