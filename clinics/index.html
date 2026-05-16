@@ -3,16 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO -->
 <title>Справка 1444н для забегов — клиники по городам России</title>
-<meta name="description" content="Список медицинских клиник где можно получить справку по приказу 1444н для участия в забегах, марафонах и трейлах.">
+<meta name="description" content="Клиники где можно получить справку по приказу 1444н для участия в забегах и марафонах: марафоны, трейлы, полумарафоны, ночные забеги. 100+ событий в 40+ городах. Официальные источники, автообновление дважды в сутки.">
+<meta name="keywords" content="забеги 2026, марафоны России 2026, трейлы 2026, беговой календарь, полумарафон, забеги Москва, забеги Екатеринбург, забеги Санкт-Петербург, беговые соревнования">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://allrunrus.ru/clinics/">
+
+<!-- Фавикон -->
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<script src="../theme.js"></script>
+
+<!-- Open Graph — превью в соцсетях и мессенджерах -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://allrunrus.ru/clinics/">
-<meta property="og:title" content="Справка 1444н для забегов — клиники России">
+<meta property="og:title" content="Беговой календарь России 2026">
+<meta property="og:description" content="100+ забегов, марафонов и трейлов по всей России. Официальные источники, автообновление дважды в сутки.">
 <meta property="og:image" content="https://allrunrus.ru/og-image.svg">
-<script src="../theme.js"></script>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Беговой календарь России">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Беговой календарь России 2026">
+<meta name="twitter:description" content="100+ забегов, марафонов и трейлов по всей России.">
+<meta name="twitter:image" content="https://allrunrus.ru/og-image.svg">
+
+<!-- Schema.org — структурированные данные для поисковиков -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Беговой календарь России 2026",
+  "url": "https://allrunrus.ru/",
+  "description": "Полный календарь беговых событий России 2026: марафоны, трейлы, полумарафоны",
+  "inLanguage": "ru",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://allrunrus.ru/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -23,7 +58,8 @@
       <div class="nav-logo-icon">
         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="10" cy="10" r="9" fill="#111827"/>
-          <text x="10" y="14.5" font-family="Georgia, serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">R</text>
+          <text x="10" y="14.5" font-family="Georgia, serif" font-size="12" font-weight="700"
+                fill="white" text-anchor="middle">R</text>
         </svg>
       </div>
       <span class="nav-logo-text">Беговой календарь России</span>
@@ -34,8 +70,8 @@
 
 <div class="nav-tabs-bar">
   <div class="nav-tabs-inner">
-    <a class="nav-tab" href="../">&#127939; Забеги</a>
-    <a class="nav-tab active" href="../clinics/">&#127973; Справка 1444н</a>
+    <a class="nav-tab" href="../">🏃 Забеги</a>
+    <a class="nav-tab active" href="../clinics/">🏥 Справка 1444н</a>
   </div>
 </div>
 
@@ -44,7 +80,7 @@
     <h1>Справка 1444н для забегов</h1>
     <p>Медицинские клиники где можно получить допуск к соревнованиям</p>
     <p style="font-size:12px;opacity:.65;margin-top:8px;">
-      <a href="../" style="color:inherit;opacity:.8;">&#8592; Все события</a>
+      <a href="../" style="color:inherit;opacity:.8;">← Все события</a>
     </p>
   </div>
 </div>
@@ -54,83 +90,233 @@
     <span class="filter-label">Город</span>
     <div class="city-search-wrap" id="city-wrap">
       <input type="text" id="city-input" class="city-input"
-        placeholder="Выберите город..." autocomplete="off" spellcheck="false" oninput="onCityInput()">
-      <button class="city-clear" id="city-clear" title="Сбросить" onclick="clearCity()">&#x2715;</button>
+        placeholder="Выберите город…" autocomplete="off" spellcheck="false" oninput="onCityInput()">
+      <button class="city-clear" id="city-clear" title="Сбросить" onclick="clearCity()">✕</button>
       <div class="city-dropdown" id="city-dropdown"></div>
     </div>
   </div>
 </div>
 
-<div class="stats-wrap"><p class="stats-text" id="stats-text">Загрузка...</p></div>
+<div class="stats-wrap"><p class="stats-text" id="stats-text">Загрузка…</p></div>
 
 <main class="main" id="main">
-  <div class="state-box"><div class="state-icon">&#9203;</div>Загружаем данные...</div>
+  <div class="state-box"><div class="state-icon">⏳</div>Загружаем данные…</div>
 </main>
 
 <footer>
-  Информация с официальных источников организаторов забегов &middot; 48 источников &middot; Обновление 2 раза в сутки
+  Информация с официальных источников организаторов забегов · 48 источников · Обновление 2 раза в сутки
 </footer>
 
 <script>
 (function () {
   'use strict';
+
   var allClinics = [];
   var selectedCity = '';
   var cityKbdIdx = -1;
 
-  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
-  function plural(n, one, few, many) { var m10=n%10,m100=n%100; if(m10===1&&m100!==11) return one; if(m10>=2&&m10<=4&&(m100<10||m100>=20)) return few; return many; }
+  function esc(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function plural(n, one, few, many) {
+    var m10=n%10, m100=n%100;
+    if (m10===1&&m100!==11) return one;
+    if (m10>=2&&m10<=4&&(m100<10||m100>=20)) return few;
+    return many;
+  }
 
   function render() {
-    var mainEl=document.getElementById('main'), statsEl=document.getElementById('stats-text');
-    var filtered = selectedCity ? allClinics.filter(function(c){return c.city===selectedCity;}) : allClinics;
-    statsEl.textContent = 'Найдено: '+filtered.length+' '+plural(filtered.length,'клиника','клиники','клиник');
-    if (!filtered.length) { mainEl.innerHTML='<div class="state-box"><div class="state-icon">&#128269;</div>Клиник не найдено.</div>'; return; }
-    var byCity={}, cityOrder=[];
-    filtered.forEach(function(c){ if(!byCity[c.city]){byCity[c.city]=[];cityOrder.push(c.city);} byCity[c.city].push(c); });
-    var html = '<div class="info-banner"><strong>Справка по приказу Минздрава № 1444н</strong> — официальный допуск к участию в спортивных соревнованиях. Для забегов до 10 км: осмотр терапевта + ЭКГ. Для марафонов и трейлов: ЭКГ с нагрузкой. Срок действия — 6 месяцев.</div>';
-    cityOrder.forEach(function(city){
-      var cl=byCity[city];
-      html+='<div class="month-section"><div class="month-heading"><span class="month-heading-text">'+esc(city)+'</span><div class="month-heading-line"></div><span class="month-heading-count">'+cl.length+' '+plural(cl.length,'клиника','клиники','клиник')+'</span></div><div class="clinics-grid">';
-      cl.forEach(function(c){
-        html+='<div class="clinic-card"><div class="clinic-name">'+esc(c.name)+'</div><div class="clinic-info">';
-        html+='<div class="clinic-info-row"><svg class="clinic-info-icon" viewBox="0 0 14 14" fill="none"><path d="M7 1C5.34 1 4 2.34 4 4C4 6.5 7 13 7 13S10 6.5 10 4C10 2.34 8.66 1 7 1zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>';
-        html+=(c.address?'<span>'+esc(c.address)+'</span>':'<span class="no-address">Адрес на сайте клиники</span>')+'</div>';
-        if(c.phone) html+='<div class="clinic-info-row"><svg class="clinic-info-icon" viewBox="0 0 14 14" fill="none"><path d="M2 2h3l1.5 3-1.5 1.5a9 9 0 004 4L10.5 9l3 1.5V14a1 1 0 01-1 1C6 15-1 8-1 1a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2" fill="none"/></svg><span>'+esc(c.phone)+'</span></div>';
-        html+='</div><a class="clinic-btn" href="'+esc(c.url)+'" target="_blank" rel="noopener"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M6 2H2a1 1 0 00-1 1v9a1 1 0 001 1h9a1 1 0 001-1V8M9 1h4m0 0v4m0-4L6 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Сайт клиники</a></div>';
-      });
-      html+='</div></div>';
+    var mainEl = document.getElementById('main');
+    var statsEl = document.getElementById('stats-text');
+    var filtered = selectedCity
+      ? allClinics.filter(function(c){ return c.city === selectedCity; })
+      : allClinics;
+
+    statsEl.textContent = 'Найдено: ' + filtered.length + ' ' +
+      plural(filtered.length, 'клиника', 'клиники', 'клиник');
+
+    if (!filtered.length) {
+      mainEl.innerHTML = '<div class="state-box"><div class="state-icon">🔍</div>' +
+        'Клиник не найдено.<br>Попробуй выбрать другой город.</div>';
+      return;
+    }
+
+    var byCity = {}, cityOrder = [];
+    filtered.forEach(function(c) {
+      if (!byCity[c.city]) { byCity[c.city] = []; cityOrder.push(c.city); }
+      byCity[c.city].push(c);
     });
-    mainEl.innerHTML=html;
+
+    var html = '<div class="info-banner">' +
+      '<strong>Справка по приказу Минздрава № 1444н</strong> — официальный допуск к участию ' +
+      'в спортивных соревнованиях. Для забегов до 10 км: осмотр терапевта + ЭКГ. ' +
+      'Для марафонов и трейлов: ЭКГ с нагрузкой. Срок действия — 6 месяцев.</div>';
+
+    cityOrder.forEach(function(city) {
+      var cl = byCity[city];
+      html += '<div class="month-section">';
+      html += '<div class="month-heading">';
+      html += '<span class="month-heading-text">' + esc(city) + '</span>';
+      html += '<div class="month-heading-line"></div>';
+      html += '<span class="month-heading-count">' + cl.length + ' ' +
+        plural(cl.length, 'клиника', 'клиники', 'клиник') + '</span>';
+      html += '</div><div class="clinics-grid">';
+
+      cl.forEach(function(c) {
+        html += '<div class="clinic-card">';
+        html += '<div class="clinic-name">' + esc(c.name) + '</div>';
+        html += '<div class="clinic-info">';
+        html += '<div class="clinic-info-row">';
+        html += '<svg width="13" height="13" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px">' +
+          '<path d="M7 1C5.34 1 4 2.34 4 4C4 6.5 7 13 7 13S10 6.5 10 4C10 2.34 8.66 1 7 1zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/>' +
+          '</svg>';
+        html += c.address
+          ? '<span>' + esc(c.address) + '</span>'
+          : '<span class="no-address">Адрес на сайте клиники</span>';
+        html += '</div>';
+        if (c.phone) {
+          html += '<div class="clinic-info-row">';
+          html += '<svg width="13" height="13" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px">' +
+            '<path d="M2 2h3l1.5 3-1.5 1.5a9 9 0 004 4L10.5 9l3 1.5V14a1 1 0 01-1 1C6 15-1 8-1 1a1 1 0 011-1z" ' +
+            'stroke="currentColor" stroke-width="1.2" fill="none"/></svg>';
+          html += '<span>' + esc(c.phone) + '</span></div>';
+        }
+        html += '</div>';
+        html += '<a class="clinic-btn" href="' + esc(c.url) + '" target="_blank" rel="noopener">';
+        html += '<svg width="12" height="12" viewBox="0 0 14 14" fill="none">' +
+          '<path d="M6 2H2a1 1 0 00-1 1v9a1 1 0 001 1h9a1 1 0 001-1V8M9 1h4m0 0v4m0-4L6 8" ' +
+          'stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        html += 'Сайт клиники</a>';
+        html += '</div>';
+      });
+
+      html += '</div></div>';
+    });
+
+    mainEl.innerHTML = html;
   }
 
-  function getCities() { var seen={},order=[]; allClinics.forEach(function(c){if(!seen[c.city]){seen[c.city]=0;order.push(c.city);}seen[c.city]++;}); return order.map(function(city){return{city:city,count:seen[city]};}); }
+  function getCities() {
+    var seen = {}, order = [];
+    allClinics.forEach(function(c) {
+      if (!seen[c.city]) { seen[c.city] = 0; order.push(c.city); }
+      seen[c.city]++;
+    });
+    return order.map(function(city) { return { city: city, count: seen[city] }; });
+  }
+
   function buildDropdown(query) {
-    var dd=document.getElementById('city-dropdown'); if(!dd) return;
-    var cities=getCities(), nq=query.toLowerCase().replace(/ё/g,'е').trim();
-    var matched=nq?cities.filter(function(c){return c.city.toLowerCase().replace(/ё/g,'е').indexOf(nq)!==-1;}):cities;
-    if(!matched.length){dd.classList.remove('open');return;}
-    var safe=query.replace(/[-\/\^$*+?.()|[\]{}]/g,'\$&');
-    dd.innerHTML=matched.map(function(c,i){
-      var nameHtml=esc(c.city).replace(new RegExp('('+safe+')','i'),'<mark>$1</mark>');
-      return '<div class="city-opt" data-city="'+esc(c.city)+'" data-idx="'+i+'"><span style="font-size:14px;flex-shrink:0">&#128205;</span><span class="city-opt-name">'+nameHtml+'</span><span class="city-opt-count">'+c.count+'</span></div>';
+    var dd = document.getElementById('city-dropdown');
+    if (!dd) return;
+    var cities = getCities();
+    var nq = query.toLowerCase().replace(/ё/g, 'е').trim();
+    var matched = nq
+      ? cities.filter(function(c) { return c.city.toLowerCase().replace(/ё/g,'е').indexOf(nq) !== -1; })
+      : cities;
+    if (!matched.length) { dd.classList.remove('open'); return; }
+    var safe = query.replace(/[-\/\^$*+?.()|[\]{}]/g,'\$&');
+    dd.innerHTML = matched.map(function(c, i) {
+      var nameHtml = esc(c.city).replace(new RegExp('('+safe+')','i'),'<mark>$1</mark>');
+      return '<div class="city-opt" data-city="'+esc(c.city)+'" data-idx="'+i+'">' +
+        '<span class="city-opt-icon">📍</span>' +
+        '<span class="city-opt-name">'+nameHtml+'</span>' +
+        '<span class="city-opt-count">'+c.count+'</span></div>';
     }).join('');
     dd.classList.add('open');
-    dd.querySelectorAll('.city-opt').forEach(function(el){el.addEventListener('mousedown',function(e){e.preventDefault();selectCity(el.getAttribute('data-city'));});});
+    dd.querySelectorAll('.city-opt').forEach(function(el) {
+      el.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        selectCity(el.getAttribute('data-city'));
+      });
+    });
   }
-  function selectCity(city){selectedCity=city;var inp=document.getElementById('city-input'),btn=document.getElementById('city-clear');if(inp)inp.value=city;if(btn)btn.style.display=city?'block':'none';closeDropdown();render();}
-  function closeDropdown(){var dd=document.getElementById('city-dropdown');if(dd)dd.classList.remove('open');cityKbdIdx=-1;}
-  window.onCityInput=function(){var inp=document.getElementById('city-input'),btn=document.getElementById('city-clear'),val=inp?inp.value.trim():'';if(btn)btn.style.display=val?'block':'none';selectedCity='';buildDropdown(val);render();};
-  window.clearCity=function(){var inp=document.getElementById('city-input'),btn=document.getElementById('city-clear');selectedCity='';if(inp){inp.value='';inp.focus();}if(btn)btn.style.display='none';closeDropdown();render();};
-  document.addEventListener('keydown',function(e){var dd=document.getElementById('city-dropdown');if(!dd||!dd.classList.contains('open'))return;var opts=dd.querySelectorAll('.city-opt');if(!opts.length)return;if(e.key==='ArrowDown'){e.preventDefault();cityKbdIdx=Math.min(cityKbdIdx+1,opts.length-1);opts.forEach(function(o,i){o.classList.toggle('kbd-active',i===cityKbdIdx);});}else if(e.key==='ArrowUp'){e.preventDefault();cityKbdIdx=Math.max(cityKbdIdx-1,0);opts.forEach(function(o,i){o.classList.toggle('kbd-active',i===cityKbdIdx);});}else if(e.key==='Enter'&&cityKbdIdx>=0){e.preventDefault();selectCity(opts[cityKbdIdx].getAttribute('data-city'));}else if(e.key==='Escape')closeDropdown();});
-  document.addEventListener('click',function(e){var wrap=document.getElementById('city-wrap');if(wrap&&!wrap.contains(e.target))closeDropdown();});
-  document.getElementById('city-input').addEventListener('focus',function(){buildDropdown(this.value.trim());});
-  document.getElementById('city-input').addEventListener('blur',function(){setTimeout(closeDropdown,160);});
 
-  fetch('https://allrunrus.ru/clinics.json?_='+Date.now())
-    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
-    .then(function(data){allClinics=data.clinics||[];render();})
-    .catch(function(){document.getElementById('main').innerHTML='<div class="state-box"><div class="state-icon">&#9888;</div>Не удалось загрузить данные.</div>';document.getElementById('stats-text').textContent='';});
+  function selectCity(city) {
+    selectedCity = city;
+    var inp = document.getElementById('city-input');
+    var btn = document.getElementById('city-clear');
+    if (inp) inp.value = city;
+    if (btn) btn.style.display = city ? 'block' : 'none';
+    closeDropdown();
+    render();
+  }
+
+  function closeDropdown() {
+    var dd = document.getElementById('city-dropdown');
+    if (dd) dd.classList.remove('open');
+    cityKbdIdx = -1;
+  }
+
+  window.onCityInput = function() {
+    var inp = document.getElementById('city-input');
+    var btn = document.getElementById('city-clear');
+    var val = inp ? inp.value.trim() : '';
+    if (btn) btn.style.display = val ? 'block' : 'none';
+    selectedCity = '';
+    buildDropdown(val);
+    render();
+  };
+
+  window.clearCity = function() {
+    var inp = document.getElementById('city-input');
+    var btn = document.getElementById('city-clear');
+    selectedCity = '';
+    if (inp) { inp.value = ''; inp.focus(); }
+    if (btn) btn.style.display = 'none';
+    closeDropdown();
+    render();
+  };
+
+  document.addEventListener('keydown', function(e) {
+    var dd = document.getElementById('city-dropdown');
+    if (!dd || !dd.classList.contains('open')) return;
+    var opts = dd.querySelectorAll('.city-opt');
+    if (!opts.length) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      cityKbdIdx = Math.min(cityKbdIdx+1, opts.length-1);
+      opts.forEach(function(o,i){ o.classList.toggle('kbd-active', i===cityKbdIdx); });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      cityKbdIdx = Math.max(cityKbdIdx-1, 0);
+      opts.forEach(function(o,i){ o.classList.toggle('kbd-active', i===cityKbdIdx); });
+    } else if (e.key === 'Enter' && cityKbdIdx >= 0) {
+      e.preventDefault();
+      selectCity(opts[cityKbdIdx].getAttribute('data-city'));
+    } else if (e.key === 'Escape') {
+      closeDropdown();
+    }
+  });
+
+  document.addEventListener('click', function(e) {
+    var wrap = document.getElementById('city-wrap');
+    if (wrap && !wrap.contains(e.target)) closeDropdown();
+  });
+
+  document.getElementById('city-input').addEventListener('focus', function() {
+    buildDropdown(this.value.trim());
+  });
+  document.getElementById('city-input').addEventListener('blur', function() {
+    setTimeout(closeDropdown, 160);
+  });
+
+  fetch('https://allrunrus.ru/clinics.json?_=' + Date.now())
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function(data) {
+      allClinics = data.clinics || [];
+      render();
+    })
+    .catch(function() {
+      document.getElementById('main').innerHTML =
+        '<div class="state-box"><div class="state-icon">⚠️</div>Не удалось загрузить данные.</div>';
+      document.getElementById('stats-text').textContent = '';
+    });
+
 }());
 </script>
 </body>
