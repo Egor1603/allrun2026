@@ -1,6 +1,16 @@
 {
-  "updated": "2026-05-15T16:56:38Z",
+  "updated": "2026-05-16T06:17:47Z",
   "events": [
+    {
+      "id": 20,
+      "date": "2026-05-15",
+      "name": "Бэкъярд на Шарташе",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "distances": "6,7 км (до последнего участника)",
+      "type": "trail",
+      "url": "https://myrace.info/events/1629"
+    },
     {
       "id": 19,
       "date": "2026-05-11",
@@ -60,16 +70,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 20,
-      "date": "2026-05-15",
-      "name": "Бэкъярд на Шарташе",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "6,7 км (до последнего участника)",
-      "type": "trail",
-      "url": "https://myrace.info/events/1629"
     },
     {
       "id": 21,
