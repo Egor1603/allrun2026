@@ -12,150 +12,8 @@
 <meta property="og:url" content="https://allrunrus.ru/clinics/">
 <meta property="og:title" content="Справка 1444н для забегов — клиники России">
 <meta property="og:image" content="https://allrunrus.ru/og-image.svg">
-<script>
-  (function(){
-    // Автоматическое переключение по времени суток
-    // 7:00–19:00 → дневная, остальное → вечерняя
-    // Ручной override сохраняется в localStorage на 1 час
-    var override = localStorage.getItem('allrunrus-theme-override');
-    var overrideTime = parseInt(localStorage.getItem('allrunrus-theme-time')||'0');
-    var now = Date.now();
-    var theme;
-    if (override && (now - overrideTime) < 3600000) {
-      theme = override;
-    } else {
-      var h = new Date().getHours();
-      theme = (h >= 7 && h < 19) ? 'day' : 'night';
-    }
-    document.documentElement.setAttribute('data-theme', theme);
-  })();
-</script>
-<style>
-  :root, [data-theme="night"] {
-    --bg:          linear-gradient(160deg, #0c1d4a 0%, #1a2f6e 45%, #0d3058 100%);
-    --bg-solid:    #0c1d4a;
-    --nav-bg:      rgba(12,29,74,0.65);
-    --tabs-bg:     rgba(8,20,55,0.60);
-    --filter-bg:   rgba(8,20,55,0.50);
-    --footer-bg:   rgba(8,16,48,0.55);
-    --surface:     rgba(255,255,255,0.09);
-    --surface2:    rgba(255,255,255,0.06);
-    --surface-hover: rgba(255,255,255,0.14);
-    --border:      rgba(255,255,255,0.16);
-    --border2:     rgba(255,255,255,0.10);
-    --text:        #ffffff;
-    --muted:       rgba(255,255,255,0.55);
-    --trail-c:     #fdf0ec;
-    --road-c:      #dbeafe;
-    --night-c:     #e0e7ff;
-    --trail-bg:    rgba(155,74,46,0.40);
-    --road-bg:     rgba(37,99,235,0.40);
-    --night-bg:    rgba(45,74,122,0.45);
-    --shadow:      0 4px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.12);
-    --dropdown-bg: rgba(12,25,70,0.90);
-    --select-opt:  #1a2f6e;
-    --theme-icon:  '☀️';
-  }
-
-  [data-theme="day"] {
-    --date-col-bg: linear-gradient(135deg, #2563eb, #1d4ed8);
-    --date-col-border: transparent;
-    --date-text: #ffffff;
-    --bg:          linear-gradient(160deg, #e8f4ff 0%, #ddeeff 45%, #e0f0f8 100%);
-    --bg-solid:    #e8f4ff;
-    --nav-bg:      rgba(240,248,255,0.75);
-    --tabs-bg:     rgba(230,244,255,0.70);
-    --filter-bg:   rgba(225,240,255,0.65);
-    --footer-bg:   rgba(220,238,255,0.65);
-    --surface:     rgba(255,255,255,0.72);
-    --surface2:    rgba(255,255,255,0.50);
-    --surface-hover: rgba(255,255,255,0.88);
-    --border:      rgba(255,255,255,0.90);
-    --border2:     rgba(37,99,235,0.12);
-    --text:        #0f1f3d;
-    --muted:       #5a7299;
-    --trail-c:     #9b4a2e;
-    --road-c:      #1e40af;
-    --night-c:     #2d4a7a;
-    --trail-bg:    #fdf0ec;
-    --road-bg:     #dbeafe;
-    --night-bg:    #dde8f7;
-    --shadow:      0 2px 16px rgba(37,99,235,0.08), 0 1px 3px rgba(0,0,0,0.04);
-    --dropdown-bg: rgba(240,248,255,0.95);
-    --select-opt:  #e8f4ff;
-    --theme-icon:  '🌙';
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); background-attachment: fixed; color: var(--text); min-height: 100vh; }
-  .nav { background: var(--nav-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border2); position: sticky; top: 0; z-index: 100; }
-  .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; height: 52px; display: flex; align-items: center; gap: 12px; overflow: hidden; }
-  .nav-logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; color: #fff; text-decoration: none; flex-shrink: 0; min-width: 0; }
-  .nav-logo-icon { width: 30px; height: 30px; background: rgba(255,255,255,0.20); border: 1px solid rgba(255,255,255,0.30); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .nav-logo-icon svg { width: 16px; height: 16px; }
-  .nav-logo-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: clamp(12px,2.5vw,16px); }
-  @media (max-width: 400px) { .nav-logo-text { display: none; } }
-  .theme-toggle { margin-left: auto; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.20); border-radius: 8px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; flex-shrink: 0; transition: all .15s; }
-  .theme-toggle:hover { background: rgba(255,255,255,0.18); }
-  .nav-tabs-bar { background: var(--tabs-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border2); position: sticky; top: 52px; z-index: 99; }
-  .nav-tabs-inner { max-width: 1100px; margin: 0 auto; display: flex; overflow-x: auto; scrollbar-width: none; padding: 0 12px; }
-  .nav-tabs-inner::-webkit-scrollbar { display: none; }
-  .nav-tab { display: flex; align-items: center; gap: 6px; padding: 10px 14px; font-size: 13px; font-weight: 500; color: var(--muted); white-space: nowrap; text-decoration: none; border-bottom: 2px solid transparent; transition: all .15s; flex-shrink: 0; }
-  .nav-tab:hover { color: var(--text); }
-  .nav-tab.active { color: var(--text); border-bottom-color: var(--text); }
-  .hero { padding: 56px 20px 52px; text-align: center; }
-  .hero h1 { font-size: clamp(24px,5vw,42px); font-weight: 800; letter-spacing: -.03em; margin-bottom: 10px; color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
-  .hero p { font-size: 14px; color: rgba(255,255,255,0.72); }
-  [data-theme="day"] .hero h1 { text-shadow: 0 2px 12px rgba(15,33,80,0.45); }
-  [data-theme="day"] .hero p { color: rgba(15,33,80,0.70); text-shadow: none; }
-  .filters-bar { background: var(--filter-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border2); position: sticky; top: 93px; z-index: 90; }
-  .filters-inner { max-width: 1100px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-  .filter-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); flex-shrink: 0; }
-  .city-search-wrap { position: relative; }
-  .city-input { font-family: inherit; font-size: 13px; color: var(--text); background: rgba(255,255,255,0.10); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 8px; padding: 6px 28px 6px 10px; min-width: 180px; width: 180px; transition: border-color .15s, width .2s; outline: none; }
-  .city-input:focus { border-color: rgba(255,255,255,0.50); width: 220px; }
-  .city-input::placeholder { color: var(--muted); }
-  .city-clear { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 14px; color: var(--muted); cursor: pointer; display: none; line-height: 1; background: none; border: none; padding: 0; }
-  .city-dropdown { display: none; position: absolute; top: calc(100% + 4px); left: 0; background: var(--dropdown-bg); backdrop-filter: blur(24px); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.40); min-width: 220px; max-height: 260px; overflow-y: auto; z-index: 200; }
-  .city-dropdown.open { display: block; }
-  .city-opt { padding: 9px 12px; font-size: 13px; color: var(--text); cursor: pointer; transition: background .1s; display: flex; align-items: center; gap: 8px; }
-  .city-opt:hover, .city-opt.kbd-active { background: rgba(255,255,255,0.10); }
-  .city-opt-name { flex: 1; }
-  .city-opt-name mark { background: none; color: #93c5fd; font-weight: 700; }
-  .city-opt-count { font-size: 11px; color: var(--muted); }
-  .stats-wrap { max-width: 1100px; margin: 0 auto; padding: 12px 20px 0; }
-  .stats-text { font-size: 13px; color: var(--muted); }
-  .main { max-width: 1100px; margin: 0 auto; padding: 16px 20px 60px; }
-  .month-section { margin-bottom: 28px; }
-  .month-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-  .month-heading-text { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); white-space: nowrap; }
-  .month-heading-line { flex: 1; height: 1px; background: var(--border2); }
-  .month-heading-count { font-size: 11px; color: var(--muted); white-space: nowrap; }
-  .clinics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
-  .clinic-card { background: var(--surface); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 16px; padding: 16px; box-shadow: var(--shadow); transition: transform .12s, background .12s; display: flex; flex-direction: column; }
-  .clinic-card:hover { transform: translateY(-2px); background: var(--surface-hover); }
-  .clinic-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
-  .clinic-info { font-size: 13px; color: var(--muted); display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; flex: 1; }
-  .clinic-info-row { display: flex; align-items: flex-start; gap: 6px; line-height: 1.4; }
-  .clinic-info-icon { flex-shrink: 0; margin-top: 1px; width: 13px; height: 13px; }
-  .no-address { font-style: italic; opacity: .65; }
-  .clinic-btn { display: inline-flex; align-items: center; gap: 5px; font-family: inherit; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); color: var(--text); background: rgba(255,255,255,0.10); text-decoration: none; transition: all .15s; align-self: flex-start; }
-  .clinic-btn:hover { background: rgba(255,255,255,0.20); border-color: rgba(255,255,255,0.40); }
-  .info-banner { background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
-  .info-banner strong { color: var(--text); }
-  .state-box { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 15px; }
-  .state-icon { font-size: 36px; margin-bottom: 12px; }
-  footer { background: var(--footer-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--border2); text-align: center; padding: 20px; font-size: 12px; color: var(--muted); line-height: 1.7; }
-  @media (max-width: 600px) { .nav-inner, .filters-inner, .stats-wrap, .main { padding-left: 14px; padding-right: 14px; } .hero { padding: 28px 16px 24px; } }
-  [data-theme="day"] .clinic-card { background: rgba(255,255,255,0.72); border-color: rgba(255,255,255,0.90); box-shadow: 0 2px 16px rgba(37,99,235,0.07); }
-  [data-theme="day"] .clinic-card:hover { background: rgba(255,255,255,0.88); }
-  [data-theme="day"] .clinic-btn { background: rgba(37,99,235,0.10); border-color: rgba(37,99,235,0.30); color: #1e40af; }
-  [data-theme="day"] .clinic-btn:hover { background: #2563eb; color: #fff; border-color: #2563eb; }
-  [data-theme="day"] .info-banner { background: rgba(37,99,235,0.08); border-color: rgba(37,99,235,0.20); }
-  [data-theme="day"] .city-opt-name mark { color: #2563eb; }
-  [data-theme="day"] .city-input { background: rgba(255,255,255,0.60); border-color: rgba(37,99,235,0.25); color: #111827; }
-  [data-theme="day"] .city-input::placeholder { color: #9ca3af; }
-</style>
+<script src="../theme.js"></script>
+<link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
@@ -164,7 +22,7 @@
     <a class="nav-logo" href="../">
       <div class="nav-logo-icon">
         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="10" cy="10" r="9" fill="white" opacity=".15"/>
+          <circle cx="10" cy="10" r="9" fill="#111827"/>
           <text x="10" y="14.5" font-family="Georgia, serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">R</text>
         </svg>
       </div>
@@ -212,28 +70,6 @@
 <footer>
   Информация с официальных источников организаторов забегов &middot; 48 источников &middot; Обновление 2 раза в сутки
 </footer>
-
-<script>
-(function() {
-  var h = new Date().getHours();
-  var auto = (h >= 7 && h < 19) ? 'day' : 'night';
-  var override = localStorage.getItem('allrunrus-theme-override');
-  var overrideTime = parseInt(localStorage.getItem('allrunrus-theme-time')||'0');
-  var theme = (override && (Date.now()-overrideTime) < 3600000) ? override : auto;
-  document.documentElement.setAttribute('data-theme', theme);
-  var btn = document.getElementById('theme-toggle');
-  if (btn) btn.textContent = theme === 'night' ? '☀️' : '🌙';
-})();
-window.toggleTheme = function() {
-  var current = document.documentElement.getAttribute('data-theme') || 'night';
-  var next = current === 'night' ? 'day' : 'night';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('allrunrus-theme-override', next);
-  localStorage.setItem('allrunrus-theme-time', Date.now().toString());
-  var btn = document.getElementById('theme-toggle');
-  if (btn) btn.textContent = next === 'night' ? '☀️' : '🌙';
-};
-</script>
 
 <script>
 (function () {
