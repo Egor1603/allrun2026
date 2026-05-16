@@ -609,3 +609,66 @@
   /* Пустой экран */
   [data-theme="day"] .state-box { color: #5a7299; }
 
+
+
+/* ── СТРАНИЦА КЛИНИК ─────────────────────────────────────────────────────── */
+  .clinics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .clinic-card {
+    background: var(--surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 16px;
+    box-shadow: var(--shadow);
+    transition: transform .12s, background .12s;
+    display: flex; flex-direction: column;
+  }
+  .clinic-card:hover { transform: translateY(-2px); background: var(--surface-hover); }
+  .clinic-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+  .clinic-info {
+    font-size: 13px; color: var(--muted);
+    display: flex; flex-direction: column; gap: 5px;
+    margin-bottom: 12px; flex: 1;
+  }
+  .clinic-info-row { display: flex; align-items: flex-start; gap: 6px; line-height: 1.4; }
+  .clinic-info-icon { flex-shrink: 0; margin-top: 1px; width: 13px; height: 13px; }
+  .no-address { font-style: italic; opacity: .65; }
+  .clinic-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: inherit; font-size: 12px; font-weight: 600;
+    padding: 6px 12px; border-radius: 8px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: rgba(255,255,255,0.10);
+    text-decoration: none; transition: all .15s; align-self: flex-start;
+  }
+  .clinic-btn:hover { background: rgba(255,255,255,0.20); border-color: rgba(255,255,255,0.40); }
+  .info-banner {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 16px;
+    font-size: 13px; color: var(--muted);
+    margin-bottom: 20px; line-height: 1.6;
+  }
+  .info-banner strong { color: var(--text); }
+
+  [data-theme="day"] .clinic-card {
+    background: rgba(255,255,255,0.72);
+    border-color: rgba(255,255,255,0.90);
+    box-shadow: 0 2px 16px rgba(37,99,235,0.07);
+  }
+  [data-theme="day"] .clinic-card:hover { background: rgba(255,255,255,0.88); }
+  [data-theme="day"] .clinic-btn {
+    background: rgba(37,99,235,0.10);
+    border-color: rgba(37,99,235,0.30);
+    color: #1e40af;
+  }
+  [data-theme="day"] .clinic-btn:hover { background: #2563eb; color: #fff; border-color: #2563eb; }
+  [data-theme="day"] .info-banner {
+    background: rgba(37,99,235,0.08);
+    border-color: rgba(37,99,235,0.20);
+  }
