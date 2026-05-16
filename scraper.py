@@ -2562,6 +2562,9 @@ def generate_city_pages(events, template_path="index.html"):
         # Относительные пути для ресурсов
         page_html = page_html.replace('href="favicon.svg"', 'href="../favicon.svg"')
         page_html = page_html.replace("url('hero-map.png')", "url('../hero-map.png')")
+        # Внешние CSS и JS — путь для подпапок
+        page_html = page_html.replace('href="style.css"', 'href="../style.css"')
+        page_html = page_html.replace('src="theme.js"', 'src="../theme.js"')
         # Вкладки навигации — исправляем пути
         page_html = page_html.replace('<a class="nav-tab active" href="/">🏃 Забеги</a>',
                                       '<a class="nav-tab" href="../">🏃 Забеги</a>')
