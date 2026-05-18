@@ -1,6 +1,76 @@
 {
-  "updated": "2026-05-17T16:04:24Z",
+  "updated": "2026-05-18T09:00:49Z",
   "events": [
+    {
+      "id": 22,
+      "date": "2026-05-17",
+      "name": "Забег «Весна»",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "2 км, 5 км",
+      "type": "road",
+      "url": "https://krasmarafon.ru/vesna"
+    },
+    {
+      "id": 79,
+      "date": "2026-05-17",
+      "name": "Городской полумарафон Совкомбанк",
+      "city": "Галич",
+      "region": "Костромская область",
+      "distances": "21,1 км, детский",
+      "type": "road",
+      "url": "https://galtropa.ru/city-marathon"
+    },
+    {
+      "id": 116,
+      "date": "2026-05-17",
+      "name": "РУТС Тобольск",
+      "city": "Тобольск",
+      "region": "Тюменская область",
+      "distances": "5 км, 10 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/RUTSTobolsk2026"
+    },
+    {
+      "id": 157,
+      "date": "2026-05-17",
+      "name": "Переславский марафон «Александровские вёрсты»",
+      "city": "Переславль-Залесский",
+      "region": "Ярославская область",
+      "distances": "5 км, 10 км, 21,1 км, 42,2 км",
+      "type": "road",
+      "url": "https://goldenringrun.ru/pereslavl"
+    },
+    {
+      "id": 180,
+      "date": "2026-05-17",
+      "name": "Безумный трейл Crazy Trail Dunilovo",
+      "city": "Дунилово",
+      "region": "Ивановская область",
+      "distances": "5 км, 10 км, 20 км, 30 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/CrazyTrailDunilovo2026"
+    },
+    {
+      "date": "2026-05-17",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 227
+    },
+    {
+      "date": "2026-05-17",
+      "name": "Информация о дополнительных опциях к регистрации",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/vesna",
+      "id": 229
+    },
     {
       "id": 21,
       "date": "2026-05-16",
@@ -151,76 +221,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 22,
-      "date": "2026-05-17",
-      "name": "Забег «Весна»",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "2 км, 5 км",
-      "type": "road",
-      "url": "https://krasmarafon.ru/vesna"
-    },
-    {
-      "id": 79,
-      "date": "2026-05-17",
-      "name": "Городской полумарафон Совкомбанк",
-      "city": "Галич",
-      "region": "Костромская область",
-      "distances": "21,1 км, детский",
-      "type": "road",
-      "url": "https://galtropa.ru/city-marathon"
-    },
-    {
-      "id": 116,
-      "date": "2026-05-17",
-      "name": "РУТС Тобольск",
-      "city": "Тобольск",
-      "region": "Тюменская область",
-      "distances": "5 км, 10 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/RUTSTobolsk2026"
-    },
-    {
-      "id": 157,
-      "date": "2026-05-17",
-      "name": "Переславский марафон «Александровские вёрсты»",
-      "city": "Переславль-Залесский",
-      "region": "Ярославская область",
-      "distances": "5 км, 10 км, 21,1 км, 42,2 км",
-      "type": "road",
-      "url": "https://goldenringrun.ru/pereslavl"
-    },
-    {
-      "id": 180,
-      "date": "2026-05-17",
-      "name": "Безумный трейл Crazy Trail Dunilovo",
-      "city": "Дунилово",
-      "region": "Ивановская область",
-      "distances": "5 км, 10 км, 20 км, 30 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/CrazyTrailDunilovo2026"
-    },
-    {
-      "date": "2026-05-17",
-      "name": "Старт Красноярск",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/",
-      "id": 227
-    },
-    {
-      "date": "2026-05-17",
-      "name": "Информация о дополнительных опциях к регистрации",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/vesna",
-      "id": 229
     },
     {
       "id": 135,
