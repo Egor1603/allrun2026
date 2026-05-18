@@ -593,6 +593,133 @@ footer a:hover{color:rgba(255,255,255,.70)}
   .hero{padding:28px 16px 20px}
   .card{padding:16px}
 }
+
+/* ════════════════════════════════════════
+   PRINT / PDF  (window.print → PDF)
+   ════════════════════════════════════════ */
+@media print {
+  /* Убираем всё лишнее */
+  .nav, .nav-tabs-bar, .hero, .breadcrumb,
+  .card:first-of-type,   /* карточка "Как это работает" */
+  #result .divider,
+  .pdf-btn-wrap,
+  footer { display: none !important; }
+
+  /* Сброс фона и цвета для печати */
+  *, *::before, *::after {
+    background: white !important;
+    color: #111 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-color: #ddd !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  html, body {
+    background: white !important;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  .page { padding: 0 !important; max-width: 100% !important; }
+
+  /* Заголовок плана */
+  .pdf-header {
+    display: block !important;
+    margin-bottom: 16pt;
+    border-bottom: 2px solid #111;
+    padding-bottom: 10pt;
+  }
+  .pdf-header h2 { font-size: 18pt; font-weight: 800; margin-bottom: 4pt; }
+  .pdf-header p  { font-size: 10pt; color: #444 !important; }
+
+  /* Метрики */
+  .metrics { display: grid !important; grid-template-columns: repeat(4,1fr) !important; gap: 8pt !important; margin-bottom: 14pt !important; }
+  .mc { border: 1px solid #ccc !important; border-radius: 6pt !important; padding: 8pt !important; }
+  .mc-label { font-size: 8pt !important; color: #666 !important; text-transform: uppercase; letter-spacing: .04em; }
+  .mc-val   { font-size: 16pt !important; font-weight: 800 !important; }
+  .mc-sub   { font-size: 8pt !important; color: #666 !important; }
+
+  /* Зоны пульса */
+  .zones { grid-template-columns: repeat(5,1fr) !important; gap: 6pt !important; margin-bottom: 14pt !important; }
+  .zone  { border: 1px solid #ccc !important; padding: 6pt 8pt !important; }
+  .zone-num   { font-size: 8pt !important; }
+  .zone-range { font-size: 12pt !important; font-weight: 800 !important; }
+  .zone-desc  { font-size: 8pt !important; color: #666 !important; }
+  /* Цвета зон сохраняем */
+  .z1 { background: #e3f2fd !important; } .z1 .zone-num, .z1 .zone-range { color: #1565c0 !important; }
+  .z2 { background: #e8f5e9 !important; } .z2 .zone-num, .z2 .zone-range { color: #2e7d32 !important; }
+  .z3 { background: #fff8e1 !important; } .z3 .zone-num, .z3 .zone-range { color: #f57f17 !important; }
+  .z4 { background: #fff3e0 !important; } .z4 .zone-num, .z4 .zone-range { color: #e65100 !important; }
+  .z5 { background: #fce4ec !important; } .z5 .zone-num, .z5 .zone-range { color: #c62828 !important; }
+
+  /* Блок прогрессии темпа */
+  .pace-chart-wrap { margin-bottom: 14pt !important; }
+  .pace-chart svg line, .pace-chart svg polyline, .pace-chart svg circle, .pace-chart svg path, .pace-chart svg rect {
+    /* SVG печатается как есть — браузер сохраняет цвета при -webkit-print-color-adjust:exact */
+  }
+  .pace-phases { grid-template-columns: repeat(4,1fr) !important; gap: 6pt !important; }
+  .pace-phase-card { border: 1px solid #ccc !important; padding: 6pt 8pt !important; }
+  .pace-phase-tempo { font-size: 13pt !important; font-weight: 800 !important; color: #111 !important; }
+
+  /* SEC labels */
+  .sec { font-size: 8pt !important; color: #666 !important; margin-bottom: 6pt !important; }
+
+  /* Прогресс бар объёма — скрываем, в PDF не читается */
+  .prog-wrap { display: none !important; }
+
+  /* План по неделям — все недели раскрыты */
+  .week-body { display: block !important; }
+  .week-hdr  { padding: 6pt 10pt !important; background: #f5f5f5 !important; }
+  .week-num  { font-size: 9pt !important; color: #555 !important; }
+  .phase-badge { font-size: 8pt !important; }
+  .wvol   { font-size: 9pt !important; color: #555 !important; }
+  .chevron { display: none !important; }
+  .days-tbl td { padding: 4pt 8pt !important; font-size: 9pt !important; border-color: #eee !important; }
+  .td-d   { font-size: 8pt !important; color: #888 !important; }
+  .td-t   { font-size: 9pt !important; }
+  /* Цвета типов тренировок */
+  .td-t.easy     { color: #2e7d32 !important; }
+  .td-t.tempo    { color: #e65100 !important; }
+  .td-t.long     { color: #1565c0 !important; }
+  .td-t.interval { color: #c62828 !important; }
+  .td-t.rest     { color: #999 !important; }
+  .td-t.race     { color: #111 !important; font-weight: 800 !important; }
+  .td-desc { color: #444 !important; }
+
+  /* Фазы — цвета бейджей */
+  .ph-base  { background: #e3f2fd !important; color: #1565c0 !important; }
+  .ph-build { background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .ph-peak  { background: #fff3e0 !important; color: #e65100 !important; }
+  .ph-taper { background: #fff8e1 !important; color: #f57f17 !important; }
+  .ph-rest  { background: #f3e5f5 !important; color: #6a1b9a !important; }
+
+  /* Disclaimer */
+  .disclaimer { border-left: 3px solid #999 !important; background: #f9f9f9 !important; font-size: 8pt !important; padding: 8pt !important; }
+
+  /* Разрывы страниц */
+  .week { page-break-inside: avoid; }
+  .metrics, .zones, .pace-chart-wrap { page-break-inside: avoid; }
+  h2, .sec { page-break-after: avoid; }
+}
+
+/* ── PDF BUTTON ── */
+.pdf-btn-wrap { text-align: center; }
+.pdf-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font); font-size: 14px; font-weight: 600;
+  padding: 11px 24px; border-radius: 8px;
+  background: var(--gen-bg); color: var(--gen-c);
+  border: none; cursor: pointer;
+  transition: background .15s, transform .1s;
+}
+.pdf-btn:hover { background: var(--gen-bg-d); transform: translateY(-1px); }
+.pdf-btn:active { transform: scale(.97); }
+.pdf-hint {
+  margin-top: 8px; font-size: 12px; color: var(--muted);
+}
 </style>
 </head>
 <body>
@@ -769,7 +896,24 @@ footer a:hover{color:rgba(255,255,255,.70)}
   <!-- ── RESULT ── -->
   <div id="result">
     <div class="divider"></div>
+    <!-- PDF заголовок (виден только при печати) -->
+    <div class="pdf-header" style="display:none">
+      <h2 id="pdfTitle">План тренировок</h2>
+      <p id="pdfSubtitle">allrunrus.ru · Беговой календарь России</p>
+    </div>
     <div id="resultInner"></div>
+    <!-- Кнопка скачать PDF -->
+    <div class="pdf-btn-wrap" id="pdfBtnWrap" style="display:none;margin-top:20px">
+      <button class="pdf-btn" id="pdfBtn" onclick="downloadPDF()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Скачать план в PDF
+      </button>
+      <p class="pdf-hint">Откроется диалог печати — выберите «Сохранить как PDF»</p>
+    </div>
   </div>
 
 </main>
@@ -1275,6 +1419,24 @@ function render(p){
   const wb=$('wb0'); if(wb){wb.classList.add('open'); const ch=$('ch0'); if(ch) ch.style.transform='rotate(90deg)';}
 
   $('result').scrollIntoView({behavior:'smooth',block:'start'});
+
+  // Показываем кнопку PDF и заполняем заголовок
+  $('pdfBtnWrap').style.display = 'block';
+  const distL = DIST_LABELS[p.dist] || '';
+  $('pdfTitle').textContent = `План тренировок · ${distL} · цель ${fmtPace(paces.target)}/км`;
+  $('pdfSubtitle').textContent = `allrunrus.ru · составлен ${new Date().toLocaleDateString('ru-RU')} · ${p.weeks} недель`;
+}
+
+
+function downloadPDF(){
+  // Раскрываем все недели
+  document.querySelectorAll('.week-body').forEach((b,i)=>{
+    b.classList.add('open');
+    const ch = document.getElementById('ch'+i);
+    if(ch) ch.style.transform = 'rotate(90deg)';
+  });
+  // Небольшая задержка чтобы DOM обновился
+  setTimeout(()=>{ window.print(); }, 120);
 }
 
 window.toggleWeek=function(i){
