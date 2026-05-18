@@ -2579,12 +2579,12 @@ def generate_city_pages(events, template_path="index.html"):
 
         # Хлебные крошки
         breadcrumb = (
-            f'<a href="../" style="color:inherit;opacity:.8;">← Все события</a>'
+            f'<a href="../">← Все события</a>'
             f' · {label} ({cnt})'
         )
         page_html = page_html.replace(
             '<p class="hero-updated" id="nav-updated"></p>',
-            f'<p style="font-size:12px;opacity:.65;margin-top:6px;">{breadcrumb}</p>'
+            f'<p class="breadcrumb">{breadcrumb}</p>'
             f'\n    <p class="hero-updated" id="nav-updated"></p>'
         )
 
