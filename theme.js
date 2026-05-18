@@ -3,7 +3,10 @@
 
 (function(){
   var h = new Date().getHours();
-  var auto = (h >= 7 && h < 19) ? 'day' : 'night';
+  var hourAuto = (h >= 7 && h < 19) ? 'day' : 'night';
+  // Системная тема имеет приоритет над часовым правилом
+  var sysPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var auto = sysPrefersDark ? 'night' : hourAuto;
   var override = localStorage.getItem('allrunrus-theme-override');
   var overrideTime = parseInt(localStorage.getItem('allrunrus-theme-time')||'0');
   var theme = (override && (Date.now()-overrideTime) < 3600000) ? override : auto;
