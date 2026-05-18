@@ -265,15 +265,34 @@ a:hover{opacity:.8}
 
 .field input,.field select{
   font-family:var(--font);font-size:13px;
-  color:var(--text);
-  background:rgba(255,255,255,.10);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  color:#ffffff;
+  /* Safari требует непрозрачный background — rgba игнорируется */
+  background-color:#1e3a7a;
   border:1px solid rgba(255,255,255,.20);
   border-radius:8px;
   padding:7px 28px 7px 10px;
   height:36px;
   outline:none;transition:border-color .15s;width:100%;
-  appearance:none;-webkit-appearance:none;
+  /* Убираем нативный стиль во всех браузерах */
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+  /* Safari: убираем скругления системного контрола */
+  border-radius:8px;
+  -webkit-border-radius:8px;
+}
+/* Стрелка — через фоновое изображение, backdrop-filter не нужен */
+.field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.55)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 10px center;
+  cursor:pointer;
+}
+.field select:focus{border-color:rgba(255,255,255,.55);outline:none}
+/* Опции — фон чтобы не было белых выпадашек */
+.field select option{
+  background-color:#1a2f6e;
+  color:#ffffff;
 }
 .field input{padding-right:10px}
 .field input:focus,.field select:focus{border-color:rgba(255,255,255,.50)}
@@ -304,19 +323,21 @@ a:hover{opacity:.8}
 .field select option{background:#1a2f6e;color:#fff}
 .field input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
 
-[data-theme="day"] .field input,
-[data-theme="day"] .field select{
+[data-theme="day"] .field input{
   color:#0f1f3d;background:rgba(255,255,255,.70);
   border-color:rgba(37,99,235,.20);
 }
-[data-theme="day"] .field input:focus,
-[data-theme="day"] .field select:focus{border-color:#2563eb}
+[data-theme="day"] .field input:focus{border-color:#2563eb}
 [data-theme="day"] .field input::placeholder{color:#8aaccc}
+/* Day theme select — непрозрачный фон для Safari */
 [data-theme="day"] .field select{
+  color:#0f1f3d;
+  background-color:#ddeeff;
+  border-color:rgba(37,99,235,.25);
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a7299' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-color:rgba(255,255,255,.70);
 }
-[data-theme="day"] .field select option{background:#e8f4ff;color:#0f1f3d}
+[data-theme="day"] .field select:focus{border-color:#2563eb}
+[data-theme="day"] .field select option{background-color:#dbeafe;color:#0f1f3d}
 
 /* ── PILLS (type-btn style из оригинала) ── */
 .pill-group{display:flex;flex-wrap:wrap;gap:6px}
