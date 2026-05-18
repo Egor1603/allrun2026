@@ -15,302 +15,546 @@
 /* ── Reset ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-/* ── Tokens — copied from allrunrus.ru palette ── */
-:root{
-  --c-bg:#ffffff;
-  --c-bg2:#f7f7f5;
-  --c-bg3:#f0f0ec;
-  --c-border:#e0e0d8;
-  --c-border2:#c8c8c0;
-  --c-text:#1a1a1a;
-  --c-text2:#555550;
-  --c-text3:#888882;
-  --c-accent:#1a1a1a;       /* same dark as site links */
-  --c-accent-bg:#f0f0ec;
-  --c-green:#2d6a2d;        /* success/ok */
-  --c-green-bg:#eaf4ea;
-  --c-orange:#b85c00;       /* warn */
-  --c-orange-bg:#fff3e0;
-  --c-red:#c0392b;
-  --c-red-bg:#fdecea;
-  --c-link:#1a73e8;
-  --radius:8px;
-  --radius-lg:12px;
-  --font:'Segoe UI',system-ui,-apple-system,sans-serif;
-  --font-mono:'SF Mono','Fira Mono',monospace;
-  --max:860px;
-  --nav-h:52px;
+/* ════════════════════════════════════════
+   ТОКЕНЫ — точная копия allrunrus.ru
+   ════════════════════════════════════════ */
+:root,[data-theme="night"]{
+  --bg:         linear-gradient(160deg,#0c1d4a 0%,#1a2f6e 45%,#0d3058 100%);
+  --bg-solid:   #0c1d4a;
+  --nav-bg:     rgba(12,29,74,.65);
+  --tabs-bg:    rgba(8,20,55,.60);
+  --footer-bg:  rgba(8,16,48,.55);
+  --surface:    rgba(255,255,255,.09);
+  --surface2:   rgba(255,255,255,.06);
+  --surface-h:  rgba(255,255,255,.14);
+  --border:     rgba(255,255,255,.16);
+  --border2:    rgba(255,255,255,.10);
+  --text:       #ffffff;
+  --muted:      rgba(255,255,255,.55);
+  --shadow:     0 4px 24px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.12);
+  --dropdown:   rgba(12,25,70,.90);
+
+  /* page-specific tokens */
+  --hint-ok-bg:    rgba(34,197,94,.15);
+  --hint-ok-c:     #86efac;
+  --hint-ok-b:     rgba(134,239,172,.40);
+  --hint-warn-bg:  rgba(251,191,36,.12);
+  --hint-warn-c:   #fcd34d;
+  --hint-warn-b:   rgba(252,211,77,.40);
+  --hint-err-bg:   rgba(220,38,38,.15);
+  --hint-err-c:    #fca5a5;
+  --hint-err-b:    rgba(252,165,165,.40);
+
+  --mc-bg:      rgba(255,255,255,.07);
+  --card-bg:    rgba(255,255,255,.09);
+  --card-b:     rgba(255,255,255,.18);
+  --week-hdr-hover: rgba(255,255,255,.05);
+  --week-body:  rgba(8,16,48,.40);
+
+  --z1-bg:rgba(37,99,235,.18);  --z1-c:#93c5fd;
+  --z2-bg:rgba(34,197,94,.18);  --z2-c:#86efac;
+  --z3-bg:rgba(251,191,36,.15); --z3-c:#fcd34d;
+  --z4-bg:rgba(249,115,22,.18); --z4-c:#fdba74;
+  --z5-bg:rgba(239,68,68,.18);  --z5-c:#fca5a5;
+
+  --ph-base-bg:rgba(37,99,235,.25);  --ph-base-c:#93c5fd;
+  --ph-build-bg:rgba(34,197,94,.20); --ph-build-c:#86efac;
+  --ph-peak-bg:rgba(249,115,22,.22); --ph-peak-c:#fdba74;
+  --ph-taper-bg:rgba(251,191,36,.18);--ph-taper-c:#fcd34d;
+  --ph-rest-bg:rgba(167,139,250,.20);--ph-rest-c:#c4b5fd;
+
+  --td-easy:#86efac; --td-tempo:#fdba74;
+  --td-long:#93c5fd; --td-int:#fca5a5;
+  --td-rest:rgba(255,255,255,.30);
+
+  --prog-track:rgba(255,255,255,.08);
+  --sec-c:rgba(255,255,255,.45);
+  --gen-bg:rgba(255,255,255,1);
+  --gen-c:#0c1d4a;
+  --gen-bg-d:rgba(255,255,255,.85);
+  --radius:10px; --radius-lg:16px;
+  --font:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+  --max:900px; --nav-h:52px;
 }
 
-/* ── Base ── */
-html{font-size:16px;scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--c-bg);color:var(--c-text);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+[data-theme="day"]{
+  --bg:         linear-gradient(160deg,#e8f4ff 0%,#ddeeff 45%,#e0f0f8 100%);
+  --bg-solid:   #e8f4ff;
+  --nav-bg:     rgba(240,248,255,.75);
+  --tabs-bg:    rgba(230,244,255,.70);
+  --footer-bg:  rgba(220,238,255,.65);
+  --surface:    rgba(255,255,255,.72);
+  --surface2:   rgba(255,255,255,.50);
+  --surface-h:  rgba(255,255,255,.88);
+  --border:     rgba(255,255,255,.90);
+  --border2:    rgba(37,99,235,.12);
+  --text:       #0f1f3d;
+  --muted:      #5a7299;
+  --shadow:     0 2px 16px rgba(37,99,235,.08),0 1px 3px rgba(0,0,0,.04);
+  --dropdown:   rgba(240,248,255,.95);
 
-a{color:var(--c-link);text-decoration:none}
-a:hover{text-decoration:underline}
+  --hint-ok-bg:   #f0fdf4; --hint-ok-c:#15803d;  --hint-ok-b:#86efac;
+  --hint-warn-bg: #fffbeb; --hint-warn-c:#92400e; --hint-warn-b:#fcd34d;
+  --hint-err-bg:  #fef2f2; --hint-err-c:#dc2626;  --hint-err-b:#fca5a5;
 
-/* ── NAV — identical to allrunrus.ru ── */
+  --mc-bg:      rgba(255,255,255,.70);
+  --card-bg:    rgba(255,255,255,.72);
+  --card-b:     rgba(255,255,255,.90);
+  --week-hdr-hover:rgba(37,99,235,.05);
+  --week-body:  rgba(240,248,255,.60);
+
+  --z1-bg:#dbeafe; --z1-c:#1e40af;
+  --z2-bg:#dcfce7; --z2-c:#166534;
+  --z3-bg:#fef9c3; --z3-c:#854d0e;
+  --z4-bg:#ffedd5; --z4-c:#9a3412;
+  --z5-bg:#fee2e2; --z5-c:#991b1b;
+
+  --ph-base-bg:#dbeafe;  --ph-base-c:#1e40af;
+  --ph-build-bg:#dcfce7; --ph-build-c:#166534;
+  --ph-peak-bg:#ffedd5;  --ph-peak-c:#9a3412;
+  --ph-taper-bg:#fef9c3; --ph-taper-c:#854d0e;
+  --ph-rest-bg:#ede9fe;  --ph-rest-c:#5b21b6;
+
+  --td-easy:#166534; --td-tempo:#9a3412;
+  --td-long:#1e40af; --td-int:#991b1b;
+  --td-rest:#5a7299;
+
+  --prog-track:rgba(37,99,235,.10);
+  --sec-c:#5a7299;
+  --gen-bg:#2563eb; --gen-c:#fff;
+  --gen-bg-d:#1d4ed8;
+}
+
+/* ════════════════════════════════════════
+   BASE
+   ════════════════════════════════════════ */
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  background-attachment:fixed;
+  color:var(--text);
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+a:hover{opacity:.8}
+
+/* ════════════════════════════════════════
+   NAV — точная копия allrunrus.ru
+   ════════════════════════════════════════ */
 .nav{
+  background:var(--nav-bg);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border2);
   position:sticky;top:0;z-index:100;
-  background:var(--c-bg);
-  border-bottom:1px solid var(--c-border);
-  height:var(--nav-h);display:flex;align-items:center;
 }
 .nav-inner{
-  max-width:var(--max);width:100%;margin:0 auto;
-  padding:0 16px;display:flex;align-items:center;gap:20px;
+  max-width:1100px;margin:0 auto;
+  padding:0 20px;height:var(--nav-h);
+  display:flex;align-items:center;gap:12px;overflow:hidden;
 }
 .nav-logo{
-  font-weight:700;font-size:15px;color:var(--c-text);
-  display:flex;align-items:center;gap:7px;
+  display:flex;align-items:center;gap:8px;
+  font-weight:700;font-size:16px;color:var(--text);
   text-decoration:none;flex-shrink:0;
 }
-.nav-logo-badge{
-  width:26px;height:26px;background:var(--c-text);color:#fff;
-  border-radius:6px;display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:800;
+.nav-logo-icon{
+  width:30px;height:30px;
+  background:rgba(255,255,255,.20);
+  border:1px solid rgba(255,255,255,.30);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-weight:800;font-size:14px;
 }
-.nav-links{display:flex;gap:4px;margin-left:8px}
-.nav-links a{
-  padding:5px 10px;border-radius:6px;font-size:14px;color:var(--c-text2);
-  text-decoration:none;transition:background .12s;
+[data-theme="day"] .nav-logo-icon{background:rgba(15,33,80,.15);border-color:rgba(15,33,80,.30);}
+
+/* Вкладки навигации */
+.nav-tabs-bar{
+  background:var(--tabs-bg);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border2);
+  position:sticky;top:var(--nav-h);z-index:99;
 }
-.nav-links a:hover{background:var(--c-bg2)}
-.nav-links a.active{background:var(--c-bg3);color:var(--c-text);font-weight:500}
-.nav-sun{margin-left:auto;font-size:18px;cursor:default}
+.nav-tabs-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;overflow-x:auto;scrollbar-width:none;
+  padding:0 12px;
+}
+.nav-tabs-inner::-webkit-scrollbar{display:none}
+.nav-tab{
+  display:flex;align-items:center;gap:6px;
+  padding:10px 14px;font-size:13px;font-weight:500;
+  color:var(--muted);white-space:nowrap;
+  text-decoration:none;cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:all .15s;flex-shrink:0;
+}
+.nav-tab:hover{color:var(--text);opacity:.85}
+.nav-tab.active{color:var(--text);border-bottom-color:var(--text);font-weight:600}
+[data-theme="day"] .nav-tab.active{color:#1e40af;border-bottom-color:#2563eb}
 
-/* ── PAGE ── */
-.page{max-width:var(--max);margin:0 auto;padding:32px 16px 64px;flex:1}
+/* Кнопка темы */
+.theme-toggle{
+  margin-left:auto;flex-shrink:0;
+  width:34px;height:34px;border-radius:10px;
+  border:1px solid var(--border);background:var(--surface);
+  font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.theme-toggle:hover{background:var(--surface-h);transform:scale(1.08)}
+[data-theme="day"] .theme-toggle{background:rgba(15,33,80,.08);border-color:transparent}
 
-/* ── PAGE HEADER ── */
-.page-hdr{margin-bottom:28px}
-.page-hdr h1{font-size:24px;font-weight:700;margin-bottom:6px;line-height:1.2}
-.page-hdr p{color:var(--c-text2);font-size:15px}
-.breadcrumb{font-size:13px;color:var(--c-text3);margin-bottom:16px}
-.breadcrumb a{color:var(--c-text3)}
-.breadcrumb a:hover{color:var(--c-text)}
+/* ════════════════════════════════════════
+   HERO
+   ════════════════════════════════════════ */
+.hero{
+  padding:44px 20px 36px;text-align:center;
+}
+.hero h1{
+  font-size:clamp(22px,4vw,36px);font-weight:800;
+  letter-spacing:-.03em;margin-bottom:8px;
+  color:var(--text);text-shadow:0 2px 20px rgba(0,0,0,.2);
+}
+.hero p{font-size:14px;color:var(--muted)}
+[data-theme="day"] .hero p{color:rgba(15,33,80,.70);text-shadow:none}
+.breadcrumb{
+  font-size:13px;color:var(--muted);
+  padding:12px 20px 0;max-width:1100px;margin:0 auto;
+}
+.breadcrumb a{color:var(--muted)}
+.breadcrumb a:hover{color:var(--text)}
 
-/* ── FORM CARD ── */
+/* ════════════════════════════════════════
+   PAGE
+   ════════════════════════════════════════ */
+.page{max-width:1100px;margin:0 auto;padding:20px 20px 64px;flex:1}
+
+/* ════════════════════════════════════════
+   CARDS (как event-card на главной)
+   ════════════════════════════════════════ */
 .card{
-  background:var(--c-bg);border:1px solid var(--c-border);
-  border-radius:var(--radius-lg);padding:24px;margin-bottom:20px;
+  background:var(--card-bg);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--card-b);
+  border-radius:var(--radius-lg);
+  padding:20px 24px;
+  margin-bottom:16px;
+  box-shadow:var(--shadow);
 }
-.card-title{font-size:13px;font-weight:600;color:var(--c-text3);
-  text-transform:uppercase;letter-spacing:.05em;margin-bottom:16px}
+.card-title{
+  font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--muted);margin-bottom:14px;
+}
 
+/* ════════════════════════════════════════
+   FORM GRID
+   ════════════════════════════════════════ */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:540px){.form-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.form-grid{grid-template-columns:1fr}}
 .form-full{grid-column:1/-1}
 
-/* ── FIELD ── */
 .field{display:flex;flex-direction:column;gap:5px}
-.field label{font-size:13px;color:var(--c-text2);font-weight:500}
+.field label{font-size:13px;color:var(--muted);font-weight:500}
 
 .field input,.field select{
-  height:38px;padding:0 12px;
-  border:1px solid var(--c-border2);border-radius:var(--radius);
-  background:var(--c-bg);color:var(--c-text);
-  font-family:var(--font);font-size:14px;
+  font-family:var(--font);font-size:13px;
+  color:var(--text);
+  background:rgba(255,255,255,.10);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:8px;
+  padding:7px 28px 7px 10px;
+  height:36px;
   outline:none;transition:border-color .15s;width:100%;
+  appearance:none;-webkit-appearance:none;
 }
-.field input:focus,.field select:focus{border-color:#888;box-shadow:0 0 0 3px rgba(0,0,0,.06)}
-.field input::placeholder{color:var(--c-text3)}
-.field select{appearance:none;-webkit-appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 5 5-5z' fill='%23888'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 12px center;padding-right:30px}
+.field input{padding-right:10px}
+.field input:focus,.field select:focus{border-color:rgba(255,255,255,.50)}
+.field input::placeholder{color:rgba(255,255,255,.35)}
+.field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.55)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 9px center;
+  background-color:rgba(255,255,255,.10);
+  cursor:pointer;
+}
+.field select option{background:#1a2f6e;color:#fff}
 .field input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
 
-/* ── PILL GROUP ── */
+[data-theme="day"] .field input,
+[data-theme="day"] .field select{
+  color:#0f1f3d;background:rgba(255,255,255,.70);
+  border-color:rgba(37,99,235,.20);
+}
+[data-theme="day"] .field input:focus,
+[data-theme="day"] .field select:focus{border-color:#2563eb}
+[data-theme="day"] .field input::placeholder{color:#8aaccc}
+[data-theme="day"] .field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a7299' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-color:rgba(255,255,255,.70);
+}
+[data-theme="day"] .field select option{background:#e8f4ff;color:#0f1f3d}
+
+/* ── PILLS (type-btn style из оригинала) ── */
 .pill-group{display:flex;flex-wrap:wrap;gap:6px}
 .pill{
-  padding:5px 12px;border-radius:20px;font-size:13px;
-  border:1px solid var(--c-border2);background:var(--c-bg);
-  color:var(--c-text2);cursor:pointer;transition:all .12s;
-  font-family:var(--font);line-height:1.4;
+  font-family:var(--font);font-size:13px;font-weight:500;
+  padding:5px 14px;border-radius:20px;
+  border:1px solid rgba(255,255,255,.20);
+  background:rgba(255,255,255,.08);
+  color:rgba(255,255,255,.60);
+  cursor:pointer;transition:all .15s;white-space:nowrap;
 }
-.pill:hover{border-color:#888;color:var(--c-text)}
-.pill.on{border-color:var(--c-text);background:var(--c-text);color:#fff}
+.pill:hover{border-color:rgba(255,255,255,.40);color:rgba(255,255,255,.90);background:rgba(255,255,255,.14)}
+.pill.on{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.50);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+
+[data-theme="day"] .pill{color:#5a7299;border-color:rgba(37,99,235,.18);background:rgba(255,255,255,.60)}
+[data-theme="day"] .pill:hover{color:#1e40af;border-color:rgba(37,99,235,.40);background:rgba(255,255,255,.80)}
+[data-theme="day"] .pill.on{background:#2563eb;border-color:#2563eb;color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.35)}
 
 /* ── DAYS BUTTONS ── */
 .days-row{display:flex;gap:6px}
 .day-btn{
-  width:40px;height:40px;border-radius:var(--radius);
-  border:1px solid var(--c-border2);background:var(--c-bg);
-  color:var(--c-text2);font-size:14px;font-weight:500;
-  cursor:pointer;transition:all .12s;font-family:var(--font);
+  width:40px;height:40px;border-radius:8px;
+  border:1px solid rgba(255,255,255,.20);
+  background:rgba(255,255,255,.08);
+  color:rgba(255,255,255,.60);
+  font-family:var(--font);font-size:14px;font-weight:500;
+  cursor:pointer;transition:all .15s;
+  display:flex;align-items:center;justify-content:center;
 }
-.day-btn:hover{border-color:#888;color:var(--c-text)}
-.day-btn.on{border-color:var(--c-text);background:var(--c-text);color:#fff}
+.day-btn:hover{border-color:rgba(255,255,255,.40);color:rgba(255,255,255,.90)}
+.day-btn.on{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.50);color:#fff}
+
+[data-theme="day"] .day-btn{color:#5a7299;border-color:rgba(37,99,235,.18);background:rgba(255,255,255,.60)}
+[data-theme="day"] .day-btn:hover{color:#1e40af;border-color:rgba(37,99,235,.40)}
+[data-theme="day"] .day-btn.on{background:#2563eb;border-color:#2563eb;color:#fff}
 
 /* ── HINT ── */
 .hint{
-  font-size:13px;padding:10px 14px;border-radius:var(--radius);
-  margin:12px 0 0;display:none;border-left:3px solid var(--c-border2);
+  font-size:13px;padding:10px 14px;border-radius:8px;
+  margin:10px 0 0;display:none;border-left:3px solid transparent;
 }
-.hint.ok{display:block;background:var(--c-green-bg);border-color:var(--c-green);color:var(--c-green)}
-.hint.warn{display:block;background:var(--c-orange-bg);border-color:var(--c-orange);color:var(--c-orange)}
-.hint.err{display:block;background:var(--c-red-bg);border-color:var(--c-red);color:var(--c-red)}
+.hint.ok  {display:block;background:var(--hint-ok-bg);  border-color:var(--hint-ok-b);  color:var(--hint-ok-c)}
+.hint.warn{display:block;background:var(--hint-warn-bg);border-color:var(--hint-warn-b);color:var(--hint-warn-c)}
+.hint.err {display:block;background:var(--hint-err-bg); border-color:var(--hint-err-b); color:var(--hint-err-c)}
 
 /* ── UPLOAD ── */
 .upload-zone{
   display:flex;align-items:center;gap:12px;
-  border:1px dashed var(--c-border2);border-radius:var(--radius);
-  padding:12px 14px;cursor:pointer;transition:all .12s;
+  border:1px dashed rgba(255,255,255,.20);border-radius:8px;
+  padding:11px 14px;cursor:pointer;transition:all .15s;
 }
-.upload-zone:hover,.upload-zone.active{border-color:#888;background:var(--c-bg2)}
+.upload-zone:hover,.upload-zone.active{
+  border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.06);
+}
+[data-theme="day"] .upload-zone{border-color:rgba(37,99,235,.25)}
+[data-theme="day"] .upload-zone:hover,[data-theme="day"] .upload-zone.active{
+  border-color:#2563eb;background:rgba(37,99,235,.05);
+}
 .up-icon{font-size:20px;flex-shrink:0}
 .up-text{flex:1}
-.up-title{font-size:14px;color:var(--c-text)}
-.up-sub{font-size:12px;color:var(--c-text3);margin-top:2px}
+.up-title{font-size:14px;color:var(--text)}
+.up-sub{font-size:12px;color:var(--muted);margin-top:1px}
 .up-badge{
-  font-size:12px;padding:3px 8px;border-radius:4px;
-  background:var(--c-bg3);color:var(--c-text2);border:1px solid var(--c-border);
-  display:none;white-space:nowrap;
+  font-size:12px;padding:3px 8px;border-radius:6px;
+  background:rgba(255,255,255,.12);color:var(--muted);
+  border:1px solid rgba(255,255,255,.15);display:none;white-space:nowrap;
 }
 .up-badge.vis{display:block}
 #fileInput{display:none}
 
 /* ── GENERATE BUTTON ── */
 .gen-btn{
-  width:100%;height:44px;border-radius:var(--radius);
-  background:var(--c-text);color:#fff;border:none;
-  font-family:var(--font);font-size:15px;font-weight:600;
-  cursor:pointer;transition:opacity .15s;margin-top:4px;
+  width:100%;height:42px;border-radius:8px;
+  background:var(--gen-bg);color:var(--gen-c);border:none;
+  font-family:var(--font);font-size:14px;font-weight:700;
+  cursor:pointer;transition:background .15s,opacity .15s;
+  margin-top:12px;letter-spacing:.01em;
 }
-.gen-btn:hover{opacity:.85}
-.gen-btn:active{opacity:.7}
-.gen-btn:disabled{opacity:.35;cursor:not-allowed}
+.gen-btn:hover{background:var(--gen-bg-d)}
+.gen-btn:active{opacity:.8}
+.gen-btn:disabled{opacity:.30;cursor:not-allowed}
 
 /* ── DIVIDER ── */
-.divider{height:1px;background:var(--c-border);margin:28px 0}
+.divider{height:1px;background:var(--border2);margin:24px 0}
 
 /* ── RESULT ── */
 #result{display:none}
 #result.vis{display:block}
 
-/* ── METRICS GRID ── */
+/* ── SEC LABEL (как month-heading-text) ── */
+.sec{
+  font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.10em;color:var(--sec-c);margin-bottom:10px;
+}
+
+/* ── METRICS ── */
 .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px}
-.mc{background:var(--c-bg2);border-radius:var(--radius);padding:12px 14px}
-.mc-label{font-size:11px;color:var(--c-text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
-.mc-val{font-size:22px;font-weight:700;color:var(--c-text)}
-.mc-sub{font-size:12px;color:var(--c-text3);margin-top:2px}
+.mc{
+  background:var(--mc-bg);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--border2);
+  border-radius:var(--radius);padding:12px 14px;
+}
+.mc-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.mc-val{font-size:22px;font-weight:800;color:var(--text)}
+.mc-sub{font-size:12px;color:var(--muted);margin-top:2px}
 
 /* ── ZONES ── */
 .zones{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:20px}
-.zone{border-radius:var(--radius);padding:10px 12px;border:1px solid var(--c-border)}
+.zone{border-radius:var(--radius);padding:10px 12px;border:1px solid var(--border2)}
 .zone-num{font-size:11px;font-weight:600;margin-bottom:3px;text-transform:uppercase;letter-spacing:.03em}
-.zone-range{font-size:15px;font-weight:700}
-.zone-desc{font-size:11px;color:var(--c-text3);margin-top:3px}
-.z1{background:#e8f4fd}.z1 .zone-num{color:#1565c0}.z1 .zone-range{color:#1565c0}
-.z2{background:#e8f5e9}.z2 .zone-num{color:#2e7d32}.z2 .zone-range{color:#2e7d32}
-.z3{background:#fff8e1}.z3 .zone-num{color:#f57f17}.z3 .zone-range{color:#f57f17}
-.z4{background:#fff3e0}.z4 .zone-num{color:#e65100}.z4 .zone-range{color:#e65100}
-.z5{background:#fce4ec}.z5 .zone-num{color:#c62828}.z5 .zone-range{color:#c62828}
+.zone-range{font-size:15px;font-weight:800}
+.zone-desc{font-size:11px;color:var(--muted);margin-top:3px}
+.z1{background:var(--z1-bg)}.z1 .zone-num,.z1 .zone-range{color:var(--z1-c)}
+.z2{background:var(--z2-bg)}.z2 .zone-num,.z2 .zone-range{color:var(--z2-c)}
+.z3{background:var(--z3-bg)}.z3 .zone-num,.z3 .zone-range{color:var(--z3-c)}
+.z4{background:var(--z4-bg)}.z4 .zone-num,.z4 .zone-range{color:var(--z4-c)}
+.z5{background:var(--z5-bg)}.z5 .zone-num,.z5 .zone-range{color:var(--z5-c)}
 
-/* ── PROGRESS ── */
+/* ── PROGRESS BAR ── */
 .prog-wrap{margin-bottom:20px}
 .prog-track{
-  height:8px;background:var(--c-bg3);border-radius:4px;
+  height:8px;background:var(--prog-track);border-radius:4px;
   display:flex;gap:2px;overflow:hidden;align-items:flex-end;margin-bottom:5px;
 }
 .prog-seg{border-radius:1px}
-.prog-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--c-text3)}
+.prog-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
 
-/* ── PLAN TABLE ── */
-.plan-wrap{border:1px solid var(--c-border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:20px}
-.week{border-bottom:1px solid var(--c-border)}
+/* ── PLAN (как event-cards) ── */
+.plan-wrap{
+  border:1px solid var(--card-b);border-radius:var(--radius-lg);
+  overflow:hidden;margin-bottom:20px;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+.week{border-bottom:1px solid var(--border2)}
 .week:last-child{border-bottom:none}
 
 .week-hdr{
   display:flex;align-items:center;gap:10px;padding:11px 16px;
-  cursor:pointer;background:var(--c-bg);transition:background .12s;
-  user-select:none;
+  cursor:pointer;
+  background:var(--surface);
+  transition:background .12s;user-select:none;
 }
-.week-hdr:hover{background:var(--c-bg2)}
-.week-num{font-size:12px;font-weight:600;color:var(--c-text3);min-width:66px}
-.phase-badge{font-size:11px;padding:2px 8px;border-radius:4px;font-weight:500}
-.ph-base  {background:#e3f2fd;color:#1565c0}
-.ph-build {background:#e8f5e9;color:#2e7d32}
-.ph-peak  {background:#fff3e0;color:#e65100}
-.ph-taper {background:#fff8e1;color:#f57f17}
-.ph-rest  {background:#f3e5f5;color:#6a1b9a}
-.wvol{margin-left:auto;font-size:13px;color:var(--c-text3)}
-.chevron{color:var(--c-text3);font-size:14px;margin-left:4px;transition:transform .15s}
+.week-hdr:hover{background:var(--surface-h)}
+.week-num{font-size:12px;font-weight:600;color:var(--muted);min-width:66px}
 
-.week-body{display:none;background:var(--c-bg);border-top:1px solid var(--c-border)}
+.phase-badge{font-size:11px;padding:2px 8px;border-radius:6px;font-weight:600}
+.ph-base  {background:var(--ph-base-bg); color:var(--ph-base-c)}
+.ph-build {background:var(--ph-build-bg);color:var(--ph-build-c)}
+.ph-peak  {background:var(--ph-peak-bg); color:var(--ph-peak-c)}
+.ph-taper {background:var(--ph-taper-bg);color:var(--ph-taper-c)}
+.ph-rest  {background:var(--ph-rest-bg); color:var(--ph-rest-c)}
+
+.wvol{margin-left:auto;font-size:13px;color:var(--muted)}
+.chevron{color:var(--muted);font-size:16px;margin-left:4px;transition:transform .15s}
+
+.week-body{
+  display:none;
+  background:var(--week-body);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid var(--border2);
+}
 .week-body.open{display:block}
 
 .days-tbl{width:100%;border-collapse:collapse;table-layout:fixed}
-.days-tbl td{padding:8px 16px;border-bottom:1px solid var(--c-border);font-size:13px;vertical-align:top}
+.days-tbl td{
+  padding:8px 16px;border-bottom:1px solid var(--border2);
+  font-size:13px;vertical-align:top;
+}
 .days-tbl tr:last-child td{border-bottom:none}
-.td-d{width:30px;color:var(--c-text3);font-size:12px;padding-top:9px;white-space:nowrap}
-.td-t{width:110px;font-weight:600;padding-right:8px;white-space:nowrap}
-.td-t.easy    {color:#2e7d32}
-.td-t.tempo   {color:#e65100}
-.td-t.long    {color:#1565c0}
-.td-t.interval{color:#c62828}
-.td-t.rest    {color:var(--c-text3);font-weight:400}
-.td-t.race    {color:var(--c-text);font-weight:700}
-.td-desc{color:var(--c-text2);line-height:1.5;word-break:break-word}
+.td-d{width:30px;color:var(--muted);font-size:12px;padding-top:9px;white-space:nowrap}
+.td-t{width:110px;font-weight:700;padding-right:8px;white-space:nowrap}
+.td-t.easy    {color:var(--td-easy)}
+.td-t.tempo   {color:var(--td-tempo)}
+.td-t.long    {color:var(--td-long)}
+.td-t.interval{color:var(--td-int)}
+.td-t.rest    {color:var(--td-rest);font-weight:400}
+.td-t.race    {color:var(--text);font-weight:700}
+.td-desc{color:var(--muted);line-height:1.5;word-break:break-word}
 
 /* ── DISCLAIMER ── */
 .disclaimer{
-  background:var(--c-bg2);border:1px solid var(--c-border);
-  border-radius:var(--radius);padding:14px 16px;
-  font-size:13px;color:var(--c-text2);line-height:1.6;
-  border-left:3px solid var(--c-border2);
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border2);border-radius:var(--radius);
+  border-left:3px solid rgba(255,255,255,.25);
+  padding:14px 16px;font-size:13px;color:var(--muted);line-height:1.6;
+}
+[data-theme="day"] .disclaimer{
+  background:rgba(37,99,235,.06);border-color:rgba(37,99,235,.15);
+  border-left-color:#2563eb;
 }
 
 /* ── HOW IT WORKS ── */
-.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:16px}
-.how-item{background:var(--c-bg2);border-radius:var(--radius);padding:14px 16px}
-.how-num{font-size:11px;font-weight:700;color:var(--c-text3);margin-bottom:6px;letter-spacing:.05em}
-.how-title{font-size:14px;font-weight:600;margin-bottom:4px}
-.how-desc{font-size:13px;color:var(--c-text2);line-height:1.5}
-
-/* ── SEC LABEL ── */
-.sec{font-size:12px;font-weight:600;color:var(--c-text3);
-  text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
-
-/* ── FOOTER ── */
-.footer{
-  border-top:1px solid var(--c-border);
-  padding:20px 16px;text-align:center;
-  font-size:13px;color:var(--c-text3);
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:14px}
+.how-item{
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:var(--radius);padding:14px 16px;
 }
-.footer a{color:var(--c-text3)}
-.footer a:hover{color:var(--c-text)}
+.how-num{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;letter-spacing:.05em}
+.how-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.how-desc{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* ── FOOTER — точная копия allrunrus.ru ── */
+footer{
+  background:var(--footer-bg);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-top:1px solid var(--border2);
+  text-align:center;padding:20px;
+  font-size:12px;color:rgba(255,255,255,.40);line-height:1.7;
+}
+footer a{color:rgba(255,255,255,.40)}
+footer a:hover{color:rgba(255,255,255,.70)}
+[data-theme="day"] footer{color:#7a9bbf}
+[data-theme="day"] footer a{color:#7a9bbf}
+[data-theme="day"] footer a:hover{color:#1e40af}
+
+/* ── MOBILE ── */
+@media(max-width:600px){
+  .nav-inner,.page{padding-left:14px;padding-right:14px}
+  .hero{padding:28px 16px 20px}
+  .card{padding:16px}
+}
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- ── NAV — точная копия allrunrus.ru ── -->
 <nav class="nav" role="navigation">
   <div class="nav-inner">
     <a href="https://allrunrus.ru/" class="nav-logo">
-      <div class="nav-logo-badge">R</div>
-      Беговой календарь России
+      <div class="nav-logo-icon">R</div>
+      <span class="nav-logo-text">Беговой календарь России</span>
     </a>
-    <div class="nav-links">
-      <a href="https://allrunrus.ru/">🏃 Забеги</a>
-      <a href="https://allrunrus.ru/clinics/">🏥 Справка 1444н</a>
-      <a href="/trenirovki/" class="active">📋 Тренировки</a>
-    </div>
-    <span class="nav-sun" aria-hidden="true">☀️</span>
+    <button class="theme-toggle" id="themeBtn" aria-label="Переключить тему">☀️</button>
   </div>
 </nav>
 
+<!-- ── ВКЛАДКИ — как на allrunrus.ru ── -->
+<div class="nav-tabs-bar">
+  <div class="nav-tabs-inner">
+    <a href="https://allrunrus.ru/" class="nav-tab">🏃 Забеги</a>
+    <a href="https://allrunrus.ru/clinics/" class="nav-tab">🏥 Справка 1444н</a>
+    <a href="/trenirovki/" class="nav-tab active">📋 Тренировки</a>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <h1>Генератор плана тренировок</h1>
+  <p>Введите данные — план рассчитается автоматически · Бесплатно · Без регистрации</p>
+</div>
+<div class="breadcrumb"><a href="https://allrunrus.ru/">← Все забеги</a></div>
+
 <!-- ── PAGE ── -->
 <main class="page">
-
-  <div class="breadcrumb">
-    <a href="https://allrunrus.ru/">← Все забеги</a>
-  </div>
-
-  <div class="page-hdr">
-    <h1>📋 Генератор плана тренировок</h1>
-    <p>Введите свои данные — план рассчитается автоматически. Бесплатно, без регистрации.</p>
-  </div>
 
   <!-- ── HOW IT WORKS ── -->
   <div class="card">
@@ -453,12 +697,12 @@ a:hover{text-decoration:underline}
 
 </main>
 
-<!-- ── FOOTER ── -->
-<footer class="footer">
+<!-- ── FOOTER — точная копия allrunrus.ru ── -->
+<footer>
   <a href="https://allrunrus.ru/">Беговой календарь России</a> ·
   <a href="https://allrunrus.ru/trenirovki/">Планы тренировок</a> ·
   <a href="https://allrunrus.ru/clinics/">Справка 1444н</a><br>
-  <span style="margin-top:6px;display:block">Информация с официальных источников · Обновление 2 раза в сутки</span>
+  Информация с официальных источников организаторов забегов · 48 источников · Обновление 2 раза в сутки
 </footer>
 
 <script>
@@ -551,134 +795,187 @@ function show(cls,txt){
 validate();
 
 // ══════════════════════════════════════
-//  PLAN ENGINE
+//  PLAN ENGINE  (fully dynamic — every
+//  value derived from user inputs)
 // ══════════════════════════════════════
-function calcZones(age,hrRest){
-  const hrMax=Math.round(208-0.7*age), r=hrMax-hrRest;
-  const z=pct=>[Math.round(hrRest+r*pct[0]),Math.round(hrRest+r*pct[1])];
-  return {hrMax,
-    z1:z([.50,.60]),z2:z([.60,.70]),
-    z3:z([.70,.80]),z4:z([.80,.90]),z5:z([.90,1])};
+
+/* Зоны пульса по Карвонену */
+function calcZones(age, hrRest){
+  const hrMax = Math.round(208 - 0.7 * age);
+  const r = hrMax - hrRest;
+  const z = (lo, hi) => [Math.round(hrRest + r * lo), Math.round(hrRest + r * hi)];
+  return { hrMax,
+    z1: z(.50,.60), z2: z(.60,.70),
+    z3: z(.70,.80), z4: z(.80,.90), z5: z(.90,1) };
 }
 
-function calcPaces(cur,dist,goal){
-  const df={'5':.88,'10':1,'21':1.09,'42':1.18,'trail':1.25,'ultra':1.42};
-  const gf={result:.92,finish:.97,zero:1.02,recovery:1.0};
-  const target=Math.round(cur*(df[dist]||1)*(gf[goal]||1));
+/* Целевые темпы — все производные от curPace */
+function calcPaces(curPace, dist, goal){
+  // Riegel-based pace adjustment per distance vs 10k
+  const distFactor = {'5':.88,'10':1,'21':1.09,'42':1.18,'trail':1.25,'ultra':1.42}[dist] || 1;
+  // Goal adjustment: result = run faster than current projection
+  const goalFactor  = {result:.90, finish:.97, zero:1.06, recovery:1.03}[goal] || 1;
+  const target = Math.round(curPace * distFactor * goalFactor);
   return {
-    easy:Math.round(cur*1.20), long:Math.round(cur*1.15),
-    tempo:Math.round(cur*0.93), interval:Math.round(cur*0.85),
-    target, current:cur
+    current:  curPace,
+    easy:     Math.round(curPace * 1.20),   // зона 1–2
+    long:     Math.round(curPace * 1.15),   // зона 2
+    tempo:    Math.round(curPace * 0.93),   // зона 3–4
+    interval: Math.round(curPace * 0.85),   // зона 4–5
+    target,
   };
 }
 
-function baseVol(level,days){
-  return Math.round({beginner:20,amateur:35,advanced:50}[level]*{3:.8,4:1,5:1.2,6:1.4}[days]);
+/* Базовый недельный объём зависит от уровня И кол-ва дней */
+function calcBaseVol(level, days){
+  const lvl = {beginner:18, amateur:32, advanced:48}[level] || 32;
+  const dm  = {3:.75, 4:1.0, 5:1.25, 6:1.50}[days] || 1.0;
+  return Math.round(lvl * dm);
 }
 
+/* Фазы по неделям */
 function buildPhases(n){
-  const p=[];
-  for(let i=0;i<n;i++){
-    if(i>=n-2) p.push('taper');
-    else if(i%4===3) p.push('rest');
-    else if(n<=6) p.push(i<n*.5?'base':'build');
-    else if(i<Math.floor(n*.3)) p.push('base');
-    else if(i<Math.floor(n*.6)) p.push('build');
-    else p.push('peak');
+  const p = [];
+  for(let i = 0; i < n; i++){
+    if(i >= n - 2)              p.push('taper');
+    else if(i % 4 === 3)        p.push('rest');
+    else if(n <= 6)             p.push(i < Math.ceil(n/2) ? 'base' : 'build');
+    else if(i < n * .30)        p.push('base');
+    else if(i < n * .60)        p.push('build');
+    else                        p.push('peak');
   }
   return p;
 }
 
-function buildVols(phases,bv,dist){
-  const mx=bv*({'5':1.4,'10':1.5,'21':1.7,'42':2.0,'trail':1.8,'ultra':2.2}[dist]||1.6);
-  let v=bv; const mult={base:1.08,build:1.10,peak:1.06,rest:.65,taper:.55};
-  return phases.map(ph=>{
-    if(ph==='rest'||ph==='taper') return Math.max(Math.round(v*(mult[ph])),12);
-    v=Math.min(v*(mult[ph]||1.08),mx);
-    return Math.max(Math.round(v),12);
+/* Объём каждой недели — нарастает от baseVol, фиксируется на пике */
+function buildVols(phases, baseVol, dist){
+  const maxMult = {'5':1.35,'10':1.50,'21':1.65,'42':1.95,'trail':1.75,'ultra':2.10}[dist] || 1.60;
+  const cap = baseVol * maxMult;
+
+  // growth rate per active phase
+  const grow = {base:1.08, build:1.10, peak:1.05};
+
+  let running = baseVol;          // tracks active-week volume (not reduced by rest/taper)
+  return phases.map(ph => {
+    if(ph === 'rest')  return Math.max(Math.round(running * .65), 12);
+    if(ph === 'taper') return Math.max(Math.round(running * .55), 12);
+    running = Math.min(running * (grow[ph] || 1.08), cap);
+    return Math.max(Math.round(running), 12);
   });
 }
 
-const DAYS7=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
-const TRAIN_IDX={3:[2,4,6],4:[1,3,5,6],5:[1,2,4,5,6],6:[0,1,2,4,5,6]};
+const DAYS7     = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+const TRAIN_IDX = {3:[2,4,6], 4:[1,3,5,6], 5:[1,2,4,5,6], 6:[0,1,2,4,5,6]};
 
-function dayWorkouts(phase,vol,paces,days,dist,wi,total,zones){
-  const isLast=wi===total-1, isTrail=dist==='trail'||dist==='ultra';
-  const isPeakLate=phase==='peak'&&wi>=Math.floor(total*.75);
+/* Генерация тренировок на неделю.
+   Все дистанции — ПРОПОРЦИИ от weekVol.
+   Все темпы    — производные от paces (которые от curPace).
+   Все пульсы   — из zones (которые из возраста + ЧСС покоя). */
+function dayWorkouts(phase, weekVol, paces, days, dist, weekIdx, totalWeeks, zones){
+  const isLast   = weekIdx === totalWeeks - 1;
+  const isTrail  = dist === 'trail' || dist === 'ultra';
+  const isPeakLate = phase === 'peak' && weekIdx >= Math.floor(totalWeeks * .75);
 
-  const tp=fmtPace(paces.tempo), ti=fmtPace(paces.interval);
-  const te=fmtPace(paces.easy),  tl=fmtPace(paces.long), tg=fmtPace(paces.target);
-  const z2=`${zones.z2[0]}–${zones.z2[1]}`, z3=`${zones.z3[0]}–${zones.z3[1]}`, z4=`${zones.z4[0]}–${zones.z4[1]}`;
+  // ── пульсовые диапазоны (строки)
+  const z2s = `${zones.z2[0]}–${zones.z2[1]}`;
+  const z3s = `${zones.z3[0]}–${zones.z3[1]}`;
+  const z4s = `${zones.z4[0]}–${zones.z4[1]}`;
 
-  const longK=Math.round(vol*.38), tempoK=Math.round(vol*.25);
-  const intK=Math.round(vol*.18),  easyK=Math.round(vol*.19);
-  const warm=2, cool=2, netT=Math.max(tempoK-warm-cool,2), netI=Math.max(intK-warm-cool,2);
-  const reps=Math.max(Math.round(netI),2);
+  // ── темп для каждого типа
+  //   В фазах base/rest — немного медленнее; в peak — точно по целевому
+  const phPaceMult = {base:1.05, build:1.0, peak:1.0, rest:1.08, taper:1.02};
+  const pm = phPaceMult[phase] || 1.0;
 
-  function longDesc(){
-    if(isTrail) return `${longK} км по пересечённой местности, по усилию (зона 2), фокус на D+`;
-    if(isPeakLate) return `${longK} км: ${longK-5} км зона 2 темп ${tl} + последние 5 км целевой темп ${tg}`;
-    return `${longK} км, зона 2, темп ${tl}, пульс ${z2}`;
+  const tEasy     = fmtPace(paces.easy);
+  const tLong     = fmtPace(paces.long);
+  const tTempo    = fmtPace(paces.tempo   * pm);
+  const tInterval = fmtPace(paces.interval * pm);
+  const tTarget   = fmtPace(paces.target);
+
+  // ── объёмы тренировок (пропорции от weekVol)
+  // Пропорции зависят от количества дней
+  const dayPct = {
+    3: {long:.46, tempo:.32, easy:.22},
+    4: {long:.38, tempo:.26, interval:.19, easy:.17},
+    5: {long:.34, tempo:.22, interval:.17, easy2:.16, easy:.11},
+    6: {long:.30, tempo:.20, interval:.16, easy2:.14, easy:.12, recovery:.08},
+  }[days] || {long:.38, tempo:.26, interval:.19, easy:.17};
+
+  const K = k => Math.max(Math.round(weekVol * (dayPct[k]||0)), 2);
+  const longK = K('long'), tempoK = K('tempo'), intK = K('interval'),
+        easyK = K('easy'), easy2K = K('easy2');
+
+  const warm = 2, cool = 2;
+  const netTempo = Math.max(tempoK - warm - cool, 2);
+  const repsInt  = Math.max(Math.round(intK / 1.2), 2);  // ~1.2км на повтор + отдых
+
+  // ── описание длительной
+  function descLong(){
+    if(isTrail) return `${longK} км по пересечённой, по усилию (зона 2, пульс ${z2s}), фокус на набор высоты`;
+    if(isPeakLate) return `${longK} км: ${Math.max(longK-5,2)} км зона 2 темп ${tLong} + последние 5 км целевой темп ${tTarget}`;
+    return `${longK} км, зона 2, темп ${tLong}, пульс ${z2s}`;
   }
 
-  function mkList(){
-    if(isLast) return null; // handled below
-    const pf={base:.87,build:.93,peak:1,rest:.72,taper:.82}[phase]||1;
-    const tpAdj=fmtPace(paces.tempo/pf), tiAdj=fmtPace(paces.interval/pf);
-
-    const list=[
-      {t:'Длительный',type:'long',desc:longDesc()},
-    ];
-    if(phase!=='base'&&phase!=='rest') list.push({t:'Интервалы',type:'interval',desc:`${intK} км: ${reps}×1 км темп ${tiAdj} (зона 4, пульс ${z4}), отдых 2 мин`});
-    list.push({t:'Темповый',type:'tempo',desc:`${tempoK} км: ${warm}+${netT} км темп ${tpAdj} (пульс ${phase==='base'?z3:z4})+${cool} заминка`});
-    if(days>=4) list.push({t:'Лёгкий',type:'easy',desc:`${easyK} км, зона 1–2, темп ${te}, пульс ниже ${zones.z2[1]}`});
-    if(days>=5) list.push({t:'Лёгкий',type:'easy',desc:`${Math.round(easyK*.7)} км, восстановительный, зона 1`});
-    if(days>=6) list.push({t:'ОФП + бег',type:'easy',desc:`${Math.round(easyK*.6)} км трусца + силовые упражнения 20 мин`});
-    if(phase==='rest'){
-      return [
-        {t:'Лёгкий',type:'easy',desc:`${easyK} км, зона 1–2, темп ${te}`},
-        ...(days>=4?[{t:'Лёгкий',type:'easy',desc:`${Math.round(easyK*.7)} км, зона 1–2`}]:[]),
-        ...(days>=5?[{t:'Темповый',type:'tempo',desc:`${warm}+${Math.max(netT-2,2)}+${cool} км, темп ${tp}`}]:[]),
-        {t:'Длительный',type:'long',desc:`${Math.round(longK*.6)} км, зона 2`},
-      ];
-    }
-    if(phase==='taper'){
-      return [
-        {t:'Лёгкий',type:'easy',desc:`${easyK} км, зона 1–2`},
-        {t:'Интервалы',type:'interval',desc:`${Math.max(reps-2,2)}×1 км темп ${ti}, поддержание скорости`},
-        {t:'Темповый',type:'tempo',desc:`${warm}+${Math.max(netT-2,2)}+${cool} км, целевой темп ${tg}`},
-        ...(days>=4?[{t:'Длительный',type:'long',desc:`${Math.round(longK*.6)} км, зона 2`}]:[]),
-      ];
-    }
-    return list;
+  // ── описание интервалов (прогрессируют от 800м к 1км к 1200м)
+  function descInterval(){
+    const repDist = phase==='base'?'800 м': phase==='build'?'1 км':'1200 м';
+    return `${intK} км: ${repsInt}×${repDist} темп ${tInterval} (зона 4, пульс ${z4s}), отдых 90–120 сек трусцой`;
   }
 
-  const tidxs=TRAIN_IDX[days]||TRAIN_IDX[4];
-  const result=[];
+  // ── описание темповой
+  function descTempo(){
+    const zone = phase==='base' ? `зона 3, пульс ${z3s}` : `зона 3–4, пульс ${z4s}`;
+    return `${tempoK} км: разминка ${warm}+${netTempo} км темп ${tTempo} (${zone})+заминка ${cool}`;
+  }
 
+  // ── стартовая неделя
   if(isLast){
-    DAYS7.forEach((d,i)=>{
-      if(i===0) result.push({d,t:'Лёгкий',type:'easy',desc:`5 км, зона 1–2, расслабленно`});
-      else if(i===1) result.push({d,t:'Лёгкий',type:'easy',desc:`4 км + 4×150 м ускорения — «разбудить» ноги`});
-      else if(i===2) result.push({d,t:'Отдых',type:'rest',desc:'растяжка, собрать экипировку'});
-      else if(i===3) result.push({d,t:'Лёгкий',type:'easy',desc:'3 км трусца, очень легко'});
-      else if(i===4) result.push({d,t:'Отдых',type:'rest',desc:'полный отдых, ранний сон'});
-      else if(i===5) result.push({d,t:'Отдых',type:'rest',desc:'прогулка 20 мин, углеводная загрузка'});
-      else result.push({d,t:'🏁 Старт!',type:'race',desc:`${DIST_LABELS[dist]} — первые 20% дистанции темп ${fmtPace(paces.target*1.05)}, затем целевой ${tg}/км`});
+    return DAYS7.map((d,i)=>{
+      if(i===0) return {d, t:'Лёгкий',   type:'easy', desc:`5 км, зона 1, темп ${fmtPace(paces.easy*1.05)}`};
+      if(i===1) return {d, t:'Лёгкий',   type:'easy', desc:`4 км + 4×150 м ускорения — «разбудить» ноги`};
+      if(i===2) return {d, t:'Отдых',    type:'rest', desc:'растяжка, проверить экипировку'};
+      if(i===3) return {d, t:'Лёгкий',   type:'easy', desc:`3 км трусца, зона 1, пульс ниже ${zones.z1[1]}`};
+      if(i===4) return {d, t:'Отдых',    type:'rest', desc:'полный отдых, ранний сон'};
+      if(i===5) return {d, t:'Отдых',    type:'rest', desc:'прогулка 20 мин, углеводная загрузка'};
+      return     {d, t:'🏁 Старт!', type:'race',
+        desc:`${DIST_LABELS[dist]} — первые 20% дистанции темп ${fmtPace(paces.target*1.05)}, цель ${tTarget}/км`};
     });
-    return result;
   }
 
-  const wlist=mkList()||[];
-  let wi2=0;
-  DAYS7.forEach((d,i)=>{
-    if(tidxs.includes(i)&&wi2<wlist.length){
-      result.push({d,...wlist[wi2++]});
-    } else {
-      result.push({d,t:'Отдых',type:'rest',desc:'полный отдых или лёгкая растяжка'});
-    }
+  // ── обычные недели: собираем список тренировок
+  let workouts = [];
+
+  if(phase === 'rest'){
+    workouts.push({t:'Лёгкий', type:'easy', desc:`${easyK} км, зона 1–2, темп ${tEasy}`});
+    workouts.push({t:'Длительный', type:'long', desc:`${Math.max(Math.round(longK*.55),6)} км, зона 2, темп ${tLong}`});
+    if(days >= 4) workouts.push({t:'Лёгкий', type:'easy', desc:`${Math.max(easy2K,4)} км, зона 1, очень легко`});
+    if(days >= 5) workouts.push({t:'Темповый', type:'tempo', desc:`${warm}+${Math.max(netTempo-2,2)}+${cool} км, темп ${tTempo}`});
+  } else if(phase === 'taper'){
+    workouts.push({t:'Лёгкий',    type:'easy',     desc:`${easyK} км, зона 1–2, темп ${tEasy}`});
+    workouts.push({t:'Интервалы', type:'interval',  desc:`${Math.max(repsInt-2,2)}×1 км темп ${tInterval}, поддержание скорости`});
+    workouts.push({t:'Темповый',  type:'tempo',     desc:`${warm}+${Math.max(netTempo-2,2)}+${cool} км, целевой темп ${tTarget}`});
+    if(days >= 4) workouts.push({t:'Длительный', type:'long', desc:`${Math.max(Math.round(longK*.55),6)} км, зона 2`});
+  } else {
+    // base / build / peak
+    workouts.push({t:'Длительный', type:'long',     desc:descLong()});
+    workouts.push({t:'Темповый',   type:'tempo',    desc:descTempo()});
+    if(phase !== 'base')
+      workouts.push({t:'Интервалы', type:'interval', desc:descInterval()});
+    workouts.push({t:'Лёгкий',     type:'easy',     desc:`${easyK} км, зона 1–2, темп ${tEasy}, пульс ниже ${zones.z2[1]}`});
+    if(days >= 5)
+      workouts.push({t:'Лёгкий', type:'easy', desc:`${easy2K} км, восстановительный, зона 1`});
+    if(days >= 6)
+      workouts.push({t:'ОФП + бег', type:'easy', desc:`${Math.max(easy2K-2,2)} км трусца + силовые 20 мин`});
+  }
+
+  // ── раскладываем по дням недели
+  const tidxs = TRAIN_IDX[days] || TRAIN_IDX[4];
+  let wi = 0;
+  return DAYS7.map((d, i) => {
+    if(tidxs.includes(i) && wi < workouts.length)
+      return {d, ...workouts[wi++]};
+    return {d, t:'Отдых', type:'rest', desc:'полный отдых или растяжка 15 мин'};
   });
-  return result;
 }
 
 // ══════════════════════════════════════
@@ -692,7 +989,7 @@ function render(p){
   const zones=calcZones(age,hrRest);
   const paces=calcPaces(curPace,dist,goal);
   const phases=buildPhases(weeks);
-  const bv=baseVol(level,days);
+  const bv=calcBaseVol(level,days);
   const vols=buildVols(phases,bv,dist);
   const maxVol=Math.max(...vols);
   const distKm={'5':5,'10':10,'21':21.1,'42':42.2,'trail':50,'ultra':80}[dist]||21.1;
@@ -790,6 +1087,22 @@ $('genBtn').addEventListener('click',()=>{
     weeks: Math.min(weeksToRace(),36),
   });
 });
+
+// ── Переключение темы (как на allrunrus.ru) ──
+(function(){
+  const saved = localStorage.getItem('theme') || 'night';
+  document.documentElement.setAttribute('data-theme', saved);
+  const btn = document.getElementById('themeBtn');
+  function update(t){
+    document.documentElement.setAttribute('data-theme',t);
+    localStorage.setItem('theme',t);
+    if(btn) btn.textContent = t==='night' ? '☀️' : '☽';
+  }
+  update(saved);
+  if(btn) btn.addEventListener('click',()=>{
+    update(document.documentElement.getAttribute('data-theme')==='night'?'day':'night');
+  });
+})();
 </script>
 </body>
 </html>
