@@ -284,6 +284,23 @@ a:hover{opacity:.8}
   background-color:rgba(255,255,255,.10);
   cursor:pointer;
 }
+/* Убираем зебру автозаполнения во всех браузерах */
+.field select:autofill,
+.field select:-webkit-autofill,
+.field select:-webkit-autofill:hover,
+.field select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px rgba(26,47,110,.95) inset !important;
+  box-shadow: 0 0 0 1000px rgba(26,47,110,.95) inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-color: rgba(26,47,110,.95) !important;
+  border-color: rgba(255,255,255,.20) !important;
+}
+[data-theme="day"] .field select:-webkit-autofill,
+[data-theme="day"] .field select:-webkit-autofill:hover,
+[data-theme="day"] .field select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px rgba(240,248,255,.95) inset !important;
+  -webkit-text-fill-color: #0f1f3d !important;
+}
 .field select option{background:#1a2f6e;color:#fff}
 .field input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
 
