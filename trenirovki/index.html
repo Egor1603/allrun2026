@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Генератор плана тренировок — Беговой календарь России</title>
+<meta name="description" content="Составьте персональный план беговых тренировок по данным ваших часов. Бесплатно, без регистрации.">
+<meta property="og:title" content="Генератор плана тренировок — Беговой календарь России">
+<meta property="og:description" content="Составьте персональный план беговых тренировок по данным ваших часов.">
+<meta property="og:url" content="https://allrunrus.ru/trenirovki/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Беговой календарь России">
+<link rel="canonical" href="https://allrunrus.ru/trenirovki/">
+<style>
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── Tokens — copied from allrunrus.ru palette ── */
+:root{
+  --c-bg:#ffffff;
+  --c-bg2:#f7f7f5;
+  --c-bg3:#f0f0ec;
+  --c-border:#e0e0d8;
+  --c-border2:#c8c8c0;
+  --c-text:#1a1a1a;
+  --c-text2:#555550;
+  --c-text3:#888882;
+  --c-accent:#1a1a1a;       /* same dark as site links */
+  --c-accent-bg:#f0f0ec;
+  --c-green:#2d6a2d;        /* success/ok */
+  --c-green-bg:#eaf4ea;
+  --c-orange:#b85c00;       /* warn */
+  --c-orange-bg:#fff3e0;
+  --c-red:#c0392b;
+  --c-red-bg:#fdecea;
+  --c-link:#1a73e8;
+  --radius:8px;
+  --radius-lg:12px;
+  --font:'Segoe UI',system-ui,-apple-system,sans-serif;
+  --font-mono:'SF Mono','Fira Mono',monospace;
+  --max:860px;
+  --nav-h:52px;
+}
+
+/* ── Base ── */
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--c-bg);color:var(--c-text);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+
+a{color:var(--c-link);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── NAV — identical to allrunrus.ru ── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--c-bg);
+  border-bottom:1px solid var(--c-border);
+  height:var(--nav-h);display:flex;align-items:center;
+}
+.nav-inner{
+  max-width:var(--max);width:100%;margin:0 auto;
+  padding:0 16px;display:flex;align-items:center;gap:20px;
+}
+.nav-logo{
+  font-weight:700;font-size:15px;color:var(--c-text);
+  display:flex;align-items:center;gap:7px;
+  text-decoration:none;flex-shrink:0;
+}
+.nav-logo-badge{
+  width:26px;height:26px;background:var(--c-text);color:#fff;
+  border-radius:6px;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;
+}
+.nav-links{display:flex;gap:4px;margin-left:8px}
+.nav-links a{
+  padding:5px 10px;border-radius:6px;font-size:14px;color:var(--c-text2);
+  text-decoration:none;transition:background .12s;
+}
+.nav-links a:hover{background:var(--c-bg2)}
+.nav-links a.active{background:var(--c-bg3);color:var(--c-text);font-weight:500}
+.nav-sun{margin-left:auto;font-size:18px;cursor:default}
+
+/* ── PAGE ── */
+.page{max-width:var(--max);margin:0 auto;padding:32px 16px 64px;flex:1}
+
+/* ── PAGE HEADER ── */
+.page-hdr{margin-bottom:28px}
+.page-hdr h1{font-size:24px;font-weight:700;margin-bottom:6px;line-height:1.2}
+.page-hdr p{color:var(--c-text2);font-size:15px}
+.breadcrumb{font-size:13px;color:var(--c-text3);margin-bottom:16px}
+.breadcrumb a{color:var(--c-text3)}
+.breadcrumb a:hover{color:var(--c-text)}
+
+/* ── FORM CARD ── */
+.card{
+  background:var(--c-bg);border:1px solid var(--c-border);
+  border-radius:var(--radius-lg);padding:24px;margin-bottom:20px;
+}
+.card-title{font-size:13px;font-weight:600;color:var(--c-text3);
+  text-transform:uppercase;letter-spacing:.05em;margin-bottom:16px}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:540px){.form-grid{grid-template-columns:1fr}}
+.form-full{grid-column:1/-1}
+
+/* ── FIELD ── */
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:13px;color:var(--c-text2);font-weight:500}
+
+.field input,.field select{
+  height:38px;padding:0 12px;
+  border:1px solid var(--c-border2);border-radius:var(--radius);
+  background:var(--c-bg);color:var(--c-text);
+  font-family:var(--font);font-size:14px;
+  outline:none;transition:border-color .15s;width:100%;
+}
+.field input:focus,.field select:focus{border-color:#888;box-shadow:0 0 0 3px rgba(0,0,0,.06)}
+.field input::placeholder{color:var(--c-text3)}
+.field select{appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 5 5-5z' fill='%23888'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:30px}
+.field input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
+
+/* ── PILL GROUP ── */
+.pill-group{display:flex;flex-wrap:wrap;gap:6px}
+.pill{
+  padding:5px 12px;border-radius:20px;font-size:13px;
+  border:1px solid var(--c-border2);background:var(--c-bg);
+  color:var(--c-text2);cursor:pointer;transition:all .12s;
+  font-family:var(--font);line-height:1.4;
+}
+.pill:hover{border-color:#888;color:var(--c-text)}
+.pill.on{border-color:var(--c-text);background:var(--c-text);color:#fff}
+
+/* ── DAYS BUTTONS ── */
+.days-row{display:flex;gap:6px}
+.day-btn{
+  width:40px;height:40px;border-radius:var(--radius);
+  border:1px solid var(--c-border2);background:var(--c-bg);
+  color:var(--c-text2);font-size:14px;font-weight:500;
+  cursor:pointer;transition:all .12s;font-family:var(--font);
+}
+.day-btn:hover{border-color:#888;color:var(--c-text)}
+.day-btn.on{border-color:var(--c-text);background:var(--c-text);color:#fff}
+
+/* ── HINT ── */
+.hint{
+  font-size:13px;padding:10px 14px;border-radius:var(--radius);
+  margin:12px 0 0;display:none;border-left:3px solid var(--c-border2);
+}
+.hint.ok{display:block;background:var(--c-green-bg);border-color:var(--c-green);color:var(--c-green)}
+.hint.warn{display:block;background:var(--c-orange-bg);border-color:var(--c-orange);color:var(--c-orange)}
+.hint.err{display:block;background:var(--c-red-bg);border-color:var(--c-red);color:var(--c-red)}
+
+/* ── UPLOAD ── */
+.upload-zone{
+  display:flex;align-items:center;gap:12px;
+  border:1px dashed var(--c-border2);border-radius:var(--radius);
+  padding:12px 14px;cursor:pointer;transition:all .12s;
+}
+.upload-zone:hover,.upload-zone.active{border-color:#888;background:var(--c-bg2)}
+.up-icon{font-size:20px;flex-shrink:0}
+.up-text{flex:1}
+.up-title{font-size:14px;color:var(--c-text)}
+.up-sub{font-size:12px;color:var(--c-text3);margin-top:2px}
+.up-badge{
+  font-size:12px;padding:3px 8px;border-radius:4px;
+  background:var(--c-bg3);color:var(--c-text2);border:1px solid var(--c-border);
+  display:none;white-space:nowrap;
+}
+.up-badge.vis{display:block}
+#fileInput{display:none}
+
+/* ── GENERATE BUTTON ── */
+.gen-btn{
+  width:100%;height:44px;border-radius:var(--radius);
+  background:var(--c-text);color:#fff;border:none;
+  font-family:var(--font);font-size:15px;font-weight:600;
+  cursor:pointer;transition:opacity .15s;margin-top:4px;
+}
+.gen-btn:hover{opacity:.85}
+.gen-btn:active{opacity:.7}
+.gen-btn:disabled{opacity:.35;cursor:not-allowed}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:var(--c-border);margin:28px 0}
+
+/* ── RESULT ── */
+#result{display:none}
+#result.vis{display:block}
+
+/* ── METRICS GRID ── */
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px}
+.mc{background:var(--c-bg2);border-radius:var(--radius);padding:12px 14px}
+.mc-label{font-size:11px;color:var(--c-text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.mc-val{font-size:22px;font-weight:700;color:var(--c-text)}
+.mc-sub{font-size:12px;color:var(--c-text3);margin-top:2px}
+
+/* ── ZONES ── */
+.zones{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:20px}
+.zone{border-radius:var(--radius);padding:10px 12px;border:1px solid var(--c-border)}
+.zone-num{font-size:11px;font-weight:600;margin-bottom:3px;text-transform:uppercase;letter-spacing:.03em}
+.zone-range{font-size:15px;font-weight:700}
+.zone-desc{font-size:11px;color:var(--c-text3);margin-top:3px}
+.z1{background:#e8f4fd}.z1 .zone-num{color:#1565c0}.z1 .zone-range{color:#1565c0}
+.z2{background:#e8f5e9}.z2 .zone-num{color:#2e7d32}.z2 .zone-range{color:#2e7d32}
+.z3{background:#fff8e1}.z3 .zone-num{color:#f57f17}.z3 .zone-range{color:#f57f17}
+.z4{background:#fff3e0}.z4 .zone-num{color:#e65100}.z4 .zone-range{color:#e65100}
+.z5{background:#fce4ec}.z5 .zone-num{color:#c62828}.z5 .zone-range{color:#c62828}
+
+/* ── PROGRESS ── */
+.prog-wrap{margin-bottom:20px}
+.prog-track{
+  height:8px;background:var(--c-bg3);border-radius:4px;
+  display:flex;gap:2px;overflow:hidden;align-items:flex-end;margin-bottom:5px;
+}
+.prog-seg{border-radius:1px}
+.prog-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--c-text3)}
+
+/* ── PLAN TABLE ── */
+.plan-wrap{border:1px solid var(--c-border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:20px}
+.week{border-bottom:1px solid var(--c-border)}
+.week:last-child{border-bottom:none}
+
+.week-hdr{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;
+  cursor:pointer;background:var(--c-bg);transition:background .12s;
+  user-select:none;
+}
+.week-hdr:hover{background:var(--c-bg2)}
+.week-num{font-size:12px;font-weight:600;color:var(--c-text3);min-width:66px}
+.phase-badge{font-size:11px;padding:2px 8px;border-radius:4px;font-weight:500}
+.ph-base  {background:#e3f2fd;color:#1565c0}
+.ph-build {background:#e8f5e9;color:#2e7d32}
+.ph-peak  {background:#fff3e0;color:#e65100}
+.ph-taper {background:#fff8e1;color:#f57f17}
+.ph-rest  {background:#f3e5f5;color:#6a1b9a}
+.wvol{margin-left:auto;font-size:13px;color:var(--c-text3)}
+.chevron{color:var(--c-text3);font-size:14px;margin-left:4px;transition:transform .15s}
+
+.week-body{display:none;background:var(--c-bg);border-top:1px solid var(--c-border)}
+.week-body.open{display:block}
+
+.days-tbl{width:100%;border-collapse:collapse;table-layout:fixed}
+.days-tbl td{padding:8px 16px;border-bottom:1px solid var(--c-border);font-size:13px;vertical-align:top}
+.days-tbl tr:last-child td{border-bottom:none}
+.td-d{width:30px;color:var(--c-text3);font-size:12px;padding-top:9px;white-space:nowrap}
+.td-t{width:110px;font-weight:600;padding-right:8px;white-space:nowrap}
+.td-t.easy    {color:#2e7d32}
+.td-t.tempo   {color:#e65100}
+.td-t.long    {color:#1565c0}
+.td-t.interval{color:#c62828}
+.td-t.rest    {color:var(--c-text3);font-weight:400}
+.td-t.race    {color:var(--c-text);font-weight:700}
+.td-desc{color:var(--c-text2);line-height:1.5;word-break:break-word}
+
+/* ── DISCLAIMER ── */
+.disclaimer{
+  background:var(--c-bg2);border:1px solid var(--c-border);
+  border-radius:var(--radius);padding:14px 16px;
+  font-size:13px;color:var(--c-text2);line-height:1.6;
+  border-left:3px solid var(--c-border2);
+}
+
+/* ── HOW IT WORKS ── */
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:16px}
+.how-item{background:var(--c-bg2);border-radius:var(--radius);padding:14px 16px}
+.how-num{font-size:11px;font-weight:700;color:var(--c-text3);margin-bottom:6px;letter-spacing:.05em}
+.how-title{font-size:14px;font-weight:600;margin-bottom:4px}
+.how-desc{font-size:13px;color:var(--c-text2);line-height:1.5}
+
+/* ── SEC LABEL ── */
+.sec{font-size:12px;font-weight:600;color:var(--c-text3);
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+
+/* ── FOOTER ── */
+.footer{
+  border-top:1px solid var(--c-border);
+  padding:20px 16px;text-align:center;
+  font-size:13px;color:var(--c-text3);
+}
+.footer a{color:var(--c-text3)}
+.footer a:hover{color:var(--c-text)}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav" role="navigation">
+  <div class="nav-inner">
+    <a href="https://allrunrus.ru/" class="nav-logo">
+      <div class="nav-logo-badge">R</div>
+      Беговой календарь России
+    </a>
+    <div class="nav-links">
+      <a href="https://allrunrus.ru/">🏃 Забеги</a>
+      <a href="https://allrunrus.ru/clinics/">🏥 Справка 1444н</a>
+      <a href="/trenirovki/" class="active">📋 Тренировки</a>
+    </div>
+    <span class="nav-sun" aria-hidden="true">☀️</span>
+  </div>
+</nav>
+
+<!-- ── PAGE ── -->
+<main class="page">
+
+  <div class="breadcrumb">
+    <a href="https://allrunrus.ru/">← Все забеги</a>
+  </div>
+
+  <div class="page-hdr">
+    <h1>📋 Генератор плана тренировок</h1>
+    <p>Введите свои данные — план рассчитается автоматически. Бесплатно, без регистрации.</p>
+  </div>
+
+  <!-- ── HOW IT WORKS ── -->
+  <div class="card">
+    <div class="card-title">Как это работает</div>
+    <div class="how-grid">
+      <div class="how-item">
+        <div class="how-num">1</div>
+        <div class="how-title">Укажите цель</div>
+        <div class="how-desc">Выберите дистанцию и дату из нашего календаря забегов</div>
+      </div>
+      <div class="how-item">
+        <div class="how-num">2</div>
+        <div class="how-title">Введите данные</div>
+        <div class="how-desc">Темп, пульс, возраст — или загрузите файл с часов (GPX, TCX, CSV)</div>
+      </div>
+      <div class="how-item">
+        <div class="how-num">3</div>
+        <div class="how-title">Получите план</div>
+        <div class="how-desc">Полный план по неделям с зонами пульса и темпом для каждой тренировки</div>
+      </div>
+      <div class="how-item">
+        <div class="how-num">4</div>
+        <div class="how-title">Тренируйтесь</div>
+        <div class="how-desc">Возвращайтесь на сайт за новыми забегами и корректируйте план</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FORM ── -->
+  <div class="card">
+    <div class="card-title">Ваши данные</div>
+    <div class="form-grid">
+
+      <!-- Дистанция -->
+      <div class="field form-full">
+        <label>Целевая дистанция</label>
+        <div class="pill-group" id="distGroup">
+          <button class="pill" data-val="5">5 км</button>
+          <button class="pill" data-val="10">10 км</button>
+          <button class="pill on" data-val="21">Полумарафон 21 км</button>
+          <button class="pill" data-val="42">Марафон 42 км</button>
+          <button class="pill" data-val="trail">Трейл (до 50 км)</button>
+          <button class="pill" data-val="ultra">Ультра (50 км+)</button>
+        </div>
+      </div>
+
+      <!-- Цель -->
+      <div class="field form-full">
+        <label>Цель</label>
+        <div class="pill-group" id="goalGroup">
+          <button class="pill on" data-val="result">⏱ Улучшить результат</button>
+          <button class="pill" data-val="finish">🏁 Просто финишировать</button>
+          <button class="pill" data-val="zero">🌱 Начинаю с нуля</button>
+          <button class="pill" data-val="recovery">🩹 После травмы</button>
+        </div>
+      </div>
+
+      <!-- Уровень -->
+      <div class="field">
+        <label>Текущий уровень</label>
+        <select id="level">
+          <option value="beginner">Новичок — до 20 км/нед</option>
+          <option value="amateur" selected>Любитель — 20–50 км/нед</option>
+          <option value="advanced">Продвинутый — 50+ км/нед</option>
+        </select>
+      </div>
+
+      <!-- Дней в неделю -->
+      <div class="field">
+        <label>Тренировочных дней в неделю</label>
+        <div class="days-row" id="daysRow">
+          <button class="day-btn" data-n="3">3</button>
+          <button class="day-btn on" data-n="4">4</button>
+          <button class="day-btn" data-n="5">5</button>
+          <button class="day-btn" data-n="6">6</button>
+        </div>
+      </div>
+
+      <!-- Темп -->
+      <div class="field">
+        <label>Текущий темп на 10 км (мин:сек / км)</label>
+        <input type="text" id="pace" placeholder="6:30" value="6:30">
+      </div>
+
+      <!-- Пульс -->
+      <div class="field">
+        <label>Пульс на этом темпе (уд/мин)</label>
+        <input type="number" id="hrPace" placeholder="145" value="145" min="100" max="200">
+      </div>
+
+      <!-- Возраст -->
+      <div class="field">
+        <label>Возраст</label>
+        <input type="number" id="age" placeholder="35" value="35" min="14" max="80">
+      </div>
+
+      <!-- ЧСС покоя -->
+      <div class="field">
+        <label>ЧСС покоя (утром, уд/мин)</label>
+        <input type="number" id="hrRest" placeholder="55" value="55" min="35" max="90">
+      </div>
+
+      <!-- Дата старта -->
+      <div class="field form-full">
+        <label>Дата целевого забега
+          <span style="font-weight:400;color:var(--c-text3);font-size:12px">
+            — выберите из <a href="https://allrunrus.ru/" target="_blank">календаря забегов</a>
+          </span>
+        </label>
+        <input type="date" id="raceDate">
+      </div>
+
+      <!-- Загрузка -->
+      <div class="field form-full">
+        <label>Данные с часов <span style="font-weight:400;color:var(--c-text3)">(необязательно — уточнит расчёт зон)</span></label>
+        <div class="upload-zone" id="uploadZone" tabindex="0" role="button" aria-label="Загрузить файл с часов">
+          <span class="up-icon">📎</span>
+          <div class="up-text">
+            <div class="up-title">GPX, TCX, CSV, JSON</div>
+            <div class="up-sub">Garmin Connect, Polar Flow, Apple Fitness, Strava</div>
+          </div>
+          <div class="up-badge" id="upBadge"></div>
+          <input type="file" id="fileInput" accept=".gpx,.tcx,.json,.csv">
+        </div>
+      </div>
+
+    </div><!-- /form-grid -->
+
+    <div class="hint" id="hint"></div>
+    <div style="margin-top:16px">
+      <button class="gen-btn" id="genBtn" disabled>Составить план тренировок</button>
+    </div>
+  </div><!-- /card -->
+
+  <!-- ── RESULT ── -->
+  <div id="result">
+    <div class="divider"></div>
+    <div id="resultInner"></div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <a href="https://allrunrus.ru/">Беговой календарь России</a> ·
+  <a href="https://allrunrus.ru/trenirovki/">Планы тренировок</a> ·
+  <a href="https://allrunrus.ru/clinics/">Справка 1444н</a><br>
+  <span style="margin-top:6px;display:block">Информация с официальных источников · Обновление 2 раза в сутки</span>
+</footer>
+
+<script>
+// ══════════════════════════════════════
+//  UTILS
+// ══════════════════════════════════════
+const $ = id => document.getElementById(id);
+
+function parsePace(s){
+  const m = s.trim().match(/^(\d{1,2}):([0-5]\d)$/);
+  return m ? parseInt(m[1])*60+parseInt(m[2]) : null;
+}
+function fmtPace(sec){
+  sec = Math.round(sec);
+  return Math.floor(sec/60)+':'+(sec%60<10?'0':'')+sec%60;
+}
+function fmtTime(sec){
+  sec = Math.round(sec);
+  const h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60), s=sec%60;
+  return h>0 ? `${h}ч ${m<10?'0':''}${m}мин` : `${m}мин ${s<10?'0':''}${s}сек`;
+}
+
+// ── pill/button groups
+function initPills(id){
+  document.querySelectorAll(`#${id} .pill`).forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll(`#${id} .pill`).forEach(x=>x.classList.remove('on'));
+      b.classList.add('on'); validate();
+    });
+  });
+}
+function initDays(){
+  document.querySelectorAll('#daysRow .day-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('#daysRow .day-btn').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on'); validate();
+    });
+  });
+}
+function getSel(id,attr='val'){
+  const b=document.querySelector(`#${id} .on`);
+  return b?b.dataset[attr]||b.dataset.n:null;
+}
+
+initPills('distGroup');
+initPills('goalGroup');
+initDays();
+
+// default date = +12 weeks
+(()=>{ const d=new Date(); d.setDate(d.getDate()+84); $('raceDate').value=d.toISOString().slice(0,10); })();
+
+// upload
+$('uploadZone').addEventListener('click',()=>$('fileInput').click());
+$('uploadZone').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ') $('fileInput').click();});
+$('fileInput').addEventListener('change',e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const b=$('upBadge');
+  b.textContent=f.name.length>24?f.name.slice(0,22)+'…':f.name;
+  b.classList.add('vis');
+  $('uploadZone').classList.add('active');
+});
+
+// ── validation
+const MIN_WEEKS={'5':4,'10':6,'21':8,'42':14,'trail':10,'ultra':16};
+const DIST_LABELS={'5':'5 км','10':'10 км','21':'Полумарафон','42':'Марафон','trail':'Трейл','ultra':'Ультра'};
+
+function weeksToRace(){
+  const v=$('raceDate').value;
+  if(!v) return null;
+  return Math.round((new Date(v)-new Date())/(7*86400000));
+}
+
+function validate(){
+  const h=$('hint'), btn=$('genBtn');
+  const dist=getSel('distGroup'), pace=parsePace($('pace').value), w=weeksToRace();
+  if(!dist){show('err','Выберите дистанцию'); btn.disabled=true; return false;}
+  if(!pace){show('err','Темп введите в формате М:СС, например 6:30'); btn.disabled=true; return false;}
+  if(!w||w<1){show('err','Укажите дату забега'); btn.disabled=true; return false;}
+  const min=MIN_WEEKS[dist]||6;
+  if(w<min){show('err',`До старта ${w} нед. Для «${DIST_LABELS[dist]}» нужно минимум ${min} нед. Перенесите дату или выберите другую дистанцию.`); btn.disabled=true; return false;}
+  if(w>36){show('warn',`До старта ${w} нед. — план будет на 36 недель, это максимум.`); btn.disabled=false; return true;}
+  show('ok',`До старта ${w} нед. — всё реалистично, составляем!`); btn.disabled=false; return true;
+}
+
+function show(cls,txt){
+  const h=$('hint'); h.className='hint '+cls; h.textContent=txt;
+}
+
+['pace','hrPace','age','hrRest','raceDate'].forEach(id=>$(id).addEventListener('input',validate));
+validate();
+
+// ══════════════════════════════════════
+//  PLAN ENGINE
+// ══════════════════════════════════════
+function calcZones(age,hrRest){
+  const hrMax=Math.round(208-0.7*age), r=hrMax-hrRest;
+  const z=pct=>[Math.round(hrRest+r*pct[0]),Math.round(hrRest+r*pct[1])];
+  return {hrMax,
+    z1:z([.50,.60]),z2:z([.60,.70]),
+    z3:z([.70,.80]),z4:z([.80,.90]),z5:z([.90,1])};
+}
+
+function calcPaces(cur,dist,goal){
+  const df={'5':.88,'10':1,'21':1.09,'42':1.18,'trail':1.25,'ultra':1.42};
+  const gf={result:.92,finish:.97,zero:1.02,recovery:1.0};
+  const target=Math.round(cur*(df[dist]||1)*(gf[goal]||1));
+  return {
+    easy:Math.round(cur*1.20), long:Math.round(cur*1.15),
+    tempo:Math.round(cur*0.93), interval:Math.round(cur*0.85),
+    target, current:cur
+  };
+}
+
+function baseVol(level,days){
+  return Math.round({beginner:20,amateur:35,advanced:50}[level]*{3:.8,4:1,5:1.2,6:1.4}[days]);
+}
+
+function buildPhases(n){
+  const p=[];
+  for(let i=0;i<n;i++){
+    if(i>=n-2) p.push('taper');
+    else if(i%4===3) p.push('rest');
+    else if(n<=6) p.push(i<n*.5?'base':'build');
+    else if(i<Math.floor(n*.3)) p.push('base');
+    else if(i<Math.floor(n*.6)) p.push('build');
+    else p.push('peak');
+  }
+  return p;
+}
+
+function buildVols(phases,bv,dist){
+  const mx=bv*({'5':1.4,'10':1.5,'21':1.7,'42':2.0,'trail':1.8,'ultra':2.2}[dist]||1.6);
+  let v=bv; const mult={base:1.08,build:1.10,peak:1.06,rest:.65,taper:.55};
+  return phases.map(ph=>{
+    if(ph==='rest'||ph==='taper') return Math.max(Math.round(v*(mult[ph])),12);
+    v=Math.min(v*(mult[ph]||1.08),mx);
+    return Math.max(Math.round(v),12);
+  });
+}
+
+const DAYS7=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+const TRAIN_IDX={3:[2,4,6],4:[1,3,5,6],5:[1,2,4,5,6],6:[0,1,2,4,5,6]};
+
+function dayWorkouts(phase,vol,paces,days,dist,wi,total,zones){
+  const isLast=wi===total-1, isTrail=dist==='trail'||dist==='ultra';
+  const isPeakLate=phase==='peak'&&wi>=Math.floor(total*.75);
+
+  const tp=fmtPace(paces.tempo), ti=fmtPace(paces.interval);
+  const te=fmtPace(paces.easy),  tl=fmtPace(paces.long), tg=fmtPace(paces.target);
+  const z2=`${zones.z2[0]}–${zones.z2[1]}`, z3=`${zones.z3[0]}–${zones.z3[1]}`, z4=`${zones.z4[0]}–${zones.z4[1]}`;
+
+  const longK=Math.round(vol*.38), tempoK=Math.round(vol*.25);
+  const intK=Math.round(vol*.18),  easyK=Math.round(vol*.19);
+  const warm=2, cool=2, netT=Math.max(tempoK-warm-cool,2), netI=Math.max(intK-warm-cool,2);
+  const reps=Math.max(Math.round(netI),2);
+
+  function longDesc(){
+    if(isTrail) return `${longK} км по пересечённой местности, по усилию (зона 2), фокус на D+`;
+    if(isPeakLate) return `${longK} км: ${longK-5} км зона 2 темп ${tl} + последние 5 км целевой темп ${tg}`;
+    return `${longK} км, зона 2, темп ${tl}, пульс ${z2}`;
+  }
+
+  function mkList(){
+    if(isLast) return null; // handled below
+    const pf={base:.87,build:.93,peak:1,rest:.72,taper:.82}[phase]||1;
+    const tpAdj=fmtPace(paces.tempo/pf), tiAdj=fmtPace(paces.interval/pf);
+
+    const list=[
+      {t:'Длительный',type:'long',desc:longDesc()},
+    ];
+    if(phase!=='base'&&phase!=='rest') list.push({t:'Интервалы',type:'interval',desc:`${intK} км: ${reps}×1 км темп ${tiAdj} (зона 4, пульс ${z4}), отдых 2 мин`});
+    list.push({t:'Темповый',type:'tempo',desc:`${tempoK} км: ${warm}+${netT} км темп ${tpAdj} (пульс ${phase==='base'?z3:z4})+${cool} заминка`});
+    if(days>=4) list.push({t:'Лёгкий',type:'easy',desc:`${easyK} км, зона 1–2, темп ${te}, пульс ниже ${zones.z2[1]}`});
+    if(days>=5) list.push({t:'Лёгкий',type:'easy',desc:`${Math.round(easyK*.7)} км, восстановительный, зона 1`});
+    if(days>=6) list.push({t:'ОФП + бег',type:'easy',desc:`${Math.round(easyK*.6)} км трусца + силовые упражнения 20 мин`});
+    if(phase==='rest'){
+      return [
+        {t:'Лёгкий',type:'easy',desc:`${easyK} км, зона 1–2, темп ${te}`},
+        ...(days>=4?[{t:'Лёгкий',type:'easy',desc:`${Math.round(easyK*.7)} км, зона 1–2`}]:[]),
+        ...(days>=5?[{t:'Темповый',type:'tempo',desc:`${warm}+${Math.max(netT-2,2)}+${cool} км, темп ${tp}`}]:[]),
+        {t:'Длительный',type:'long',desc:`${Math.round(longK*.6)} км, зона 2`},
+      ];
+    }
+    if(phase==='taper'){
+      return [
+        {t:'Лёгкий',type:'easy',desc:`${easyK} км, зона 1–2`},
+        {t:'Интервалы',type:'interval',desc:`${Math.max(reps-2,2)}×1 км темп ${ti}, поддержание скорости`},
+        {t:'Темповый',type:'tempo',desc:`${warm}+${Math.max(netT-2,2)}+${cool} км, целевой темп ${tg}`},
+        ...(days>=4?[{t:'Длительный',type:'long',desc:`${Math.round(longK*.6)} км, зона 2`}]:[]),
+      ];
+    }
+    return list;
+  }
+
+  const tidxs=TRAIN_IDX[days]||TRAIN_IDX[4];
+  const result=[];
+
+  if(isLast){
+    DAYS7.forEach((d,i)=>{
+      if(i===0) result.push({d,t:'Лёгкий',type:'easy',desc:`5 км, зона 1–2, расслабленно`});
+      else if(i===1) result.push({d,t:'Лёгкий',type:'easy',desc:`4 км + 4×150 м ускорения — «разбудить» ноги`});
+      else if(i===2) result.push({d,t:'Отдых',type:'rest',desc:'растяжка, собрать экипировку'});
+      else if(i===3) result.push({d,t:'Лёгкий',type:'easy',desc:'3 км трусца, очень легко'});
+      else if(i===4) result.push({d,t:'Отдых',type:'rest',desc:'полный отдых, ранний сон'});
+      else if(i===5) result.push({d,t:'Отдых',type:'rest',desc:'прогулка 20 мин, углеводная загрузка'});
+      else result.push({d,t:'🏁 Старт!',type:'race',desc:`${DIST_LABELS[dist]} — первые 20% дистанции темп ${fmtPace(paces.target*1.05)}, затем целевой ${tg}/км`});
+    });
+    return result;
+  }
+
+  const wlist=mkList()||[];
+  let wi2=0;
+  DAYS7.forEach((d,i)=>{
+    if(tidxs.includes(i)&&wi2<wlist.length){
+      result.push({d,...wlist[wi2++]});
+    } else {
+      result.push({d,t:'Отдых',type:'rest',desc:'полный отдых или лёгкая растяжка'});
+    }
+  });
+  return result;
+}
+
+// ══════════════════════════════════════
+//  RENDER
+// ══════════════════════════════════════
+const PHASE_LABEL={base:'база',build:'наращивание',peak:'пик',taper:'спад',rest:'разгрузка'};
+const PHASE_COLOR={base:'#1565c0',build:'#2e7d32',peak:'#e65100',taper:'#f57f17',rest:'#6a1b9a'};
+
+function render(p){
+  const {dist,goal,level,days,curPace,age,hrRest,weeks}=p;
+  const zones=calcZones(age,hrRest);
+  const paces=calcPaces(curPace,dist,goal);
+  const phases=buildPhases(weeks);
+  const bv=baseVol(level,days);
+  const vols=buildVols(phases,bv,dist);
+  const maxVol=Math.max(...vols);
+  const distKm={'5':5,'10':10,'21':21.1,'42':42.2,'trail':50,'ultra':80}[dist]||21.1;
+
+  let html='';
+
+  // metrics
+  html+=`<div class="sec">Ваши показатели</div><div class="metrics">`;
+  [
+    {l:'Текущий темп',v:fmtPace(curPace),s:'мин/км'},
+    {l:'Целевой темп',v:fmtPace(paces.target),s:`для ${DIST_LABELS[dist]}`},
+    {l:'Прогноз',v:fmtTime(paces.target*distKm),s:DIST_LABELS[dist]},
+    {l:'Недель в плане',v:weeks,s:'до старта'},
+  ].forEach(m=>html+=`<div class="mc"><div class="mc-label">${m.l}</div><div class="mc-val">${m.v}</div><div class="mc-sub">${m.s}</div></div>`);
+  html+=`</div>`;
+
+  // zones
+  html+=`<div class="sec">Ваши зоны пульса (формула Карвонена)</div><div class="zones">`;
+  [
+    {cls:'z1',n:'Зона 1 — восст.',r:`${zones.z1[0]}–${zones.z1[1]}`,d:'трусца, заминка'},
+    {cls:'z2',n:'Зона 2 — база',r:`${zones.z2[0]}–${zones.z2[1]}`,d:'лёгкие и длительные'},
+    {cls:'z3',n:'Зона 3 — темп',r:`${zones.z3[0]}–${zones.z3[1]}`,d:'марафонный темп'},
+    {cls:'z4',n:'Зона 4 — порог',r:`${zones.z4[0]}–${zones.z4[1]}`,d:'темповые, интервалы'},
+    {cls:'z5',n:'Зона 5 — макс',r:`${zones.z5[0]}–${zones.z5[1]}`,d:'короткие ускорения'},
+  ].forEach(z=>html+=`<div class="zone ${z.cls}"><div class="zone-num">${z.n}</div><div class="zone-range">${z.r}</div><div class="zone-desc">${z.d}</div></div>`);
+  html+=`</div>`;
+
+  // progress bar
+  html+=`<div class="sec">Прогрессия объёма по неделям</div><div class="prog-wrap"><div class="prog-track">`;
+  phases.forEach((ph,i)=>{
+    const pct=Math.round(vols[i]/maxVol*100);
+    html+=`<div class="prog-seg" style="width:${Math.round(100/phases.length)}%;height:${pct}%;background:${PHASE_COLOR[ph]}"></div>`;
+  });
+  html+=`</div><div class="prog-labels"><span>нед 1</span><span>нед ${Math.ceil(weeks/2)}</span><span>нед ${weeks}</span></div></div>`;
+
+  // plan
+  html+=`<div class="sec">Детальный план по неделям</div><div class="plan-wrap" id="planInner">`;
+  phases.forEach((ph,wi)=>{
+    const vol=vols[wi], isLast=wi===weeks-1;
+    const dlist=dayWorkouts(ph,vol,paces,days,dist,wi,weeks,zones);
+    const rows=dlist.map(d=>`<tr><td class="td-d">${d.d}</td><td class="td-t ${d.type}">${d.t}</td><td class="td-desc">${d.desc}</td></tr>`).join('');
+    html+=`
+    <div class="week">
+      <div class="week-hdr" onclick="toggleWeek(${wi})">
+        <span class="week-num">Неделя ${wi+1}</span>
+        <span class="phase-badge ph-${ph}">${PHASE_LABEL[ph]}</span>
+        <span class="wvol">${isLast?'⭐ Старт':vol+' км'}</span>
+        <span class="chevron" id="ch${wi}">›</span>
+      </div>
+      <div class="week-body" id="wb${wi}">
+        <table class="days-tbl"><tbody>${rows}</tbody></table>
+      </div>
+    </div>`;
+  });
+  html+=`</div>`;
+
+  // disclaimer
+  html+=`<div class="disclaimer" style="margin-top:16px">
+    ⚠️ <strong>Важно:</strong> это автоматически рассчитанный план на основе введённых данных.
+    Я не врач и не сертифицированный тренер. При болях, травмах или хронических заболеваниях
+    перед началом тренировок обязательно проконсультируйтесь со <a href="https://allrunrus.ru/clinics/">спортивным врачом</a>.
+    Прислушивайтесь к своему телу — если план кажется слишком тяжёлым, снизьте объём на 15–20%.
+  </div>`;
+
+  $('resultInner').innerHTML=html;
+  $('result').id='result';
+  $('result').className='vis';
+
+  // open week 1
+  const wb=$('wb0'); if(wb){wb.classList.add('open'); const ch=$('ch0'); if(ch) ch.style.transform='rotate(90deg)';}
+
+  $('result').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+window.toggleWeek=function(i){
+  const b=$('wb'+i), c=$('ch'+i);
+  if(!b) return;
+  const open=b.classList.toggle('open');
+  if(c) c.style.transform=open?'rotate(90deg)':'';
+};
+
+// ══════════════════════════════════════
+//  GENERATE
+// ══════════════════════════════════════
+$('genBtn').addEventListener('click',()=>{
+  if(!validate()) return;
+  render({
+    dist: getSel('distGroup'),
+    goal: getSel('goalGroup')||'result',
+    level: $('level').value,
+    days: parseInt(getSel('daysRow')||4),
+    curPace: parsePace($('pace').value),
+    age: parseInt($('age').value)||35,
+    hrRest: parseInt($('hrRest').value)||55,
+    weeks: Math.min(weeksToRace(),36),
+  });
+});
+</script>
+</body>
+</html>
