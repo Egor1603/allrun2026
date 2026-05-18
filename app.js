@@ -28,7 +28,12 @@
 
   function closeCityDropdown() {
     var dd = document.getElementById('city-dropdown');
-    if (dd) dd.classList.remove('open');
+    if (!dd) return;
+    if (typeof dd.hidePopover === 'function') {
+      try { dd.hidePopover(); } catch(e) {}
+    } else {
+      dd.classList.remove('open');
+    }
     cityKbdIdx = -1;
   }
 
@@ -178,7 +183,11 @@
         + '</div>';
     });
     dd.innerHTML = html;
-    dd.classList.add('open');
+    if (typeof dd.showPopover === 'function') {
+      try { dd.showPopover(); } catch(e) { dd.classList.add('open'); }
+    } else {
+      dd.classList.add('open');
+    }
 
     dd.querySelectorAll('.city-opt').forEach(function(el) {
       el.addEventListener('mousedown', function(e) {
@@ -241,11 +250,13 @@
     }
   });
 
-  // Закрываем при клике вне
-  document.addEventListener('click', function(e) {
-    var wrap = document.getElementById('city-wrap');
-    if (wrap && !wrap.contains(e.target)) closeCityDropdown();
-  });
+  // Закрываем при клике вне — только если Popover API не поддерживается
+  if (typeof HTMLElement.prototype.showPopover !== 'function') {
+    document.addEventListener('click', function(e) {
+      var wrap = document.getElementById('city-wrap');
+      if (wrap && !wrap.contains(e.target)) closeCityDropdown();
+    });
+  }
 
   // ── Константы ──────────────────────────────────────────────────────────────
   var MONTHS = {
@@ -696,25 +707,33 @@
     if (searchBtn) searchBtn.style.display = searchVal ? 'block' : 'none';
     var cityQ = getCityQuery();
 
-    if (currentType === 'past') {
-      var filtered = pastEvents.filter(function (e) {
-        if (!cityMatch(e, cityQ))                 return false;
-        if (month && e.date.slice(5,7) !== month) return false;
-        if (!eventMatchesSearch(e, searchVal))    return false;
+    function doRender() {
+      if (currentType === 'past') {
+        var filtered = pastEvents.filter(function (e) {
+          if (!cityMatch(e, cityQ))                 return false;
+          if (month && e.date.slice(5,7) !== month) return false;
+          if (!eventMatchesSearch(e, searchVal))    return false;
+          return true;
+        });
+        renderEvents(filtered, true, cityQ);
+        return;
+      }
+
+      var filtered = allEvents.filter(function (e) {
+        if (currentType !== 'all' && e.type !== currentType) return false;
+        if (!cityMatch(e, cityQ))                             return false;
+        if (month && e.date.slice(5,7) !== month)            return false;
+        if (!eventMatchesSearch(e, searchVal))               return false;
         return true;
       });
-      renderEvents(filtered, true, cityQ);
-      return;
+      renderEvents(filtered, false, cityQ);
     }
 
-    var filtered = allEvents.filter(function (e) {
-      if (currentType !== 'all' && e.type !== currentType) return false;
-      if (!cityMatch(e, cityQ))                             return false;
-      if (month && e.date.slice(5,7) !== month)            return false;
-      if (!eventMatchesSearch(e, searchVal))               return false;
-      return true;
-    });
-    renderEvents(filtered, false, cityQ);
+    if (document.startViewTransition) {
+      document.startViewTransition(doRender);
+    } else {
+      doRender();
+    }
   };
 
   // ── Рендер событий ─────────────────────────────────────────────────────────
@@ -775,7 +794,7 @@
           + (accent === 2 ? ' is-accent-2' : accent === 1 ? ' is-accent-1' : '')
           + (ev.charity  ? ' is-charity' : '');
 
-        html += '<div class="' + cardClass + '" data-url="' + esc(ev.url) + '" role="link" tabindex="0">';
+        html += '<div class="' + cardClass + '"' + (isPast ? '' : ' data-url="' + esc(ev.url) + '" role="link" tabindex="0"') + '>';
         html += '<div class="date-col">';
         html += '<div class="date-day">' + day + '</div>';
         html += '<div class="date-mon">' + mon + '</div>';
@@ -792,19 +811,21 @@
           html += '<span class="badge badge-charity">&#9829; благотворительный</span>';
         }
         html += '</div>';
-        html += '<div class="cal-btns">';
-        html += '<a class="cal-btn cal-btn-google" href="' + esc(googleCalUrl(ev)) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">';
-        html += '<svg viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 1v2M9 1v2M1 6h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
-        html += 'Google</a>';
-        html += '<a class="cal-btn cal-btn-yandex" href="' + esc(yandexCalUrl(ev)) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">';
-        html += '<svg viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 1v2M9 1v2M1 6h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
-        html += 'Яндекс</a>';
-        html += '<button class="cal-btn" onclick="event.stopPropagation(); window._icsDownload(' + ev.id + ')">';
-        html += '<svg viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-        html += '.ics</button>';
+        if (!isPast) {
+          html += '<div class="cal-btns">';
+          html += '<a class="cal-btn cal-btn-google" href="' + esc(googleCalUrl(ev)) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">';
+          html += '<svg viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 1v2M9 1v2M1 6h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
+          html += 'Google</a>';
+          html += '<a class="cal-btn cal-btn-yandex" href="' + esc(yandexCalUrl(ev)) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">';
+          html += '<svg viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 1v2M9 1v2M1 6h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
+          html += 'Яндекс</a>';
+          html += '<button class="cal-btn" onclick="event.stopPropagation(); window._icsDownload(' + ev.id + ')">';
+          html += '<svg viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          html += '.ics</button>';
+          html += '</div>';
+        }
         html += '</div>';
-        html += '</div>';
-        html += '<div class="card-arrow">›</div>';
+        if (!isPast) html += '<div class="card-arrow">›</div>';
         html += '</div>';
       });
 
@@ -816,7 +837,7 @@
     // ── Динамический title и schema.org Event ─────────────────────────────
     updateSEO(events, isPast, cityQ);
 
-    mainEl.querySelectorAll('.event-card').forEach(function (card) {
+    mainEl.querySelectorAll('.event-card[data-url]').forEach(function (card) {
       card.addEventListener('click', function () {
         var url = card.getAttribute('data-url');
         if (url) window.open(url, '_blank', 'noopener,noreferrer');
