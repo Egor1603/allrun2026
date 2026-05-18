@@ -457,7 +457,7 @@ a:hover{opacity:.8}
 .z4{background:var(--z4-bg)}.z4 .zone-num,.z4 .zone-range{color:var(--z4-c)}
 .z5{background:var(--z5-bg)}.z5 .zone-num,.z5 .zone-range{color:var(--z5-c)}
 
-/* ── PROGRESS BAR ── */
+/* ── PROGRESS BAR (объём) ── */
 .prog-wrap{margin-bottom:20px}
 .prog-track{
   height:8px;background:var(--prog-track);border-radius:4px;
@@ -465,6 +465,35 @@ a:hover{opacity:.8}
 }
 .prog-seg{border-radius:1px}
 .prog-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+
+/* ── PACE PROGRESSION CHART ── */
+.pace-chart-wrap{margin-bottom:24px}
+.pace-chart{
+  position:relative;width:100%;height:120px;
+  background:var(--prog-track);border-radius:10px;
+  overflow:hidden;margin-bottom:6px;
+}
+.pace-chart-fill{
+  position:absolute;bottom:0;left:0;right:0;
+  /* строится через inline clip-path в JS */
+}
+.pace-chart svg{width:100%;height:100%;display:block}
+.pace-chart-labels{
+  display:flex;justify-content:space-between;
+  font-size:11px;color:var(--muted);margin-bottom:8px;
+}
+.pace-legend{display:flex;gap:16px;flex-wrap:wrap}
+.pace-legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.pace-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+/* Карточки темпа по фазам */
+.pace-phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:12px}
+.pace-phase-card{
+  background:var(--mc-bg);border:1px solid var(--border2);
+  border-radius:var(--radius);padding:10px 12px;
+}
+.pace-phase-label{font-size:11px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.pace-phase-tempo{font-size:16px;font-weight:700;color:var(--text)}
+.pace-phase-desc{font-size:11px;color:var(--muted);margin-top:3px}
 
 /* ── PLAN (как event-cards) ── */
 .plan-wrap{
@@ -529,6 +558,10 @@ a:hover{opacity:.8}
   background:rgba(37,99,235,.06);border-color:rgba(37,99,235,.15);
   border-left-color:#2563eb;
 }
+/* Day theme — pace chart */
+[data-theme="day"] .pace-chart{background:rgba(37,99,235,.07)}
+[data-theme="day"] .pace-phase-card{background:rgba(255,255,255,.70);border-color:rgba(37,99,235,.15)}
+[data-theme="day"] .pace-phase-tempo{color:#0f1f3d}
 
 /* ── HOW IT WORKS ── */
 .how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:14px}
@@ -683,6 +716,12 @@ footer a:hover{color:rgba(255,255,255,.70)}
         <input type="number" id="hrPace" placeholder="145" value="145" min="100" max="200">
       </div>
 
+      <!-- Целевой темп -->
+      <div class="field">
+        <label>Целевой темп на финише (мин:сек) <span style="font-weight:400;color:var(--muted);font-size:12px">— необязательно</span></label>
+        <input type="text" id="targetPace" placeholder="Например 5:27" autocomplete="off">
+      </div>
+
       <!-- Возраст -->
       <div class="field">
         <label>Возраст</label>
@@ -822,6 +861,15 @@ function validate(){
   const min=MIN_WEEKS[dist]||6;
   if(w<min){show('err',`До старта ${w} нед. Для «${DIST_LABELS[dist]}» нужно минимум ${min} нед. Перенесите дату или выберите другую дистанцию.`); btn.disabled=true; return false;}
   if(w>36){show('warn',`До старта ${w} нед. — план будет на 36 недель, это максимум.`); btn.disabled=false; return true;}
+  // Проверяем целевой темп если указан
+  const tp = parsePace($('targetPace').value);
+  if($('targetPace').value.trim() && !tp){
+    show('err','Целевой темп введите в формате М:СС, например 5:27'); btn.disabled=true; return false;
+  }
+  if(tp && tp >= parsePace($('pace').value)){
+    show('warn','Целевой темп медленнее или равен текущему — план всё равно составим, но улучшения не будет.');
+    btn.disabled=false; return true;
+  }
   show('ok',`До старта ${w} нед. — всё реалистично, составляем!`); btn.disabled=false; return true;
 }
 
@@ -829,7 +877,7 @@ function show(cls,txt){
   const h=$('hint'); h.className='hint '+cls; h.textContent=txt;
 }
 
-['pace','hrPace','age','hrRest','raceDate'].forEach(id=>$(id).addEventListener('input',validate));
+['pace','hrPace','age','hrRest','raceDate','targetPace'].forEach(id=>$(id).addEventListener('input',validate));
 validate();
 
 // ══════════════════════════════════════
@@ -847,20 +895,37 @@ function calcZones(age, hrRest){
     z3: z(.70,.80), z4: z(.80,.90), z5: z(.90,1) };
 }
 
-/* Целевые темпы — все производные от curPace */
-function calcPaces(curPace, dist, goal){
-  // Riegel-based pace adjustment per distance vs 10k
-  const distFactor = {'5':.88,'10':1,'21':1.09,'42':1.18,'trail':1.25,'ultra':1.42}[dist] || 1;
-  // Goal adjustment: result = run faster than current projection
-  const goalFactor  = {result:.90, finish:.97, zero:1.06, recovery:1.03}[goal] || 1;
-  const target = Math.round(curPace * distFactor * goalFactor);
+/* Целевые темпы — производные от curPace или от явно заданного targetPace */
+function calcPaces(curPace, dist, goal, userTarget){
+  // Если пользователь задал целевой темп — используем его напрямую
+  // Иначе рассчитываем через Riegel + поправку на цель
+  let target;
+  if(userTarget && userTarget > 0){
+    target = userTarget;
+  } else {
+    const distFactor = {'5':.88,'10':1,'21':1.09,'42':1.18,'trail':1.25,'ultra':1.42}[dist] || 1;
+    const goalFactor = {result:.90, finish:.97, zero:1.06, recovery:1.03}[goal] || 1;
+    target = Math.round(curPace * distFactor * goalFactor);
+  }
+
+  // Тренировочные темпы — всегда от curPace (текущий уровень атлета),
+  // но в пиковую фазу подтягиваются к target
+  // easy/long — от curPace; tempo/interval — между curPace и target
+  const blendFactor = Math.min(curPace / target, 1.5); // насколько цель амбициознее текущего
+  // easy/long — всегда медленнее curPace (восстановление)
+  // tempo     — между curPace и target: по мере подготовки подтягивается к цели
+  //             в начале ≈ 93% от curPace, к пику ≈ 97% от target
+  //             усредняем: (curPace*0.93 + target*0.97) / 2
+  // interval  — чуть быстрее target (развивает скорость выше гоночной)
+  const tempo    = Math.round((curPace * 0.93 + target * 0.97) / 2);
+  const interval = Math.round(target * 0.95);
   return {
     current:  curPace,
-    easy:     Math.round(curPace * 1.20),   // зона 1–2
-    long:     Math.round(curPace * 1.15),   // зона 2
-    tempo:    Math.round(curPace * 0.93),   // зона 3–4
-    interval: Math.round(curPace * 0.85),   // зона 4–5
     target,
+    easy:     Math.round(curPace * 1.20),   // зона 1-2, медленнее curPace
+    long:     Math.round(curPace * 1.15),   // зона 2,   медленнее curPace
+    tempo:    Math.min(tempo, Math.round(curPace * 0.97)),  // не быстрее 97% от curPace
+    interval: Math.min(interval, Math.round(curPace * 0.90)), // не быстрее 90% от curPace
   };
 }
 
@@ -1017,15 +1082,41 @@ function dayWorkouts(phase, weekVol, paces, days, dist, weekIdx, totalWeeks, zon
 }
 
 // ══════════════════════════════════════
+//  PACE PROGRESSION PER WEEK
+// ══════════════════════════════════════
+
+/* Возвращает темп темповой тренировки для каждой недели.
+   Логика: в базовой фазе близко к curPace,
+           в пиковой — выходим на целевой,
+           в тейпере — немного откатываемся (свежесть важнее).
+   Используется для графика и для подстановки в описания. */
+function buildPaceProgression(phases, curPace, targetPace){
+  const gap = curPace - targetPace; // разница, которую надо преодолеть (>0 = улучшение)
+  // прогресс по фазе: доля пройденного пути к цели
+  const phaseProgress = {base:0.15, build:0.50, peak:0.90, rest:null, taper:0.85};
+
+  return phases.map((ph, i) => {
+    if(ph === 'rest'){
+      // разгрузка — берём прогресс предыдущей активной недели
+      const prev = phases.slice(0,i).reverse().find(p=>p!=='rest');
+      const prog = phaseProgress[prev] ?? 0.15;
+      return Math.round(curPace - gap * prog);
+    }
+    const prog = phaseProgress[ph] ?? 0.15;
+    return Math.round(curPace - gap * prog);
+  });
+}
+
+// ══════════════════════════════════════
 //  RENDER
 // ══════════════════════════════════════
 const PHASE_LABEL={base:'база',build:'наращивание',peak:'пик',taper:'спад',rest:'разгрузка'};
 const PHASE_COLOR={base:'#1565c0',build:'#2e7d32',peak:'#e65100',taper:'#f57f17',rest:'#6a1b9a'};
 
 function render(p){
-  const {dist,goal,level,days,curPace,age,hrRest,weeks}=p;
+  const {dist,goal,level,days,curPace,userTarget,age,hrRest,weeks}=p;
   const zones=calcZones(age,hrRest);
-  const paces=calcPaces(curPace,dist,goal);
+  const paces=calcPaces(curPace,dist,goal,userTarget);
   const phases=buildPhases(weeks);
   const bv=calcBaseVol(level,days);
   const vols=buildVols(phases,bv,dist);
@@ -1038,7 +1129,7 @@ function render(p){
   html+=`<div class="sec">Ваши показатели</div><div class="metrics">`;
   [
     {l:'Текущий темп',v:fmtPace(curPace),s:'мин/км'},
-    {l:'Целевой темп',v:fmtPace(paces.target),s:`для ${DIST_LABELS[dist]}`},
+    {l:'Целевой темп',v:fmtPace(paces.target),s:userTarget?`задан вами`:`для ${DIST_LABELS[dist]}`},
     {l:'Прогноз',v:fmtTime(paces.target*distKm),s:DIST_LABELS[dist]},
     {l:'Недель в плане',v:weeks,s:'до старта'},
   ].forEach(m=>html+=`<div class="mc"><div class="mc-label">${m.l}</div><div class="mc-val">${m.v}</div><div class="mc-sub">${m.s}</div></div>`);
@@ -1055,13 +1146,97 @@ function render(p){
   ].forEach(z=>html+=`<div class="zone ${z.cls}"><div class="zone-num">${z.n}</div><div class="zone-range">${z.r}</div><div class="zone-desc">${z.d}</div></div>`);
   html+=`</div>`;
 
-  // progress bar
+  // ── Прогрессия объёма
   html+=`<div class="sec">Прогрессия объёма по неделям</div><div class="prog-wrap"><div class="prog-track">`;
   phases.forEach((ph,i)=>{
     const pct=Math.round(vols[i]/maxVol*100);
     html+=`<div class="prog-seg" style="width:${Math.round(100/phases.length)}%;height:${pct}%;background:${PHASE_COLOR[ph]}"></div>`;
   });
   html+=`</div><div class="prog-labels"><span>нед 1</span><span>нед ${Math.ceil(weeks/2)}</span><span>нед ${weeks}</span></div></div>`;
+
+  // ── Прогрессия темпа
+  const paceProg = buildPaceProgression(phases, curPace, paces.target);
+  const paceMin  = Math.min(...paceProg, paces.target) - 5;
+  const paceMax  = Math.max(...paceProg, curPace) + 5;
+  const paceRange = paceMax - paceMin;
+  const W = phases.length;
+
+  // SVG-график: ось Y = темп (быстрее = выше), ось X = недели
+  const svgW = 1000, svgH = 120;
+  const padL = 8, padR = 8, padT = 12, padB = 12;
+  const plotW = svgW - padL - padR;
+  const plotH = svgH - padT - padB;
+
+  // точки линии темповой тренировки
+  const pts = paceProg.map((p,i)=>{
+    const x = padL + (i/(W-1||1))*plotW;
+    const y = padT + ((p - paceMin)/paceRange)*plotH;
+    return [x,y];
+  });
+  // точки линии цели (горизонталь)
+  const targetY = padT + ((paces.target - paceMin)/paceRange)*plotH;
+  // точки линии текущего (горизонталь)
+  const curY    = padT + ((curPace     - paceMin)/paceRange)*plotH;
+
+  const polyline = pts.map(([x,y])=>`${x},${y}`).join(' ');
+  // area fill под линией
+  const areaPath = `M${pts[0][0]},${svgH} ` + pts.map(([x,y])=>`L${x},${y}`).join(' ') + ` L${pts[pts.length-1][0]},${svgH} Z`;
+
+  html+=`<div class="sec">Прогрессия темпа к цели</div><div class="pace-chart-wrap">
+  <div class="pace-chart">
+    <svg viewBox="0 0 ${svgW} ${svgH}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- сетка -->
+      <line x1="${padL}" y1="${targetY}" x2="${svgW-padR}" y2="${targetY}" stroke="rgba(134,239,172,0.35)" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <line x1="${padL}" y1="${curY}"    x2="${svgW-padR}" y2="${curY}"    stroke="rgba(255,255,255,0.15)"  stroke-width="1"   stroke-dasharray="4,4"/>
+      <!-- фаза-полосы -->
+      ${phases.map((ph,i)=>{
+        const x1 = padL+(i/(W||1))*plotW;
+        const x2 = padL+((i+1)/(W||1))*plotW;
+        const c  = {base:'rgba(37,99,235,.08)',build:'rgba(34,197,94,.08)',peak:'rgba(249,115,22,.10)',taper:'rgba(251,191,36,.08)',rest:'rgba(167,139,250,.08)'}[ph]||'transparent';
+        return `<rect x="${x1}" y="${padT}" width="${x2-x1}" height="${plotH}" fill="${c}"/>`;
+      }).join('')}
+      <!-- area fill -->
+      <path d="${areaPath}" fill="rgba(134,239,172,0.10)"/>
+      <!-- линия прогрессии -->
+      <polyline points="${polyline}" fill="none" stroke="rgba(134,239,172,0.9)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <!-- точки -->
+      ${pts.filter((_,i)=>i%Math.max(1,Math.floor(W/8))===0||i===W-1).map(([x,y],_,arr)=>
+        `<circle cx="${x}" cy="${y}" r="4" fill="#86efac" stroke="rgba(0,0,0,.3)" stroke-width="1"/>`
+      ).join('')}
+    </svg>
+  </div>
+  <div class="pace-chart-labels">
+    <span>нед 1 · ${fmtPace(paceProg[0])}</span>
+    <span>нед ${Math.ceil(W/2)} · ${fmtPace(paceProg[Math.ceil(W/2)-1]||paceProg[0])}</span>
+    <span>нед ${W} · ${fmtPace(paceProg[W-1])}</span>
+  </div>
+  <div class="pace-legend">
+    <div class="pace-legend-item"><div class="pace-legend-dot" style="background:rgba(134,239,172,.9)"></div>Темп темповой тренировки</div>
+    <div class="pace-legend-item"><div class="pace-legend-dot" style="background:rgba(134,239,172,.35);border:1px dashed rgba(134,239,172,.6)"></div>Целевой темп ${fmtPace(paces.target)}/км</div>
+    <div class="pace-legend-item"><div class="pace-legend-dot" style="background:rgba(255,255,255,.15);border:1px dashed rgba(255,255,255,.3)"></div>Текущий темп ${fmtPace(curPace)}/км</div>
+  </div>
+  </div>
+
+  <!-- Карточки по фазам -->
+  <div class="pace-phases">
+    ${['base','build','peak','taper'].map(ph=>{
+      const wIdx = phases.indexOf(ph);
+      if(wIdx<0) return '';
+      const tp = paceProg[wIdx];
+      const labels={base:'🏗 База',build:'📈 Наращивание',peak:'🔥 Пик',taper:'🎯 Тейпер'};
+      const descs={
+        base:`Темповые в ${fmtPace(tp)}/км — закладываем аэробную базу`,
+        build:`Темповые в ${fmtPace(tp)}/км — нарастает интенсивность`,
+        peak:`Темповые в ${fmtPace(tp)}/км — выходим на целевой темп`,
+        taper:`Темповые в ${fmtPace(tp)}/км — сохраняем остроту, отдыхаем`,
+      };
+      return `<div class="pace-phase-card">
+        <div class="pace-phase-label">${labels[ph]}</div>
+        <div class="pace-phase-tempo">${fmtPace(tp)}<span style="font-size:11px;font-weight:400;color:var(--muted)">/км</span></div>
+        <div class="pace-phase-desc">${descs[ph]}</div>
+      </div>`;
+    }).join('')}
+  </div>`;
 
   // plan
   html+=`<div class="sec">Детальный план по неделям</div><div class="plan-wrap" id="planInner">`;
@@ -1120,6 +1295,7 @@ $('genBtn').addEventListener('click',()=>{
     level: $('level').value,
     days: parseInt(getSel('daysRow')||4),
     curPace: parsePace($('pace').value),
+    userTarget: parsePace($('targetPace').value) || null,
     age: parseInt($('age').value)||35,
     hrRest: parseInt($('hrRest').value)||55,
     weeks: Math.min(weeksToRace(),36),
