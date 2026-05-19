@@ -339,6 +339,14 @@ a:hover{opacity:.8}
 [data-theme="day"] .field select:focus{border-color:#2563eb}
 [data-theme="day"] .field select option{background-color:#dbeafe;color:#0f1f3d}
 
+/* ── FIELD SECTION DIVIDER ── */
+.field-section{
+  font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--muted);
+  padding-bottom:6px;border-bottom:1px solid var(--border2);
+  margin-top:4px;
+}
+
 /* ── PILLS (type-btn style из оригинала) ── */
 .pill-group{display:flex;flex-wrap:wrap;gap:6px}
 .pill{
@@ -441,6 +449,13 @@ a:hover{opacity:.8}
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   border:1px solid var(--border2);
   border-radius:var(--radius);padding:12px 14px;
+}
+.mc-warn{border-color:var(--hint-warn-b);background:var(--hint-warn-bg)}
+.mc-warn .mc-val{color:var(--hint-warn-c)}
+.bmi-notice{
+  font-size:13px;padding:10px 14px;border-radius:8px;margin-bottom:16px;
+  background:var(--hint-warn-bg);border-left:3px solid var(--hint-warn-b);
+  color:var(--hint-warn-c);line-height:1.5;
 }
 .mc-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
 .mc-val{font-size:22px;font-weight:800;color:var(--text)}
@@ -854,6 +869,62 @@ footer a:hover{color:rgba(255,255,255,.70)}
         </div>
       </div>
 
+      <!-- Секция: Физические данные -->
+      <div class="field-section form-full">О вас</div>
+
+      <!-- Пол -->
+      <div class="field">
+        <label>Пол</label>
+        <div class="pill-group" id="sexGroup">
+          <button class="pill" data-val="m">👨 Мужской</button>
+          <button class="pill" data-val="f">👩 Женский</button>
+        </div>
+      </div>
+
+      <!-- Возраст -->
+      <div class="field">
+        <label>Возраст</label>
+        <input type="number" id="age" placeholder="например 35" min="14" max="80">
+      </div>
+
+      <!-- Вес -->
+      <div class="field">
+        <label>Вес (кг) <span style="font-weight:400;color:var(--muted);font-size:12px">— для расчёта ИМТ и нагрузки</span></label>
+        <input type="number" id="weight" placeholder="например 75" min="40" max="200">
+      </div>
+
+      <!-- Беговой стаж -->
+      <div class="field">
+        <label>Беговой стаж</label>
+        <div class="pill-group" id="expGroup">
+          <button class="pill" data-val="0">Меньше года</button>
+          <button class="pill" data-val="1">1–2 года</button>
+          <button class="pill" data-val="3">3–5 лет</button>
+          <button class="pill" data-val="6">6+ лет</button>
+        </div>
+      </div>
+
+      <!-- Секция: Беговые данные -->
+      <div class="field-section form-full">Ваши результаты</div>
+
+      <!-- Текущий объём -->
+      <div class="field">
+        <label>Текущий объём в неделю (км) <span style="font-weight:400;color:var(--muted);font-size:12px">— сколько бегаете сейчас</span></label>
+        <input type="number" id="weeklyVol" placeholder="например 30" min="0" max="300">
+      </div>
+
+      <!-- Лучший результат -->
+      <div class="field">
+        <label>Лучший результат на 5 или 10 км <span style="font-weight:400;color:var(--muted);font-size:12px">— необязательно</span></label>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div class="pill-group" id="prDistGroup" style="flex-shrink:0">
+            <button class="pill" data-val="5">5 км</button>
+            <button class="pill" data-val="10">10 км</button>
+          </div>
+          <input type="text" id="prTime" placeholder="например 25:30" style="flex:1" autocomplete="off">
+        </div>
+      </div>
+
       <!-- Темп -->
       <div class="field">
         <label>Текущий темп на 10 км (мин:сек / км)</label>
@@ -866,22 +937,16 @@ footer a:hover{color:rgba(255,255,255,.70)}
         <input type="number" id="hrPace" placeholder="например 145" min="100" max="200">
       </div>
 
+      <!-- ЧСС покоя -->
+      <div class="field">
+        <label>ЧСС покоя (утром до вставания, уд/мин)</label>
+        <input type="number" id="hrRest" placeholder="например 55" min="35" max="90">
+      </div>
+
       <!-- Целевой темп -->
       <div class="field">
         <label>Целевой темп на финише (мин:сек) <span style="font-weight:400;color:var(--muted);font-size:12px">— необязательно</span></label>
         <input type="text" id="targetPace" placeholder="например 5:27" autocomplete="off">
-      </div>
-
-      <!-- Возраст -->
-      <div class="field">
-        <label>Возраст</label>
-        <input type="number" id="age" placeholder="например 35" min="14" max="80">
-      </div>
-
-      <!-- ЧСС покоя -->
-      <div class="field">
-        <label>ЧСС покоя (утром, уд/мин)</label>
-        <input type="number" id="hrRest" placeholder="например 55" min="35" max="90">
       </div>
 
       <!-- Дата старта -->
@@ -993,6 +1058,9 @@ function getSel(id,attr='val'){
 
 initPills('distGroup');
 initPills('goalGroup');
+initPills('sexGroup');
+initPills('expGroup');
+initPills('prDistGroup');
 initDays();
 
 // default date = +12 weeks
@@ -1029,53 +1097,38 @@ function validate(){
   const hrR  = parseInt($('hrRest').value);
   const w    = weeksToRace();
 
+  const sex    = getSel('sexGroup');
+  const exp    = getSel('expGroup');
+  const wVol   = parseInt($('weeklyVol').value);
+  const weight = parseInt($('weight').value);
+
   // Шаг 1 — дистанция
-  if(!dist){
-    show('info','👆 Выберите целевую дистанцию');
-    btn.disabled=true; return false;
-  }
+  if(!dist){ show('info','👆 Выберите целевую дистанцию'); btn.disabled=true; return false; }
   // Шаг 2 — цель
-  if(!goal){
-    show('info','👆 Выберите цель подготовки');
-    btn.disabled=true; return false;
-  }
+  if(!goal){ show('info','👆 Выберите цель подготовки'); btn.disabled=true; return false; }
   // Шаг 3 — дни
-  if(!daysV){
-    show('info','👆 Укажите количество тренировочных дней в неделю');
-    btn.disabled=true; return false;
-  }
-  // Шаг 4 — текущий темп
-  if(!$('pace').value.trim()){
-    show('info','✏️ Введите ваш текущий темп на 10 км — например 6:30');
-    btn.disabled=true; return false;
-  }
-  if(!pace){
-    show('err','Темп введите в формате М:СС — например 6:30');
-    btn.disabled=true; return false;
-  }
+  if(!daysV){ show('info','👆 Укажите количество тренировочных дней в неделю'); btn.disabled=true; return false; }
+  // Шаг 4 — пол
+  if(!sex){ show('info','👆 Укажите пол — влияет на расчёт ЧСС макс и зон пульса'); btn.disabled=true; return false; }
   // Шаг 5 — возраст
-  if(!$('age').value.trim()){
-    show('info','✏️ Введите ваш возраст — это нужно для расчёта зон пульса');
-    btn.disabled=true; return false;
-  }
-  if(isNaN(age)||age<14||age>80){
-    show('err','Возраст должен быть от 14 до 80 лет');
-    btn.disabled=true; return false;
-  }
-  // Шаг 6 — ЧСС покоя
-  if(!$('hrRest').value.trim()){
-    show('info','✏️ Введите ЧСС покоя — измерьте пульс утром, лёжа. Обычно 45–70 уд/мин');
-    btn.disabled=true; return false;
-  }
-  if(isNaN(hrR)||hrR<35||hrR>90){
-    show('err','ЧСС покоя обычно от 35 до 90 уд/мин');
-    btn.disabled=true; return false;
-  }
-  // Шаг 7 — дата забега
-  if(!w||w<1){
-    show('info','📅 Выберите дату целевого забега из календаря');
-    btn.disabled=true; return false;
-  }
+  if(!$('age').value.trim()){ show('info','✏️ Введите возраст — нужен для расчёта зон пульса'); btn.disabled=true; return false; }
+  if(isNaN(age)||age<14||age>80){ show('err','Возраст должен быть от 14 до 80 лет'); btn.disabled=true; return false; }
+  // Шаг 6 — вес
+  if(!$('weight').value.trim()){ show('info','✏️ Введите вес — используется для расчёта ИМТ и корректировки нагрузки'); btn.disabled=true; return false; }
+  if(isNaN(weight)||weight<40||weight>200){ show('err','Вес должен быть от 40 до 200 кг'); btn.disabled=true; return false; }
+  // Шаг 7 — беговой стаж
+  if(!exp){ show('info','👆 Укажите беговой стаж — влияет на допустимый прирост объёма'); btn.disabled=true; return false; }
+  // Шаг 8 — текущий объём
+  if(!$('weeklyVol').value.trim()){ show('info','✏️ Введите текущий недельный объём — это точка отсчёта для плана'); btn.disabled=true; return false; }
+  if(isNaN(wVol)||wVol<0||wVol>300){ show('err','Объём должен быть от 0 до 300 км/нед'); btn.disabled=true; return false; }
+  // Шаг 9 — темп
+  if(!$('pace').value.trim()){ show('info','✏️ Введите текущий темп на 10 км — например 6:30'); btn.disabled=true; return false; }
+  if(!pace){ show('err','Темп введите в формате М:СС — например 6:30'); btn.disabled=true; return false; }
+  // Шаг 10 — ЧСС покоя
+  if(!$('hrRest').value.trim()){ show('info','✏️ Введите ЧСС покоя — измерьте пульс утром лёжа. Обычно 45–70 уд/мин'); btn.disabled=true; return false; }
+  if(isNaN(hrR)||hrR<35||hrR>90){ show('err','ЧСС покоя обычно от 35 до 90 уд/мин'); btn.disabled=true; return false; }
+  // Шаг 11 — дата забега
+  if(!w||w<1){ show('info','📅 Выберите дату целевого забега из календаря'); btn.disabled=true; return false; }
   const min=MIN_WEEKS[dist]||6;
   if(w<min){
     show('err',`До старта ${w} нед. Для «${DIST_LABELS[dist]}» нужно минимум ${min} нед. Перенесите дату или выберите другую дистанцию.`);
@@ -1103,7 +1156,7 @@ function show(cls,txt){
   const h=$('hint'); h.className='hint '+cls; h.textContent=txt;
 }
 
-['pace','hrPace','age','hrRest','raceDate','targetPace'].forEach(id=>$(id).addEventListener('input',validate));
+['pace','hrPace','age','hrRest','raceDate','targetPace','weight','weeklyVol','prTime'].forEach(id=>$(id).addEventListener('input',validate));
 validate();
 
 // ══════════════════════════════════════
@@ -1111,9 +1164,13 @@ validate();
 //  value derived from user inputs)
 // ══════════════════════════════════════
 
-/* Зоны пульса по Карвонену */
-function calcZones(age, hrRest){
-  const hrMax = Math.round(208 - 0.7 * age);
+/* Зоны пульса по Карвонену + Танака с поправкой на пол.
+   Женщины: hrMax в среднем на 6 уд/мин выше при том же возрасте
+   (Females have higher age-predicted maximum heart rate, Gulati et al. 2010) */
+function calcZones(age, hrRest, sex){
+  // Танака: hrMax = 208 − 0.7×age (оба пола базово)
+  // Поправка для женщин: +6 уд/мин (исследования Gulati 2010)
+  const hrMax = Math.round(208 - 0.7 * age + (sex === 'f' ? 6 : 0));
   const r = hrMax - hrRest;
   const z = (lo, hi) => [Math.round(hrRest + r * lo), Math.round(hrRest + r * hi)];
   return { hrMax,
@@ -1158,11 +1215,54 @@ function calcPaces(curPace, dist, goal, userTarget){
   return { current:curPace, target, easy, long, tempo, interval, goalPace, strides };
 }
 
-/* Базовый недельный объём зависит от уровня И кол-ва дней */
-function calcBaseVol(level, days){
-  const lvl = {beginner:18, amateur:32, advanced:48}[level] || 32;
-  const dm  = {3:.75, 4:1.0, 5:1.25, 6:1.50}[days] || 1.0;
-  return Math.round(lvl * dm);
+/* Базовый недельный объём — от реального объёма пользователя.
+   Правило 10%: прирост не более 10% в неделю.
+   Стаж: опытные могут расти на 12–15%.
+   ИМТ > 27: снижаем нагрузку на 10% (риск для суставов).
+   Если weeklyVol = 0 (начинающий) — берём минимум по уровню. */
+function calcBaseVol(level, days, weeklyVol, exp, bmi){
+  let base;
+  if(weeklyVol > 0){
+    // Отправная точка — реальный объём пользователя
+    base = weeklyVol;
+  } else {
+    // Фолбек по уровню если объём не указан
+    base = {beginner:15, amateur:28, advanced:45}[level] || 28;
+  }
+
+  // Поправка на количество дней (если дней больше/меньше «нормы» для уровня)
+  const dayMod = {3:.80, 4:1.0, 5:1.20, 6:1.40}[days] || 1.0;
+  const levelBase = {beginner:20, amateur:32, advanced:48}[level] || 32;
+  // Если реальный объём сильно расходится с уровнем — мягко корректируем
+  const blended = Math.round(base * 0.75 + levelBase * dayMod * 0.25);
+
+  // Поправка на ИМТ: > 27 — снижаем на 10%, > 30 — на 20%
+  const bmiMod = bmi > 30 ? 0.80 : bmi > 27 ? 0.90 : 1.0;
+
+  return Math.max(Math.round(blended * bmiMod), 10);
+}
+
+/* ИМТ и его интерпретация */
+function calcBMI(weight, height){
+  if(!weight || !height) return null;
+  return weight / ((height/100) ** 2);
+}
+
+/* Допустимый прирост объёма в неделю по стажу (правило 10% + поправка) */
+function weeklyGrowthRate(exp, bmi){
+  // exp: '0'=<1yr, '1'=1-2yr, '3'=3-5yr, '6'=6+yr
+  const base = {'0':1.07, '1':1.09, '3':1.11, '6':1.13}[exp] || 1.09;
+  // При высоком ИМТ — консервативнее
+  return bmi > 27 ? Math.min(base, 1.08) : base;
+}
+
+/* Прогноз результата по лучшему времени через формулу Ригеля.
+   Возвращает ТЕМП (сек/км) на целевой дистанции. */
+function riegelPredict(prTimeSec, prDistKm, targetDistKm){
+  // Время на целевой дистанции: t2 = t1 × (d2/d1)^1.06
+  const predictedTimeSec = prTimeSec * Math.pow(targetDistKm / prDistKm, 1.06);
+  // Темп = время / дистанция
+  return Math.round(predictedTimeSec / targetDistKm);
 }
 
 /* Фазы по неделям */
@@ -1179,19 +1279,22 @@ function buildPhases(n){
   return p;
 }
 
-/* Объём каждой недели — нарастает от baseVol, фиксируется на пике */
-function buildVols(phases, baseVol, dist){
+/* Объём каждой недели — нарастает от baseVol.
+   Темп роста зависит от стажа (weeklyGrowthRate) и фазы. */
+function buildVols(phases, baseVol, dist, exp, bmi){
   const maxMult = {'5':1.35,'10':1.50,'21':1.65,'42':1.95,'trail':1.75,'ultra':2.10}[dist] || 1.60;
   const cap = baseVol * maxMult;
+  const gr  = weeklyGrowthRate(exp||'1', bmi||22); // базовый прирост
 
-  // growth rate per active phase
-  const grow = {base:1.08, build:1.10, peak:1.05};
+  // Фазовые модификаторы поверх персонального темпа роста
+  const phMod = {base:0.97, build:1.0, peak:1.03};
 
-  let running = baseVol;          // tracks active-week volume (not reduced by rest/taper)
+  let running = baseVol;
   return phases.map(ph => {
     if(ph === 'rest')  return Math.max(Math.round(running * .65), 12);
     if(ph === 'taper') return Math.max(Math.round(running * .55), 12);
-    running = Math.min(running * (grow[ph] || 1.08), cap);
+    const rate = gr * (phMod[ph] || 1.0);
+    running = Math.min(running * rate, cap);
     return Math.max(Math.round(running), 12);
   });
 }
@@ -1475,26 +1578,49 @@ const PHASE_LABEL={base:'база',build:'наращивание',peak:'пик',
 const PHASE_COLOR={base:'#1565c0',build:'#2e7d32',peak:'#e65100',taper:'#f57f17',rest:'#6a1b9a'};
 
 function render(p){
-  const {dist,goal,level,days,curPace,userTarget,age,hrRest,weeks}=p;
-  const zones=calcZones(age,hrRest);
-  const paces=calcPaces(curPace,dist,goal,userTarget);
-  const phases=buildPhases(weeks);
-  const bv=calcBaseVol(level,days);
-  const vols=buildVols(phases,bv,dist);
-  const maxVol=Math.max(...vols);
-  const distKm={'5':5,'10':10,'21':21.1,'42':42.2,'trail':50,'ultra':80}[dist]||21.1;
+  const {dist,goal,level,days,curPace,userTarget,age,sex,weight,exp,weeklyVol,prDist,prTimeSec,hrRest,weeks}=p;
+
+  // ── Производные показатели
+  const bmi    = weight && p.height ? calcBMI(weight, p.height) : (weight ? weight/((1.75)**2) : 22);
+  const bmiVal = Math.round(bmi*10)/10;
+  const bmiLabel = bmi < 18.5 ? 'Дефицит веса' : bmi < 25 ? 'Норма' : bmi < 30 ? 'Избыток веса' : 'Ожирение';
+  const bmiWarn  = bmi > 27;
+
+  // Прогноз через Riegel если есть личник
+  let riegelTarget = null;
+  if(prTimeSec && prDist){
+    const distKmMap = {'5':5,'10':10,'21':21.1,'42':42.2,'trail':50,'ultra':80};
+    const tDist = distKmMap[dist]||21.1;
+    riegelTarget = riegelPredict(prTimeSec, parseFloat(prDist), tDist);
+  }
+
+  const zones  = calcZones(age, hrRest, sex);
+  const paces  = calcPaces(curPace, dist, goal, userTarget || riegelTarget);
+  const phases = buildPhases(weeks);
+  const bv     = calcBaseVol(level, days, weeklyVol, exp, bmiVal);
+  const vols   = buildVols(phases, bv, dist, exp, bmiVal);
+  const maxVol = Math.max(...vols);
+  const distKm = {'5':5,'10':10,'21':21.1,'42':42.2,'trail':50,'ultra':80}[dist]||21.1;
 
   let html='';
 
-  // metrics
+  // ── Метрики
+  const targetSrc = userTarget ? 'задан вами' : riegelTarget ? `прогноз Riegel по личнику` : `авторасчёт`;
+  const metrics = [
+    {l:'Текущий темп',   v:fmtPace(curPace),          s:'мин/км на 10 км'},
+    {l:'Целевой темп',   v:fmtPace(paces.target),      s:targetSrc},
+    {l:'Прогноз',        v:fmtTime(paces.target*distKm),s:DIST_LABELS[dist]},
+    {l:'Недель в плане', v:weeks,                       s:'до старта'},
+    {l:'ИМТ',            v:bmiVal,                      s:bmiLabel, warn:bmiWarn},
+    {l:'ЧСС макс',       v:zones.hrMax,                 s:`уд/мин, ${sex==='f'?'женщина':'мужчина'} ${age} лет`},
+  ];
+  if(riegelTarget && !userTarget){
+    metrics.splice(2,0,{l:'Riegel-прогноз', v:fmtTime(riegelTarget*distKm), s:`из личника ${prDist} км`});
+  }
   html+=`<div class="sec">Ваши показатели</div><div class="metrics">`;
-  [
-    {l:'Текущий темп',v:fmtPace(curPace),s:'мин/км'},
-    {l:'Целевой темп',v:fmtPace(paces.target),s:userTarget?`задан вами`:`для ${DIST_LABELS[dist]}`},
-    {l:'Прогноз',v:fmtTime(paces.target*distKm),s:DIST_LABELS[dist]},
-    {l:'Недель в плане',v:weeks,s:'до старта'},
-  ].forEach(m=>html+=`<div class="mc"><div class="mc-label">${m.l}</div><div class="mc-val">${m.v}</div><div class="mc-sub">${m.s}</div></div>`);
+  metrics.forEach(m=>html+=`<div class="mc${m.warn?' mc-warn':''}"><div class="mc-label">${m.l}</div><div class="mc-val">${m.v}</div><div class="mc-sub">${m.s}</div></div>`);
   html+=`</div>`;
+  if(bmiWarn) html+=`<div class="bmi-notice">⚠️ ИМТ ${bmiVal} — рекомендуем добавить кросс-тренинг (велосипед, плавание) и снизить беговой объём на 10–15% для снижения нагрузки на суставы.</div>`;
 
   // zones
   html+=`<div class="sec">Ваши зоны пульса (формула Карвонена)</div><div class="zones">`;
@@ -1681,16 +1807,34 @@ window.toggleWeek=function(i){
 // ══════════════════════════════════════
 $('genBtn').addEventListener('click',()=>{
   if(!validate()) return;
+  // Парсим личник
+  const prDistVal = getSel('prDistGroup');
+  const prRaw     = $('prTime').value.trim();
+  let prTimeSec   = null;
+  if(prRaw && prDistVal){
+    // формат М:СС или Ч:ММ:СС
+    const p3 = prRaw.match(/^(\d+):(\d{2}):(\d{2})$/);
+    const p2 = prRaw.match(/^(\d+):(\d{2})$/);
+    if(p3) prTimeSec = parseInt(p3[1])*3600+parseInt(p3[2])*60+parseInt(p3[3]);
+    else if(p2) prTimeSec = parseInt(p2[1])*60+parseInt(p2[2]);
+  }
+
   render({
-    dist: getSel('distGroup'),
-    goal: getSel('goalGroup')||'result',
-    level: $('level').value,
-    days: parseInt(getSel('daysRow')||4),
-    curPace: parsePace($('pace').value),
+    dist:       getSel('distGroup'),
+    goal:       getSel('goalGroup')||'result',
+    level:      $('level').value,
+    days:       parseInt(getSel('daysRow')||4),
+    sex:        getSel('sexGroup')||'m',
+    exp:        getSel('expGroup')||'1',
+    age:        parseInt($('age').value)||35,
+    weight:     parseInt($('weight').value)||70,
+    weeklyVol:  parseInt($('weeklyVol').value)||0,
+    prDist:     prDistVal,
+    prTimeSec:  prTimeSec,
+    curPace:    parsePace($('pace').value),
+    hrRest:     parseInt($('hrRest').value)||55,
     userTarget: parsePace($('targetPace').value) || null,
-    age: parseInt($('age').value)||35,
-    hrRest: parseInt($('hrRest').value)||55,
-    weeks: Math.min(weeksToRace(),36),
+    weeks:      Math.min(weeksToRace(),36),
   });
 });
 
