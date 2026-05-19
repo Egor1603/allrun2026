@@ -382,6 +382,7 @@ a:hover{opacity:.8}
 .hint.ok  {display:block;background:var(--hint-ok-bg);  border-color:var(--hint-ok-b);  color:var(--hint-ok-c)}
 .hint.warn{display:block;background:var(--hint-warn-bg);border-color:var(--hint-warn-b);color:var(--hint-warn-c)}
 .hint.err {display:block;background:var(--hint-err-bg); border-color:var(--hint-err-b); color:var(--hint-err-c)}
+.hint.info{display:block;background:var(--surface2);    border-color:var(--border2);     color:var(--muted)}
 
 /* ── UPLOAD ── */
 .upload-zone{
@@ -529,6 +530,16 @@ a:hover{opacity:.8}
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border-top:1px solid var(--border2);
 }
+.week-logic{
+  padding:10px 16px 8px;
+  font-size:12px;color:var(--muted);
+  border-bottom:1px solid var(--border2);
+  background:rgba(255,255,255,.03);
+}
+[data-theme="day"] .week-logic{background:rgba(37,99,235,.04);color:#4b6a99}
+@media print{
+  .week-logic{font-size:8.5pt!important;color:#555!important;padding:4pt 8pt!important;border-bottom:1px solid #ddd!important}
+}
 .week-body.open{display:block}
 
 .days-tbl{width:100%;border-collapse:collapse;table-layout:fixed}
@@ -546,6 +557,18 @@ a:hover{opacity:.8}
 .td-t.rest    {color:var(--td-rest);font-weight:400}
 .td-t.race    {color:var(--text);font-weight:700}
 .td-desc{color:var(--muted);line-height:1.5;word-break:break-word}
+.td-why{
+  color:var(--muted);font-size:11px;line-height:1.55;
+  padding:3px 16px 8px 16px;
+  border-bottom:1px solid var(--border2);
+  opacity:.80;
+  font-style:italic;
+}
+.days-tbl tr:last-child .td-why{border-bottom:none}
+[data-theme="day"] .td-why{color:#5a7299}
+@media print{
+  .td-why{font-size:8pt!important;color:#666!important;padding:2pt 8pt 5pt!important;font-style:italic!important}
+}
 
 /* ── DISCLAIMER ── */
 .disclaimer{
@@ -792,7 +815,7 @@ footer a:hover{color:rgba(255,255,255,.70)}
         <div class="pill-group" id="distGroup">
           <button class="pill" data-val="5">5 км</button>
           <button class="pill" data-val="10">10 км</button>
-          <button class="pill on" data-val="21">Полумарафон 21 км</button>
+          <button class="pill" data-val="21">Полумарафон 21 км</button>
           <button class="pill" data-val="42">Марафон 42 км</button>
           <button class="pill" data-val="trail">Трейл (до 50 км)</button>
           <button class="pill" data-val="ultra">Ультра (50 км+)</button>
@@ -803,7 +826,7 @@ footer a:hover{color:rgba(255,255,255,.70)}
       <div class="field form-full">
         <label>Цель</label>
         <div class="pill-group" id="goalGroup">
-          <button class="pill on" data-val="result">⏱ Улучшить результат</button>
+          <button class="pill" data-val="result">⏱ Улучшить результат</button>
           <button class="pill" data-val="finish">🏁 Просто финишировать</button>
           <button class="pill" data-val="zero">🌱 Начинаю с нуля</button>
           <button class="pill" data-val="recovery">🩹 После травмы</button>
@@ -825,7 +848,7 @@ footer a:hover{color:rgba(255,255,255,.70)}
         <label>Тренировочных дней в неделю</label>
         <div class="days-row" id="daysRow">
           <button class="day-btn" data-n="3">3</button>
-          <button class="day-btn on" data-n="4">4</button>
+          <button class="day-btn" data-n="4">4</button>
           <button class="day-btn" data-n="5">5</button>
           <button class="day-btn" data-n="6">6</button>
         </div>
@@ -834,31 +857,31 @@ footer a:hover{color:rgba(255,255,255,.70)}
       <!-- Темп -->
       <div class="field">
         <label>Текущий темп на 10 км (мин:сек / км)</label>
-        <input type="text" id="pace" placeholder="6:30" value="6:30">
+        <input type="text" id="pace" placeholder="например 6:30">
       </div>
 
       <!-- Пульс -->
       <div class="field">
         <label>Пульс на этом темпе (уд/мин)</label>
-        <input type="number" id="hrPace" placeholder="145" value="145" min="100" max="200">
+        <input type="number" id="hrPace" placeholder="например 145" min="100" max="200">
       </div>
 
       <!-- Целевой темп -->
       <div class="field">
         <label>Целевой темп на финише (мин:сек) <span style="font-weight:400;color:var(--muted);font-size:12px">— необязательно</span></label>
-        <input type="text" id="targetPace" placeholder="Например 5:27" autocomplete="off">
+        <input type="text" id="targetPace" placeholder="например 5:27" autocomplete="off">
       </div>
 
       <!-- Возраст -->
       <div class="field">
         <label>Возраст</label>
-        <input type="number" id="age" placeholder="35" value="35" min="14" max="80">
+        <input type="number" id="age" placeholder="например 35" min="14" max="80">
       </div>
 
       <!-- ЧСС покоя -->
       <div class="field">
         <label>ЧСС покоя (утром, уд/мин)</label>
-        <input type="number" id="hrRest" placeholder="55" value="55" min="35" max="90">
+        <input type="number" id="hrRest" placeholder="например 55" min="35" max="90">
       </div>
 
       <!-- Дата старта -->
@@ -973,7 +996,7 @@ initPills('goalGroup');
 initDays();
 
 // default date = +12 weeks
-(()=>{ const d=new Date(); d.setDate(d.getDate()+84); $('raceDate').value=d.toISOString().slice(0,10); })();
+// Дата не заполняется автоматически — пользователь выбирает сам
 
 // upload
 $('uploadZone').addEventListener('click',()=>$('fileInput').click());
@@ -998,23 +1021,82 @@ function weeksToRace(){
 
 function validate(){
   const h=$('hint'), btn=$('genBtn');
-  const dist=getSel('distGroup'), pace=parsePace($('pace').value), w=weeksToRace();
-  if(!dist){show('err','Выберите дистанцию'); btn.disabled=true; return false;}
-  if(!pace){show('err','Темп введите в формате М:СС, например 6:30'); btn.disabled=true; return false;}
-  if(!w||w<1){show('err','Укажите дату забега'); btn.disabled=true; return false;}
-  const min=MIN_WEEKS[dist]||6;
-  if(w<min){show('err',`До старта ${w} нед. Для «${DIST_LABELS[dist]}» нужно минимум ${min} нед. Перенесите дату или выберите другую дистанцию.`); btn.disabled=true; return false;}
-  if(w>36){show('warn',`До старта ${w} нед. — план будет на 36 недель, это максимум.`); btn.disabled=false; return true;}
-  // Проверяем целевой темп если указан
-  const tp = parsePace($('targetPace').value);
-  if($('targetPace').value.trim() && !tp){
-    show('err','Целевой темп введите в формате М:СС, например 5:27'); btn.disabled=true; return false;
+  const dist = getSel('distGroup');
+  const goal = getSel('goalGroup');
+  const daysV= getSel('daysRow');
+  const pace = parsePace($('pace').value);
+  const age  = parseInt($('age').value);
+  const hrR  = parseInt($('hrRest').value);
+  const w    = weeksToRace();
+
+  // Шаг 1 — дистанция
+  if(!dist){
+    show('info','👆 Выберите целевую дистанцию');
+    btn.disabled=true; return false;
   }
-  if(tp && tp >= parsePace($('pace').value)){
-    show('warn','Целевой темп медленнее или равен текущему — план всё равно составим, но улучшения не будет.');
+  // Шаг 2 — цель
+  if(!goal){
+    show('info','👆 Выберите цель подготовки');
+    btn.disabled=true; return false;
+  }
+  // Шаг 3 — дни
+  if(!daysV){
+    show('info','👆 Укажите количество тренировочных дней в неделю');
+    btn.disabled=true; return false;
+  }
+  // Шаг 4 — текущий темп
+  if(!$('pace').value.trim()){
+    show('info','✏️ Введите ваш текущий темп на 10 км — например 6:30');
+    btn.disabled=true; return false;
+  }
+  if(!pace){
+    show('err','Темп введите в формате М:СС — например 6:30');
+    btn.disabled=true; return false;
+  }
+  // Шаг 5 — возраст
+  if(!$('age').value.trim()){
+    show('info','✏️ Введите ваш возраст — это нужно для расчёта зон пульса');
+    btn.disabled=true; return false;
+  }
+  if(isNaN(age)||age<14||age>80){
+    show('err','Возраст должен быть от 14 до 80 лет');
+    btn.disabled=true; return false;
+  }
+  // Шаг 6 — ЧСС покоя
+  if(!$('hrRest').value.trim()){
+    show('info','✏️ Введите ЧСС покоя — измерьте пульс утром, лёжа. Обычно 45–70 уд/мин');
+    btn.disabled=true; return false;
+  }
+  if(isNaN(hrR)||hrR<35||hrR>90){
+    show('err','ЧСС покоя обычно от 35 до 90 уд/мин');
+    btn.disabled=true; return false;
+  }
+  // Шаг 7 — дата забега
+  if(!w||w<1){
+    show('info','📅 Выберите дату целевого забега из календаря');
+    btn.disabled=true; return false;
+  }
+  const min=MIN_WEEKS[dist]||6;
+  if(w<min){
+    show('err',`До старта ${w} нед. Для «${DIST_LABELS[dist]}» нужно минимум ${min} нед. Перенесите дату или выберите другую дистанцию.`);
+    btn.disabled=true; return false;
+  }
+  if(w>36){
+    show('warn',`До старта ${w} нед. — план будет на 36 недель, это максимум.`);
     btn.disabled=false; return true;
   }
-  show('ok',`До старта ${w} нед. — всё реалистично, составляем!`); btn.disabled=false; return true;
+  // Целевой темп (необязательный)
+  const tp = parsePace($('targetPace').value);
+  if($('targetPace').value.trim() && !tp){
+    show('err','Целевой темп введите в формате М:СС, например 5:27');
+    btn.disabled=true; return false;
+  }
+  if(tp && tp >= pace){
+    show('warn','Целевой темп медленнее текущего — план составим, но улучшений в скорости не будет.');
+    btn.disabled=false; return true;
+  }
+  show('ok',`Отлично! До старта ${w} нед. — всё готово, составляем план!`);
+  btn.disabled=false; return true;
 }
 
 function show(cls,txt){
@@ -1039,10 +1121,8 @@ function calcZones(age, hrRest){
     z3: z(.70,.80), z4: z(.80,.90), z5: z(.90,1) };
 }
 
-/* Целевые темпы — производные от curPace или от явно заданного targetPace */
+/* Целевые темпы — по методологии McMillan/Garmin Coach */
 function calcPaces(curPace, dist, goal, userTarget){
-  // Если пользователь задал целевой темп — используем его напрямую
-  // Иначе рассчитываем через Riegel + поправку на цель
   let target;
   if(userTarget && userTarget > 0){
     target = userTarget;
@@ -1052,25 +1132,30 @@ function calcPaces(curPace, dist, goal, userTarget){
     target = Math.round(curPace * distFactor * goalFactor);
   }
 
-  // Тренировочные темпы — всегда от curPace (текущий уровень атлета),
-  // но в пиковую фазу подтягиваются к target
-  // easy/long — от curPace; tempo/interval — между curPace и target
-  const blendFactor = Math.min(curPace / target, 1.5); // насколько цель амбициознее текущего
-  // easy/long — всегда медленнее curPace (восстановление)
-  // tempo     — между curPace и target: по мере подготовки подтягивается к цели
-  //             в начале ≈ 93% от curPace, к пику ≈ 97% от target
-  //             усредняем: (curPace*0.93 + target*0.97) / 2
-  // interval  — чуть быстрее target (развивает скорость выше гоночной)
-  const tempo    = Math.round((curPace * 0.93 + target * 0.97) / 2);
+  // ── McMillan: лёгкий = цель + 75–90 сек/км, НО не быстрее curPace×1.05
+  // Это ключевое отличие от "curPace×1.20":
+  // атлет с амбициозной целью должен бегать лёгкие быстрее,
+  // чтобы создавать нужный аэробный стимул
+  const easyFromTarget = target + 82;        // +82 сек ≈ середина диапазона 75–90
+  const easyFloor      = Math.round(curPace * 1.05); // нельзя назначить быстрее текущего
+  const easy           = Math.max(easyFromTarget, easyFloor);
+
+  // long — чуть медленнее easy (зона 2, разговорный темп)
+  const long = easy + 15;
+
+  // tempo — между curPace и target, тяготеет к цели
+  const tempo = Math.round((curPace * 0.93 + target * 0.97) / 2);
+
+  // interval — быстрее целевого (развивает скорость выше гоночной)
   const interval = Math.round(target * 0.95);
-  return {
-    current:  curPace,
-    target,
-    easy:     Math.round(curPace * 1.20),   // зона 1-2, медленнее curPace
-    long:     Math.round(curPace * 1.15),   // зона 2,   медленнее curPace
-    tempo:    Math.min(tempo, Math.round(curPace * 0.97)),  // не быстрее 97% от curPace
-    interval: Math.min(interval, Math.round(curPace * 0.90)), // не быстрее 90% от curPace
-  };
+
+  // goal pace run — строго целевой темп ± 5 сек (специфичность)
+  const goalPace = target;
+
+  // strides — максимально быстро, но коротко (20 сек): ~target × 0.85
+  const strides = Math.round(target * 0.85);
+
+  return { current:curPace, target, easy, long, tempo, interval, goalPace, strides };
 }
 
 /* Базовый недельный объём зависит от уровня И кол-ва дней */
@@ -1116,20 +1201,21 @@ const TRAIN_IDX = {3:[2,4,6], 4:[1,3,5,6], 5:[1,2,4,5,6], 6:[0,1,2,4,5,6]};
 
 /* Генерация тренировок на неделю.
    Все дистанции — ПРОПОРЦИИ от weekVol.
-   Все темпы    — производные от paces (которые от curPace).
-   Все пульсы   — из zones (которые из возраста + ЧСС покоя). */
+   Все темпы    — производные от paces (McMillan: easy от цели, не от curPace).
+   Все пульсы   — из zones (Карвонен).
+   Каждая тренировка содержит why — объяснение для спортсмена. */
 function dayWorkouts(phase, weekVol, paces, days, dist, weekIdx, totalWeeks, zones){
   const isLast   = weekIdx === totalWeeks - 1;
   const isTrail  = dist === 'trail' || dist === 'ultra';
   const isPeakLate = phase === 'peak' && weekIdx >= Math.floor(totalWeeks * .75);
 
-  // ── пульсовые диапазоны (строки)
+  // ── пульсовые диапазоны
+  const z1s = `${zones.z1[0]}–${zones.z1[1]}`;
   const z2s = `${zones.z2[0]}–${zones.z2[1]}`;
   const z3s = `${zones.z3[0]}–${zones.z3[1]}`;
   const z4s = `${zones.z4[0]}–${zones.z4[1]}`;
 
-  // ── темп для каждого типа
-  //   В фазах base/rest — немного медленнее; в peak — точно по целевому
+  // ── темпы (McMillan: easy от цели, не от текущего!)
   const phPaceMult = {base:1.05, build:1.0, peak:1.0, rest:1.08, taper:1.02};
   const pm = phPaceMult[phase] || 1.0;
 
@@ -1138,90 +1224,221 @@ function dayWorkouts(phase, weekVol, paces, days, dist, weekIdx, totalWeeks, zon
   const tTempo    = fmtPace(paces.tempo   * pm);
   const tInterval = fmtPace(paces.interval * pm);
   const tTarget   = fmtPace(paces.target);
+  const tGoalPace = fmtPace(paces.goalPace);
+  const tStrides  = fmtPace(paces.strides);
 
   // ── объёмы тренировок (пропорции от weekVol)
-  // Пропорции зависят от количества дней
   const dayPct = {
     3: {long:.46, tempo:.32, easy:.22},
-    4: {long:.38, tempo:.26, interval:.19, easy:.17},
-    5: {long:.34, tempo:.22, interval:.17, easy2:.16, easy:.11},
-    6: {long:.30, tempo:.20, interval:.16, easy2:.14, easy:.12, recovery:.08},
-  }[days] || {long:.38, tempo:.26, interval:.19, easy:.17};
+    4: {long:.36, tempo:.24, interval:.18, easy:.22},
+    5: {long:.32, tempo:.20, interval:.16, goalp:.14, easy:.18},
+    6: {long:.28, tempo:.18, interval:.15, goalp:.13, easy:.16, recovery:.10},
+  }[days] || {long:.36, tempo:.24, interval:.18, easy:.22};
 
   const K = k => Math.max(Math.round(weekVol * (dayPct[k]||0)), 2);
-  const longK = K('long'), tempoK = K('tempo'), intK = K('interval'),
-        easyK = K('easy'), easy2K = K('easy2');
+  const longK  = K('long'),  tempoK = K('tempo'), intK  = K('interval'),
+        goalpK = K('goalp'), easyK  = K('easy'),  easy2K = Math.max(Math.round(easyK*.7),3);
 
   const warm = 2, cool = 2;
   const netTempo = Math.max(tempoK - warm - cool, 2);
-  const repsInt  = Math.max(Math.round(intK / 1.2), 2);  // ~1.2км на повтор + отдых
+  const repsInt  = Math.max(Math.round(intK / 1.2), 2);
+  const goalpReps = Math.max(Math.round(goalpK / 1.5), 2);
 
-  // ── описание длительной
-  function descLong(){
-    if(isTrail) return `${longK} км по пересечённой, по усилию (зона 2, пульс ${z2s}), фокус на набор высоты`;
-    if(isPeakLate) return `${longK} км: ${Math.max(longK-5,2)} км зона 2 темп ${tLong} + последние 5 км целевой темп ${tTarget}`;
-    return `${longK} км, зона 2, темп ${tLong}, пульс ${z2s}`;
-  }
+  // ── WHY-объяснения для каждого типа тренировки
+  const WHY = {
+    easy_base:   `Лёгкий бег строит аэробную базу — капилляры, митохондрии, экономичность. Темп ${tEasy}/км держит пульс в зоне 2 (${z2s}): достаточно для адаптации, не нагружает восстановление.`,
+    easy_rec:    `Восстановительный бег ускоряет выведение лактата и снижает усталость после тяжёлых дней. Темп ${tEasy}/км — «разговорный», пульс ниже ${zones.z2[0]}.`,
+    long_base:   `Длительный бег — главная тренировка недели. Развивает выносливость, учит организм использовать жиры как топливо. Темп ${tLong}/км держит пульс в зоне 2 (${z2s}) — можно говорить предложениями.`,
+    long_peak:   `Длительный с финишным ускорением имитирует финал гонки: организм учится переключаться на целевой темп ${tTarget}/км при накопленной усталости. Это ключевой тренировочный стимул в пиковой фазе.`,
+    long_trail:  `На трейле длительность по времени важнее дистанции. Фокус на набор высоты — тренирует специфические мышцы подъёма. Темп вторичен, следите за пульсом в зоне 2 (${z2s}).`,
+    tempo_base:  `Темповый бег поднимает лактатный порог — порог, выше которого мышцы устают быстро. В базовой фазе бежим чуть ниже порога (зона 3, пульс ${z3s}), чтобы адаптироваться без перегрузки.`,
+    tempo_build: `Темповый в зоне 3–4 (пульс ${z4s}) — «прокачка» лактатного порога. После каждого блока организм адаптируется и следующий старт становится чуть легче.`,
+    tempo_peak:  `Темп ${tTempo}/км сейчас уже близок к целевому — нервная система «запоминает» это ощущение. Разминка и заминка обязательны: они снижают травматизм на 30%.`,
+    interval_build: `Интервалы развивают МПК (максимальное потребление кислорода) — «потолок» вашей аэробной мощности. Короткий отдых между повторами держит пульс высоким и создаёт нужный стимул.`,
+    interval_peak:  `Длинные интервалы ${repsInt}×1200 м обучают держать целевой темп при нарастающей усталости — именно так выглядит середина гонки. Отдых 90–120 сек — неполное восстановление, это намеренно.`,
+    goalp:       `Goal pace run по методике McMillan — бег строго в целевом темпе ${tGoalPace}/км. Специфичность: организм адаптируется к тому ритму, в котором тренируется. Эта тренировка «встраивает» целевой темп в мышечную память.`,
+    strides:     `Страйды (6×20 сек ускорений) не дают объёма, но тренируют нейромышечную скорость: каденс, толчок, механику бега. Делаются в конце лёгкого бега — когда мышцы разогреты, но не устали.`,
+    progression: `Прогрессивный бег начинается легко и заканчивается в темповом темпе. Тренирует финишное ускорение и учит экономить силы в начале — ключевой навык для гонки.`,
+    rest_active: `Отдых — часть тренировочного процесса. Именно в дни покоя мышцы восстанавливаются и становятся сильнее. Лёгкая растяжка поддерживает подвижность.`,
+    rest_full:   `Полный отдых позволяет нервной системе восстановиться. Не пропускайте: перетренированность откатывает прогресс сильнее, чем пропущенная тренировка.`,
+    taper_why:   `Тейпер — снижение объёма перед стартом. Мышцы восполняют гликоген, микроповреждения заживают. Вы не теряете форму — вы выходите на пик.`,
+    race_why:    `Стартуйте на 3–5% медленнее целевого темпа первые 5 км — это страховка от слишком раннего закисления. Тело разогреется и сможет ускориться во второй половине.`,
+  };
 
-  // ── описание интервалов (прогрессируют от 800м к 1км к 1200м)
-  function descInterval(){
-    const repDist = phase==='base'?'800 м': phase==='build'?'1 км':'1200 м';
-    return `${intK} км: ${repsInt}×${repDist} темп ${tInterval} (зона 4, пульс ${z4s}), отдых 90–120 сек трусцой`;
-  }
-
-  // ── описание темповой
-  function descTempo(){
-    const zone = phase==='base' ? `зона 3, пульс ${z3s}` : `зона 3–4, пульс ${z4s}`;
-    return `${tempoK} км: разминка ${warm}+${netTempo} км темп ${tTempo} (${zone})+заминка ${cool}`;
-  }
-
-  // ── стартовая неделя
+  // ── НЕДЕЛЯ СТАРТА
   if(isLast){
     return DAYS7.map((d,i)=>{
-      if(i===0) return {d, t:'Лёгкий',   type:'easy', desc:`5 км, зона 1, темп ${fmtPace(paces.easy*1.05)}`};
-      if(i===1) return {d, t:'Лёгкий',   type:'easy', desc:`4 км + 4×150 м ускорения — «разбудить» ноги`};
-      if(i===2) return {d, t:'Отдых',    type:'rest', desc:'растяжка, проверить экипировку'};
-      if(i===3) return {d, t:'Лёгкий',   type:'easy', desc:`3 км трусца, зона 1, пульс ниже ${zones.z1[1]}`};
-      if(i===4) return {d, t:'Отдых',    type:'rest', desc:'полный отдых, ранний сон'};
-      if(i===5) return {d, t:'Отдых',    type:'rest', desc:'прогулка 20 мин, углеводная загрузка'};
-      return     {d, t:'🏁 Старт!', type:'race',
-        desc:`${DIST_LABELS[dist]} — первые 20% дистанции темп ${fmtPace(paces.target*1.05)}, цель ${tTarget}/км`};
+      if(i===0) return {d, t:'Лёгкий', type:'easy',
+        desc:`5 км, зона 1, темп ${fmtPace(paces.easy+10)}`,
+        why:`Последняя лёгкая пробежка перед стартом. Не нужно ничего доказывать — просто поддержать кровоток и снять нервное напряжение. Темп выше обычного лёгкого, пульс ниже ${zones.z1[1]}.`};
+      if(i===1) return {d, t:'Страйды', type:'easy',
+        desc:`3 км + 6×20 сек ускорений (темп ${tStrides}/км), отдых 40 сек`,
+        why:`Страйды «пробуждают» нейромышечную систему и напоминают ногам, что такое скорость. Это не нагрузка — это настройка. После них вы чувствуете лёгкость и резкость на следующий день.`};
+      if(i===2) return {d, t:'Отдых', type:'rest',
+        desc:'Полный отдых, растяжка 15 мин, собрать экипировку',
+        why:WHY.rest_full};
+      if(i===3) return {d, t:'Лёгкий', type:'easy',
+        desc:`3 км трусца, зона 1, пульс ниже ${zones.z1[1]}`,
+        why:`Совсем короткая пробежка — только чтобы ноги не «деревенели». Пульс строго в зоне 1. Если совсем не хочется — замените на 20-минутную прогулку.`};
+      if(i===4) return {d, t:'Отдых', type:'rest',
+        desc:'Полный отдых, ранний сон',
+        why:`Сон за 2 ночи до старта важнее, чем сон накануне — многие нервничают и плохо спят перед гонкой. Ложитесь на 30–60 мин раньше обычного.`};
+      if(i===5) return {d, t:'Отдых', type:'rest',
+        desc:'Прогулка 20 мин, углеводная загрузка (паста, рис, хлеб)',
+        why:`Углеводная загрузка пополняет гликоген в мышцах — это ваше «топливо» на гонке. Избегайте непривычных продуктов, много клетчатки и алкоголя.`};
+      return {d, t:'🏁 Старт!', type:'race',
+        desc:`${DIST_LABELS[dist]} — первые 20% дистанции темп ${fmtPace(paces.target*1.04)}, затем целевой ${tTarget}/км`,
+        why:WHY.race_why};
     });
   }
 
-  // ── обычные недели: собираем список тренировок
+  // ── ОБЫЧНЫЕ НЕДЕЛИ
   let workouts = [];
 
   if(phase === 'rest'){
-    workouts.push({t:'Лёгкий', type:'easy', desc:`${easyK} км, зона 1–2, темп ${tEasy}`});
-    workouts.push({t:'Длительный', type:'long', desc:`${Math.max(Math.round(longK*.55),6)} км, зона 2, темп ${tLong}`});
-    if(days >= 4) workouts.push({t:'Лёгкий', type:'easy', desc:`${Math.max(easy2K,4)} км, зона 1, очень легко`});
-    if(days >= 5) workouts.push({t:'Темповый', type:'tempo', desc:`${warm}+${Math.max(netTempo-2,2)}+${cool} км, темп ${tTempo}`});
+    // Разгрузочная неделя — объём -35%, интенсивность снижена
+    workouts.push({t:'Лёгкий', type:'easy',
+      desc:`${easyK} км, зона 1–2, темп ${tEasy}`,
+      why:`Разгрузочная неделя: объём снижен на 35%, чтобы дать суперкомпенсацию. Лёгкий бег поддерживает аэробный тонус без накопления усталости.`});
+    workouts.push({t:'Длительный', type:'long',
+      desc:`${Math.max(Math.round(longK*.55),6)} км, зона 2, темп ${tLong}`,
+      why:`Укороченная длительная сохраняет нейромышечную адаптацию. Ключевое — не темп, а время на ногах в зоне 2 (пульс ${z2s}).`});
+    if(days >= 4) workouts.push({t:'Лёгкий', type:'easy',
+      desc:`${easy2K} км, зона 1, очень легко`,
+      why:WHY.easy_rec});
+    if(days >= 5) workouts.push({t:'Прогрессивный', type:'tempo',
+      desc:`${warm+Math.max(netTempo-2,2)+cool} км: первая половина темп ${tLong}, вторая — ${tTempo}`,
+      why:`Лёгкая прогрессивная тренировка поддерживает «память» на темп без серьёзной нагрузки в разгрузочную неделю.`});
+
   } else if(phase === 'taper'){
-    workouts.push({t:'Лёгкий',    type:'easy',     desc:`${easyK} км, зона 1–2, темп ${tEasy}`});
-    workouts.push({t:'Интервалы', type:'interval',  desc:`${Math.max(repsInt-2,2)}×1 км темп ${tInterval}, поддержание скорости`});
-    workouts.push({t:'Темповый',  type:'tempo',     desc:`${warm}+${Math.max(netTempo-2,2)}+${cool} км, целевой темп ${tTarget}`});
-    if(days >= 4) workouts.push({t:'Длительный', type:'long', desc:`${Math.max(Math.round(longK*.55),6)} км, зона 2`});
+    // Тейпер — объём -45%, острота сохраняется
+    workouts.push({t:'Лёгкий', type:'easy',
+      desc:`${easyK} км, зона 1–2, темп ${tEasy}`,
+      why:WHY.taper_why + ` Лёгкий бег поддерживает кровоток и нервно-мышечный тонус.`});
+    workouts.push({t:'Интервалы', type:'interval',
+      desc:`Разм. ${warm} км + ${Math.max(repsInt-2,2)}×1 км темп ${tInterval} + заминка ${cool} км`,
+      why:`Короткие быстрые интервалы в тейпере — не для нагрузки, а для поддержания «остроты» нервной системы. Меньше повторов, тот же темп. После них вы должны чувствовать себя свежо, не уставшим.`});
+    workouts.push({t:'Goal pace', type:'interval',
+      desc:`Разм. ${warm} км + ${Math.max(goalpReps-1,2)}×1 км темп ${tGoalPace}/км + заминка ${cool} км`,
+      why:`Goal pace run перед стартом — финальная «репетиция» целевого темпа. Ноги запоминают ощущение ${tGoalPace}/км. После этой тренировки страх старта снижается: вы уже бежали так.`});
+    if(days >= 4) workouts.push({t:'Длительный', type:'long',
+      desc:`${Math.max(Math.round(longK*.50),6)} км, зона 2, темп ${tLong}`,
+      why:`Укороченная длительная (50% от пика) сохраняет аэробный тонус. Важно: не превышайте зону 2, даже если чувствуете себя отлично — берегите силы для старта.`});
+
   } else {
-    // base / build / peak
-    workouts.push({t:'Длительный', type:'long',     desc:descLong()});
-    workouts.push({t:'Темповый',   type:'tempo',    desc:descTempo()});
-    if(phase !== 'base')
-      workouts.push({t:'Интервалы', type:'interval', desc:descInterval()});
-    workouts.push({t:'Лёгкий',     type:'easy',     desc:`${easyK} км, зона 1–2, темп ${tEasy}, пульс ниже ${zones.z2[1]}`});
-    if(days >= 5)
-      workouts.push({t:'Лёгкий', type:'easy', desc:`${easy2K} км, восстановительный, зона 1`});
-    if(days >= 6)
-      workouts.push({t:'ОФП + бег', type:'easy', desc:`${Math.max(easy2K-2,2)} км трусца + силовые 20 мин`});
+    // base / build / peak — основные тренировочные недели
+
+    // ДЛИТЕЛЬНАЯ — всегда в субботу (самый важный день)
+    if(isTrail){
+      workouts.push({t:'Длительный', type:'long',
+        desc:`${longK} км по пересечённой, зона 2 (пульс ${z2s}), фокус на D+`,
+        why:WHY.long_trail});
+    } else if(isPeakLate){
+      workouts.push({t:'Длительный', type:'long',
+        desc:`${longK} км: ${Math.max(longK-5,2)} км зона 2 темп ${tLong}, последние 5 км → ${tTarget}/км`,
+        why:WHY.long_peak});
+    } else {
+      workouts.push({t:'Длительный', type:'long',
+        desc:`${longK} км, зона 2, темп ${tLong}, пульс ${z2s}`,
+        why:WHY.long_base});
+    }
+
+    // ТЕМПОВАЯ
+    if(phase === 'base'){
+      workouts.push({t:'Темповый', type:'tempo',
+        desc:`${tempoK} км: разм. ${warm} км + ${netTempo} км темп ${tTempo} (зона 3, пульс ${z3s}) + заминка ${cool} км`,
+        why:WHY.tempo_base});
+    } else if(phase === 'peak'){
+      workouts.push({t:'Темповый', type:'tempo',
+        desc:`${tempoK} км: разм. ${warm} км + ${netTempo} км темп ${tTempo} (зона 3–4, пульс ${z4s}) + заминка ${cool} км`,
+        why:WHY.tempo_peak});
+    } else {
+      workouts.push({t:'Темповый', type:'tempo',
+        desc:`${tempoK} км: разм. ${warm} км + ${netTempo} км темп ${tTempo} (зона 3–4, пульс ${z4s}) + заминка ${cool} км`,
+        why:WHY.tempo_build});
+    }
+
+    // ИНТЕРВАЛЫ (с base — страйды вместо полноценных интервалов)
+    if(phase === 'base'){
+      workouts.push({t:'Страйды', type:'interval',
+        desc:`${easyK} км лёгкого + 6×20 сек ускорений (темп ${tStrides}/км), отдых 40 сек`,
+        why:WHY.strides});
+    } else if(phase === 'build'){
+      workouts.push({t:'Интервалы', type:'interval',
+        desc:`${intK} км: разм. ${warm} км + ${repsInt}×1 км темп ${tInterval} (пульс ${z4s}), отдых 90 сек + заминка ${cool} км`,
+        why:WHY.interval_build});
+    } else { // peak
+      workouts.push({t:'Интервалы', type:'interval',
+        desc:`${intK} км: разм. ${warm} км + ${repsInt}×1200 м темп ${tInterval} (пульс ${z4s}), отдых 90–120 сек + заминка ${cool} км`,
+        why:WHY.interval_peak});
+    }
+
+    // GOAL PACE RUN (build и peak, если дней >= 4)
+    if(days >= 4 && (phase === 'build' || phase === 'peak')){
+      workouts.push({t:'Goal pace', type:'interval',
+        desc:`${goalpK} км: разм. ${warm} км + ${goalpReps}×1 км строго ${tGoalPace}/км, отдых 2 мин + заминка ${cool} км`,
+        why:WHY.goalp});
+    } else {
+      // иначе лёгкий
+      workouts.push({t:'Лёгкий', type:'easy',
+        desc:`${easyK} км, зона 1–2, темп ${tEasy}, пульс ниже ${zones.z2[1]}`,
+        why:WHY.easy_base});
+    }
+
+    // ЛЁГКИЕ дополнительные
+    if(days >= 4){
+      workouts.push({t:'Лёгкий', type:'easy',
+        desc:`${easyK} км, зона 1–2, темп ${tEasy}`,
+        why:WHY.easy_base});
+    }
+    if(days >= 5){
+      workouts.push({t:'Прогрессивный', type:'easy',
+        desc:`${easy2K} км: первая половина темп ${tLong}, вторая — ${tTempo}`,
+        why:WHY.progression});
+    }
+    if(days >= 6){
+      workouts.push({t:'ОФП + бег', type:'easy',
+        desc:`${easy2K} км трусца зона 1 + силовые упражнения 20 мин`,
+        why:`Силовые упражнения (планка, приседания, выпады) укрепляют стабилизаторы и снижают риск травм. Лёгкий бег перед ними — разминка, после — заминка.`});
+    }
+
+    // ОТДЫХ с объяснением
+    workouts._restWhy = WHY.rest_active;
   }
 
-  // ── раскладываем по дням недели
+  // ── РАСКЛАДЫВАЕМ ПО ДНЯМ НЕДЕЛИ
+  // Принцип: тяжёлые дни НЕ подряд; длительная — в конце недели (сб)
+  // Между тяжёлыми тренировками — минимум 1 день лёгкого или отдыха
   const tidxs = TRAIN_IDX[days] || TRAIN_IDX[4];
+
+  // Сортируем тренировки: длительная → в последний тренировочный день
+  // Тяжёлые (темп, интервалы, goalp) → не рядом
+  const heavy = workouts.filter(w => ['tempo','interval'].includes(w.type) || w.t === 'Goal pace' || w.t === 'Страйды');
+  const light  = workouts.filter(w => !heavy.includes(w) && w.t !== '🏁 Старт!');
+  const longW  = workouts.find(w => w.t === 'Длительный') || null;
+
+  // Собираем финальный порядок: лёгкий → тяжёлый → лёгкий → тяжёлый → лёгкий → длительный → отдых
+  let ordered = [];
+  if(longW) { // убираем длит. из light
+    const li = light.indexOf(longW);
+    if(li >= 0) light.splice(li, 1);
+  }
+
+  // Чередуем тяжёлые и лёгкие
+  let hi = 0, li2 = 0;
+  for(let slot = 0; slot < tidxs.length - (longW ? 1 : 0); slot++){
+    if(slot % 2 === 0 && hi < heavy.length) ordered.push(heavy[hi++]);
+    else if(li2 < light.length)             ordered.push(light[li2++]);
+    else if(hi < heavy.length)              ordered.push(heavy[hi++]);
+  }
+  if(longW) ordered.push(longW); // длительная — последний тренировочный день
+
+  const restWhy = (workouts._restWhy) || WHY.rest_active;
   let wi = 0;
   return DAYS7.map((d, i) => {
-    if(tidxs.includes(i) && wi < workouts.length)
-      return {d, ...workouts[wi++]};
-    return {d, t:'Отдых', type:'rest', desc:'полный отдых или растяжка 15 мин'};
+    if(tidxs.includes(i) && wi < ordered.length)
+      return {d, ...ordered[wi++]};
+    return {d, t:'Отдых', type:'rest', desc:'Полный отдых или растяжка 15 мин', why:restWhy};
   });
 }
 
@@ -1383,11 +1600,23 @@ function render(p){
   </div>`;
 
   // plan
+  const phLogic = {
+    base:  '🏗 Закладываем аэробный фундамент: длительные в зоне 2 + страйды для нейромышечной скорости. Тяжёлые тренировки чередуются с лёгкими — это принцип «стресс → восстановление → адаптация».',
+    build: '📈 Наращиваем интенсивность: интервалы развивают МПК, goal pace runs встраивают целевой темп в мышечную память. Объём растёт на 8–10% в неделю.',
+    peak:  '🔥 Пиковая нагрузка: длительные с финишным ускорением имитируют финал гонки. Это самые тяжёлые недели — после них тейпер даст суперкомпенсацию.',
+    taper: '🎯 Тейпер: объём снижается на 40–50%, но острота сохраняется. Организм восполняет гликоген, мышцы заживают. Вы выходите на пик формы.',
+    rest:  '💤 Разгрузочная неделя: объём -35%. Именно в дни отдыха мышцы растут — адаптация происходит не во время нагрузки, а после неё.',
+  };
   html+=`<div class="sec">Детальный план по неделям</div><div class="plan-wrap" id="planInner">`;
   phases.forEach((ph,wi)=>{
     const vol=vols[wi], isLast=wi===weeks-1;
     const dlist=dayWorkouts(ph,vol,paces,days,dist,wi,weeks,zones);
-    const rows=dlist.map(d=>`<tr><td class="td-d">${d.d}</td><td class="td-t ${d.type}">${d.t}</td><td class="td-desc">${d.desc}</td></tr>`).join('');
+    const rows=dlist.map(d=>{
+      const mainRow=`<tr><td class="td-d">${d.d}</td><td class="td-t ${d.type}">${d.t}</td><td class="td-desc">${d.desc}</td></tr>`;
+      const whyRow=d.why?`<tr><td class="td-d"></td><td></td><td class="td-why">💡 ${d.why}</td></tr>`:'';
+      return mainRow+whyRow;
+    }).join('');
+    const logic = !isLast ? (phLogic[ph]||'') : '🏁 Неделя старта: минимальный объём, максимальная свежесть. Каждый день — своя роль в подготовке к гонке.';
     html+=`
     <div class="week">
       <div class="week-hdr" onclick="toggleWeek(${wi})">
@@ -1397,6 +1626,7 @@ function render(p){
         <span class="chevron" id="ch${wi}">›</span>
       </div>
       <div class="week-body" id="wb${wi}">
+        ${logic ? `<div class="week-logic">${logic}</div>` : ''}
         <table class="days-tbl"><tbody>${rows}</tbody></table>
       </div>
     </div>`;
