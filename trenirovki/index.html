@@ -573,16 +573,65 @@ a:hover{opacity:.8}
 .td-t.race    {color:var(--text);font-weight:700}
 .td-desc{color:var(--muted);line-height:1.5;word-break:break-word}
 .td-why{
-  color:var(--muted);font-size:11px;line-height:1.55;
-  padding:3px 16px 8px 16px;
+  color:var(--muted);font-size:12px;line-height:1.6;
+  padding:8px 16px 10px 16px;
   border-bottom:1px solid var(--border2);
-  opacity:.80;
+  border-left:2px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.03);
   font-style:italic;
+  animation:whyFadeIn .18s ease-out;
 }
+@keyframes whyFadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 .days-tbl tr:last-child .td-why{border-bottom:none}
-[data-theme="day"] .td-why{color:#5a7299}
+[data-theme="day"] .td-why{
+  color:#4b6a99;
+  background:rgba(37,99,235,.04);
+  border-left-color:rgba(37,99,235,.25);
+}
+
+/* Кнопка-инфо (ⓘ) */
+.why-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;
+  margin-left:6px;
+  border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.25);
+  background:transparent;
+  color:rgba(255,255,255,.40);
+  cursor:pointer;
+  vertical-align:middle;
+  transition:color .12s, border-color .12s, background .12s, transform .1s;
+  flex-shrink:0;
+  padding:0;
+}
+.why-btn:hover{
+  color:rgba(255,255,255,.80);
+  border-color:rgba(255,255,255,.60);
+  transform:scale(1.15);
+}
+.why-btn.active{
+  color:#fff;
+  border-color:rgba(255,255,255,.70);
+  background:rgba(255,255,255,.12);
+}
+.why-btn.active .why-chevron{
+  transform:rotate(180deg);
+}
+.why-chevron{
+  transition:transform .2s ease;
+  display:block;
+}
+[data-theme="day"] .why-btn{color:rgba(37,99,235,.40);border-color:rgba(37,99,235,.25);background:transparent}
+[data-theme="day"] .why-btn:hover{color:#2563eb;border-color:#2563eb;background:rgba(37,99,235,.06)}
+[data-theme="day"] .why-btn.active{color:#2563eb;border-color:#2563eb;background:rgba(37,99,235,.10)}
+
 @media print{
-  .td-why{font-size:8pt!important;color:#666!important;padding:2pt 8pt 5pt!important;font-style:italic!important}
+  .why-btn{display:none!important}
+  .why-row,
+  tr.why-row[style*="display:none"],
+  tr.why-row[style="display: none"],
+  tr.why-row{display:table-row!important}
+  .td-why{font-size:8pt!important;color:#555!important;padding:2pt 8pt 6pt!important;font-style:italic!important;border-left:2px solid #bbb!important;background:transparent!important}
 }
 
 /* ── DISCLAIMER ── */
@@ -1737,9 +1786,23 @@ function render(p){
   phases.forEach((ph,wi)=>{
     const vol=vols[wi], isLast=wi===weeks-1;
     const dlist=dayWorkouts(ph,vol,paces,days,dist,wi,weeks,zones);
+    let whyIdx = 0;
     const rows=dlist.map(d=>{
-      const mainRow=`<tr><td class="td-d">${d.d}</td><td class="td-t ${d.type}">${d.t}</td><td class="td-desc">${d.desc}</td></tr>`;
-      const whyRow=d.why?`<tr><td class="td-d"></td><td></td><td class="td-why">💡 ${d.why}</td></tr>`:'';
+      const wid = `why-${wi}-${whyIdx++}`;
+      const mainRow=`<tr>
+        <td class="td-d">${d.d}</td>
+        <td class="td-t ${d.type}">${d.t}</td>
+        <td class="td-desc">
+          ${d.desc}
+          ${d.why ? `<button class="why-btn" onclick="toggleWhy('${wid}')" aria-label="Почему эта тренировка?" aria-expanded="false"><svg class="why-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>` : ''}
+        </td>
+      </tr>`;
+      const whyRow=d.why
+        ? `<tr class="why-row" id="${wid}" style="display:none">
+             <td class="td-d"></td><td></td>
+             <td class="td-why">${d.why}</td>
+           </tr>`
+        : '';
       return mainRow+whyRow;
     }).join('');
     const logic = !isLast ? (phLogic[ph]||'') : '🏁 Неделя старта: минимальный объём, максимальная свежесть. Каждый день — своя роль в подготовке к гонке.';
@@ -1791,9 +1854,26 @@ function downloadPDF(){
     const ch = document.getElementById('ch'+i);
     if(ch) ch.style.transform = 'rotate(90deg)';
   });
+  // Раскрываем все подсказки WHY
+  document.querySelectorAll('.why-row').forEach(r=>{
+    r.style.display = 'table-row';
+  });
   // Небольшая задержка чтобы DOM обновился
   setTimeout(()=>{ window.print(); }, 120);
 }
+
+window.toggleWhy=function(id){
+  const row = document.getElementById(id);
+  if(!row) return;
+  const isHidden = row.style.display === 'none' || row.style.display === '';
+  row.style.display = isHidden ? 'table-row' : 'none';
+  // находим кнопку по data-атрибуту и переключаем класс
+  const btn = document.querySelector(`[onclick="toggleWhy('${id}')"]`);
+  if(btn){
+    btn.classList.toggle('active', isHidden);
+    btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+  }
+};
 
 window.toggleWeek=function(i){
   const b=$('wb'+i), c=$('ch'+i);
