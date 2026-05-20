@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-20T09:54:25Z",
+  "updated": "2026-05-20T17:59:15Z",
   "events": [
     {
       "id": 22,
@@ -1930,6 +1930,16 @@
       "type": "trail",
       "url": "https://goldenultra.ru/vmr/",
       "id": 245
+    },
+    {
+      "date": "2028-05-28",
+      "name": "Рыбачий-Териберка Ultra Grand Escape",
+      "city": "Мурманск",
+      "region": "Мурманская область",
+      "distances": "ультра",
+      "type": "trail",
+      "url": "https://goldenultra.ru/kuge/",
+      "id": 251
     }
   ]
 }
