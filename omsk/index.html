@@ -6,7 +6,6 @@
 
 <!-- SEO -->
 <title>Забеги Омск 2026 — 4 событий | Беговой календарь России</title>
-<!-- generated: 2026-05-19T17:43:16Z -->
 <meta name="description" content="Все забеги, марафоны и трейлы в Омск и Омская область в 2026 году. 4 событий, официальные источники.">
 <meta name="keywords" content="забеги 2026, марафоны России 2026, трейлы 2026, беговой календарь, полумарафон, забеги Москва, забеги Екатеринбург, забеги Санкт-Петербург, беговые соревнования">
 <meta name="robots" content="index, follow">
@@ -49,6 +48,8 @@
   }
 }
 </script>
+  <link rel="preload" href="../style.css" as="style">
+  <link rel="preload" href="https://allrunrus.ru/events.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -58,7 +59,7 @@
     <a class="nav-logo" href="/">
       <div class="nav-logo-icon">
         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="10" cy="10" r="9" fill="white" opacity=".15"/>
+          <circle cx="10" cy="10" r="9" fill="#111827"/>
           <text x="10" y="14.5" font-family="Georgia, serif" font-size="12" font-weight="700"
                 fill="white" text-anchor="middle">R</text>
         </svg>
@@ -72,8 +73,8 @@
 <div class="nav-tabs-bar">
   <div class="nav-tabs-inner">
     <a class="nav-tab" href="../">🏃 Забеги</a>
-    <a class="nav-tab" href="../clinics/">🏥 Справка 1444н</a>
-    <a class="nav-tab" href="/trenirovki/">📋 Тренировки</a>
+    <a class="nav-tab" href="../clinics/">🏥 Справка 1144н</a>
+    <a class="nav-tab" href="../trenirovki/">📋 План тренировок</a>
   </div>
 </div>
 
@@ -81,7 +82,7 @@
   <div class="hero-content">
     <h1>Беговой календарь России 2026</h1>
     <p>Забеги, марафоны, трейлы &nbsp;·&nbsp; Официальные источники &nbsp;·&nbsp; Автообновление 2 раза в сутки</p>
-    <p class="breadcrumb"><a href="../">← Все события</a> · Омск (4)</p>
+    <p style="font-size:12px;opacity:.65;margin-top:6px;"><a href="../" style="color:inherit;opacity:.8;">← Все события</a> · Омск (4)</p>
     <p class="hero-updated" id="nav-updated"></p>
   </div>
 </div>
@@ -102,7 +103,7 @@
           oninput="onCityInput()"
         >
         <button class="city-clear" id="city-clear" title="Сбросить" style="display:none" onclick="clearCity()">✕</button>
-        <div class="city-dropdown" id="city-dropdown" popover="manual"></div>
+        <div class="city-dropdown" id="city-dropdown"></div>
       </div>
     </div>
 
@@ -139,7 +140,7 @@
           placeholder="Название события…"
           autocomplete="off"
           spellcheck="false"
-          oninput="applyFilters()"
+          oninput="applyFiltersDebounced()"
         >
         <button class="event-search-clear" id="event-search-clear" title="Сбросить" style="display:none" onclick="clearEventSearch()">✕</button>
       </div>
@@ -210,6 +211,17 @@ window.toggleTheme = function() {
 (function () {
   'use strict';
 
+  // ── Debounce ───────────────────────────────────────────────────────────────
+  function debounce(fn, ms) {
+    var t;
+    return function() {
+      var args = arguments, ctx = this;
+      clearTimeout(t);
+      t = setTimeout(function(){ fn.apply(ctx, args); }, ms);
+    };
+  }
+  var applyFiltersDebounced = debounce(function(){ window.applyFilters(); }, 200);
+
   // ── Состояние ──────────────────────────────────────────────────────────────
   var PRESELECT_CITY='Омск';
   var allEvents   = [];
@@ -233,6 +245,7 @@ window.toggleTheme = function() {
         if (!eventMatchesSearch(e, searchVal))    return false;
         return true;
       });
+      syncURL();
       renderEvents(filtered, true, cityQ);
       return;
     }
@@ -246,6 +259,7 @@ window.toggleTheme = function() {
       if (!eventMatchesSearch(e, searchVal))               return false;
       return true;
     });
+    syncURL();
     renderEvents(filtered, false, cityQ);
   };
 
@@ -1004,6 +1018,19 @@ window.toggleTheme = function() {
     applyFilters();
   };
 
+
+  // ── Форматирование дат через Intl ─────────────────────────────────────────
+  var _fmtMonth = new Intl.DateTimeFormat('ru', { month: 'long', year: 'numeric' });
+  var _fmtMonthShort = new Intl.DateTimeFormat('ru', { month: 'short' });
+  function formatMonthHeading(yearMonth) {
+    var d = new Date(yearMonth + '-01');
+    return _fmtMonth.format(d).replace(/^./, function(c){ return c.toUpperCase(); });
+  }
+  function formatMonthShort(mm) {
+    var d = new Date('2000-' + mm + '-01');
+    return _fmtMonthShort.format(d).replace('.','');
+  }
+
   // ── Рендер событий ─────────────────────────────────────────────────────────
   function renderEvents(events, isPast, cityQ) {
     var mainEl  = document.getElementById('main');
@@ -1040,7 +1067,7 @@ window.toggleTheme = function() {
     order.forEach(function (key) {
       var evs  = byMonth[key];
       var mNum = key.slice(5, 7);
-      var head = (MONTHS[mNum] || mNum) + ' ' + key.slice(0, 4);
+      var head = formatMonthHeading(key);
 
       html += '<div class="month-section">';
       html += '<div class="month-heading">';
@@ -1054,7 +1081,7 @@ window.toggleTheme = function() {
       evs.forEach(function (ev) {
         var parts  = ev.date.split('-');
         var day    = parseInt(parts[2], 10);
-        var mon    = MONTHS_SHORT[parts[1]] || parts[1];
+        var mon    = formatMonthShort(parts[1]);
         var badge  = BADGE_LABELS[ev.type] || ev.type;
         var accent = isPast ? 0 : accentLevel(ev, cityQ || '');
         var cardClass = 'event-card'
@@ -1092,7 +1119,7 @@ window.toggleTheme = function() {
         html += '</div>';
         html += '<a class="cert-btn" href="clinics/" onclick="event.stopPropagation()">';
         html += '<svg width="11" height="11" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M4 5h6M4 8h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
-        html += 'Справка 1444н</a>';
+        html += 'Справка 1144н</a>';
         html += '</div>';
         html += '<div class="card-arrow">›</div>';
         html += '</div>';
@@ -1101,7 +1128,11 @@ window.toggleTheme = function() {
       html += '</div></div>';
     });
 
-    mainEl.innerHTML = html;
+    if (document.startViewTransition) {
+      document.startViewTransition(function() { mainEl.innerHTML = html; });
+    } else {
+      mainEl.innerHTML = html;
+    }
 
     // ── Динамический title и schema.org Event ─────────────────────────────
     updateSEO(events, isPast, cityQ);
@@ -1152,7 +1183,7 @@ window.toggleTheme = function() {
     if (existing) existing.remove();
 
     if (!isPast && events.length > 0) {
-      var eventsForSchema = events.slice(0, 20);
+      var eventsForSchema = events.slice(0, 50);
       var schemaEvents = eventsForSchema.map(function(ev) {
         var typeMap = { road: 'SportsEvent', trail: 'SportsEvent', night: 'SportsEvent' };
         return {
@@ -1278,6 +1309,45 @@ window.toggleTheme = function() {
     } catch (e) { return ''; }
   }
 
+
+  // ── Синхронизация URL с фильтрами ─────────────────────────────────────────
+  function syncURL() {
+    var params = new URLSearchParams();
+    var cityQ = getCityQuery();
+    var month = document.getElementById('sel-month');
+    var search = document.getElementById('event-search');
+    if (cityQ) params.set('city', cityQ);
+    if (month && month.value) params.set('month', month.value);
+    if (search && search.value.trim()) params.set('q', search.value.trim());
+    if (currentType && currentType !== 'all') params.set('type', currentType);
+    var newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+    history.replaceState(null, '', newUrl);
+  }
+
+  function readURL() {
+    var params = new URLSearchParams(window.location.search);
+    var city = params.get('city');
+    var month = params.get('month');
+    var q = params.get('q');
+    var type = params.get('type');
+    if (city) {
+      selectedCityQuery = city;
+      var inp = document.getElementById('city-input');
+      var btn = document.getElementById('city-clear');
+      if (inp) inp.value = city;
+      if (btn) btn.style.display = 'block';
+    }
+    if (month) {
+      var sel = document.getElementById('sel-month');
+      if (sel) sel.value = month;
+    }
+    if (q) {
+      var si = document.getElementById('event-search');
+      if (si) si.value = q;
+    }
+    if (type) currentType = type;
+  }
+
   // ── Загрузка events.json ───────────────────────────────────────────────────
   var eventsUrl = 'https://allrunrus.ru/events.json';
   fetch(eventsUrl + '?_=' + Date.now())
@@ -1302,6 +1372,9 @@ window.toggleTheme = function() {
       if (data.updated) {
         document.getElementById('nav-updated').textContent = formatUpdated(data.updated);
       }
+      // Читаем параметры из URL
+      readURL();
+
       // Список городов строим по всем событиям (включая прошедшие)
       buildGeoIndex(all);
       buildCityFilter(all);
