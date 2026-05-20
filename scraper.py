@@ -28,9 +28,6 @@ from datetime import datetime, date
 # ─── HTTP ────────────────────────────────────────────────────────────────────
 
 ctx = ssl.create_default_context()
-ctx.check_hostname = False
-ctx.verify_mode = ssl.CERT_NONE
-
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
                   '(KHTML, like Gecko) Chrome/122.0 Safari/537.36',
@@ -80,7 +77,7 @@ def parse_date(s):
     m = re.search(r'(\d{1,2})\s+([а-яёa-z]+)\s+(\d{4})', s)
     if m:
         day, mon, year = int(m.group(1)), m.group(2), int(m.group(3))
-        if mon in RU_MONTHS and 2026 <= year <= 2027:
+        if mon in RU_MONTHS and year >= date.today().year:
             return f"{year}-{RU_MONTHS[mon]:02d}-{day:02d}"
     # YYYY-MM-DD
     m = re.search(r'(202[6-7])-(\d{2})-(\d{2})', s)
@@ -2568,8 +2565,10 @@ def generate_city_pages(events, template_path="index.html"):
         # Вкладки навигации — исправляем пути
         page_html = page_html.replace('<a class="nav-tab active" href="/">🏃 Забеги</a>',
                                       '<a class="nav-tab" href="../">🏃 Забеги</a>')
-        page_html = page_html.replace('<a class="nav-tab" href="/clinics/">🏥 Справка 1444н</a>',
-                                      '<a class="nav-tab" href="../clinics/">🏥 Справка 1444н</a>')
+        page_html = page_html.replace('<a class="nav-tab" href="/clinics/">🏥 Справка 1144н</a>',
+                                      '<a class="nav-tab" href="../clinics/">🏥 Справка 1144н</a>')
+        page_html = page_html.replace('<a class="nav-tab" href="/trenirovki/">📋 План тренировок</a>',
+                                      '<a class="nav-tab" href="../trenirovki/">📋 План тренировок</a>')
 
         # Логотип ведёт на главную
         page_html = page_html.replace(
@@ -2579,12 +2578,12 @@ def generate_city_pages(events, template_path="index.html"):
 
         # Хлебные крошки
         breadcrumb = (
-            f'<a href="../">← Все события</a>'
+            f'<a href="../" style="color:inherit;opacity:.8;">← Все события</a>'
             f' · {label} ({cnt})'
         )
         page_html = page_html.replace(
             '<p class="hero-updated" id="nav-updated"></p>',
-            f'<p class="breadcrumb">{breadcrumb}</p>'
+            f'<p style="font-size:12px;opacity:.65;margin-top:6px;">{breadcrumb}</p>'
             f'\n    <p class="hero-updated" id="nav-updated"></p>'
         )
 
@@ -2592,12 +2591,6 @@ def generate_city_pages(events, template_path="index.html"):
         page_html = page_html.replace(
             '  var allEvents   = [];',
             f'  {preselect_js}\n  var allEvents   = [];'
-        )
-
-        # Метка времени — чтобы git видел изменение при каждом запуске
-        page_html = page_html.replace(
-            '</title>',
-            f'</title>\n<!-- generated: {datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")} -->'
         )
 
         os.makedirs(slug, exist_ok=True)
