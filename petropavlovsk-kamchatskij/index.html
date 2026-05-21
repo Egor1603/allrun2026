@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://allrunrus.ru https://calendar.google.com https://calendar.yandex.ru; frame-ancestors 'none'; form-action 'none'; base-uri 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=()">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -728,6 +733,51 @@
 </style>
 </head>
 <body>
+<script>
+  // ── Защита от парсинга и злоупотреблений ─────────────────────────────────
+  (function() {
+    // 1. Honeypot — скрытая ссылка для ботов
+    var trap = document.createElement('a');
+    trap.href = '/trap-do-not-follow';
+    trap.style.cssText = 'position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;';
+    trap.setAttribute('aria-hidden', 'true');
+    trap.setAttribute('tabindex', '-1');
+    document.body.appendChild(trap);
+
+    // 2. Блокировка встраивания через JS (дублирует CSP)
+    if (window.self !== window.top) {
+      document.body.innerHTML = '';
+      window.top.location = window.self.location;
+    }
+
+    // 3. Базовая детекция headless / автоматизированных браузеров
+    var isBot = (
+      navigator.webdriver === true ||
+      /HeadlessChrome|PhantomJS|Selenium|WebDriver/i.test(navigator.userAgent) ||
+      !window.chrome && /Chrome/.test(navigator.userAgent) && /Google/.test(navigator.vendor) === false && navigator.userAgent.indexOf('Edge') === -1
+    );
+
+    // 4. Rate limiting для fetch — не более 10 запросов в минуту
+    var _fetchCount = 0;
+    var _fetchReset = Date.now();
+    var _origFetch = window.fetch;
+    window.fetch = function(url, opts) {
+      var now = Date.now();
+      if (now - _fetchReset > 60000) { _fetchCount = 0; _fetchReset = now; }
+      _fetchCount++;
+      if (_fetchCount > 10) {
+        console.warn('Rate limit: слишком много запросов');
+        return Promise.reject(new Error('Rate limited'));
+      }
+      return _origFetch.apply(this, arguments);
+    };
+
+    // 5. Запрет копирования через правую кнопку и DevTools для ботов
+    if (isBot) {
+      document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    }
+  })();
+</script>
 
 <nav class="nav">
   <div class="nav-inner">
