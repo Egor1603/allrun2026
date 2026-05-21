@@ -1,4 +1,39 @@
 User-agent: *
 Allow: /
+Allow: /clinics/
+Allow: /trenirovki/
+Allow: /events.json
+Allow: /clinics.json
+Allow: /sitemap.xml
+
+# Закрываем все *.json кроме разрешённых выше
+Disallow: /*.json$
+# Закрываем городские страницы от агрессивного краулинга
+Crawl-delay: 2
+
+# Разрешаем поисковики
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+# Блокируем известные агрессивные краулеры
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
 
 Sitemap: https://allrunrus.ru/sitemap.xml
