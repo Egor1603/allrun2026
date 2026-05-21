@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://allrunrus.ru https://calendar.google.com https://calendar.yandex.ru; frame-ancestors 'none'; form-action 'none'; base-uri 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=()">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -752,6 +757,23 @@ function toggleTheme() {
 </script>
 </head>
 <body>
+<script>
+  (function() {
+    if (window.self !== window.top) {
+      document.body.innerHTML = '';
+      window.top.location = window.self.location;
+    }
+    var isBot = navigator.webdriver === true ||
+      /HeadlessChrome|PhantomJS|Selenium/i.test(navigator.userAgent);
+    var _fetchCount = 0, _fetchReset = Date.now(), _origFetch = window.fetch;
+    window.fetch = function(url, opts) {
+      var now = Date.now();
+      if (now - _fetchReset > 60000) { _fetchCount = 0; _fetchReset = now; }
+      if (++_fetchCount > 10) return Promise.reject(new Error('Rate limited'));
+      return _origFetch.apply(this, arguments);
+    };
+  })();
+</script>
 
 <nav class="nav">
   <div class="nav-inner">
