@@ -2569,6 +2569,8 @@ def generate_city_pages(events, template_path="index.html"):
                                       '<a class="nav-tab" href="../clinics/">🏥 Справка 1144н</a>')
         page_html = page_html.replace('<a class="nav-tab" href="/trenirovki/">📋 План тренировок</a>',
                                       '<a class="nav-tab" href="../trenirovki/">📋 План тренировок</a>')
+        page_html = page_html.replace('<a class="nav-tab" href="/trenirovki/">📋 План тренировок</a>',
+                                      '<a class="nav-tab" href="../trenirovki/">📋 План тренировок</a>')
 
         # Логотип ведёт на главную
         page_html = page_html.replace(
