@@ -6,7 +6,7 @@
 
 <!-- SEO -->
 <title>Справка 1144н для забегов — клиники по городам России</title>
-<meta name="description" content="Клиники где можно получить справку по приказу 1144н для участия в забегах и марафонах: марафоны, трейлы, полумарафоны, ночные забеги. 100+ событий в 40+ городах. Официальные источники, автообновление дважды в сутки.">
+<meta name="description" content="Список медицинских клиник для получения справки 1144н — официального допуска к участию в забегах и марафонах. Москва, Санкт-Петербург, Екатеринбург и другие города.">
 <meta name="keywords" content="справка 1144н, справка для соревнований, клиники для забегов, медицинская справка спорт, допуск к соревнованиям, ЭКГ для марафона, спортивная медкомиссия">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://allrunrus.ru/clinics/">
@@ -19,9 +19,9 @@
 <!-- Open Graph — превью в соцсетях и мессенджерах -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://allrunrus.ru/clinics/">
-<meta property="og:title" content="Беговой календарь России 2026">
-<meta property="og:description" content="100+ забегов, марафонов и трейлов по всей России. Официальные источники, автообновление дважды в сутки.">
-<meta property="og:image" content="https://allrunrus.ru/og-image.svg">
+<meta property="og:title" content="Справка 1144н для забегов — клиники по городам России">
+<meta property="og:description" content="Список клиник где можно получить справку 1144н для участия в забегах и марафонах.">
+<meta property="og:image" content="https://allrunrus.ru/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
@@ -29,9 +29,9 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Беговой календарь России 2026">
-<meta name="twitter:description" content="100+ забегов, марафонов и трейлов по всей России.">
-<meta name="twitter:image" content="https://allrunrus.ru/og-image.svg">
+<meta name="twitter:title" content="Справка 1144н для забегов — клиники по городам России">
+<meta name="twitter:description" content="Список клиник где можно получить справку 1144н для участия в забегах.">
+<meta name="twitter:image" content="https://allrunrus.ru/og-image.png">
 
 <!-- Schema.org — структурированные данные для поисковиков -->
 <script type="application/ld+json">
@@ -726,6 +726,30 @@
   }
 
 </style>
+<script>
+/* Авто-переключение темы по времени суток */
+(function(){
+  var h = new Date().getHours();
+  var auto = (h >= 7 && h < 19) ? 'day' : 'night';
+  var override = localStorage.getItem('allrunrus-theme-override');
+  var overrideTime = parseInt(localStorage.getItem('allrunrus-theme-time')||'0');
+  var theme = (override && (Date.now()-overrideTime) < 3600000) ? override : auto;
+  document.documentElement.setAttribute('data-theme', theme);
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('theme-toggle');
+    if (btn) btn.textContent = theme === 'night' ? '☀️' : '☽';
+  });
+})();
+function toggleTheme() {
+  var current = document.documentElement.getAttribute('data-theme') || 'night';
+  var next = current === 'night' ? 'day' : 'night';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('allrunrus-theme-override', next);
+  localStorage.setItem('allrunrus-theme-time', Date.now().toString());
+  var btn = document.getElementById('theme-toggle');
+  if (btn) btn.textContent = next === 'night' ? '☀️' : '☽';
+}
+</script>
 </head>
 <body>
 
