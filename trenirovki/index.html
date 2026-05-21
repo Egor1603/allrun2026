@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://allrunrus.ru https://calendar.google.com https://calendar.yandex.ru; frame-ancestors 'none'; form-action 'none'; base-uri 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=()">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Генератор плана тренировок — Беговой календарь России</title>
 <meta name="description" content="Составьте персональный план беговых тренировок по данным ваших часов. Бесплатно, без регистрации.">
 <meta property="og:title" content="Генератор плана тренировок — Беговой календарь России">
 <meta property="og:description" content="Составьте персональный план беговых тренировок по данным ваших часов.">
+<meta property="og:image" content="https://allrunrus.ru/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="https://allrunrus.ru/trenirovki/">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Беговой календарь России">
@@ -810,6 +818,23 @@ footer a:hover{color:rgba(255,255,255,.70)}
 </style>
 </head>
 <body>
+<script>
+(function() {
+  if (window.self !== window.top) {
+    document.body.innerHTML = '';
+    window.top.location = window.self.location;
+  }
+  var isBot = navigator.webdriver === true ||
+    /HeadlessChrome|PhantomJS|Selenium/i.test(navigator.userAgent);
+  var _fc = 0, _fr = Date.now(), _of = window.fetch;
+  window.fetch = function(url, opts) {
+    var now = Date.now();
+    if (now - _fr > 60000) { _fc = 0; _fr = now; }
+    if (++_fc > 15) return Promise.reject(new Error('Rate limited'));
+    return _of.apply(this, arguments);
+  };
+})();
+</script>
 
 <!-- ── NAV — точная копия allrunrus.ru ── -->
 <nav class="nav" role="navigation">
@@ -826,7 +851,7 @@ footer a:hover{color:rgba(255,255,255,.70)}
 <div class="nav-tabs-bar">
   <div class="nav-tabs-inner">
     <a href="https://allrunrus.ru/" class="nav-tab">🏃 Забеги</a>
-    <a href="https://allrunrus.ru/clinics/" class="nav-tab">🏥 Справка 1444н</a>
+    <a href="https://allrunrus.ru/clinics/" class="nav-tab">🏥 Справка 1144н</a>
     <a href="/trenirovki/" class="nav-tab active">📋 Тренировки</a>
   </div>
 </div>
@@ -1059,7 +1084,7 @@ footer a:hover{color:rgba(255,255,255,.70)}
 <footer>
   <a href="https://allrunrus.ru/">Беговой календарь России</a> ·
   <a href="https://allrunrus.ru/trenirovki/">Планы тренировок</a> ·
-  <a href="https://allrunrus.ru/clinics/">Справка 1444н</a><br>
+  <a href="https://allrunrus.ru/clinics/">Справка 1144н</a><br>
   Информация с официальных источников организаторов забегов · 48 источников · Обновление 2 раза в сутки
 </footer>
 
@@ -1920,18 +1945,14 @@ $('genBtn').addEventListener('click',()=>{
 
 // ── Переключение темы (как на allrunrus.ru) ──
 (function(){
-  const saved = localStorage.getItem('theme') || 'night';
-  document.documentElement.setAttribute('data-theme', saved);
-  const btn = document.getElementById('themeBtn');
-  function update(t){
-    document.documentElement.setAttribute('data-theme',t);
-    localStorage.setItem('theme',t);
-    if(btn) btn.textContent = t==='night' ? '☀️' : '☽';
-  }
-  update(saved);
-  if(btn) btn.addEventListener('click',()=>{
-    update(document.documentElement.getAttribute('data-theme')==='night'?'day':'night');
-  });
+  var h = new Date().getHours();
+  var auto = (h >= 7 && h < 19) ? 'day' : 'night';
+  var override = localStorage.getItem('allrunrus-theme-override');
+  var overrideTime = parseInt(localStorage.getItem('allrunrus-theme-time')||'0');
+  var theme = (override && (Date.now()-overrideTime) < 3600000) ? override : auto;
+  document.documentElement.setAttribute('data-theme', theme);
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.textContent = theme === 'night' ? '☀️' : '☽';
 })();
 </script>
 </body>
