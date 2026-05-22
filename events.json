@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-22T09:47:48Z",
+  "updated": "2026-05-22T17:13:52Z",
   "events": [
     {
       "id": 22,
@@ -498,6 +498,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/tamara-city-game-2026/",
       "id": 247
+    },
+    {
+      "date": "2026-06-06",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 252
     },
     {
       "id": 27,
