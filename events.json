@@ -1,6 +1,16 @@
 {
-  "updated": "2026-05-22T17:13:52Z",
+  "updated": "2026-05-23T08:33:05Z",
   "events": [
+    {
+      "id": 135,
+      "date": "2026-05-22",
+      "name": "Alol Ultra Trail",
+      "city": "Пустошка",
+      "region": "Псковская область",
+      "distances": "5 км, 10 км, 20 км, 30 км, 50 км, 100 км, 180 км",
+      "type": "trail",
+      "url": "https://edge-ultra.ru"
+    },
     {
       "id": 22,
       "date": "2026-05-17",
@@ -223,16 +233,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 135,
-      "date": "2026-05-22",
-      "name": "Alol Ultra Trail",
-      "city": "Пустошка",
-      "region": "Псковская область",
-      "distances": "5 км, 10 км, 20 км, 30 км, 50 км, 100 км, 180 км",
-      "type": "trail",
-      "url": "https://edge-ultra.ru"
-    },
-    {
       "id": 23,
       "date": "2026-05-23",
       "name": "Забег РФ",
@@ -282,6 +282,16 @@
       "type": "road",
       "url": "https://legal.run/",
       "charity": true
+    },
+    {
+      "date": "2026-05-23",
+      "name": "Alol Ultra Trail",
+      "city": "Пустошка",
+      "region": "Псковская область",
+      "distances": "5, 10, 20, 30, 50, 100, 180 км",
+      "type": "trail",
+      "url": "https://edge-ultra.ru",
+      "id": 253
     },
     {
       "id": 90,
