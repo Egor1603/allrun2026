@@ -1,6 +1,67 @@
 {
-  "updated": "2026-05-23T16:08:41Z",
+  "updated": "2026-05-24T08:43:34Z",
   "events": [
+    {
+      "id": 23,
+      "date": "2026-05-23",
+      "name": "Забег РФ",
+      "city": "Новосибирск",
+      "region": "Новосибирская область",
+      "distances": "1 км, 5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://забег.рф/Новосибирск"
+    },
+    {
+      "id": 104,
+      "date": "2026-05-23",
+      "name": "Благотворительный полумарафон «Беги, герой!»",
+      "city": "Нижний Новгород",
+      "region": "Нижегородская область",
+      "distances": "5 км, 10 км, 21 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/BlagotvoritelnyypolumarafonBEGIGEROY2026"
+    },
+    {
+      "id": 147,
+      "date": "2026-05-23",
+      "name": "Весенний полумарафон ЗаБег.РФ",
+      "city": "Омск",
+      "region": "Омская область",
+      "distances": "1 км, 5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://runsim.ru/events/vesennii-polumarafon-zabegrf-2026"
+    },
+    {
+      "id": 179,
+      "date": "2026-05-23",
+      "name": "РанКарьяла / Забег.РФ Петрозаводск",
+      "city": "Петрозаводск",
+      "region": "Республика Карелия",
+      "distances": "1 км, 5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/zabegptz2026"
+    },
+    {
+      "id": 220,
+      "date": "2026-05-23",
+      "name": "Legal Run Волгоград 2026",
+      "city": "Волгоград",
+      "region": "Волгоградская область",
+      "distances": "1 км, 5 км",
+      "type": "road",
+      "url": "https://legal.run/",
+      "charity": true
+    },
+    {
+      "date": "2026-05-23",
+      "name": "Alol Ultra Trail",
+      "city": "Пустошка",
+      "region": "Псковская область",
+      "distances": "5, 10, 20, 30, 50, 100, 180 км",
+      "type": "trail",
+      "url": "https://edge-ultra.ru",
+      "id": 253
+    },
     {
       "id": 135,
       "date": "2026-05-22",
@@ -231,67 +292,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 23,
-      "date": "2026-05-23",
-      "name": "Забег РФ",
-      "city": "Новосибирск",
-      "region": "Новосибирская область",
-      "distances": "1 км, 5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://забег.рф/Новосибирск"
-    },
-    {
-      "id": 104,
-      "date": "2026-05-23",
-      "name": "Благотворительный полумарафон «Беги, герой!»",
-      "city": "Нижний Новгород",
-      "region": "Нижегородская область",
-      "distances": "5 км, 10 км, 21 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/BlagotvoritelnyypolumarafonBEGIGEROY2026"
-    },
-    {
-      "id": 147,
-      "date": "2026-05-23",
-      "name": "Весенний полумарафон ЗаБег.РФ",
-      "city": "Омск",
-      "region": "Омская область",
-      "distances": "1 км, 5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://runsim.ru/events/vesennii-polumarafon-zabegrf-2026"
-    },
-    {
-      "id": 179,
-      "date": "2026-05-23",
-      "name": "РанКарьяла / Забег.РФ Петрозаводск",
-      "city": "Петрозаводск",
-      "region": "Республика Карелия",
-      "distances": "1 км, 5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/zabegptz2026"
-    },
-    {
-      "id": 220,
-      "date": "2026-05-23",
-      "name": "Legal Run Волгоград 2026",
-      "city": "Волгоград",
-      "region": "Волгоградская область",
-      "distances": "1 км, 5 км",
-      "type": "road",
-      "url": "https://legal.run/",
-      "charity": true
-    },
-    {
-      "date": "2026-05-23",
-      "name": "Alol Ultra Trail",
-      "city": "Пустошка",
-      "region": "Псковская область",
-      "distances": "5, 10, 20, 30, 50, 100, 180 км",
-      "type": "trail",
-      "url": "https://edge-ultra.ru",
-      "id": 253
     },
     {
       "id": 90,
