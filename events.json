@@ -1,6 +1,59 @@
 {
-  "updated": "2026-05-24T16:08:31Z",
+  "updated": "2026-05-25T10:27:25Z",
   "events": [
+    {
+      "id": 90,
+      "date": "2026-05-24",
+      "name": "City Trail #1 Romashkovo",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5, 15, 30 км + вело",
+      "type": "trail",
+      "url": "https://city-trail.ru/1"
+    },
+    {
+      "id": 126,
+      "date": "2026-05-24",
+      "name": "O-Trail «Стрижамент ВЭС»",
+      "city": "Невинномысск",
+      "region": "Ставропольский край",
+      "distances": "5 км, 10 км, 25 км, 81 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/OTRAILStrizhamentVES2026"
+    },
+    {
+      "id": 221,
+      "date": "2026-05-24",
+      "name": "Legal Run Красноярск 2026",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "1 км, 5 км",
+      "type": "road",
+      "url": "https://legal.run/",
+      "charity": true
+    },
+    {
+      "id": 223,
+      "date": "2026-05-24",
+      "name": "Забег тут рядом 2026",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "distances": "5 км",
+      "type": "road",
+      "url": "https://antontut.ru/zabeg-tut-ryadom/",
+      "charity": true
+    },
+    {
+      "id": 224,
+      "date": "2026-05-24",
+      "name": "Благотворительный забег «Спорт во благо»",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5 км, детский",
+      "type": "road",
+      "url": "https://sportvoblago.ru/",
+      "charity": true
+    },
     {
       "id": 23,
       "date": "2026-05-23",
@@ -292,59 +345,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 90,
-      "date": "2026-05-24",
-      "name": "City Trail #1 Romashkovo",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "5, 15, 30 км + вело",
-      "type": "trail",
-      "url": "https://city-trail.ru/1"
-    },
-    {
-      "id": 126,
-      "date": "2026-05-24",
-      "name": "O-Trail «Стрижамент ВЭС»",
-      "city": "Невинномысск",
-      "region": "Ставропольский край",
-      "distances": "5 км, 10 км, 25 км, 81 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/OTRAILStrizhamentVES2026"
-    },
-    {
-      "id": 221,
-      "date": "2026-05-24",
-      "name": "Legal Run Красноярск 2026",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "1 км, 5 км",
-      "type": "road",
-      "url": "https://legal.run/",
-      "charity": true
-    },
-    {
-      "id": 223,
-      "date": "2026-05-24",
-      "name": "Забег тут рядом 2026",
-      "city": "Санкт-Петербург",
-      "region": "Санкт-Петербург",
-      "distances": "5 км",
-      "type": "road",
-      "url": "https://antontut.ru/zabeg-tut-ryadom/",
-      "charity": true
-    },
-    {
-      "id": 224,
-      "date": "2026-05-24",
-      "name": "Благотворительный забег «Спорт во благо»",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "5 км, детский",
-      "type": "road",
-      "url": "https://sportvoblago.ru/",
-      "charity": true
     },
     {
       "id": 81,
@@ -719,6 +719,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/belokuriha-2026/",
       "id": 250
+    },
+    {
+      "date": "2026-06-14",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/belokuriha-2026/",
+      "id": 254
     },
     {
       "id": 183,
