@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-28T10:24:26Z",
+  "updated": "2026-05-28T18:20:31Z",
   "events": [
     {
       "id": 90,
@@ -1950,6 +1950,16 @@
       "type": "road",
       "url": "https://krasmarafon.ru/vesna",
       "id": 249
+    },
+    {
+      "date": "2027-05-21",
+      "name": "Alol Ultra Trail",
+      "city": "Пустошка",
+      "region": "Псковская область",
+      "distances": "5, 10, 20, 30, 50, 100, 180 км",
+      "type": "trail",
+      "url": "https://edge-ultra.ru",
+      "id": 255
     },
     {
       "date": "2027-09-05",
