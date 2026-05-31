@@ -1,6 +1,78 @@
 {
-  "updated": "2026-05-30T16:10:17Z",
+  "updated": "2026-05-31T09:00:10Z",
   "events": [
+    {
+      "id": 81,
+      "date": "2026-05-30",
+      "name": "XIV Вертикальный километр",
+      "city": "Саратов",
+      "region": "Саратовская область",
+      "distances": "вертикальный километр (ночной)",
+      "type": "trail",
+      "url": "https://www.sambatrail.ru/vkm/"
+    },
+    {
+      "id": 84,
+      "date": "2026-05-30",
+      "name": "Ультра Погорелов DON SPACE TRAIL",
+      "city": "Белая Калитва",
+      "region": "Ростовская область",
+      "distances": "5, 10, 25, 50 км, детский 1,5 км",
+      "type": "trail",
+      "url": "https://donspacetrail.tilda.ws/pogorelov"
+    },
+    {
+      "id": 85,
+      "date": "2026-05-30",
+      "name": "X Парижский полумарафон",
+      "city": "Красноуфимск",
+      "region": "Свердловская область",
+      "distances": "5, 10, 21,1 км, детский, ночной 1,6 км",
+      "type": "trail",
+      "url": "https://paris-running.ru"
+    },
+    {
+      "id": 158,
+      "date": "2026-05-30",
+      "name": "Рыбинский полумарафон «Великий хлебный путь»",
+      "city": "Рыбинск",
+      "region": "Ярославская область",
+      "distances": "3 км, 5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://goldenringrun.ru/rybinsk"
+    },
+    {
+      "id": 181,
+      "date": "2026-05-30",
+      "name": "Первоуральск Опен 2026 (Весна)",
+      "city": "Первоуральск",
+      "region": "Свердловская область",
+      "distances": "3 км, 8 км, 15 км, 30 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/PervouralskOpen2026Vesna"
+    },
+    {
+      "id": 222,
+      "date": "2026-05-30",
+      "name": "Legal Run Иркутск 2026",
+      "city": "Иркутск",
+      "region": "Иркутская область",
+      "distances": "1 км, 5 км",
+      "type": "road",
+      "url": "https://legal.run/",
+      "charity": true
+    },
+    {
+      "id": 226,
+      "date": "2026-05-30",
+      "name": "СберПрайм Зелёный Марафон 2026",
+      "city": "60+ городов России",
+      "region": "Россия",
+      "distances": "4,2 км, 10 км, 21,1 км, детские дистанции",
+      "type": "road",
+      "url": "https://greenmarathon.sberbank.ru",
+      "charity": true
+    },
     {
       "id": 90,
       "date": "2026-05-24",
@@ -347,78 +419,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 81,
-      "date": "2026-05-30",
-      "name": "XIV Вертикальный километр",
-      "city": "Саратов",
-      "region": "Саратовская область",
-      "distances": "вертикальный километр (ночной)",
-      "type": "trail",
-      "url": "https://www.sambatrail.ru/vkm/"
-    },
-    {
-      "id": 84,
-      "date": "2026-05-30",
-      "name": "Ультра Погорелов DON SPACE TRAIL",
-      "city": "Белая Калитва",
-      "region": "Ростовская область",
-      "distances": "5, 10, 25, 50 км, детский 1,5 км",
-      "type": "trail",
-      "url": "https://donspacetrail.tilda.ws/pogorelov"
-    },
-    {
-      "id": 85,
-      "date": "2026-05-30",
-      "name": "X Парижский полумарафон",
-      "city": "Красноуфимск",
-      "region": "Свердловская область",
-      "distances": "5, 10, 21,1 км, детский, ночной 1,6 км",
-      "type": "trail",
-      "url": "https://paris-running.ru"
-    },
-    {
-      "id": 158,
-      "date": "2026-05-30",
-      "name": "Рыбинский полумарафон «Великий хлебный путь»",
-      "city": "Рыбинск",
-      "region": "Ярославская область",
-      "distances": "3 км, 5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://goldenringrun.ru/rybinsk"
-    },
-    {
-      "id": 181,
-      "date": "2026-05-30",
-      "name": "Первоуральск Опен 2026 (Весна)",
-      "city": "Первоуральск",
-      "region": "Свердловская область",
-      "distances": "3 км, 8 км, 15 км, 30 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/PervouralskOpen2026Vesna"
-    },
-    {
-      "id": 222,
-      "date": "2026-05-30",
-      "name": "Legal Run Иркутск 2026",
-      "city": "Иркутск",
-      "region": "Иркутская область",
-      "distances": "1 км, 5 км",
-      "type": "road",
-      "url": "https://legal.run/",
-      "charity": true
-    },
-    {
-      "id": 226,
-      "date": "2026-05-30",
-      "name": "СберПрайм Зелёный Марафон 2026",
-      "city": "60+ городов России",
-      "region": "Россия",
-      "distances": "4,2 км, 10 км, 21,1 км, детские дистанции",
-      "type": "road",
-      "url": "https://greenmarathon.sberbank.ru",
-      "charity": true
-    },
-    {
       "id": 153,
       "date": "2026-05-31",
       "name": "XXI Выборгский полумарафон",
@@ -447,6 +447,26 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/solonovka-2026/",
       "id": 236
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Парижский полумарафон",
+      "city": "Красноуфимск",
+      "region": "Свердловская область",
+      "distances": "5, 10, 21,1 км, детский, ночной 1,6 км",
+      "type": "trail",
+      "url": "https://paris-running.ru",
+      "id": 256
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Ультра Погорелов DON SPACE TRAIL",
+      "city": "Белая Калитва",
+      "region": "Ростовская область",
+      "distances": "5, 10, 25, 50 км, детский 1,5 км",
+      "type": "trail",
+      "url": "https://donspacetrail.tilda.ws/pogorelov",
+      "id": 257
     },
     {
       "id": 26,
