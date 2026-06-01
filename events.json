@@ -1,6 +1,56 @@
 {
-  "updated": "2026-05-31T16:17:54Z",
+  "updated": "2026-06-01T11:55:56Z",
   "events": [
+    {
+      "id": 153,
+      "date": "2026-05-31",
+      "name": "XXI Выборгский полумарафон",
+      "city": "Выборг",
+      "region": "Ленинградская область",
+      "distances": "3,5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://reg.o-time.ru/race/26019"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Солоновский серпантин 2026 31.05.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/solonovka-2026/",
+      "id": 235
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/solonovka-2026/",
+      "id": 236
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Парижский полумарафон",
+      "city": "Красноуфимск",
+      "region": "Свердловская область",
+      "distances": "5, 10, 21,1 км, детский, ночной 1,6 км",
+      "type": "trail",
+      "url": "https://paris-running.ru",
+      "id": 256
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Ультра Погорелов DON SPACE TRAIL",
+      "city": "Белая Калитва",
+      "region": "Ростовская область",
+      "distances": "5, 10, 25, 50 км, детский 1,5 км",
+      "type": "trail",
+      "url": "https://donspacetrail.tilda.ws/pogorelov",
+      "id": 257
+    },
     {
       "id": 81,
       "date": "2026-05-30",
@@ -417,56 +467,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 153,
-      "date": "2026-05-31",
-      "name": "XXI Выборгский полумарафон",
-      "city": "Выборг",
-      "region": "Ленинградская область",
-      "distances": "3,5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://reg.o-time.ru/race/26019"
-    },
-    {
-      "date": "2026-05-31",
-      "name": "Солоновский серпантин 2026 31.05.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/solonovka-2026/",
-      "id": 235
-    },
-    {
-      "date": "2026-05-31",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/solonovka-2026/",
-      "id": 236
-    },
-    {
-      "date": "2026-05-31",
-      "name": "Парижский полумарафон",
-      "city": "Красноуфимск",
-      "region": "Свердловская область",
-      "distances": "5, 10, 21,1 км, детский, ночной 1,6 км",
-      "type": "trail",
-      "url": "https://paris-running.ru",
-      "id": 256
-    },
-    {
-      "date": "2026-05-31",
-      "name": "Ультра Погорелов DON SPACE TRAIL",
-      "city": "Белая Калитва",
-      "region": "Ростовская область",
-      "distances": "5, 10, 25, 50 км, детский 1,5 км",
-      "type": "trail",
-      "url": "https://donspacetrail.tilda.ws/pogorelov",
-      "id": 257
     },
     {
       "id": 26,
@@ -900,6 +900,16 @@
       "distances": "5 км, 10 км, 21 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/MilovskiyZabeg2026"
+    },
+    {
+      "date": "2026-06-21",
+      "name": "Детский велозаезд и забег в рамках WildSiberia 2026 21.06.202",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/wildkids-2026/",
+      "id": 258
     },
     {
       "id": 99,
