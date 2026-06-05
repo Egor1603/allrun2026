@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-04T17:52:54Z",
+  "updated": "2026-06-05T10:08:55Z",
   "events": [
     {
       "id": 153,
@@ -910,6 +910,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/wildkids-2026/",
       "id": 258
+    },
+    {
+      "date": "2026-06-21",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/wildkids-2026/",
+      "id": 259
     },
     {
       "id": 99,
