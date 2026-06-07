@@ -1,6 +1,77 @@
 {
-  "updated": "2026-06-06T16:15:03Z",
+  "updated": "2026-06-07T09:31:46Z",
   "events": [
+    {
+      "id": 26,
+      "date": "2026-06-06",
+      "name": "Kamensk Urban Trail",
+      "city": "Каменск-Уральский",
+      "region": "Свердловская область",
+      "distances": "3 км, 10 км, 14 км, 20 км",
+      "type": "trail",
+      "url": "https://myrace.info/events/1637"
+    },
+    {
+      "id": 159,
+      "date": "2026-06-06",
+      "name": "Полумарафон «Ростов Великий»",
+      "city": "Ростов",
+      "region": "Ярославская область",
+      "distances": "3 км, 5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://goldenringrun.ru/rostov"
+    },
+    {
+      "id": 167,
+      "date": "2026-06-06",
+      "name": "Фестиваль бега «Королева спорта»",
+      "city": "Самара",
+      "region": "Самарская область",
+      "distances": "1586 м, 5 км, 10 км, 21,1 км, дет.",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/KorolevaSporta2026"
+    },
+    {
+      "id": 217,
+      "date": "2026-06-06",
+      "name": "Legal Run Москва 2026",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "2,5 км, 5 км",
+      "type": "road",
+      "url": "https://legal.run/",
+      "charity": true
+    },
+    {
+      "date": "2026-06-06",
+      "name": "Tamara City Game 2026 06.06.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/tamara-city-game-2026/",
+      "id": 237
+    },
+    {
+      "date": "2026-06-06",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/tamara-city-game-2026/",
+      "id": 247
+    },
+    {
+      "date": "2026-06-06",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 252
+    },
     {
       "id": 153,
       "date": "2026-05-31",
@@ -469,77 +540,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 26,
-      "date": "2026-06-06",
-      "name": "Kamensk Urban Trail",
-      "city": "Каменск-Уральский",
-      "region": "Свердловская область",
-      "distances": "3 км, 10 км, 14 км, 20 км",
-      "type": "trail",
-      "url": "https://myrace.info/events/1637"
-    },
-    {
-      "id": 159,
-      "date": "2026-06-06",
-      "name": "Полумарафон «Ростов Великий»",
-      "city": "Ростов",
-      "region": "Ярославская область",
-      "distances": "3 км, 5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://goldenringrun.ru/rostov"
-    },
-    {
-      "id": 167,
-      "date": "2026-06-06",
-      "name": "Фестиваль бега «Королева спорта»",
-      "city": "Самара",
-      "region": "Самарская область",
-      "distances": "1586 м, 5 км, 10 км, 21,1 км, дет.",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/KorolevaSporta2026"
-    },
-    {
-      "id": 217,
-      "date": "2026-06-06",
-      "name": "Legal Run Москва 2026",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "2,5 км, 5 км",
-      "type": "road",
-      "url": "https://legal.run/",
-      "charity": true
-    },
-    {
-      "date": "2026-06-06",
-      "name": "Tamara City Game 2026 06.06.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/tamara-city-game-2026/",
-      "id": 237
-    },
-    {
-      "date": "2026-06-06",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/tamara-city-game-2026/",
-      "id": 247
-    },
-    {
-      "date": "2026-06-06",
-      "name": "Старт Красноярск",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/",
-      "id": 252
-    },
-    {
       "id": 27,
       "date": "2026-06-07",
       "name": "Тагил ультра трейл",
@@ -609,6 +609,16 @@
       "distances": "9,5 км, 30 км, 65 км, скандинавская ходьба, детский",
       "type": "trail",
       "url": "https://ultra.irunclub.ru"
+    },
+    {
+      "date": "2026-06-12",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 260
     },
     {
       "id": 30,
@@ -1010,6 +1020,16 @@
       "distances": "5 км, 10 км, 21,1 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/PokrovskiePrudy792026"
+    },
+    {
+      "date": "2026-06-28",
+      "name": "Открытые шоссейные тренировки “Раздельная гонка” и “Критериум",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/roadbike-2026/",
+      "id": 261
     },
     {
       "id": 36,
