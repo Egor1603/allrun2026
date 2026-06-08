@@ -1,6 +1,37 @@
 {
-  "updated": "2026-06-07T16:24:07Z",
+  "updated": "2026-06-08T11:16:59Z",
   "events": [
+    {
+      "id": 27,
+      "date": "2026-06-07",
+      "name": "Тагил ультра трейл",
+      "city": "Нижний Тагил",
+      "region": "Свердловская область",
+      "distances": "5 км, 10 км, 21 км, 65 км",
+      "type": "trail",
+      "url": "https://myrace.info/events/1716"
+    },
+    {
+      "date": "2026-06-07",
+      "name": "Красочный забег",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5 км",
+      "type": "road",
+      "url": "https://colorrun5km.runc.run/",
+      "id": 64
+    },
+    {
+      "id": 225,
+      "date": "2026-06-07",
+      "name": "Красочный забег Color Run 2026",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5 км",
+      "type": "road",
+      "url": "https://colorrun5km.runc.run/",
+      "charity": true
+    },
     {
       "id": 26,
       "date": "2026-06-06",
@@ -538,37 +569,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 27,
-      "date": "2026-06-07",
-      "name": "Тагил ультра трейл",
-      "city": "Нижний Тагил",
-      "region": "Свердловская область",
-      "distances": "5 км, 10 км, 21 км, 65 км",
-      "type": "trail",
-      "url": "https://myrace.info/events/1716"
-    },
-    {
-      "date": "2026-06-07",
-      "name": "Красочный забег",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "5 км",
-      "type": "road",
-      "url": "https://colorrun5km.runc.run/",
-      "id": 64
-    },
-    {
-      "id": 225,
-      "date": "2026-06-07",
-      "name": "Красочный забег Color Run 2026",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "5 км",
-      "type": "road",
-      "url": "https://colorrun5km.runc.run/",
-      "charity": true
     },
     {
       "id": 70,
