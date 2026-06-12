@@ -1,6 +1,16 @@
 {
-  "updated": "2026-06-11T18:24:15Z",
+  "updated": "2026-06-12T10:30:29Z",
   "events": [
+    {
+      "id": 70,
+      "date": "2026-06-11",
+      "name": "Т-Банк Sport-Marafon Fest",
+      "city": "Никола-Ленивец",
+      "region": "Калужская область",
+      "distances": "от 10 до 100 км",
+      "type": "trail",
+      "url": "https://sportmarafonfest.ru"
+    },
     {
       "id": 27,
       "date": "2026-06-07",
@@ -571,16 +581,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 70,
-      "date": "2026-06-11",
-      "name": "Т-Банк Sport-Marafon Fest",
-      "city": "Никола-Ленивец",
-      "region": "Калужская область",
-      "distances": "от 10 до 100 км",
-      "type": "trail",
-      "url": "https://sportmarafonfest.ru"
-    },
-    {
       "id": 28,
       "date": "2026-06-12",
       "name": "Бисертский марафон",
@@ -1010,6 +1010,16 @@
       "distances": "3 км, 5 км, 10 км, 21 км",
       "type": "night",
       "url": "https://reg.russiarunning.com/event/NochnayaPchela2026"
+    },
+    {
+      "date": "2026-06-27",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/roadbike-2026/",
+      "id": 262
     },
     {
       "id": 175,
