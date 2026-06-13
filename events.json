@@ -1,6 +1,46 @@
 {
-  "updated": "2026-06-12T17:42:04Z",
+  "updated": "2026-06-13T09:33:01Z",
   "events": [
+    {
+      "id": 28,
+      "date": "2026-06-12",
+      "name": "Бисертский марафон",
+      "city": "Бисерть",
+      "region": "Свердловская область",
+      "distances": "5 км, 10 км, 42 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/VIIBisertskiymarafon12062026g"
+    },
+    {
+      "id": 29,
+      "date": "2026-06-12",
+      "name": "Полумарафон «Здорово, Кострома!»",
+      "city": "Кострома",
+      "region": "Костромская область",
+      "distances": "3 км, 5 км, 10 км, 21,1 км, детский",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/BZK_Kostroma_26"
+    },
+    {
+      "id": 89,
+      "date": "2026-06-12",
+      "name": "Ультрамарафон Taganay-Turgoyak",
+      "city": "Миасс",
+      "region": "Челябинская область",
+      "distances": "9,5 км, 30 км, 65 км, скандинавская ходьба, детский",
+      "type": "trail",
+      "url": "https://ultra.irunclub.ru"
+    },
+    {
+      "date": "2026-06-12",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 260
+    },
     {
       "id": 70,
       "date": "2026-06-11",
@@ -581,46 +621,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 28,
-      "date": "2026-06-12",
-      "name": "Бисертский марафон",
-      "city": "Бисерть",
-      "region": "Свердловская область",
-      "distances": "5 км, 10 км, 42 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/VIIBisertskiymarafon12062026g"
-    },
-    {
-      "id": 29,
-      "date": "2026-06-12",
-      "name": "Полумарафон «Здорово, Кострома!»",
-      "city": "Кострома",
-      "region": "Костромская область",
-      "distances": "3 км, 5 км, 10 км, 21,1 км, детский",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/BZK_Kostroma_26"
-    },
-    {
-      "id": 89,
-      "date": "2026-06-12",
-      "name": "Ультрамарафон Taganay-Turgoyak",
-      "city": "Миасс",
-      "region": "Челябинская область",
-      "distances": "9,5 км, 30 км, 65 км, скандинавская ходьба, детский",
-      "type": "trail",
-      "url": "https://ultra.irunclub.ru"
-    },
-    {
-      "date": "2026-06-12",
-      "name": "Старт Красноярск",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/",
-      "id": 260
-    },
-    {
       "id": 30,
       "date": "2026-06-13",
       "name": "Марафон «Врата Сибири»",
@@ -850,6 +850,16 @@
       "type": "road",
       "url": "https://krasmarafon.ru/colorrun",
       "id": 230
+    },
+    {
+      "date": "2026-06-20",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 263
     },
     {
       "id": 34,
