@@ -16,12 +16,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://allrunrus.ru/krasnoyarsk/</loc>
+    <loc>https://allrunrus.ru/altajskij-kraj/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://allrunrus.ru/altajskij-kraj/</loc>
+    <loc>https://allrunrus.ru/krasnoyarsk/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -37,11 +37,6 @@
   </url>
   <url>
     <loc>https://allrunrus.ru/aktash/</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://allrunrus.ru/kisegach/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>

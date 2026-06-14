@@ -1,6 +1,116 @@
 {
-  "updated": "2026-06-13T16:20:42Z",
+  "updated": "2026-06-14T09:52:30Z",
   "events": [
+    {
+      "id": 30,
+      "date": "2026-06-13",
+      "name": "Марафон «Врата Сибири»",
+      "city": "Тюмень",
+      "region": "Тюменская область",
+      "distances": "3 км, 5 км, 10 км, 21,1 км, 42,2 км, эстафета",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/TyumenskiymarafonVrataSibiri"
+    },
+    {
+      "id": 31,
+      "date": "2026-06-13",
+      "name": "Пульс Ночи",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "5 км, 10 км, 21,1 км",
+      "type": "night",
+      "url": "https://toplist.run/race/12637"
+    },
+    {
+      "id": 88,
+      "date": "2026-06-13",
+      "name": "Т-Банк Sport-Marafon Fest — Trail",
+      "city": "Никола-Ленивец",
+      "region": "Калужская область",
+      "distances": "8,5, 17, 33,6, 47,8, 98,9 км",
+      "type": "trail",
+      "url": "https://sportmarafonfest.ru/trail"
+    },
+    {
+      "id": 96,
+      "date": "2026-06-13",
+      "name": "Трейл «Святилище Аллаки»",
+      "city": "Кисегач",
+      "region": "Челябинская область",
+      "distances": "7 км, 13 км, 20 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/SvyatilishcheAllaki2026"
+    },
+    {
+      "id": 97,
+      "date": "2026-06-13",
+      "name": "URALMAN Кисегач 2026",
+      "city": "Кисегач",
+      "region": "Челябинская область",
+      "distances": "триатлон",
+      "type": "road",
+      "url": "https://myrace.info/events/1517"
+    },
+    {
+      "id": 98,
+      "date": "2026-06-13",
+      "name": "Кубок МАНДАЛА 2026",
+      "city": "Кисегач",
+      "region": "Челябинская область",
+      "distances": "трейл",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/KubokMandala2026"
+    },
+    {
+      "id": 108,
+      "date": "2026-06-13",
+      "name": "Забег «Динамовская миля»",
+      "city": "Ижевск",
+      "region": "Удмуртская Республика",
+      "distances": "1 миля, 5 км, 10 км, 21 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/DinamovskayaMilya2026"
+    },
+    {
+      "id": 164,
+      "date": "2026-06-13",
+      "name": "LeoRun — трейловый полумарафон",
+      "city": "Хасанский район",
+      "region": "Приморский край",
+      "distances": "3 км, 5 км, 10 км, 15 км, 22 км",
+      "type": "trail",
+      "url": "https://leorun.ru/"
+    },
+    {
+      "id": 165,
+      "date": "2026-06-13",
+      "name": "VIII Чупинский полумарафон «Северная Карелия»",
+      "city": "Чупа",
+      "region": "Республика Карелия",
+      "distances": "10 км, 21,1 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/CHupinskijPolumarafon2026"
+    },
+    {
+      "id": 182,
+      "date": "2026-06-13",
+      "name": "Суворов Трейл",
+      "city": "Усть-Лабинск",
+      "region": "Краснодарский край",
+      "distances": "5 км, 10 км, 21 км",
+      "type": "trail",
+      "url": "https://events.topliga.ru/event/SuvorovTreyl2026/"
+    },
+    {
+      "date": "2026-06-13",
+      "name": "Сумасшедшая Сова (CrazyOwl50) 2026 Вещий Олег, могучий Волхов",
+      "city": "Переславль-Залесский",
+      "region": "Ярославская область",
+      "distances": "10 км, 30 км, 50 км (ночной)",
+      "type": "night",
+      "url": "https://goldenultra.ru/crazyowl/",
+      "id": 243
+    },
     {
       "id": 28,
       "date": "2026-06-12",
@@ -619,116 +729,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 30,
-      "date": "2026-06-13",
-      "name": "Марафон «Врата Сибири»",
-      "city": "Тюмень",
-      "region": "Тюменская область",
-      "distances": "3 км, 5 км, 10 км, 21,1 км, 42,2 км, эстафета",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/TyumenskiymarafonVrataSibiri"
-    },
-    {
-      "id": 31,
-      "date": "2026-06-13",
-      "name": "Пульс Ночи",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "5 км, 10 км, 21,1 км",
-      "type": "night",
-      "url": "https://toplist.run/race/12637"
-    },
-    {
-      "id": 88,
-      "date": "2026-06-13",
-      "name": "Т-Банк Sport-Marafon Fest — Trail",
-      "city": "Никола-Ленивец",
-      "region": "Калужская область",
-      "distances": "8,5, 17, 33,6, 47,8, 98,9 км",
-      "type": "trail",
-      "url": "https://sportmarafonfest.ru/trail"
-    },
-    {
-      "id": 96,
-      "date": "2026-06-13",
-      "name": "Трейл «Святилище Аллаки»",
-      "city": "Кисегач",
-      "region": "Челябинская область",
-      "distances": "7 км, 13 км, 20 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/SvyatilishcheAllaki2026"
-    },
-    {
-      "id": 97,
-      "date": "2026-06-13",
-      "name": "URALMAN Кисегач 2026",
-      "city": "Кисегач",
-      "region": "Челябинская область",
-      "distances": "триатлон",
-      "type": "road",
-      "url": "https://myrace.info/events/1517"
-    },
-    {
-      "id": 98,
-      "date": "2026-06-13",
-      "name": "Кубок МАНДАЛА 2026",
-      "city": "Кисегач",
-      "region": "Челябинская область",
-      "distances": "трейл",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/KubokMandala2026"
-    },
-    {
-      "id": 108,
-      "date": "2026-06-13",
-      "name": "Забег «Динамовская миля»",
-      "city": "Ижевск",
-      "region": "Удмуртская Республика",
-      "distances": "1 миля, 5 км, 10 км, 21 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/DinamovskayaMilya2026"
-    },
-    {
-      "id": 164,
-      "date": "2026-06-13",
-      "name": "LeoRun — трейловый полумарафон",
-      "city": "Хасанский район",
-      "region": "Приморский край",
-      "distances": "3 км, 5 км, 10 км, 15 км, 22 км",
-      "type": "trail",
-      "url": "https://leorun.ru/"
-    },
-    {
-      "id": 165,
-      "date": "2026-06-13",
-      "name": "VIII Чупинский полумарафон «Северная Карелия»",
-      "city": "Чупа",
-      "region": "Республика Карелия",
-      "distances": "10 км, 21,1 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/CHupinskijPolumarafon2026"
-    },
-    {
-      "id": 182,
-      "date": "2026-06-13",
-      "name": "Суворов Трейл",
-      "city": "Усть-Лабинск",
-      "region": "Краснодарский край",
-      "distances": "5 км, 10 км, 21 км",
-      "type": "trail",
-      "url": "https://events.topliga.ru/event/SuvorovTreyl2026/"
-    },
-    {
-      "date": "2026-06-13",
-      "name": "Сумасшедшая Сова (CrazyOwl50) 2026 Вещий Олег, могучий Волхов",
-      "city": "Переславль-Залесский",
-      "region": "Ярославская область",
-      "distances": "10 км, 30 км, 50 км (ночной)",
-      "type": "night",
-      "url": "https://goldenultra.ru/crazyowl/",
-      "id": 243
     },
     {
       "date": "2026-06-14",
