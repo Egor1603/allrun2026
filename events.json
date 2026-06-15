@@ -1,6 +1,36 @@
 {
-  "updated": "2026-06-14T16:30:01Z",
+  "updated": "2026-06-15T12:38:12Z",
   "events": [
+    {
+      "date": "2026-06-14",
+      "name": "Цветочный забег",
+      "city": "Омск",
+      "region": "Омская область",
+      "distances": "3 км, 10 км",
+      "type": "road",
+      "url": "https://runsim.ru/events/cvetocnyi-zabeg-2026",
+      "id": 232
+    },
+    {
+      "date": "2026-06-14",
+      "name": "XC в Лесной сказке 2026 13.06-14.06.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/belokuriha-2026/",
+      "id": 250
+    },
+    {
+      "date": "2026-06-14",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/belokuriha-2026/",
+      "id": 254
+    },
     {
       "id": 30,
       "date": "2026-06-13",
@@ -731,36 +761,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "date": "2026-06-14",
-      "name": "Цветочный забег",
-      "city": "Омск",
-      "region": "Омская область",
-      "distances": "3 км, 10 км",
-      "type": "road",
-      "url": "https://runsim.ru/events/cvetocnyi-zabeg-2026",
-      "id": 232
-    },
-    {
-      "date": "2026-06-14",
-      "name": "XC в Лесной сказке 2026 13.06-14.06.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/belokuriha-2026/",
-      "id": 250
-    },
-    {
-      "date": "2026-06-14",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/belokuriha-2026/",
-      "id": 254
-    },
-    {
       "id": 183,
       "date": "2026-06-19",
       "name": "Ультратрейл Тридцатка",
@@ -1090,6 +1090,16 @@
       "distances": "3 км, 5 км, 10 км, 21,1 км",
       "type": "road",
       "url": "https://goldenringrun.ru/tutaev"
+    },
+    {
+      "date": "2026-07-04",
+      "name": "Tamara Summer Race 2026 04.07.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/tamara-summer-2026/",
+      "id": 264
     },
     {
       "id": 82,
@@ -2040,6 +2050,16 @@
       "type": "trail",
       "url": "https://edge-ultra.ru",
       "id": 255
+    },
+    {
+      "date": "2027-06-13",
+      "name": "CrazyOwl50 — Сумасшедшая Сова",
+      "city": "Переславль-Залесский",
+      "region": "Ярославская область",
+      "distances": "10 км, 30 км, 50 км (ночной)",
+      "type": "night",
+      "url": "https://goldenultra.ru/crazyowl/",
+      "id": 265
     },
     {
       "date": "2027-09-05",
