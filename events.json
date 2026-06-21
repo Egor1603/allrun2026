@@ -1,6 +1,97 @@
 {
-  "updated": "2026-06-20T16:27:56Z",
+  "updated": "2026-06-21T10:05:37Z",
   "events": [
+    {
+      "id": 32,
+      "date": "2026-06-20",
+      "name": "Ночной полумарафон «Серые ночи»",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "distances": "10 км, 21,1 км, детский",
+      "type": "night",
+      "url": "https://ea-m.org/greynight2026"
+    },
+    {
+      "id": 33,
+      "date": "2026-06-20",
+      "name": "Архангельский марафон «Гандвик»",
+      "city": "Архангельск",
+      "region": "Архангельская область",
+      "distances": "1 км, 4,2 км, 10 км, 21,1 км, 42,2 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/0926"
+    },
+    {
+      "date": "2026-06-20",
+      "name": "Ночной забег",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "10 км",
+      "type": "night",
+      "url": "https://nightrun10km.runc.run/",
+      "id": 65
+    },
+    {
+      "id": 101,
+      "date": "2026-06-20",
+      "name": "Wild Peak",
+      "city": "Акташ",
+      "region": "Республика Алтай",
+      "distances": "7, 15, 35, 66 км (набор до 3700 м)",
+      "type": "trail",
+      "url": "https://wildsiberia.ru/wild-peak"
+    },
+    {
+      "id": 103,
+      "date": "2026-06-20",
+      "name": "Beauty Run KAVKAZ.RUN",
+      "city": "Железноводск",
+      "region": "Ставропольский край",
+      "distances": "3 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/BEAUTYRUNKAVKAZRUN2026"
+    },
+    {
+      "id": 160,
+      "date": "2026-06-20",
+      "name": "Угличский полумарафон",
+      "city": "Углич",
+      "region": "Ярославская область",
+      "distances": "3 км, 5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://goldenringrun.ru/uglich"
+    },
+    {
+      "id": 218,
+      "date": "2026-06-20",
+      "name": "SPb Legal Run 2026",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "distances": "2,5 км, 5 км",
+      "type": "road",
+      "url": "https://legal.run/place/spb/",
+      "charity": true
+    },
+    {
+      "date": "2026-06-20",
+      "name": "Информация о дополнительных опциях к регистрации",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/colorrun",
+      "id": 230
+    },
+    {
+      "date": "2026-06-20",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 263
+    },
     {
       "id": 183,
       "date": "2026-06-19",
@@ -771,97 +862,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 32,
-      "date": "2026-06-20",
-      "name": "Ночной полумарафон «Серые ночи»",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "10 км, 21,1 км, детский",
-      "type": "night",
-      "url": "https://ea-m.org/greynight2026"
-    },
-    {
-      "id": 33,
-      "date": "2026-06-20",
-      "name": "Архангельский марафон «Гандвик»",
-      "city": "Архангельск",
-      "region": "Архангельская область",
-      "distances": "1 км, 4,2 км, 10 км, 21,1 км, 42,2 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/0926"
-    },
-    {
-      "date": "2026-06-20",
-      "name": "Ночной забег",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "10 км",
-      "type": "night",
-      "url": "https://nightrun10km.runc.run/",
-      "id": 65
-    },
-    {
-      "id": 101,
-      "date": "2026-06-20",
-      "name": "Wild Peak",
-      "city": "Акташ",
-      "region": "Республика Алтай",
-      "distances": "7, 15, 35, 66 км (набор до 3700 м)",
-      "type": "trail",
-      "url": "https://wildsiberia.ru/wild-peak"
-    },
-    {
-      "id": 103,
-      "date": "2026-06-20",
-      "name": "Beauty Run KAVKAZ.RUN",
-      "city": "Железноводск",
-      "region": "Ставропольский край",
-      "distances": "3 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/BEAUTYRUNKAVKAZRUN2026"
-    },
-    {
-      "id": 160,
-      "date": "2026-06-20",
-      "name": "Угличский полумарафон",
-      "city": "Углич",
-      "region": "Ярославская область",
-      "distances": "3 км, 5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://goldenringrun.ru/uglich"
-    },
-    {
-      "id": 218,
-      "date": "2026-06-20",
-      "name": "SPb Legal Run 2026",
-      "city": "Санкт-Петербург",
-      "region": "Санкт-Петербург",
-      "distances": "2,5 км, 5 км",
-      "type": "road",
-      "url": "https://legal.run/place/spb/",
-      "charity": true
-    },
-    {
-      "date": "2026-06-20",
-      "name": "Информация о дополнительных опциях к регистрации",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/colorrun",
-      "id": 230
-    },
-    {
-      "date": "2026-06-20",
-      "name": "Старт Красноярск",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/",
-      "id": 263
-    },
-    {
       "id": 34,
       "date": "2026-06-21",
       "name": "Иркутский международный марафон",
@@ -1180,6 +1180,16 @@
       "type": "road",
       "url": "https://krasmarafon.ru/girlseven",
       "id": 231
+    },
+    {
+      "date": "2026-07-12",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 266
     },
     {
       "id": 187,
