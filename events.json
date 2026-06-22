@@ -1,6 +1,86 @@
 {
-  "updated": "2026-06-21T16:52:05Z",
+  "updated": "2026-06-22T12:25:05Z",
   "events": [
+    {
+      "id": 34,
+      "date": "2026-06-21",
+      "name": "Иркутский международный марафон",
+      "city": "Иркутск",
+      "region": "Иркутская область",
+      "distances": "10 км, 21,1 км, 42,2 км",
+      "type": "road",
+      "url": "https://alpmarathon.ru"
+    },
+    {
+      "id": 35,
+      "date": "2026-06-21",
+      "name": "Международный марафон «Алые паруса»",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "distances": "5 км, 10 км, 21,1 км, 42,2 км, 63 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/SCARLETSAILS2026"
+    },
+    {
+      "id": 91,
+      "date": "2026-06-21",
+      "name": "City Trail #2 Альфа-Битца",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5, 15, 30 км + вело",
+      "type": "trail",
+      "url": "https://city-trail.ru/2"
+    },
+    {
+      "id": 112,
+      "date": "2026-06-21",
+      "name": "РУТС Нижний Новгород",
+      "city": "Нижний Новгород",
+      "region": "Нижегородская область",
+      "distances": "5 км, 10 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/RUTSNN2026"
+    },
+    {
+      "id": 151,
+      "date": "2026-06-21",
+      "name": "Цветочный забег",
+      "city": "Омск",
+      "region": "Омская область",
+      "distances": "3 км, 10 км",
+      "type": "road",
+      "url": "https://runsim.ru/events/cvetocnyi-zabeg-2026"
+    },
+    {
+      "id": 216,
+      "date": "2026-06-21",
+      "name": "XIII Мыловский забег",
+      "city": "Кимры",
+      "region": "Тверская область",
+      "distances": "5 км, 10 км, 21 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/MilovskiyZabeg2026"
+    },
+    {
+      "date": "2026-06-21",
+      "name": "Детский велозаезд и забег в рамках WildSiberia 2026 21.06.202",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/wildkids-2026/",
+      "id": 258
+    },
+    {
+      "date": "2026-06-21",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/wildkids-2026/",
+      "id": 259
+    },
     {
       "id": 32,
       "date": "2026-06-20",
@@ -862,86 +942,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 34,
-      "date": "2026-06-21",
-      "name": "Иркутский международный марафон",
-      "city": "Иркутск",
-      "region": "Иркутская область",
-      "distances": "10 км, 21,1 км, 42,2 км",
-      "type": "road",
-      "url": "https://alpmarathon.ru"
-    },
-    {
-      "id": 35,
-      "date": "2026-06-21",
-      "name": "Международный марафон «Алые паруса»",
-      "city": "Санкт-Петербург",
-      "region": "Санкт-Петербург",
-      "distances": "5 км, 10 км, 21,1 км, 42,2 км, 63 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/SCARLETSAILS2026"
-    },
-    {
-      "id": 91,
-      "date": "2026-06-21",
-      "name": "City Trail #2 Альфа-Битца",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "5, 15, 30 км + вело",
-      "type": "trail",
-      "url": "https://city-trail.ru/2"
-    },
-    {
-      "id": 112,
-      "date": "2026-06-21",
-      "name": "РУТС Нижний Новгород",
-      "city": "Нижний Новгород",
-      "region": "Нижегородская область",
-      "distances": "5 км, 10 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/RUTSNN2026"
-    },
-    {
-      "id": 151,
-      "date": "2026-06-21",
-      "name": "Цветочный забег",
-      "city": "Омск",
-      "region": "Омская область",
-      "distances": "3 км, 10 км",
-      "type": "road",
-      "url": "https://runsim.ru/events/cvetocnyi-zabeg-2026"
-    },
-    {
-      "id": 216,
-      "date": "2026-06-21",
-      "name": "XIII Мыловский забег",
-      "city": "Кимры",
-      "region": "Тверская область",
-      "distances": "5 км, 10 км, 21 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/MilovskiyZabeg2026"
-    },
-    {
-      "date": "2026-06-21",
-      "name": "Детский велозаезд и забег в рамках WildSiberia 2026 21.06.202",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/wildkids-2026/",
-      "id": 258
-    },
-    {
-      "date": "2026-06-21",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/wildkids-2026/",
-      "id": 259
-    },
-    {
       "id": 99,
       "date": "2026-06-22",
       "name": "Wild Siberia 226",
@@ -1100,6 +1100,26 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/tamara-summer-2026/",
       "id": 264
+    },
+    {
+      "date": "2026-07-04",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/tamara-summer-2026/",
+      "id": 269
+    },
+    {
+      "date": "2026-07-04",
+      "name": "Чарыш трейл 2026 04.07.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/charysh-trail-2026/",
+      "id": 270
     },
     {
       "id": 82,
@@ -2070,6 +2090,36 @@
       "type": "night",
       "url": "https://goldenultra.ru/crazyowl/",
       "id": 265
+    },
+    {
+      "date": "2027-06-20",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 267
+    },
+    {
+      "date": "2027-06-20",
+      "name": "Информация о дополнительных опциях к регистрации",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/colorrun",
+      "id": 268
+    },
+    {
+      "date": "2027-06-23",
+      "name": "Wild Siberia 226",
+      "city": "Акташ",
+      "region": "Республика Алтай",
+      "distances": "226 км (плавание 3,8 + вело 180 + бег 42,2 км)",
+      "type": "road",
+      "url": "https://wildsiberia.ru",
+      "id": 271
     },
     {
       "date": "2027-09-05",
