@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22T12:25:05Z",
+  "updated": "2026-06-22T18:55:34Z",
   "events": [
     {
       "id": 34,
@@ -2090,6 +2090,16 @@
       "type": "night",
       "url": "https://goldenultra.ru/crazyowl/",
       "id": 265
+    },
+    {
+      "date": "2027-06-19",
+      "name": "Wild Peak",
+      "city": "Акташ",
+      "region": "Республика Алтай",
+      "distances": "7, 15, 35, 66 км (набор до 3700 м)",
+      "type": "trail",
+      "url": "https://wildsiberia.ru/wild-peak",
+      "id": 272
     },
     {
       "date": "2027-06-20",
