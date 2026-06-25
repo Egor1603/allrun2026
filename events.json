@@ -1,6 +1,16 @@
 {
-  "updated": "2026-06-24T17:11:33Z",
+  "updated": "2026-06-25T09:41:18Z",
   "events": [
+    {
+      "date": "2026-06-24",
+      "name": "Wild Siberia 226",
+      "city": "Акташ",
+      "region": "Республика Алтай",
+      "distances": "226 км (плавание 3,8 + вело 180 + бег 42,2 км)",
+      "type": "road",
+      "url": "https://wildsiberia.ru",
+      "id": 238
+    },
     {
       "id": 99,
       "date": "2026-06-22",
@@ -960,16 +970,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "date": "2026-06-24",
-      "name": "Wild Siberia 226",
-      "city": "Акташ",
-      "region": "Республика Алтай",
-      "distances": "226 км (плавание 3,8 + вело 180 + бег 42,2 км)",
-      "type": "road",
-      "url": "https://wildsiberia.ru",
-      "id": 238
     },
     {
       "id": 71,
