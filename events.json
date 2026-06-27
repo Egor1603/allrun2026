@@ -1,6 +1,36 @@
 {
-  "updated": "2026-06-26T17:07:50Z",
+  "updated": "2026-06-27T08:50:07Z",
   "events": [
+    {
+      "id": 71,
+      "date": "2026-06-26",
+      "name": "Т-Банк Arkhyz Wild Trail",
+      "city": "Архыз",
+      "region": "Карачаево-Черкессия",
+      "distances": "от 10 км",
+      "type": "trail",
+      "url": "https://wildtrail.ru/awt"
+    },
+    {
+      "id": 86,
+      "date": "2026-06-26",
+      "name": "Altai Ultra-Trail",
+      "city": "Горный Алтай",
+      "region": "Республика Алтай",
+      "distances": "16, 40, 80, 170 км",
+      "type": "trail",
+      "url": "https://altai-trail.ru/aut/"
+    },
+    {
+      "id": 185,
+      "date": "2026-06-26",
+      "name": "Демино Фест",
+      "city": "Демино",
+      "region": "Ярославская область",
+      "distances": "5 км, 10 км, 21 км, 42 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/DeminoFest2026"
+    },
     {
       "date": "2026-06-24",
       "name": "Wild Siberia 226",
@@ -970,36 +1000,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 71,
-      "date": "2026-06-26",
-      "name": "Т-Банк Arkhyz Wild Trail",
-      "city": "Архыз",
-      "region": "Карачаево-Черкессия",
-      "distances": "от 10 км",
-      "type": "trail",
-      "url": "https://wildtrail.ru/awt"
-    },
-    {
-      "id": 86,
-      "date": "2026-06-26",
-      "name": "Altai Ultra-Trail",
-      "city": "Горный Алтай",
-      "region": "Республика Алтай",
-      "distances": "16, 40, 80, 170 км",
-      "type": "trail",
-      "url": "https://altai-trail.ru/aut/"
-    },
-    {
-      "id": 185,
-      "date": "2026-06-26",
-      "name": "Демино Фест",
-      "city": "Демино",
-      "region": "Ярославская область",
-      "distances": "5 км, 10 км, 21 км, 42 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/DeminoFest2026"
     },
     {
       "id": 102,
