@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-28T09:29:23Z",
+  "updated": "2026-06-28T16:18:04Z",
   "events": [
     {
       "id": 102,
@@ -1050,6 +1050,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/roadbike-2026/",
       "id": 261
+    },
+    {
+      "date": "2026-06-28",
+      "name": "Пробег «От Кремля до Кремля»",
+      "city": "Коломна",
+      "region": "Московская область",
+      "distances": "65 км (соло) или эстафета 4×12–20 км",
+      "type": "road",
+      "url": "https://run2kremlins.ru",
+      "id": 273
     },
     {
       "id": 36,
