@@ -1,6 +1,36 @@
 {
-  "updated": "2026-06-27T16:13:00Z",
+  "updated": "2026-06-28T09:29:23Z",
   "events": [
+    {
+      "id": 102,
+      "date": "2026-06-27",
+      "name": "Пробег «От Кремля до Кремля»",
+      "city": "Коломна",
+      "region": "Московская область",
+      "distances": "65 км (соло) или эстафета 4×12–20 км (Коломна → Зарайск)",
+      "type": "road",
+      "url": "https://run2kremlins.ru"
+    },
+    {
+      "id": 186,
+      "date": "2026-06-27",
+      "name": "Забег «Ночная пчела»",
+      "city": "Палех",
+      "region": "Ивановская область",
+      "distances": "3 км, 5 км, 10 км, 21 км",
+      "type": "night",
+      "url": "https://reg.russiarunning.com/event/NochnayaPchela2026"
+    },
+    {
+      "date": "2026-06-27",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/roadbike-2026/",
+      "id": 262
+    },
     {
       "id": 71,
       "date": "2026-06-26",
@@ -1000,36 +1030,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 102,
-      "date": "2026-06-27",
-      "name": "Пробег «От Кремля до Кремля»",
-      "city": "Коломна",
-      "region": "Московская область",
-      "distances": "65 км (соло) или эстафета 4×12–20 км (Коломна → Зарайск)",
-      "type": "road",
-      "url": "https://run2kremlins.ru"
-    },
-    {
-      "id": 186,
-      "date": "2026-06-27",
-      "name": "Забег «Ночная пчела»",
-      "city": "Палех",
-      "region": "Ивановская область",
-      "distances": "3 км, 5 км, 10 км, 21 км",
-      "type": "night",
-      "url": "https://reg.russiarunning.com/event/NochnayaPchela2026"
-    },
-    {
-      "date": "2026-06-27",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/roadbike-2026/",
-      "id": 262
     },
     {
       "id": 175,
