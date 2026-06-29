@@ -1,6 +1,36 @@
 {
-  "updated": "2026-06-28T16:18:04Z",
+  "updated": "2026-06-29T11:23:05Z",
   "events": [
+    {
+      "id": 175,
+      "date": "2026-06-28",
+      "name": "79 Пробег-Марафон «Покровские Пруды»",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/PokrovskiePrudy792026"
+    },
+    {
+      "date": "2026-06-28",
+      "name": "Открытые шоссейные тренировки “Раздельная гонка” и “Критериум",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/roadbike-2026/",
+      "id": 261
+    },
+    {
+      "date": "2026-06-28",
+      "name": "Пробег «От Кремля до Кремля»",
+      "city": "Коломна",
+      "region": "Московская область",
+      "distances": "65 км (соло) или эстафета 4×12–20 км",
+      "type": "road",
+      "url": "https://run2kremlins.ru",
+      "id": 273
+    },
     {
       "id": 102,
       "date": "2026-06-27",
@@ -1032,36 +1062,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 175,
-      "date": "2026-06-28",
-      "name": "79 Пробег-Марафон «Покровские Пруды»",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/PokrovskiePrudy792026"
-    },
-    {
-      "date": "2026-06-28",
-      "name": "Открытые шоссейные тренировки “Раздельная гонка” и “Критериум",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/roadbike-2026/",
-      "id": 261
-    },
-    {
-      "date": "2026-06-28",
-      "name": "Пробег «От Кремля до Кремля»",
-      "city": "Коломна",
-      "region": "Московская область",
-      "distances": "65 км (соло) или эстафета 4×12–20 км",
-      "type": "road",
-      "url": "https://run2kremlins.ru",
-      "id": 273
-    },
-    {
       "id": 36,
       "date": "2026-07-04",
       "name": "Марафон «Белые ночи»",
@@ -1170,6 +1170,16 @@
       "distances": "5 км, 10 км, 21,1 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/NizhnekanskijPolumarafon2026"
+    },
+    {
+      "date": "2026-07-11",
+      "name": "Парный XCM Зелёный марафон 2026 11.07.2026 // Новосибирская о",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/zel-marafon-2026/",
+      "id": 274
     },
     {
       "id": 40,
