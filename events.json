@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-01T17:25:02Z",
+  "updated": "2026-07-02T09:30:57Z",
   "events": [
     {
       "id": 175,
@@ -1180,6 +1180,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/zel-marafon-2026/",
       "id": 274
+    },
+    {
+      "date": "2026-07-11",
+      "name": "Ночной трейл забег Жилино 2026 11.07.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/zhilino-2026/",
+      "id": 275
     },
     {
       "id": 40,
