@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-05T09:20:07Z",
+  "updated": "2026-07-05T16:17:36Z",
   "events": [
     {
       "id": 36,
@@ -1520,6 +1520,16 @@
       "distances": "4 км, 6 км, 12 км, 21 км",
       "type": "trail",
       "url": "https://myrace.info/events/1603"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "X Веломарафон Таёжная трасса 2026 (Тягун-Заринск) 15.08.2026",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/tyagun-2026/",
+      "id": 279
     },
     {
       "id": 87,
