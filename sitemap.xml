@@ -11,12 +11,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://allrunrus.ru/sankt-peterburg/</loc>
+    <loc>https://allrunrus.ru/krasnoyarsk/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://allrunrus.ru/krasnoyarsk/</loc>
+    <loc>https://allrunrus.ru/sankt-peterburg/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>

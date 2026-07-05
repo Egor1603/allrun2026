@@ -1,6 +1,76 @@
 {
-  "updated": "2026-07-04T16:10:41Z",
+  "updated": "2026-07-05T09:20:07Z",
   "events": [
+    {
+      "id": 36,
+      "date": "2026-07-04",
+      "name": "Марафон «Белые ночи»",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "distances": "10 км, 42,2 км, эстафета",
+      "type": "road",
+      "url": "https://wnmarathon.runc.run/"
+    },
+    {
+      "id": 37,
+      "date": "2026-07-04",
+      "name": "Арктический марафон",
+      "city": "Воркута",
+      "region": "Республика Коми",
+      "distances": "3 км, 10 км, 21,1 км, 42,2 км, детский",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/ArcticMarathon_2026"
+    },
+    {
+      "id": 38,
+      "date": "2026-07-04",
+      "name": "Горный марафон «Конжак»",
+      "city": "Краснотурьинск",
+      "region": "Свердловская область",
+      "distances": "42 км (горная трасса, подъём на г. Конжаковский Камень 1569 м)",
+      "type": "trail",
+      "url": "https://myrace.info/events/1699"
+    },
+    {
+      "id": 161,
+      "date": "2026-07-04",
+      "name": "Тутаевский полумарафон",
+      "city": "Тутаев",
+      "region": "Ярославская область",
+      "distances": "3 км, 5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://goldenringrun.ru/tutaev"
+    },
+    {
+      "date": "2026-07-04",
+      "name": "Tamara Summer Race 2026 04.07.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/tamara-summer-2026/",
+      "id": 264
+    },
+    {
+      "date": "2026-07-04",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/tamara-summer-2026/",
+      "id": 269
+    },
+    {
+      "date": "2026-07-04",
+      "name": "Чарыш трейл 2026 04.07.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/charysh-trail-2026/",
+      "id": 270
+    },
     {
       "id": 175,
       "date": "2026-06-28",
@@ -1062,76 +1132,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 36,
-      "date": "2026-07-04",
-      "name": "Марафон «Белые ночи»",
-      "city": "Санкт-Петербург",
-      "region": "Санкт-Петербург",
-      "distances": "10 км, 42,2 км, эстафета",
-      "type": "road",
-      "url": "https://wnmarathon.runc.run/"
-    },
-    {
-      "id": 37,
-      "date": "2026-07-04",
-      "name": "Арктический марафон",
-      "city": "Воркута",
-      "region": "Республика Коми",
-      "distances": "3 км, 10 км, 21,1 км, 42,2 км, детский",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/ArcticMarathon_2026"
-    },
-    {
-      "id": 38,
-      "date": "2026-07-04",
-      "name": "Горный марафон «Конжак»",
-      "city": "Краснотурьинск",
-      "region": "Свердловская область",
-      "distances": "42 км (горная трасса, подъём на г. Конжаковский Камень 1569 м)",
-      "type": "trail",
-      "url": "https://myrace.info/events/1699"
-    },
-    {
-      "id": 161,
-      "date": "2026-07-04",
-      "name": "Тутаевский полумарафон",
-      "city": "Тутаев",
-      "region": "Ярославская область",
-      "distances": "3 км, 5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://goldenringrun.ru/tutaev"
-    },
-    {
-      "date": "2026-07-04",
-      "name": "Tamara Summer Race 2026 04.07.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/tamara-summer-2026/",
-      "id": 264
-    },
-    {
-      "date": "2026-07-04",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/tamara-summer-2026/",
-      "id": 269
-    },
-    {
-      "date": "2026-07-04",
-      "name": "Чарыш трейл 2026 04.07.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/charysh-trail-2026/",
-      "id": 270
-    },
-    {
       "id": 82,
       "date": "2026-07-05",
       "name": "VI трейл-полумарафон Тенистые овраги",
@@ -1190,6 +1190,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/zhilino-2026/",
       "id": 275
+    },
+    {
+      "date": "2026-07-11",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/zhilino-2026/",
+      "id": 276
     },
     {
       "id": 40,
@@ -1440,6 +1450,26 @@
       "distances": "5 км, 10 км, 21,1 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/AlmetevskijPolumarafon2026"
+    },
+    {
+      "date": "2026-08-08",
+      "name": "Колывань трейл 2026 08.08.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/kolyvan-trail-2026/",
+      "id": 277
+    },
+    {
+      "date": "2026-08-08",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/kolyvan-trail-2026/",
+      "id": 278
     },
     {
       "id": 41,
