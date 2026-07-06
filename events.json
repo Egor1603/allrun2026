@@ -1,6 +1,16 @@
 {
-  "updated": "2026-07-05T16:17:36Z",
+  "updated": "2026-07-06T10:56:18Z",
   "events": [
+    {
+      "id": 82,
+      "date": "2026-07-05",
+      "name": "VI трейл-полумарафон Тенистые овраги",
+      "city": "Саратов",
+      "region": "Саратовская область",
+      "distances": "трейл",
+      "type": "trail",
+      "url": "https://www.sambatrail.ru/shady-ravines"
+    },
     {
       "id": 36,
       "date": "2026-07-04",
@@ -1130,16 +1140,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 82,
-      "date": "2026-07-05",
-      "name": "VI трейл-полумарафон Тенистые овраги",
-      "city": "Саратов",
-      "region": "Саратовская область",
-      "distances": "трейл",
-      "type": "trail",
-      "url": "https://www.sambatrail.ru/shady-ravines"
     },
     {
       "id": 39,
