@@ -1,6 +1,66 @@
 {
-  "updated": "2026-07-11T16:02:12Z",
+  "updated": "2026-07-12T08:33:08Z",
   "events": [
+    {
+      "id": 39,
+      "date": "2026-07-11",
+      "name": "Полумарафон «Сергиевым путём»",
+      "city": "Сергиев Посад",
+      "region": "Московская область",
+      "distances": "5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/BZK_SPosad_26"
+    },
+    {
+      "id": 80,
+      "date": "2026-07-11",
+      "name": "Спортфест и рогейн Совкомбанк",
+      "city": "Галич",
+      "region": "Костромская область",
+      "distances": "трейл, рогейн",
+      "type": "trail",
+      "url": "https://galtropa.ru/sportfest"
+    },
+    {
+      "id": 171,
+      "date": "2026-07-11",
+      "name": "Нижнекамский полумарафон",
+      "city": "Нижнекамск",
+      "region": "Республика Татарстан",
+      "distances": "5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/NizhnekanskijPolumarafon2026"
+    },
+    {
+      "date": "2026-07-11",
+      "name": "Парный XCM Зелёный марафон 2026 11.07.2026 // Новосибирская о",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/zel-marafon-2026/",
+      "id": 274
+    },
+    {
+      "date": "2026-07-11",
+      "name": "Ночной трейл забег Жилино 2026 11.07.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/zhilino-2026/",
+      "id": 275
+    },
+    {
+      "date": "2026-07-11",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/zhilino-2026/",
+      "id": 276
+    },
     {
       "id": 82,
       "date": "2026-07-05",
@@ -1142,66 +1202,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 39,
-      "date": "2026-07-11",
-      "name": "Полумарафон «Сергиевым путём»",
-      "city": "Сергиев Посад",
-      "region": "Московская область",
-      "distances": "5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/BZK_SPosad_26"
-    },
-    {
-      "id": 80,
-      "date": "2026-07-11",
-      "name": "Спортфест и рогейн Совкомбанк",
-      "city": "Галич",
-      "region": "Костромская область",
-      "distances": "трейл, рогейн",
-      "type": "trail",
-      "url": "https://galtropa.ru/sportfest"
-    },
-    {
-      "id": 171,
-      "date": "2026-07-11",
-      "name": "Нижнекамский полумарафон",
-      "city": "Нижнекамск",
-      "region": "Республика Татарстан",
-      "distances": "5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/NizhnekanskijPolumarafon2026"
-    },
-    {
-      "date": "2026-07-11",
-      "name": "Парный XCM Зелёный марафон 2026 11.07.2026 // Новосибирская о",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/zel-marafon-2026/",
-      "id": 274
-    },
-    {
-      "date": "2026-07-11",
-      "name": "Ночной трейл забег Жилино 2026 11.07.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/zhilino-2026/",
-      "id": 275
-    },
-    {
-      "date": "2026-07-11",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/zhilino-2026/",
-      "id": 276
-    },
-    {
       "id": 40,
       "date": "2026-07-12",
       "name": "Трейл «Шигирский идол»",
@@ -1402,6 +1402,16 @@
       "id": 240
     },
     {
+      "date": "2026-07-30",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/xc-novosib-2026/",
+      "id": 283
+    },
+    {
       "id": 149,
       "date": "2026-08-01",
       "name": "37-й Сибирский международный марафон",
@@ -1420,6 +1430,16 @@
       "distances": "5 км, 10 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/StalnoiHaracterTobolsk2026"
+    },
+    {
+      "date": "2026-08-02",
+      "name": "VII этап Кубка Сибири по МТБ. Двухдневная велогонка XCC + XCO",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/xc-novosib-2026/",
+      "id": 282
     },
     {
       "id": 172,
@@ -2200,6 +2220,26 @@
       "type": "road",
       "url": "https://wildsiberia.ru",
       "id": 271
+    },
+    {
+      "date": "2027-07-11",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 280
+    },
+    {
+      "date": "2027-07-11",
+      "name": "Подробнее о дополнительных опциях к регистрации",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/girlseven",
+      "id": 281
     },
     {
       "date": "2027-09-05",
