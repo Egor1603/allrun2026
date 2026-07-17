@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-17T08:24:15Z",
+  "updated": "2026-07-17T16:23:01Z",
   "events": [
     {
       "id": 40,
@@ -1412,6 +1412,16 @@
       "id": 283
     },
     {
+      "date": "2026-07-31",
+      "name": "Бийский ночной забег 2026 31.07.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/night-run-biysk-2026/",
+      "id": 285
+    },
+    {
       "id": 149,
       "date": "2026-08-01",
       "name": "37-й Сибирский международный марафон",
@@ -1430,6 +1440,16 @@
       "distances": "5 км, 10 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/StalnoiHaracterTobolsk2026"
+    },
+    {
+      "date": "2026-08-01",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 284
     },
     {
       "date": "2026-08-02",
