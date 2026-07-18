@@ -1,6 +1,16 @@
 {
-  "updated": "2026-07-17T16:23:01Z",
+  "updated": "2026-07-18T08:07:35Z",
   "events": [
+    {
+      "id": 187,
+      "date": "2026-07-17",
+      "name": "Марафон «БЕГИ»",
+      "city": "Карталы",
+      "region": "Челябинская область",
+      "distances": "5 км, 10 км, 21,1 км, 42,2 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/MarafonBEGI2026"
+    },
     {
       "id": 40,
       "date": "2026-07-12",
@@ -1250,16 +1260,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 187,
-      "date": "2026-07-17",
-      "name": "Марафон «БЕГИ»",
-      "city": "Карталы",
-      "region": "Челябинская область",
-      "distances": "5 км, 10 км, 21,1 км, 42,2 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/MarafonBEGI2026"
     },
     {
       "id": 117,
