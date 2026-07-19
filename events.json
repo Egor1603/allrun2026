@@ -1,6 +1,46 @@
 {
-  "updated": "2026-07-18T16:05:43Z",
+  "updated": "2026-07-19T08:32:23Z",
   "events": [
+    {
+      "id": 117,
+      "date": "2026-07-18",
+      "name": "Карабашский полумарафон",
+      "city": "Карабаш",
+      "region": "Челябинская область",
+      "distances": "5 км, 12 км, 21 км",
+      "type": "road",
+      "url": "https://myrace.info/events/1510"
+    },
+    {
+      "id": 162,
+      "date": "2026-07-18",
+      "name": "Мышкинский полумарафон",
+      "city": "Мышкин",
+      "region": "Ярославская область",
+      "distances": "3 км, 5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://goldenringrun.ru/myshkin"
+    },
+    {
+      "id": 188,
+      "date": "2026-07-18",
+      "name": "Иглинский трейл Трёхречье",
+      "city": "Охлебинино",
+      "region": "Республика Башкортостан",
+      "distances": "5 км, 10 км, 21 км, 42 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/IglinskijTrejl2026"
+    },
+    {
+      "id": 189,
+      "date": "2026-07-18",
+      "name": "POMA RUN CUP 2026",
+      "city": "Суздаль",
+      "region": "Владимирская область",
+      "distances": "5 км, 10 км, 21,1 км, 42,2 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/POMARUNCUP2026"
+    },
     {
       "id": 187,
       "date": "2026-07-17",
@@ -1260,46 +1300,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 117,
-      "date": "2026-07-18",
-      "name": "Карабашский полумарафон",
-      "city": "Карабаш",
-      "region": "Челябинская область",
-      "distances": "5 км, 12 км, 21 км",
-      "type": "road",
-      "url": "https://myrace.info/events/1510"
-    },
-    {
-      "id": 162,
-      "date": "2026-07-18",
-      "name": "Мышкинский полумарафон",
-      "city": "Мышкин",
-      "region": "Ярославская область",
-      "distances": "3 км, 5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://goldenringrun.ru/myshkin"
-    },
-    {
-      "id": 188,
-      "date": "2026-07-18",
-      "name": "Иглинский трейл Трёхречье",
-      "city": "Охлебинино",
-      "region": "Республика Башкортостан",
-      "distances": "5 км, 10 км, 21 км, 42 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/IglinskijTrejl2026"
-    },
-    {
-      "id": 189,
-      "date": "2026-07-18",
-      "name": "POMA RUN CUP 2026",
-      "city": "Суздаль",
-      "region": "Владимирская область",
-      "distances": "5 км, 10 км, 21,1 км, 42,2 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/POMARUNCUP2026"
     },
     {
       "id": 190,

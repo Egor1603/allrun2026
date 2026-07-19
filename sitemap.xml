@@ -31,11 +31,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://allrunrus.ru/suzdal/</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://allrunrus.ru/ekaterinburg/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
