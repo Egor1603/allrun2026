@@ -1,6 +1,26 @@
 {
-  "updated": "2026-07-19T16:04:14Z",
+  "updated": "2026-07-20T09:33:49Z",
   "events": [
+    {
+      "id": 190,
+      "date": "2026-07-19",
+      "name": "Ночной трейл «Пять вершин» KAVKAZ.RUN 2026",
+      "city": "Лермонтов",
+      "region": "Ставропольский край",
+      "distances": "5 км, 10 км, 21 км",
+      "type": "night",
+      "url": "https://reg.russiarunning.com/event/KavkazRun2026"
+    },
+    {
+      "id": 191,
+      "date": "2026-07-19",
+      "name": "Волчья тропа",
+      "city": "Белово",
+      "region": "Ленинградская область",
+      "distances": "5 км, 10 км, 21 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/VolchyaTropa2026"
+    },
     {
       "id": 117,
       "date": "2026-07-18",
@@ -1300,26 +1320,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 190,
-      "date": "2026-07-19",
-      "name": "Ночной трейл «Пять вершин» KAVKAZ.RUN 2026",
-      "city": "Лермонтов",
-      "region": "Ставропольский край",
-      "distances": "5 км, 10 км, 21 км",
-      "type": "night",
-      "url": "https://reg.russiarunning.com/event/KavkazRun2026"
-    },
-    {
-      "id": 191,
-      "date": "2026-07-19",
-      "name": "Волчья тропа",
-      "city": "Белово",
-      "region": "Ленинградская область",
-      "distances": "5 км, 10 км, 21 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/VolchyaTropa2026"
     },
     {
       "id": 154,
