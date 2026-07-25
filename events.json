@@ -1,6 +1,26 @@
 {
-  "updated": "2026-07-24T16:50:31Z",
+  "updated": "2026-07-25T08:21:50Z",
   "events": [
+    {
+      "id": 154,
+      "date": "2026-07-24",
+      "name": "Golden Ring Ultra-Trail 100",
+      "city": "Суздаль",
+      "region": "Владимирская область",
+      "distances": "5 км, 10 км, 20 км, 30 км, 50 км, 80 км, 100 км, SE 30K, HN 10K, детский",
+      "type": "trail",
+      "url": "https://goldenultra.ru/grut/"
+    },
+    {
+      "id": 209,
+      "date": "2026-07-24",
+      "name": "Игры ЭкстримКрым",
+      "city": "Оленевка",
+      "region": "Республика Крым",
+      "distances": "трейл, кросс",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/EkstrimKrym2026"
+    },
     {
       "id": 190,
       "date": "2026-07-19",
@@ -1320,26 +1340,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 154,
-      "date": "2026-07-24",
-      "name": "Golden Ring Ultra-Trail 100",
-      "city": "Суздаль",
-      "region": "Владимирская область",
-      "distances": "5 км, 10 км, 20 км, 30 км, 50 км, 80 км, 100 км, SE 30K, HN 10K, детский",
-      "type": "trail",
-      "url": "https://goldenultra.ru/grut/"
-    },
-    {
-      "id": 209,
-      "date": "2026-07-24",
-      "name": "Игры ЭкстримКрым",
-      "city": "Оленевка",
-      "region": "Республика Крым",
-      "distances": "трейл, кросс",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/EkstrimKrym2026"
     },
     {
       "id": 77,
