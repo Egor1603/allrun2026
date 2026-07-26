@@ -1,6 +1,46 @@
 {
-  "updated": "2026-07-25T16:09:42Z",
+  "updated": "2026-07-26T08:40:49Z",
   "events": [
+    {
+      "id": 77,
+      "date": "2026-07-25",
+      "name": "GESH RUN FEST",
+      "city": "Шерегеш",
+      "region": "Кемеровская область",
+      "distances": "8, 15, 24, 35 км трейл; 10, 21,1 км шоссе",
+      "type": "trail",
+      "url": "https://taigatrail.run/geshtrail"
+    },
+    {
+      "id": 192,
+      "date": "2026-07-25",
+      "name": "Беги за сердцем",
+      "city": "Губаха",
+      "region": "Пермский край",
+      "distances": "3 км, 5 км, 10 км, 21 км, 42 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/BegiZaSerdcem2026"
+    },
+    {
+      "id": 193,
+      "date": "2026-07-25",
+      "name": "Батыр x Этноран Башкортостан 2026",
+      "city": "Жуково",
+      "region": "Республика Башкортостан",
+      "distances": "3 км, 5 км, 10 км, 21 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/BatyrEtnoranBashkortostan2026"
+    },
+    {
+      "id": 211,
+      "date": "2026-07-25",
+      "name": "Батыр Бэкъярд (гонка на выбывание) 2026",
+      "city": "Жуково",
+      "region": "Республика Башкортостан",
+      "distances": "6,7 км петля (до последнего)",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/BatyrBackyard2026"
+    },
     {
       "id": 154,
       "date": "2026-07-24",
@@ -1340,46 +1380,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 77,
-      "date": "2026-07-25",
-      "name": "GESH RUN FEST",
-      "city": "Шерегеш",
-      "region": "Кемеровская область",
-      "distances": "8, 15, 24, 35 км трейл; 10, 21,1 км шоссе",
-      "type": "trail",
-      "url": "https://taigatrail.run/geshtrail"
-    },
-    {
-      "id": 192,
-      "date": "2026-07-25",
-      "name": "Беги за сердцем",
-      "city": "Губаха",
-      "region": "Пермский край",
-      "distances": "3 км, 5 км, 10 км, 21 км, 42 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/BegiZaSerdcem2026"
-    },
-    {
-      "id": 193,
-      "date": "2026-07-25",
-      "name": "Батыр x Этноран Башкортостан 2026",
-      "city": "Жуково",
-      "region": "Республика Башкортостан",
-      "distances": "3 км, 5 км, 10 км, 21 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/BatyrEtnoranBashkortostan2026"
-    },
-    {
-      "id": 211,
-      "date": "2026-07-25",
-      "name": "Батыр Бэкъярд (гонка на выбывание) 2026",
-      "city": "Жуково",
-      "region": "Республика Башкортостан",
-      "distances": "6,7 км петля (до последнего)",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/BatyrBackyard2026"
     },
     {
       "id": 113,
