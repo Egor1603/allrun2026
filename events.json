@@ -1,6 +1,16 @@
 {
-  "updated": "2026-07-31T16:53:30Z",
+  "updated": "2026-08-01T08:36:16Z",
   "events": [
+    {
+      "date": "2026-07-31",
+      "name": "Бийский ночной забег 2026 31.07.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/night-run-biysk-2026/",
+      "id": 285
+    },
     {
       "date": "2026-07-30",
       "name": "Онлайн регистрация",
@@ -1410,16 +1420,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "date": "2026-07-31",
-      "name": "Бийский ночной забег 2026 31.07.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/night-run-biysk-2026/",
-      "id": 285
     },
     {
       "id": 149,
