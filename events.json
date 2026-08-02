@@ -1,6 +1,36 @@
 {
-  "updated": "2026-08-01T16:08:37Z",
+  "updated": "2026-08-02T08:36:12Z",
   "events": [
+    {
+      "id": 149,
+      "date": "2026-08-01",
+      "name": "37-й Сибирский международный марафон",
+      "city": "Омск",
+      "region": "Омская область",
+      "distances": "3 км, 10 км, 21,1 км, 42,2 км, детский",
+      "type": "road",
+      "url": "https://runsim.ru/events/sibirskii-mezdunarodnyi-marafon2026"
+    },
+    {
+      "id": 176,
+      "date": "2026-08-01",
+      "name": "Стальной характер Тобольск",
+      "city": "Тобольск",
+      "region": "Тюменская область",
+      "distances": "5 км, 10 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/StalnoiHaracterTobolsk2026"
+    },
+    {
+      "date": "2026-08-01",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 284
+    },
     {
       "date": "2026-07-31",
       "name": "Бийский ночной забег 2026 31.07.2026 // Алтайский край",
@@ -1422,36 +1452,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 149,
-      "date": "2026-08-01",
-      "name": "37-й Сибирский международный марафон",
-      "city": "Омск",
-      "region": "Омская область",
-      "distances": "3 км, 10 км, 21,1 км, 42,2 км, детский",
-      "type": "road",
-      "url": "https://runsim.ru/events/sibirskii-mezdunarodnyi-marafon2026"
-    },
-    {
-      "id": 176,
-      "date": "2026-08-01",
-      "name": "Стальной характер Тобольск",
-      "city": "Тобольск",
-      "region": "Тюменская область",
-      "distances": "5 км, 10 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/StalnoiHaracterTobolsk2026"
-    },
-    {
-      "date": "2026-08-01",
-      "name": "Старт Красноярск",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/",
-      "id": 284
-    },
-    {
       "date": "2026-08-02",
       "name": "VII этап Кубка Сибири по МТБ. Двухдневная велогонка XCC + XCO",
       "city": "Алтайский край",
@@ -1690,6 +1690,16 @@
       "distances": "5 км, 10 км, 20 км, 30 км",
       "type": "trail",
       "url": "https://reg.russiarunning.com/event/MishkinoTrejl2026"
+    },
+    {
+      "date": "2026-08-23",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 288
     },
     {
       "id": 107,
