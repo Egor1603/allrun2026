@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-04T17:00:03Z",
+  "updated": "2026-08-05T08:51:29Z",
   "events": [
     {
       "date": "2026-08-02",
@@ -1620,6 +1620,16 @@
       "distances": "1,5 км, 6,7 км, 10 км, 20 км",
       "type": "trail",
       "url": "https://reg.russiarunning.com/event/Ultra100Fest2026"
+    },
+    {
+      "date": "2026-08-16",
+      "name": "Соревнования по бегу Изумрудная миля 2026 (эстафета) 16.08.20",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/izumrudnaya-milya-2026/",
+      "id": 289
     },
     {
       "id": 73,
