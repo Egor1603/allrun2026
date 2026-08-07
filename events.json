@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-07T07:39:30Z",
+  "updated": "2026-08-07T16:02:40Z",
   "events": [
     {
       "date": "2026-08-02",
@@ -1630,6 +1630,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/izumrudnaya-milya-2026/",
       "id": 289
+    },
+    {
+      "date": "2026-08-16",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/izumrudnaya-milya-2026/",
+      "id": 290
     },
     {
       "id": 73,
