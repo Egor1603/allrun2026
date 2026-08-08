@@ -1,6 +1,16 @@
 {
-  "updated": "2026-08-07T16:02:40Z",
+  "updated": "2026-08-08T07:09:05Z",
   "events": [
+    {
+      "id": 172,
+      "date": "2026-08-07",
+      "name": "Alpindustria Elbrus Race",
+      "city": "Терскол",
+      "region": "Кабардино-Балкария",
+      "distances": "39 км, 55 км, 78 км, 92 км, 131 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/AlpindEltrace2026"
+    },
     {
       "date": "2026-08-02",
       "name": "VII этап Кубка Сибири по МТБ. Двухдневная велогонка XCC + XCO",
@@ -1460,16 +1470,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 172,
-      "date": "2026-08-07",
-      "name": "Alpindustria Elbrus Race",
-      "city": "Терскол",
-      "region": "Кабардино-Балкария",
-      "distances": "39 км, 55 км, 78 км, 92 км, 131 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/AlpindEltrace2026"
     },
     {
       "id": 72,
