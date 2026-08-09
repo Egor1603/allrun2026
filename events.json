@@ -1,6 +1,46 @@
 {
-  "updated": "2026-08-08T15:36:57Z",
+  "updated": "2026-08-09T07:10:11Z",
   "events": [
+    {
+      "id": 72,
+      "date": "2026-08-08",
+      "name": "Т-Банк Elbrus Wild Trail",
+      "city": "Эльбрус",
+      "region": "Кабардино-Балкария",
+      "distances": "от 5 до 130 км",
+      "type": "trail",
+      "url": "https://wildtrail.ru/ewt"
+    },
+    {
+      "id": 170,
+      "date": "2026-08-08",
+      "name": "Альметьевский полумарафон",
+      "city": "Альметьевск",
+      "region": "Республика Татарстан",
+      "distances": "5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/AlmetevskijPolumarafon2026"
+    },
+    {
+      "date": "2026-08-08",
+      "name": "Колывань трейл 2026 08.08.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/kolyvan-trail-2026/",
+      "id": 277
+    },
+    {
+      "date": "2026-08-08",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/kolyvan-trail-2026/",
+      "id": 278
+    },
     {
       "id": 172,
       "date": "2026-08-07",
@@ -1472,46 +1512,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 72,
-      "date": "2026-08-08",
-      "name": "Т-Банк Elbrus Wild Trail",
-      "city": "Эльбрус",
-      "region": "Кабардино-Балкария",
-      "distances": "от 5 до 130 км",
-      "type": "trail",
-      "url": "https://wildtrail.ru/ewt"
-    },
-    {
-      "id": 170,
-      "date": "2026-08-08",
-      "name": "Альметьевский полумарафон",
-      "city": "Альметьевск",
-      "region": "Республика Татарстан",
-      "distances": "5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/AlmetevskijPolumarafon2026"
-    },
-    {
-      "date": "2026-08-08",
-      "name": "Колывань трейл 2026 08.08.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/kolyvan-trail-2026/",
-      "id": 277
-    },
-    {
-      "date": "2026-08-08",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/kolyvan-trail-2026/",
-      "id": 278
-    },
-    {
       "id": 41,
       "date": "2026-08-09",
       "name": "XI Марафон «Европа-Азия»",
@@ -1720,6 +1720,16 @@
       "type": "road",
       "url": "https://krasmarafon.ru/",
       "id": 288
+    },
+    {
+      "date": "2026-08-23",
+      "name": "MTB фестиваль Шерегеш 2026 (enduro & downhill) 21.08-23.08.20",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/sheregesh-2026/",
+      "id": 291
     },
     {
       "id": 107,
