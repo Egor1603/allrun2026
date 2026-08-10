@@ -1,6 +1,46 @@
 {
-  "updated": "2026-08-09T15:40:21Z",
+  "updated": "2026-08-10T07:59:50Z",
   "events": [
+    {
+      "id": 41,
+      "date": "2026-08-09",
+      "name": "XI Марафон «Европа-Азия»",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "distances": "3 км, 10 км, 21,1 км, 42,2 км, эстафета, детский",
+      "type": "road",
+      "url": "https://ea-m.org/eamarathon2026"
+    },
+    {
+      "date": "2026-08-09",
+      "name": "СПБ полумарафон «Северная столица»",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "distances": "21,1 км, 10 км, эстафета",
+      "type": "road",
+      "url": "https://spbhalf.runc.run/",
+      "id": 66
+    },
+    {
+      "id": 169,
+      "date": "2026-08-09",
+      "name": "Амурский марафон «Бег к мечте»",
+      "city": "Благовещенск",
+      "region": "Амурская область",
+      "distances": "5 км, 10 км, 21,1 км, 42,2 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/AmurskijMarafon2026"
+    },
+    {
+      "date": "2026-08-09",
+      "name": "Велогонка для детей Ёлки-палки-race 2026 09.08.2026 // Алтайс",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/elki-palki-2026/",
+      "id": 287
+    },
     {
       "id": 72,
       "date": "2026-08-08",
@@ -1512,46 +1552,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 41,
-      "date": "2026-08-09",
-      "name": "XI Марафон «Европа-Азия»",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "3 км, 10 км, 21,1 км, 42,2 км, эстафета, детский",
-      "type": "road",
-      "url": "https://ea-m.org/eamarathon2026"
-    },
-    {
-      "date": "2026-08-09",
-      "name": "СПБ полумарафон «Северная столица»",
-      "city": "Санкт-Петербург",
-      "region": "Санкт-Петербург",
-      "distances": "21,1 км, 10 км, эстафета",
-      "type": "road",
-      "url": "https://spbhalf.runc.run/",
-      "id": 66
-    },
-    {
-      "id": 169,
-      "date": "2026-08-09",
-      "name": "Амурский марафон «Бег к мечте»",
-      "city": "Благовещенск",
-      "region": "Амурская область",
-      "distances": "5 км, 10 км, 21,1 км, 42,2 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/AmurskijMarafon2026"
-    },
-    {
-      "date": "2026-08-09",
-      "name": "Велогонка для детей Ёлки-палки-race 2026 09.08.2026 // Алтайс",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/elki-palki-2026/",
-      "id": 287
-    },
-    {
       "id": 194,
       "date": "2026-08-14",
       "name": "Тула Спорт Фест",
@@ -1820,6 +1820,16 @@
       "distances": "5 км, 10 км, 21,1 км",
       "type": "trail",
       "url": "https://reg.russiarunning.com/event/ForrestTrail2026"
+    },
+    {
+      "date": "2026-09-05",
+      "name": "Этноран.Республика Алтай 2026 05.09.2026 // Республика Алтай",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/etnorun-2026/",
+      "id": 292
     },
     {
       "id": 128,
