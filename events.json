@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-11T16:07:53Z",
+  "updated": "2026-08-12T07:46:05Z",
   "events": [
     {
       "id": 41,
@@ -1830,6 +1830,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/etnorun-2026/",
       "id": 292
+    },
+    {
+      "date": "2026-09-05",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/etnorun-2026/",
+      "id": 293
     },
     {
       "id": 128,
