@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-12T07:46:05Z",
+  "updated": "2026-08-12T16:04:28Z",
   "events": [
     {
       "id": 41,
@@ -1800,6 +1800,26 @@
       "distances": "5 км, 10 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/AlexandrinoSportmasterPROCrossFestdedicatedtoRussianFlagDay"
+    },
+    {
+      "date": "2026-08-30",
+      "name": "IX этап Кубка городов Сибири по кросс-кантри XCO Горно-Алтайс",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/elanda-2026/",
+      "id": 294
+    },
+    {
+      "date": "2026-08-30",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/elanda-2026/",
+      "id": 295
     },
     {
       "id": 74,
