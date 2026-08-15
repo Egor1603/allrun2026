@@ -1,6 +1,16 @@
 {
-  "updated": "2026-08-14T16:00:01Z",
+  "updated": "2026-08-15T06:52:42Z",
   "events": [
+    {
+      "id": 194,
+      "date": "2026-08-14",
+      "name": "Тула Спорт Фест",
+      "city": "Тула",
+      "region": "Тульская область",
+      "distances": "5 км, 10 км, 21 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/TulaSportFest2026"
+    },
     {
       "id": 41,
       "date": "2026-08-09",
@@ -1550,16 +1560,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 194,
-      "date": "2026-08-14",
-      "name": "Тула Спорт Фест",
-      "city": "Тула",
-      "region": "Тульская область",
-      "distances": "5 км, 10 км, 21 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/TulaSportFest2026"
     },
     {
       "id": 140,
