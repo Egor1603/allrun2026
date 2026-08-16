@@ -1,6 +1,26 @@
 {
-  "updated": "2026-08-15T15:29:50Z",
+  "updated": "2026-08-16T06:56:35Z",
   "events": [
+    {
+      "id": 140,
+      "date": "2026-08-15",
+      "name": "Бабай-трейл",
+      "city": "Кумертау",
+      "region": "Республика Башкортостан",
+      "distances": "4 км, 6 км, 12 км, 21 км",
+      "type": "trail",
+      "url": "https://myrace.info/events/1603"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "X Веломарафон Таёжная трасса 2026 (Тягун-Заринск) 15.08.2026",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/tyagun-2026/",
+      "id": 279
+    },
     {
       "id": 194,
       "date": "2026-08-14",
@@ -1560,26 +1580,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 140,
-      "date": "2026-08-15",
-      "name": "Бабай-трейл",
-      "city": "Кумертау",
-      "region": "Республика Башкортостан",
-      "distances": "4 км, 6 км, 12 км, 21 км",
-      "type": "trail",
-      "url": "https://myrace.info/events/1603"
-    },
-    {
-      "date": "2026-08-15",
-      "name": "X Веломарафон Таёжная трасса 2026 (Тягун-Заринск) 15.08.2026",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/tyagun-2026/",
-      "id": 279
     },
     {
       "id": 87,
