@@ -1,6 +1,66 @@
 {
-  "updated": "2026-08-16T15:30:29Z",
+  "updated": "2026-08-17T07:13:11Z",
   "events": [
+    {
+      "id": 87,
+      "date": "2026-08-16",
+      "name": "Белуха Чемпионский трейл (БЧТ)",
+      "city": "Горный Алтай",
+      "region": "Республика Алтай",
+      "distances": "ультра трейл",
+      "type": "trail",
+      "url": "https://altai-trail.ru/bkt/"
+    },
+    {
+      "id": 93,
+      "date": "2026-08-16",
+      "name": "City Trail #4 Лосиный остров",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5, 14, 24 км + вело",
+      "type": "trail",
+      "url": "https://city-trail.ru/4"
+    },
+    {
+      "id": 195,
+      "date": "2026-08-16",
+      "name": "Фестиваль бега «Аракай»",
+      "city": "Нижние Серги",
+      "region": "Свердловская область",
+      "distances": "3 км, 8 км, 15 км, 30 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/Arakai2026"
+    },
+    {
+      "id": 212,
+      "date": "2026-08-16",
+      "name": "Фестиваль «Ультра100» 2026",
+      "city": "Волжский",
+      "region": "Волгоградская область",
+      "distances": "1,5 км, 6,7 км, 10 км, 20 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/Ultra100Fest2026"
+    },
+    {
+      "date": "2026-08-16",
+      "name": "Соревнования по бегу Изумрудная миля 2026 (эстафета) 16.08.20",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/izumrudnaya-milya-2026/",
+      "id": 289
+    },
+    {
+      "date": "2026-08-16",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/izumrudnaya-milya-2026/",
+      "id": 290
+    },
     {
       "id": 140,
       "date": "2026-08-15",
@@ -1580,66 +1640,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 87,
-      "date": "2026-08-16",
-      "name": "Белуха Чемпионский трейл (БЧТ)",
-      "city": "Горный Алтай",
-      "region": "Республика Алтай",
-      "distances": "ультра трейл",
-      "type": "trail",
-      "url": "https://altai-trail.ru/bkt/"
-    },
-    {
-      "id": 93,
-      "date": "2026-08-16",
-      "name": "City Trail #4 Лосиный остров",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "5, 14, 24 км + вело",
-      "type": "trail",
-      "url": "https://city-trail.ru/4"
-    },
-    {
-      "id": 195,
-      "date": "2026-08-16",
-      "name": "Фестиваль бега «Аракай»",
-      "city": "Нижние Серги",
-      "region": "Свердловская область",
-      "distances": "3 км, 8 км, 15 км, 30 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/Arakai2026"
-    },
-    {
-      "id": 212,
-      "date": "2026-08-16",
-      "name": "Фестиваль «Ультра100» 2026",
-      "city": "Волжский",
-      "region": "Волгоградская область",
-      "distances": "1,5 км, 6,7 км, 10 км, 20 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/Ultra100Fest2026"
-    },
-    {
-      "date": "2026-08-16",
-      "name": "Соревнования по бегу Изумрудная миля 2026 (эстафета) 16.08.20",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/izumrudnaya-milya-2026/",
-      "id": 289
-    },
-    {
-      "date": "2026-08-16",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/izumrudnaya-milya-2026/",
-      "id": 290
     },
     {
       "id": 73,
