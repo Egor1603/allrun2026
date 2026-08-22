@@ -1,6 +1,16 @@
 {
-  "updated": "2026-08-21T15:40:11Z",
+  "updated": "2026-08-22T06:54:47Z",
   "events": [
+    {
+      "id": 73,
+      "date": "2026-08-21",
+      "name": "Т-Банк MMK Wild Fest",
+      "city": "Абзаково",
+      "region": "Республика Башкортостан",
+      "distances": "от 11 до 95 км",
+      "type": "trail",
+      "url": "https://wildtrail.ru/mmk"
+    },
     {
       "id": 87,
       "date": "2026-08-16",
@@ -1640,16 +1650,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 73,
-      "date": "2026-08-21",
-      "name": "Т-Банк MMK Wild Fest",
-      "city": "Абзаково",
-      "region": "Республика Башкортостан",
-      "distances": "от 11 до 95 км",
-      "type": "trail",
-      "url": "https://wildtrail.ru/mmk"
     },
     {
       "date": "2026-08-22",
