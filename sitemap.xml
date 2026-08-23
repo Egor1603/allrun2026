@@ -6,12 +6,12 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://allrunrus.ru/moskva/</loc>
+    <loc>https://allrunrus.ru/krasnoyarsk/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://allrunrus.ru/krasnoyarsk/</loc>
+    <loc>https://allrunrus.ru/moskva/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -21,12 +21,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://allrunrus.ru/sankt-peterburg/</loc>
+    <loc>https://allrunrus.ru/altajskij-kraj/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://allrunrus.ru/altajskij-kraj/</loc>
+    <loc>https://allrunrus.ru/sankt-peterburg/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>

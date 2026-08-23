@@ -1,6 +1,56 @@
 {
-  "updated": "2026-08-22T15:28:01Z",
+  "updated": "2026-08-23T06:55:47Z",
   "events": [
+    {
+      "date": "2026-08-22",
+      "name": "Большой фестиваль бега",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5 км, 10 км",
+      "type": "road",
+      "url": "https://runfest.runc.run/",
+      "id": 67
+    },
+    {
+      "id": 111,
+      "date": "2026-08-22",
+      "name": "Ночной забег PushkinRun",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "distances": "5 км, 10 км",
+      "type": "night",
+      "url": "https://reg.russiarunning.com/event/Nochnoyzabeg2026"
+    },
+    {
+      "id": 145,
+      "date": "2026-08-22",
+      "name": "Норильск. Горный старт",
+      "city": "Норильск",
+      "region": "Красноярский край",
+      "distances": "5 км, 15 км, 30 км, 50 км, 70 км, детский",
+      "type": "trail",
+      "url": "https://norilsktrail.ru"
+    },
+    {
+      "id": 156,
+      "date": "2026-08-22",
+      "name": "Хребет Кодара — Пески Чара (Life Journey Race)",
+      "city": "Чара",
+      "region": "Забайкальский край",
+      "distances": "трейл-экспедиция, ультра",
+      "type": "trail",
+      "url": "https://goldenultra.ru/krcs/"
+    },
+    {
+      "id": 196,
+      "date": "2026-08-22",
+      "name": "NORD ROCK 2026",
+      "city": "Кировск",
+      "region": "Мурманская область",
+      "distances": "7 км, 15 км, 32 км, 54 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/NordRock2026"
+    },
     {
       "id": 73,
       "date": "2026-08-21",
@@ -1652,56 +1702,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "date": "2026-08-22",
-      "name": "Большой фестиваль бега",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "5 км, 10 км",
-      "type": "road",
-      "url": "https://runfest.runc.run/",
-      "id": 67
-    },
-    {
-      "id": 111,
-      "date": "2026-08-22",
-      "name": "Ночной забег PushkinRun",
-      "city": "Санкт-Петербург",
-      "region": "Санкт-Петербург",
-      "distances": "5 км, 10 км",
-      "type": "night",
-      "url": "https://reg.russiarunning.com/event/Nochnoyzabeg2026"
-    },
-    {
-      "id": 145,
-      "date": "2026-08-22",
-      "name": "Норильск. Горный старт",
-      "city": "Норильск",
-      "region": "Красноярский край",
-      "distances": "5 км, 15 км, 30 км, 50 км, 70 км, детский",
-      "type": "trail",
-      "url": "https://norilsktrail.ru"
-    },
-    {
-      "id": 156,
-      "date": "2026-08-22",
-      "name": "Хребет Кодара — Пески Чара (Life Journey Race)",
-      "city": "Чара",
-      "region": "Забайкальский край",
-      "distances": "трейл-экспедиция, ультра",
-      "type": "trail",
-      "url": "https://goldenultra.ru/krcs/"
-    },
-    {
-      "id": 196,
-      "date": "2026-08-22",
-      "name": "NORD ROCK 2026",
-      "city": "Кировск",
-      "region": "Мурманская область",
-      "distances": "7 км, 15 км, 32 км, 54 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/NordRock2026"
-    },
-    {
       "id": 197,
       "date": "2026-08-23",
       "name": "Мишкино Трейл",
@@ -1730,6 +1730,26 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/sheregesh-2026/",
       "id": 291
+    },
+    {
+      "date": "2026-08-23",
+      "name": "Большой фестиваль бега",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5 км, 10 км",
+      "type": "road",
+      "url": "https://runfest.runc.run/",
+      "id": 296
+    },
+    {
+      "date": "2026-08-23",
+      "name": "Хребет Кодара — Пески Чара (Life Journey Race)",
+      "city": "Чара",
+      "region": "Забайкальский край",
+      "distances": "трейл-экспедиция",
+      "type": "trail",
+      "url": "https://goldenultra.ru/krcs/",
+      "id": 297
     },
     {
       "id": 107,
