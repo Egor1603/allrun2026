@@ -1,6 +1,56 @@
 {
-  "updated": "2026-08-23T15:29:54Z",
+  "updated": "2026-08-24T07:14:48Z",
   "events": [
+    {
+      "id": 197,
+      "date": "2026-08-23",
+      "name": "Мишкино Трейл",
+      "city": "Мишкино",
+      "region": "Ленинградская область",
+      "distances": "5 км, 10 км, 20 км, 30 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/MishkinoTrejl2026"
+    },
+    {
+      "date": "2026-08-23",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 288
+    },
+    {
+      "date": "2026-08-23",
+      "name": "MTB фестиваль Шерегеш 2026 (enduro & downhill) 21.08-23.08.20",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/sheregesh-2026/",
+      "id": 291
+    },
+    {
+      "date": "2026-08-23",
+      "name": "Большой фестиваль бега",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5 км, 10 км",
+      "type": "road",
+      "url": "https://runfest.runc.run/",
+      "id": 296
+    },
+    {
+      "date": "2026-08-23",
+      "name": "Хребет Кодара — Пески Чара (Life Journey Race)",
+      "city": "Чара",
+      "region": "Забайкальский край",
+      "distances": "трейл-экспедиция",
+      "type": "trail",
+      "url": "https://goldenultra.ru/krcs/",
+      "id": 297
+    },
     {
       "date": "2026-08-22",
       "name": "Большой фестиваль бега",
@@ -1702,56 +1752,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 197,
-      "date": "2026-08-23",
-      "name": "Мишкино Трейл",
-      "city": "Мишкино",
-      "region": "Ленинградская область",
-      "distances": "5 км, 10 км, 20 км, 30 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/MishkinoTrejl2026"
-    },
-    {
-      "date": "2026-08-23",
-      "name": "Старт Красноярск",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/",
-      "id": 288
-    },
-    {
-      "date": "2026-08-23",
-      "name": "MTB фестиваль Шерегеш 2026 (enduro & downhill) 21.08-23.08.20",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/sheregesh-2026/",
-      "id": 291
-    },
-    {
-      "date": "2026-08-23",
-      "name": "Большой фестиваль бега",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "5 км, 10 км",
-      "type": "road",
-      "url": "https://runfest.runc.run/",
-      "id": 296
-    },
-    {
-      "date": "2026-08-23",
-      "name": "Хребет Кодара — Пески Чара (Life Journey Race)",
-      "city": "Чара",
-      "region": "Забайкальский край",
-      "distances": "трейл-экспедиция",
-      "type": "trail",
-      "url": "https://goldenultra.ru/krcs/",
-      "id": 297
-    },
-    {
       "id": 107,
       "date": "2026-08-28",
       "name": "Калужский космический марафон",
@@ -1880,6 +1880,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/etnorun-2026/",
       "id": 293
+    },
+    {
+      "date": "2026-09-05",
+      "name": "Tamara Autumn Race 2026 05.09.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/tamara-autumn-2026/",
+      "id": 299
     },
     {
       "id": 128,
