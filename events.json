@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-26T16:24:14Z",
+  "updated": "2026-08-27T17:36:16Z",
   "events": [
     {
       "id": 197,
@@ -2390,6 +2390,16 @@
       "type": "trail",
       "url": "https://goldenultra.ru/grut/",
       "id": 286
+    },
+    {
+      "date": "2027-08-21",
+      "name": "Норильск. Горный старт",
+      "city": "Норильск",
+      "region": "Красноярский край",
+      "distances": "5 км, 15 км, 30 км, 50 км, 70 км, детский",
+      "type": "trail",
+      "url": "https://norilsktrail.ru",
+      "id": 300
     },
     {
       "date": "2027-08-29",
