@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-28T00:21:07Z",
+  "updated": "2026-08-28T18:33:55Z",
   "events": [
     {
       "id": 197,
@@ -2060,6 +2060,16 @@
       "distances": "5 км, 10 км, 21 км, 30 км",
       "type": "trail",
       "url": "https://бег40.рф/events/160"
+    },
+    {
+      "date": "2026-09-26",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 301
     },
     {
       "id": 83,
