@@ -1,6 +1,36 @@
 {
-  "updated": "2026-08-29T18:16:50Z",
+  "updated": "2026-08-30T11:47:43Z",
   "events": [
+    {
+      "id": 122,
+      "date": "2026-08-29",
+      "name": "Лахти трейл",
+      "city": "Кандалакша",
+      "region": "Мурманская область",
+      "distances": "10 км, 25 км, 35 км, 55 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/lahtitrail2026"
+    },
+    {
+      "id": 198,
+      "date": "2026-08-29",
+      "name": "Лето. Ферма. Трейл. 2026",
+      "city": "Клейменово",
+      "region": "Московская область",
+      "distances": "5 км, 10 км, 15 км, 20 км, 30 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/LetoFermaTrejl2026"
+    },
+    {
+      "id": 199,
+      "date": "2026-08-29",
+      "name": "Космо Трейл 2026",
+      "city": "Бахчисарай",
+      "region": "Республика Крым",
+      "distances": "5 км, 10 км, 25 км, 50 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/KosmoTrejl2026"
+    },
     {
       "id": 107,
       "date": "2026-08-28",
@@ -1780,36 +1810,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 122,
-      "date": "2026-08-29",
-      "name": "Лахти трейл",
-      "city": "Кандалакша",
-      "region": "Мурманская область",
-      "distances": "10 км, 25 км, 35 км, 55 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/lahtitrail2026"
-    },
-    {
-      "id": 198,
-      "date": "2026-08-29",
-      "name": "Лето. Ферма. Трейл. 2026",
-      "city": "Клейменово",
-      "region": "Московская область",
-      "distances": "5 км, 10 км, 15 км, 20 км, 30 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/LetoFermaTrejl2026"
-    },
-    {
-      "id": 199,
-      "date": "2026-08-29",
-      "name": "Космо Трейл 2026",
-      "city": "Бахчисарай",
-      "region": "Республика Крым",
-      "distances": "5 км, 10 км, 25 км, 50 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/KosmoTrejl2026"
     },
     {
       "id": 114,
