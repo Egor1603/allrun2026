@@ -1,6 +1,36 @@
 {
-  "updated": "2026-08-30T18:33:32Z",
+  "updated": "2026-08-31T13:27:56Z",
   "events": [
+    {
+      "id": 114,
+      "date": "2026-08-30",
+      "name": "КроссФест Александрино Спортмастер Про",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "distances": "5 км, 10 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/AlexandrinoSportmasterPROCrossFestdedicatedtoRussianFlagDay"
+    },
+    {
+      "date": "2026-08-30",
+      "name": "IX этап Кубка городов Сибири по кросс-кантри XCO Горно-Алтайс",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/elanda-2026/",
+      "id": 294
+    },
+    {
+      "date": "2026-08-30",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/elanda-2026/",
+      "id": 295
+    },
     {
       "id": 122,
       "date": "2026-08-29",
@@ -1812,36 +1842,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 114,
-      "date": "2026-08-30",
-      "name": "КроссФест Александрино Спортмастер Про",
-      "city": "Санкт-Петербург",
-      "region": "Санкт-Петербург",
-      "distances": "5 км, 10 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/AlexandrinoSportmasterPROCrossFestdedicatedtoRussianFlagDay"
-    },
-    {
-      "date": "2026-08-30",
-      "name": "IX этап Кубка городов Сибири по кросс-кантри XCO Горно-Алтайс",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/elanda-2026/",
-      "id": 294
-    },
-    {
-      "date": "2026-08-30",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/elanda-2026/",
-      "id": 295
-    },
-    {
       "id": 74,
       "date": "2026-09-04",
       "name": "Т-Банк Rosa Wild Fest",
@@ -1920,6 +1920,16 @@
       "distances": "30 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/PushkinSPb2026"
+    },
+    {
+      "date": "2026-09-06",
+      "name": "Заезд на лыжероллерах 2026 06.09.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/skiroller-2026/",
+      "id": 302
     },
     {
       "id": 141,
