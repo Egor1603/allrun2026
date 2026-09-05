@@ -1,6 +1,16 @@
 {
-  "updated": "2026-09-04T18:15:42Z",
+  "updated": "2026-09-05T10:27:56Z",
   "events": [
+    {
+      "id": 74,
+      "date": "2026-09-04",
+      "name": "Т-Банк Rosa Wild Fest",
+      "city": "Красная Поляна",
+      "region": "Краснодарский край",
+      "distances": "от 10 до 180 км",
+      "type": "trail",
+      "url": "https://wildtrail.ru/rwt"
+    },
     {
       "id": 114,
       "date": "2026-08-30",
@@ -1840,16 +1850,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 74,
-      "date": "2026-09-04",
-      "name": "Т-Банк Rosa Wild Fest",
-      "city": "Красная Поляна",
-      "region": "Краснодарский край",
-      "distances": "от 10 до 180 км",
-      "type": "trail",
-      "url": "https://wildtrail.ru/rwt"
     },
     {
       "id": 174,
