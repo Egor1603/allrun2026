@@ -1,6 +1,46 @@
 {
-  "updated": "2026-09-05T17:16:24Z",
+  "updated": "2026-09-06T10:48:01Z",
   "events": [
+    {
+      "id": 174,
+      "date": "2026-09-05",
+      "name": "Фестиваль спорта «Бег не за горами» FORREST TRAIL",
+      "city": "Самара",
+      "region": "Самарская область",
+      "distances": "5 км, 10 км, 21,1 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/ForrestTrail2026"
+    },
+    {
+      "date": "2026-09-05",
+      "name": "Этноран.Республика Алтай 2026 05.09.2026 // Республика Алтай",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/etnorun-2026/",
+      "id": 292
+    },
+    {
+      "date": "2026-09-05",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/etnorun-2026/",
+      "id": 293
+    },
+    {
+      "date": "2026-09-05",
+      "name": "Tamara Autumn Race 2026 05.09.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/tamara-autumn-2026/",
+      "id": 299
+    },
     {
       "id": 74,
       "date": "2026-09-04",
@@ -1852,46 +1892,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 174,
-      "date": "2026-09-05",
-      "name": "Фестиваль спорта «Бег не за горами» FORREST TRAIL",
-      "city": "Самара",
-      "region": "Самарская область",
-      "distances": "5 км, 10 км, 21,1 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/ForrestTrail2026"
-    },
-    {
-      "date": "2026-09-05",
-      "name": "Этноран.Республика Алтай 2026 05.09.2026 // Республика Алтай",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/etnorun-2026/",
-      "id": 292
-    },
-    {
-      "date": "2026-09-05",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/etnorun-2026/",
-      "id": 293
-    },
-    {
-      "date": "2026-09-05",
-      "name": "Tamara Autumn Race 2026 05.09.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/tamara-autumn-2026/",
-      "id": 299
-    },
-    {
       "id": 128,
       "date": "2026-09-06",
       "name": "Oka River Trail",
@@ -1930,6 +1930,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/skiroller-2026/",
       "id": 302
+    },
+    {
+      "date": "2026-09-06",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/skiroller-2026/",
+      "id": 304
     },
     {
       "id": 141,
@@ -2042,6 +2052,16 @@
       "id": 303
     },
     {
+      "date": "2026-09-19",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/pulse-2026/",
+      "id": 305
+    },
+    {
       "id": 94,
       "date": "2026-09-20",
       "name": "City Trail #5 Парк Измайлово",
@@ -2130,6 +2150,16 @@
       "distances": "5 км, 10 км, 21 км, 42 км",
       "type": "trail",
       "url": "https://reg.russiarunning.com/event/BordinoTrail2026"
+    },
+    {
+      "date": "2026-09-27",
+      "name": "Спортивный фестиваль Belka Tour - Царь Горы 2026 26.09-27.09.",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/mountain-king-2026/",
+      "id": 306
     },
     {
       "id": 155,
