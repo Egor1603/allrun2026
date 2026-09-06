@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-06T10:48:01Z",
+  "updated": "2026-09-06T17:37:01Z",
   "events": [
     {
       "id": 174,
@@ -2160,6 +2160,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/mountain-king-2026/",
       "id": 306
+    },
+    {
+      "date": "2026-09-27",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/mountain-king-2026/",
+      "id": 307
     },
     {
       "id": 155,
