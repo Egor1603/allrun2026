@@ -1,6 +1,56 @@
 {
-  "updated": "2026-09-06T17:37:01Z",
+  "updated": "2026-09-07T12:16:45Z",
   "events": [
+    {
+      "id": 128,
+      "date": "2026-09-06",
+      "name": "Oka River Trail",
+      "city": "Выползово",
+      "region": "Рязанская область",
+      "distances": "5 км, 10 км, 30 км, 50 км",
+      "type": "trail",
+      "url": "https://okarivertrail.ru"
+    },
+    {
+      "id": 139,
+      "date": "2026-09-06",
+      "name": "«Каштак Trail – Осень»",
+      "city": "Челябинск",
+      "region": "Челябинская область",
+      "distances": "3 км, 10 км, 21 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/KAShTAKTRAILOSEN2025"
+    },
+    {
+      "id": 168,
+      "date": "2026-09-06",
+      "name": "Пробег Пушкин — Санкт-Петербург",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "distances": "30 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/PushkinSPb2026"
+    },
+    {
+      "date": "2026-09-06",
+      "name": "Заезд на лыжероллерах 2026 06.09.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/skiroller-2026/",
+      "id": 302
+    },
+    {
+      "date": "2026-09-06",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/skiroller-2026/",
+      "id": 304
+    },
     {
       "id": 174,
       "date": "2026-09-05",
@@ -1892,56 +1942,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 128,
-      "date": "2026-09-06",
-      "name": "Oka River Trail",
-      "city": "Выползово",
-      "region": "Рязанская область",
-      "distances": "5 км, 10 км, 30 км, 50 км",
-      "type": "trail",
-      "url": "https://okarivertrail.ru"
-    },
-    {
-      "id": 139,
-      "date": "2026-09-06",
-      "name": "«Каштак Trail – Осень»",
-      "city": "Челябинск",
-      "region": "Челябинская область",
-      "distances": "3 км, 10 км, 21 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/KAShTAKTRAILOSEN2025"
-    },
-    {
-      "id": 168,
-      "date": "2026-09-06",
-      "name": "Пробег Пушкин — Санкт-Петербург",
-      "city": "Санкт-Петербург",
-      "region": "Санкт-Петербург",
-      "distances": "30 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/PushkinSPb2026"
-    },
-    {
-      "date": "2026-09-06",
-      "name": "Заезд на лыжероллерах 2026 06.09.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/skiroller-2026/",
-      "id": 302
-    },
-    {
-      "date": "2026-09-06",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/skiroller-2026/",
-      "id": 304
-    },
-    {
       "id": 141,
       "date": "2026-09-10",
       "name": "Trail-1 «Тепло Земли»",
@@ -2062,6 +2062,16 @@
       "id": 305
     },
     {
+      "date": "2026-09-19",
+      "name": "X Юбилейный Марафон в дисциплине маунтинбайк-кросс-кантри (ХС",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/pulse-2026/",
+      "id": 308
+    },
+    {
       "id": 94,
       "date": "2026-09-20",
       "name": "City Trail #5 Парк Измайлово",
@@ -2110,6 +2120,16 @@
       "type": "road",
       "url": "https://krasmarafon.ru/",
       "id": 301
+    },
+    {
+      "date": "2026-09-26",
+      "name": "Алтайский полумарафон 2026 26.09.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/altai-polumarafon-2026/",
+      "id": 309
     },
     {
       "id": 83,
