@@ -1,6 +1,26 @@
 {
-  "updated": "2026-09-12T17:45:53Z",
+  "updated": "2026-09-13T11:39:26Z",
   "events": [
+    {
+      "id": 42,
+      "date": "2026-09-12",
+      "name": "Ночной забег Laser Night Run",
+      "city": "Екатеринбург",
+      "region": "Свердловская область",
+      "distances": "3 км, 10 км, детский",
+      "type": "night",
+      "url": "https://ea-m.org/lasernightrun-2026"
+    },
+    {
+      "id": 143,
+      "date": "2026-09-12",
+      "name": "Trail-1 «Другая планета»",
+      "city": "Петропавловск-Камчатский",
+      "region": "Камчатский край",
+      "distances": "17 км (↑2000 м), вулкан Авачинский",
+      "type": "trail",
+      "url": "https://trail1.ru/anotherplanet"
+    },
     {
       "id": 142,
       "date": "2026-09-11",
@@ -1970,26 +1990,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 42,
-      "date": "2026-09-12",
-      "name": "Ночной забег Laser Night Run",
-      "city": "Екатеринбург",
-      "region": "Свердловская область",
-      "distances": "3 км, 10 км, детский",
-      "type": "night",
-      "url": "https://ea-m.org/lasernightrun-2026"
-    },
-    {
-      "id": 143,
-      "date": "2026-09-12",
-      "name": "Trail-1 «Другая планета»",
-      "city": "Петропавловск-Камчатский",
-      "region": "Камчатский край",
-      "distances": "17 км (↑2000 м), вулкан Авачинский",
-      "type": "trail",
-      "url": "https://trail1.ru/anotherplanet"
     },
     {
       "id": 144,
