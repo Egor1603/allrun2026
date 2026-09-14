@@ -21,11 +21,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://allrunrus.ru/ural/</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://allrunrus.ru/sibir/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -37,16 +32,6 @@
   </url>
   <url>
     <loc>https://allrunrus.ru/altaj/</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://allrunrus.ru/dalvostok/</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://allrunrus.ru/povolzhe/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>

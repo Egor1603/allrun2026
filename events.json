@@ -1,6 +1,56 @@
 {
-  "updated": "2026-09-13T18:02:36Z",
+  "updated": "2026-09-14T12:32:28Z",
   "events": [
+    {
+      "id": 144,
+      "date": "2026-09-13",
+      "name": "Trail-1 «Океанская песня»",
+      "city": "Петропавловск-Камчатский",
+      "region": "Камчатский край",
+      "distances": "32 км (↑900 м), берег Тихого океана",
+      "type": "trail",
+      "url": "https://trail1.ru/oceansong"
+    },
+    {
+      "id": 166,
+      "date": "2026-09-13",
+      "name": "Самарский международный марафон",
+      "city": "Самара",
+      "region": "Самарская область",
+      "distances": "5 км, 10 км, 21,1 км, 42,2 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/SamarskijMezhdunarodnyjMarafon2026"
+    },
+    {
+      "id": 200,
+      "date": "2026-09-13",
+      "name": "Исеть Ультра Трейл",
+      "city": "Каменск-Уральский",
+      "region": "Свердловская область",
+      "distances": "15 км, 30 км, 50 км, 80 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/IsetUltraTrail2026"
+    },
+    {
+      "id": 201,
+      "date": "2026-09-13",
+      "name": "Тыринская линия",
+      "city": "Кирсино",
+      "region": "Ленинградская область",
+      "distances": "5 км, 10 км, 21 км, 42 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/TyrinskayaLiniya2026"
+    },
+    {
+      "date": "2026-09-13",
+      "name": "Камчатка Trail-1",
+      "city": "Петропавловск-Камчатский",
+      "region": "Камчатский край",
+      "distances": "",
+      "type": "trail",
+      "url": "https://trail1.ru",
+      "id": 239
+    },
     {
       "id": 42,
       "date": "2026-09-12",
@@ -1990,56 +2040,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 144,
-      "date": "2026-09-13",
-      "name": "Trail-1 «Океанская песня»",
-      "city": "Петропавловск-Камчатский",
-      "region": "Камчатский край",
-      "distances": "32 км (↑900 м), берег Тихого океана",
-      "type": "trail",
-      "url": "https://trail1.ru/oceansong"
-    },
-    {
-      "id": 166,
-      "date": "2026-09-13",
-      "name": "Самарский международный марафон",
-      "city": "Самара",
-      "region": "Самарская область",
-      "distances": "5 км, 10 км, 21,1 км, 42,2 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/SamarskijMezhdunarodnyjMarafon2026"
-    },
-    {
-      "id": 200,
-      "date": "2026-09-13",
-      "name": "Исеть Ультра Трейл",
-      "city": "Каменск-Уральский",
-      "region": "Свердловская область",
-      "distances": "15 км, 30 км, 50 км, 80 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/IsetUltraTrail2026"
-    },
-    {
-      "id": 201,
-      "date": "2026-09-13",
-      "name": "Тыринская линия",
-      "city": "Кирсино",
-      "region": "Ленинградская область",
-      "distances": "5 км, 10 км, 21 км, 42 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/TyrinskayaLiniya2026"
-    },
-    {
-      "date": "2026-09-13",
-      "name": "Камчатка Trail-1",
-      "city": "Петропавловск-Камчатский",
-      "region": "Камчатский край",
-      "distances": "",
-      "type": "trail",
-      "url": "https://trail1.ru",
-      "id": 239
     },
     {
       "date": "2026-09-19",
