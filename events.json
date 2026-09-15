@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-15T11:35:39Z",
+  "updated": "2026-09-15T18:50:47Z",
   "events": [
     {
       "id": 144,
@@ -2130,6 +2130,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/altai-polumarafon-2026/",
       "id": 309
+    },
+    {
+      "date": "2026-09-26",
+      "name": "Всероссийский день бега Кросс Нации 2026 (Бийск) 26.09.2026 /",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/kross-natsii-2026/",
+      "id": 311
     },
     {
       "id": 83,
