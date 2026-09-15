@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-14T19:49:33Z",
+  "updated": "2026-09-15T11:35:39Z",
   "events": [
     {
       "id": 144,
@@ -2510,6 +2510,16 @@
       "type": "trail",
       "url": "https://goldenultra.ru/vmr/",
       "id": 245
+    },
+    {
+      "date": "2027-10-03",
+      "name": "Белая Невеста Геленджик (White Bride Ultra)",
+      "city": "Геленджик",
+      "region": "Краснодарский край",
+      "distances": "4,2 км, 15 км, 30 км, 50 км, 70 км, 120 км",
+      "type": "trail",
+      "url": "https://goldenultra.ru/wbu/",
+      "id": 310
     },
     {
       "date": "2028-05-28",
