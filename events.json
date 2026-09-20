@@ -1,6 +1,36 @@
 {
-  "updated": "2026-09-19T17:54:45Z",
+  "updated": "2026-09-20T11:10:36Z",
   "events": [
+    {
+      "date": "2026-09-19",
+      "name": "Тренировочный этап кубка Сибири в дисциплине маунтинбайк-крос",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/pulse-2026/",
+      "id": 303
+    },
+    {
+      "date": "2026-09-19",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/pulse-2026/",
+      "id": 305
+    },
+    {
+      "date": "2026-09-19",
+      "name": "X Юбилейный Марафон в дисциплине маунтинбайк-кросс-кантри (ХС",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/pulse-2026/",
+      "id": 308
+    },
     {
       "id": 144,
       "date": "2026-09-13",
@@ -2040,36 +2070,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "date": "2026-09-19",
-      "name": "Тренировочный этап кубка Сибири в дисциплине маунтинбайк-крос",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/pulse-2026/",
-      "id": 303
-    },
-    {
-      "date": "2026-09-19",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/pulse-2026/",
-      "id": 305
-    },
-    {
-      "date": "2026-09-19",
-      "name": "X Юбилейный Марафон в дисциплине маунтинбайк-кросс-кантри (ХС",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/pulse-2026/",
-      "id": 308
     },
     {
       "id": 94,
