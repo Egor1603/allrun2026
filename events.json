@@ -1,6 +1,16 @@
 {
-  "updated": "2026-09-20T18:10:31Z",
+  "updated": "2026-09-21T12:38:55Z",
   "events": [
+    {
+      "id": 94,
+      "date": "2026-09-20",
+      "name": "City Trail #5 Парк Измайлово",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5, 12, 25 км + вело",
+      "type": "trail",
+      "url": "https://city-trail.ru/5"
+    },
     {
       "date": "2026-09-19",
       "name": "Тренировочный этап кубка Сибири в дисциплине маунтинбайк-крос",
@@ -2070,16 +2080,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 94,
-      "date": "2026-09-20",
-      "name": "City Trail #5 Парк Измайлово",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "5, 12, 25 км + вело",
-      "type": "trail",
-      "url": "https://city-trail.ru/5"
     },
     {
       "id": 202,
