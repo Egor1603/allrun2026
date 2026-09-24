@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-23T19:00:17Z",
+  "updated": "2026-09-24T11:37:59Z",
   "events": [
     {
       "id": 94,
@@ -2260,6 +2260,16 @@
       "distances": "5 км, 10 км, 21 км, 42 км",
       "type": "trail",
       "url": "https://reg.russiarunning.com/event/YablochnyTrejl2026"
+    },
+    {
+      "date": "2026-10-22",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 312
     },
     {
       "id": 95,
