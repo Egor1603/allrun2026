@@ -41,6 +41,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://allrunrus.ru/dalvostok/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://allrunrus.ru/centr/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>

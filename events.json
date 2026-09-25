@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-25T11:42:46Z",
+  "updated": "2026-09-25T19:16:08Z",
   "events": [
     {
       "id": 94,
@@ -2262,6 +2262,16 @@
       "id": 313
     },
     {
+      "date": "2026-10-04",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/osen-s-begom-2026/",
+      "id": 314
+    },
+    {
       "id": 205,
       "date": "2026-10-10",
       "name": "Яблочный Трейл 2026",
@@ -2400,6 +2410,16 @@
       "type": "trail",
       "url": "https://goldenultra.ru/bud/",
       "id": 244
+    },
+    {
+      "date": "2027-05-09",
+      "name": "Кыргызстан Trail-1",
+      "city": "Петропавловск-Камчатский",
+      "region": "Камчатский край",
+      "distances": "",
+      "type": "trail",
+      "url": "https://trail1.ru",
+      "id": 315
     },
     {
       "date": "2027-05-16",
