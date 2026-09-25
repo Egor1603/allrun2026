@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-24T18:59:07Z",
+  "updated": "2026-09-25T11:42:46Z",
   "events": [
     {
       "id": 94,
@@ -2250,6 +2250,16 @@
       "type": "trail",
       "url": "https://goldenultra.ru/wbu/",
       "id": 242
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Закрытие бегового сезона Осень с бегом 2026 04.10.2026 // Алт",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/osen-s-begom-2026/",
+      "id": 313
     },
     {
       "id": 205,
