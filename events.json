@@ -1,6 +1,16 @@
 {
-  "updated": "2026-09-25T19:16:08Z",
+  "updated": "2026-09-26T11:15:52Z",
   "events": [
+    {
+      "id": 202,
+      "date": "2026-09-25",
+      "name": "Через горы к морю за 1 день",
+      "city": "Лаго-Наки",
+      "region": "Краснодарский край",
+      "distances": "60 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/CherezGoryKMoryu2026"
+    },
     {
       "id": 94,
       "date": "2026-09-20",
@@ -2080,16 +2090,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 202,
-      "date": "2026-09-25",
-      "name": "Через горы к морю за 1 день",
-      "city": "Лаго-Наки",
-      "region": "Краснодарский край",
-      "distances": "60 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/CherezGoryKMoryu2026"
     },
     {
       "date": "2026-09-26",
