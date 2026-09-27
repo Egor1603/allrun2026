@@ -1,6 +1,56 @@
 {
-  "updated": "2026-09-26T18:28:24Z",
+  "updated": "2026-09-27T11:54:31Z",
   "events": [
+    {
+      "date": "2026-09-26",
+      "name": "СберПрайм Московский Марафон",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "42,2 км, 10 км, эстафета",
+      "type": "road",
+      "url": "https://moscowmarathon.runc.run/",
+      "id": 68
+    },
+    {
+      "id": 134,
+      "date": "2026-09-26",
+      "name": "Атомный трейл",
+      "city": "Обнинск",
+      "region": "Калужская область",
+      "distances": "5 км, 10 км, 21 км, 30 км",
+      "type": "trail",
+      "url": "https://бег40.рф/events/160"
+    },
+    {
+      "date": "2026-09-26",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 301
+    },
+    {
+      "date": "2026-09-26",
+      "name": "Алтайский полумарафон 2026 26.09.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/altai-polumarafon-2026/",
+      "id": 309
+    },
+    {
+      "date": "2026-09-26",
+      "name": "Всероссийский день бега Кросс Нации 2026 (Бийск) 26.09.2026 /",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/kross-natsii-2026/",
+      "id": 311
+    },
     {
       "id": 202,
       "date": "2026-09-25",
@@ -2092,56 +2142,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "date": "2026-09-26",
-      "name": "СберПрайм Московский Марафон",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "42,2 км, 10 км, эстафета",
-      "type": "road",
-      "url": "https://moscowmarathon.runc.run/",
-      "id": 68
-    },
-    {
-      "id": 134,
-      "date": "2026-09-26",
-      "name": "Атомный трейл",
-      "city": "Обнинск",
-      "region": "Калужская область",
-      "distances": "5 км, 10 км, 21 км, 30 км",
-      "type": "trail",
-      "url": "https://бег40.рф/events/160"
-    },
-    {
-      "date": "2026-09-26",
-      "name": "Старт Красноярск",
-      "city": "Красноярск",
-      "region": "Красноярский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://krasmarafon.ru/",
-      "id": 301
-    },
-    {
-      "date": "2026-09-26",
-      "name": "Алтайский полумарафон 2026 26.09.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/altai-polumarafon-2026/",
-      "id": 309
-    },
-    {
-      "date": "2026-09-26",
-      "name": "Всероссийский день бега Кросс Нации 2026 (Бийск) 26.09.2026 /",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/kross-natsii-2026/",
-      "id": 311
-    },
-    {
       "id": 83,
       "date": "2026-09-27",
       "name": "Фестиваль спорта Сокровища Атамана",
@@ -2200,6 +2200,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/mountain-king-2026/",
       "id": 307
+    },
+    {
+      "date": "2026-09-27",
+      "name": "СберПрайм Московский Марафон",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "42,2 км, 10 км, эстафета",
+      "type": "road",
+      "url": "https://moscowmarathon.runc.run/",
+      "id": 318
     },
     {
       "id": 155,
@@ -2300,6 +2310,26 @@
       "distances": "5, 11, 22 км + вело",
       "type": "trail",
       "url": "https://city-trail.ru/6"
+    },
+    {
+      "date": "2026-11-01",
+      "name": "Yolochka Trail 2026 01.11.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/yolochka-trail-2026/",
+      "id": 316
+    },
+    {
+      "date": "2026-11-01",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/yolochka-trail-2026/",
+      "id": 317
     },
     {
       "id": 206,
