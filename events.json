@@ -1,6 +1,76 @@
 {
-  "updated": "2026-09-27T18:59:28Z",
+  "updated": "2026-09-28T13:39:53Z",
   "events": [
+    {
+      "id": 83,
+      "date": "2026-09-27",
+      "name": "Фестиваль спорта Сокровища Атамана",
+      "city": "Белогорское",
+      "region": "Саратовская область",
+      "distances": "трейл",
+      "type": "trail",
+      "url": "https://www.sambatrail.ru/treasures/"
+    },
+    {
+      "id": 109,
+      "date": "2026-09-27",
+      "name": "Международный Балтийский Марафон «Андрей Первозванный»",
+      "city": "Санкт-Петербург",
+      "region": "Санкт-Петербург",
+      "distances": "5 км, 10 км, 21 км, 42 км, 63 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/BalticOrden2026"
+    },
+    {
+      "id": 178,
+      "date": "2026-09-27",
+      "name": "Арена Полумарафон",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://reg.russiarunning.com/event/ArenaPolumarafon2026"
+    },
+    {
+      "id": 203,
+      "date": "2026-09-27",
+      "name": "Бородино Трейл",
+      "city": "Бородино",
+      "region": "Московская область",
+      "distances": "5 км, 10 км, 21 км, 42 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/BordinoTrail2026"
+    },
+    {
+      "date": "2026-09-27",
+      "name": "Спортивный фестиваль Belka Tour - Царь Горы 2026 26.09-27.09.",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/mountain-king-2026/",
+      "id": 306
+    },
+    {
+      "date": "2026-09-27",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/mountain-king-2026/",
+      "id": 307
+    },
+    {
+      "date": "2026-09-27",
+      "name": "СберПрайм Московский Марафон",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "42,2 км, 10 км, эстафета",
+      "type": "road",
+      "url": "https://moscowmarathon.runc.run/",
+      "id": 318
+    },
     {
       "date": "2026-09-26",
       "name": "СберПрайм Московский Марафон",
@@ -2142,76 +2212,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "id": 83,
-      "date": "2026-09-27",
-      "name": "Фестиваль спорта Сокровища Атамана",
-      "city": "Белогорское",
-      "region": "Саратовская область",
-      "distances": "трейл",
-      "type": "trail",
-      "url": "https://www.sambatrail.ru/treasures/"
-    },
-    {
-      "id": 109,
-      "date": "2026-09-27",
-      "name": "Международный Балтийский Марафон «Андрей Первозванный»",
-      "city": "Санкт-Петербург",
-      "region": "Санкт-Петербург",
-      "distances": "5 км, 10 км, 21 км, 42 км, 63 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/BalticOrden2026"
-    },
-    {
-      "id": 178,
-      "date": "2026-09-27",
-      "name": "Арена Полумарафон",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://reg.russiarunning.com/event/ArenaPolumarafon2026"
-    },
-    {
-      "id": 203,
-      "date": "2026-09-27",
-      "name": "Бородино Трейл",
-      "city": "Бородино",
-      "region": "Московская область",
-      "distances": "5 км, 10 км, 21 км, 42 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/BordinoTrail2026"
-    },
-    {
-      "date": "2026-09-27",
-      "name": "Спортивный фестиваль Belka Tour - Царь Горы 2026 26.09-27.09.",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/mountain-king-2026/",
-      "id": 306
-    },
-    {
-      "date": "2026-09-27",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/mountain-king-2026/",
-      "id": 307
-    },
-    {
-      "date": "2026-09-27",
-      "name": "СберПрайм Московский Марафон",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "42,2 км, 10 км, эстафета",
-      "type": "road",
-      "url": "https://moscowmarathon.runc.run/",
-      "id": 318
-    },
-    {
       "id": 155,
       "date": "2026-10-02",
       "name": "Белая Невеста Геленджик (White Bride Ultra)",
@@ -2430,6 +2430,16 @@
       "type": "night",
       "url": "https://krasmarafon.ru/nightrun",
       "id": 228
+    },
+    {
+      "date": "2027-04-25",
+      "name": "Весенний полумарафон Академгородок",
+      "city": "Новосибирск",
+      "region": "Новосибирская область",
+      "distances": "5 км, 10 км, 21,1 км, детский",
+      "type": "road",
+      "url": "https://www.springrun.ru/",
+      "id": 319
     },
     {
       "date": "2027-05-08",
