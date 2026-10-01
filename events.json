@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-30T19:58:59Z",
+  "updated": "2026-10-01T13:02:10Z",
   "events": [
     {
       "id": 83,
@@ -2460,6 +2460,16 @@
       "type": "trail",
       "url": "https://trail1.ru",
       "id": 315
+    },
+    {
+      "date": "2027-05-10",
+      "name": "Медовый забег 2027 10.05.2027 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/medovyy-zabeg-2027/",
+      "id": 320
     },
     {
       "date": "2027-05-16",
