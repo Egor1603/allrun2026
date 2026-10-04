@@ -1,6 +1,26 @@
 {
-  "updated": "2026-10-03T18:40:03Z",
+  "updated": "2026-10-04T12:15:15Z",
   "events": [
+    {
+      "id": 163,
+      "date": "2026-10-03",
+      "name": "Полумарафон «Моя столица»",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "3 км, 5 км, 10 км, 21,1 км",
+      "type": "road",
+      "url": "https://goldenringrun.ru/moscow"
+    },
+    {
+      "id": 204,
+      "date": "2026-10-03",
+      "name": "Хехцир Трейл. Золотая Осень 2026",
+      "city": "Хабаровск",
+      "region": "Хабаровский край",
+      "distances": "5 км, 10 км, 21 км, 42 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/HekhcirTrejl2026"
+    },
     {
       "id": 155,
       "date": "2026-10-02",
@@ -2220,26 +2240,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 163,
-      "date": "2026-10-03",
-      "name": "Полумарафон «Моя столица»",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "3 км, 5 км, 10 км, 21,1 км",
-      "type": "road",
-      "url": "https://goldenringrun.ru/moscow"
-    },
-    {
-      "id": 204,
-      "date": "2026-10-03",
-      "name": "Хехцир Трейл. Золотая Осень 2026",
-      "city": "Хабаровск",
-      "region": "Хабаровский край",
-      "distances": "5 км, 10 км, 21 км, 42 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/HekhcirTrejl2026"
     },
     {
       "id": 78,
