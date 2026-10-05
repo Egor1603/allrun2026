@@ -1,6 +1,46 @@
 {
-  "updated": "2026-10-04T18:39:04Z",
+  "updated": "2026-10-05T14:25:59Z",
   "events": [
+    {
+      "id": 78,
+      "date": "2026-10-04",
+      "name": "Октобер Трейл",
+      "city": "Новосибирск",
+      "region": "Новосибирская область",
+      "distances": "8, 14, 22 км, детский",
+      "type": "trail",
+      "url": "https://taigatrail.run/octobertrail"
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Белая Невеста Геленджик (White Bride Ultra)",
+      "city": "Геленджик",
+      "region": "Краснодарский край",
+      "distances": "4,2 км, 15 км, 30 км, 50 км, 70 км, 120 км",
+      "type": "trail",
+      "url": "https://goldenultra.ru/wbu/",
+      "id": 242
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Закрытие бегового сезона Осень с бегом 2026 04.10.2026 // Алт",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/osen-s-begom-2026/",
+      "id": 313
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/osen-s-begom-2026/",
+      "id": 314
+    },
     {
       "id": 163,
       "date": "2026-10-03",
@@ -2240,46 +2280,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 78,
-      "date": "2026-10-04",
-      "name": "Октобер Трейл",
-      "city": "Новосибирск",
-      "region": "Новосибирская область",
-      "distances": "8, 14, 22 км, детский",
-      "type": "trail",
-      "url": "https://taigatrail.run/octobertrail"
-    },
-    {
-      "date": "2026-10-04",
-      "name": "Белая Невеста Геленджик (White Bride Ultra)",
-      "city": "Геленджик",
-      "region": "Краснодарский край",
-      "distances": "4,2 км, 15 км, 30 км, 50 км, 70 км, 120 км",
-      "type": "trail",
-      "url": "https://goldenultra.ru/wbu/",
-      "id": 242
-    },
-    {
-      "date": "2026-10-04",
-      "name": "Закрытие бегового сезона Осень с бегом 2026 04.10.2026 // Алт",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/osen-s-begom-2026/",
-      "id": 313
-    },
-    {
-      "date": "2026-10-04",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/osen-s-begom-2026/",
-      "id": 314
     },
     {
       "id": 205,
