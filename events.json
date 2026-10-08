@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-07T20:33:53Z",
+  "updated": "2026-10-08T13:19:25Z",
   "events": [
     {
       "id": 78,
@@ -2290,6 +2290,26 @@
       "distances": "5 км, 10 км, 21 км, 42 км",
       "type": "trail",
       "url": "https://reg.russiarunning.com/event/YablochnyTrejl2026"
+    },
+    {
+      "date": "2026-10-17",
+      "name": "Финиш сезона 2026. г.Бийск 17.10.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/finish-sezona-2026/",
+      "id": 322
+    },
+    {
+      "date": "2026-10-17",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/finish-sezona-2026/",
+      "id": 323
     },
     {
       "date": "2026-10-22",
