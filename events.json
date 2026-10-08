@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-08T13:19:25Z",
+  "updated": "2026-10-08T20:37:46Z",
   "events": [
     {
       "id": 78,
@@ -2450,6 +2450,16 @@
       "type": "night",
       "url": "https://krasmarafon.ru/nightrun",
       "id": 228
+    },
+    {
+      "date": "2027-04-10",
+      "name": "Алтайский полумарафон 2027 10.04.2027 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/altai-polumarafon-2027/",
+      "id": 324
     },
     {
       "date": "2027-04-25",
