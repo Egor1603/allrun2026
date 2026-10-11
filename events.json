@@ -1,6 +1,16 @@
 {
-  "updated": "2026-10-10T19:13:57Z",
+  "updated": "2026-10-11T12:37:36Z",
   "events": [
+    {
+      "id": 205,
+      "date": "2026-10-10",
+      "name": "Яблочный Трейл 2026",
+      "city": "Грушевка",
+      "region": "Республика Крым",
+      "distances": "5 км, 10 км, 21 км, 42 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/YablochnyTrejl2026"
+    },
     {
       "id": 78,
       "date": "2026-10-04",
@@ -2280,16 +2290,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 205,
-      "date": "2026-10-10",
-      "name": "Яблочный Трейл 2026",
-      "city": "Грушевка",
-      "region": "Республика Крым",
-      "distances": "5 км, 10 км, 21 км, 42 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/YablochnyTrejl2026"
     },
     {
       "date": "2026-10-17",
