@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-16T18:45:55Z",
+  "updated": "2026-10-17T10:33:03Z",
   "events": [
     {
       "id": 205,
@@ -2312,6 +2312,16 @@
       "id": 323
     },
     {
+      "date": "2026-10-17",
+      "name": "April/10/13/d04343ac-bcbe-43c5-84ae-3b55579bcd31.jpg alt= Аф",
+      "city": "Новосибирск",
+      "region": "Новосибирская область",
+      "distances": "",
+      "type": "road",
+      "url": "https://sportsauce.ru/starts/",
+      "id": 326
+    },
+    {
       "date": "2026-10-22",
       "name": "Старт Красноярск",
       "city": "Красноярск",
@@ -2460,6 +2470,16 @@
       "type": "road",
       "url": "https://sib-events.ru/reg/altai-polumarafon-2027/",
       "id": 324
+    },
+    {
+      "date": "2027-04-10",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/altai-polumarafon-2027/",
+      "id": 325
     },
     {
       "date": "2027-04-25",
