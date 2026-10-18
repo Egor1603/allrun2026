@@ -1,6 +1,36 @@
 {
-  "updated": "2026-10-17T17:52:27Z",
+  "updated": "2026-10-18T10:52:11Z",
   "events": [
+    {
+      "date": "2026-10-17",
+      "name": "Финиш сезона 2026. г.Бийск 17.10.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/finish-sezona-2026/",
+      "id": 322
+    },
+    {
+      "date": "2026-10-17",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/finish-sezona-2026/",
+      "id": 323
+    },
+    {
+      "date": "2026-10-17",
+      "name": "April/10/13/d04343ac-bcbe-43c5-84ae-3b55579bcd31.jpg alt= Аф",
+      "city": "Новосибирск",
+      "region": "Новосибирская область",
+      "distances": "",
+      "type": "road",
+      "url": "https://sportsauce.ru/starts/",
+      "id": 326
+    },
     {
       "id": 205,
       "date": "2026-10-10",
@@ -2292,36 +2322,6 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "date": "2026-10-17",
-      "name": "Финиш сезона 2026. г.Бийск 17.10.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/finish-sezona-2026/",
-      "id": 322
-    },
-    {
-      "date": "2026-10-17",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/finish-sezona-2026/",
-      "id": 323
-    },
-    {
-      "date": "2026-10-17",
-      "name": "April/10/13/d04343ac-bcbe-43c5-84ae-3b55579bcd31.jpg alt= Аф",
-      "city": "Новосибирск",
-      "region": "Новосибирская область",
-      "distances": "",
-      "type": "road",
-      "url": "https://sportsauce.ru/starts/",
-      "id": 326
-    },
-    {
       "date": "2026-10-22",
       "name": "Старт Красноярск",
       "city": "Красноярск",
@@ -2570,6 +2570,16 @@
       "type": "night",
       "url": "https://goldenultra.ru/crazyowl/",
       "id": 265
+    },
+    {
+      "date": "2027-06-13",
+      "name": "Ультрамарафон Taganay-Turgoyak",
+      "city": "Миасс",
+      "region": "Челябинская область",
+      "distances": "9,5 км, 30 км, 65 км, скандинавская ходьба, детский",
+      "type": "trail",
+      "url": "https://ultra.irunclub.ru",
+      "id": 327
     },
     {
       "date": "2027-06-19",
