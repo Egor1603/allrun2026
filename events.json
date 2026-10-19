@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-18T17:57:48Z",
+  "updated": "2026-10-19T12:54:12Z",
   "events": [
     {
       "date": "2026-10-17",
@@ -2420,6 +2420,16 @@
       "distances": "5 км, 10 км, 21 км, 42 км, 63 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/SosnovkaGoat"
+    },
+    {
+      "date": "2026-12-15",
+      "name": "Церемония награждения ТОП 100 спортсменов циклических видов с",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/top-2026/",
+      "id": 328
     },
     {
       "date": "2026-12-20",
