@@ -1,6 +1,16 @@
 {
-  "updated": "2026-10-22T19:09:57Z",
+  "updated": "2026-10-23T11:29:07Z",
   "events": [
+    {
+      "date": "2026-10-22",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 312
+    },
     {
       "date": "2026-10-17",
       "name": "Финиш сезона 2026. г.Бийск 17.10.2026 // Алтайский край",
@@ -2322,14 +2332,14 @@
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
     },
     {
-      "date": "2026-10-22",
-      "name": "Старт Красноярск",
-      "city": "Красноярск",
-      "region": "Красноярский край",
+      "date": "2026-10-25",
+      "name": "May/06/03/790fcc76-63b7-49ed-b03d-cd265710de87.jpg alt= Афиш",
+      "city": "Новосибирск",
+      "region": "Новосибирская область",
       "distances": "",
       "type": "road",
-      "url": "https://krasmarafon.ru/",
-      "id": 312
+      "url": "https://sportsauce.ru/starts/",
+      "id": 330
     },
     {
       "id": 95,
@@ -2412,6 +2422,16 @@
       "url": "https://reg.russiarunning.com/event/VYubileynyyFestivalsportaiotdykhaMayskayagora2026"
     },
     {
+      "date": "2026-12-06",
+      "name": "Старт Красноярск",
+      "city": "Красноярск",
+      "region": "Красноярский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://krasmarafon.ru/",
+      "id": 329
+    },
+    {
       "id": 110,
       "date": "2026-12-13",
       "name": "Новогодний марафон Sosnovka Goat",
@@ -2460,6 +2480,16 @@
       "distances": "",
       "type": "road",
       "url": "https://tomskmarathon.ru/"
+    },
+    {
+      "date": "2027-03-06",
+      "name": "March/02/01/d02f888f-a645-44b9-b33d-72cc445c39c0.jpg alt= Аф",
+      "city": "Новосибирск",
+      "region": "Новосибирская область",
+      "distances": "",
+      "type": "road",
+      "url": "https://sportsauce.ru/starts/",
+      "id": 331
     },
     {
       "date": "2027-03-27",
