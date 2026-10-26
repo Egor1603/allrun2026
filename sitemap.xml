@@ -16,11 +16,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://allrunrus.ru/novosibirsk/</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://allrunrus.ru/moskva/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
