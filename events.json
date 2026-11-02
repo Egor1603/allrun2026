@@ -1,6 +1,36 @@
 {
-  "updated": "2026-11-01T19:30:21Z",
+  "updated": "2026-11-02T15:34:51Z",
   "events": [
+    {
+      "id": 95,
+      "date": "2026-11-01",
+      "name": "City Trail #6 X-Land",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "5, 11, 22 км + вело",
+      "type": "trail",
+      "url": "https://city-trail.ru/6"
+    },
+    {
+      "date": "2026-11-01",
+      "name": "Yolochka Trail 2026 01.11.2026 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/yolochka-trail-2026/",
+      "id": 316
+    },
+    {
+      "date": "2026-11-01",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/yolochka-trail-2026/",
+      "id": 317
+    },
     {
       "date": "2026-10-25",
       "name": "May/06/03/790fcc76-63b7-49ed-b03d-cd265710de87.jpg alt= Афиш",
@@ -2340,36 +2370,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 95,
-      "date": "2026-11-01",
-      "name": "City Trail #6 X-Land",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "5, 11, 22 км + вело",
-      "type": "trail",
-      "url": "https://city-trail.ru/6"
-    },
-    {
-      "date": "2026-11-01",
-      "name": "Yolochka Trail 2026 01.11.2026 // Алтайский край",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/yolochka-trail-2026/",
-      "id": 316
-    },
-    {
-      "date": "2026-11-01",
-      "name": "Онлайн регистрация",
-      "city": "Алтайский край",
-      "region": "Алтайский край",
-      "distances": "",
-      "type": "road",
-      "url": "https://sib-events.ru/reg/yolochka-trail-2026/",
-      "id": 317
     },
     {
       "id": 206,
