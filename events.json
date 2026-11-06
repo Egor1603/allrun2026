@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05T21:28:49Z",
+  "updated": "2026-11-06T14:09:14Z",
   "events": [
     {
       "id": 95,
@@ -2460,6 +2460,16 @@
       "type": "trail",
       "url": "https://goldenultra.ru/madfox/",
       "id": 241
+    },
+    {
+      "date": "2026-12-20",
+      "name": "November/06/06/ffc48f07-e9b3-4b3e-8f67-68a039c2fb63.jpg alt=",
+      "city": "Новосибирск",
+      "region": "Новосибирская область",
+      "distances": "",
+      "type": "road",
+      "url": "https://sportsauce.ru/starts/",
+      "id": 332
     },
     {
       "id": 177,
