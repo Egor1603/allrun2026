@@ -1,6 +1,26 @@
 {
-  "updated": "2026-11-07T19:20:47Z",
+  "updated": "2026-11-08T13:14:02Z",
   "events": [
+    {
+      "id": 206,
+      "date": "2026-11-07",
+      "name": "Трейлфест МинВоды 2026",
+      "city": "Минеральные Воды",
+      "region": "Ставропольский край",
+      "distances": "5 км, 10 км, 21 км, 42 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/TrejlfestMinVody2026"
+    },
+    {
+      "id": 215,
+      "date": "2026-11-07",
+      "name": "Забег «По тропам предков»",
+      "city": "Кара-Паго",
+      "region": "Карачаево-Черкессия",
+      "distances": "5 км, 10 км, 21 км",
+      "type": "trail",
+      "url": "https://reg.russiarunning.com/event/PoTropamPredkov2026"
+    },
     {
       "id": 95,
       "date": "2026-11-01",
@@ -2370,26 +2390,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "id": 206,
-      "date": "2026-11-07",
-      "name": "Трейлфест МинВоды 2026",
-      "city": "Минеральные Воды",
-      "region": "Ставропольский край",
-      "distances": "5 км, 10 км, 21 км, 42 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/TrejlfestMinVody2026"
-    },
-    {
-      "id": 215,
-      "date": "2026-11-07",
-      "name": "Забег «По тропам предков»",
-      "city": "Кара-Паго",
-      "region": "Карачаево-Черкессия",
-      "distances": "5 км, 10 км, 21 км",
-      "type": "trail",
-      "url": "https://reg.russiarunning.com/event/PoTropamPredkov2026"
     },
     {
       "date": "2026-11-14",
