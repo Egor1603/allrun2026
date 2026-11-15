@@ -1,6 +1,16 @@
 {
-  "updated": "2026-11-14T19:51:47Z",
+  "updated": "2026-11-15T13:51:22Z",
   "events": [
+    {
+      "date": "2026-11-14",
+      "name": "ANTA Кросс Московский Дрифт",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "кросс",
+      "type": "trail",
+      "url": "https://ultras.goldenultra.ru/",
+      "id": 246
+    },
     {
       "id": 206,
       "date": "2026-11-07",
@@ -2390,16 +2400,6 @@
       "distances": "",
       "type": "road",
       "url": "https://sib-events.ru/reg/mir-trud-beg-2026/"
-    },
-    {
-      "date": "2026-11-14",
-      "name": "ANTA Кросс Московский Дрифт",
-      "city": "Москва",
-      "region": "Москва",
-      "distances": "кросс",
-      "type": "trail",
-      "url": "https://ultras.goldenultra.ru/",
-      "id": 246
     },
     {
       "date": "2026-12-05",
