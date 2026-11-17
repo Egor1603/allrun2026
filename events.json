@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16T23:43:56Z",
+  "updated": "2026-11-17T15:55:39Z",
   "events": [
     {
       "date": "2026-11-14",
@@ -2510,6 +2510,16 @@
       "type": "road",
       "url": "https://sportsauce.ru/starts/",
       "id": 331
+    },
+    {
+      "date": "2027-03-20",
+      "name": "ANTA Кросс Московский Дрифт",
+      "city": "Москва",
+      "region": "Москва",
+      "distances": "кросс",
+      "type": "trail",
+      "url": "https://ultras.goldenultra.ru/",
+      "id": 335
     },
     {
       "date": "2027-03-27",
