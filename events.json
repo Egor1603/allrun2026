@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T22:41:26Z",
+  "updated": "2026-11-20T15:18:29Z",
   "events": [
     {
       "date": "2026-11-14",
@@ -2490,6 +2490,16 @@
       "distances": "5 км, 10 км",
       "type": "road",
       "url": "https://reg.russiarunning.com/event/ROZhDESTVENSKIYZABEG2026"
+    },
+    {
+      "date": "2027-02-13",
+      "name": "November/20/01/ea6c3486-7fcd-4cd2-a065-abaa9f862a30.jpg alt=",
+      "city": "Новосибирск",
+      "region": "Новосибирская область",
+      "distances": "",
+      "type": "road",
+      "url": "https://sportsauce.ru/starts/",
+      "id": 336
     },
     {
       "id": 55,
