@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-27T23:20:23Z",
+  "updated": "2026-11-28T15:25:31Z",
   "events": [
     {
       "date": "2026-11-14",
@@ -2500,6 +2500,26 @@
       "type": "road",
       "url": "https://sportsauce.ru/starts/",
       "id": 336
+    },
+    {
+      "date": "2027-02-23",
+      "name": "Жилинский полумарафон 2027 23.02.2027 // Алтайский край",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/zhilino-2027/",
+      "id": 339
+    },
+    {
+      "date": "2027-02-23",
+      "name": "Онлайн регистрация",
+      "city": "Алтайский край",
+      "region": "Алтайский край",
+      "distances": "",
+      "type": "road",
+      "url": "https://sib-events.ru/reg/zhilino-2027/",
+      "id": 340
     },
     {
       "id": 55,
